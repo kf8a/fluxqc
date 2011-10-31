@@ -101,9 +101,15 @@ window.scatterPlot = (model, el) ->
 
   g.append('svg:text')
     .attr('transform', 'scale(1,-1)')
-    .attr('x', width-margin)
-    .attr('y',50) 
-    .text(r2)
+    .attr('x', 80)
+    .attr('y',-height+margin) 
+    .text("r2 = " + d3.round(r2,3))
+
+  g.append('svg:text')
+    .attr('transform', 'scale(1,-1)')
+    .attr('x', 80)
+    .attr('y', -height+margin+20)
+    .text('flux = ' + d3.round(m,3))
 
   g.selectAll('.fitLine')
     .data([a1,a2])
