@@ -8,6 +8,8 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'pg'
+
 gem 'devise'
 #gem 'oa-openid', :require => 'omniauth/openid'
 

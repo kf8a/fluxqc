@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Incubation do
   it {should have_many :fluxes}
+  it {should belong_to :run}
   
   describe 'selecting a specific flux' do
     before(:each) do

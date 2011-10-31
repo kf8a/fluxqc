@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031153030) do
+ActiveRecord::Schema.define(:version => 20111031155547) do
 
   create_table "fluxes", :force => true do |t|
     t.integer  "incubation_id"
@@ -24,16 +24,28 @@ ActiveRecord::Schema.define(:version => 20111031153030) do
   create_table "incubations", :force => true do |t|
     t.datetime "sampled_at"
     t.string   "chamber"
+    t.string   "plot"
+    t.float    "soil_temperature"
+    t.float    "average_height_cm"
+    t.integer  "lid_id"
+    t.integer  "run_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "measurements", :force => true do |t|
     t.integer  "flux_id"
+    t.float    "seconds"
     t.float    "ppm"
     t.float    "area"
     t.datetime "starting_time"
     t.datetime "ending_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "runs", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
