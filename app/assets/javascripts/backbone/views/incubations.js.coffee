@@ -2,10 +2,12 @@ class Flux.Views.IncubationView extends Backbone.View
   tagName: 'li'
 
   initialize: ->
+    @template = _.template($('#incubation-template').html())
     @.model.bind('change', @.render)
 
   render: =>
     $(@el).empty()
+    $(@el).append(@template(@model.toJSON()))
 
     view = new Flux.Views.FluxView(model: @model.n2o_model)
     $(@el).append(view.render().el)
