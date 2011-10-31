@@ -1,0 +1,2 @@
+module IncubationsHelper
+end
