@@ -9,7 +9,7 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 
 gem 'sqlite3'
 gem 'devise'
-
+#gem 'oa-openid', :require => 'omniauth/openid'
 
 # Gems used only for assets and not required
 # in production environments by default.
