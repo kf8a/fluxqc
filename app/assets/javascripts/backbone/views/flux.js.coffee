@@ -1,4 +1,5 @@
 class Flux.Views.FluxView extends Backbone.View
+  tagName: 'span'
 
   initialize: ->
     @.model.bind('change', @.render)

@@ -1,7 +1,6 @@
 Fluxqc::Application.routes.draw do
-  resources :incubations do
-    resources :fluxes
-  end
+  resources :incubations 
+  resources :fluxes
 
   root :to => 'incubations#index'
 end

@@ -1,8 +1,9 @@
 class Flux.Models.Flux extends Backbone.Model
-  paramRoot: 'flux'
+  urlRoot: '/fluxes'
 
   defaults:
-    data: null
+    id:       null
+    data:     null
     compound: null
   
   togglePoint: (point) ->
