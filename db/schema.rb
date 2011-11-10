@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
     t.float    "ymin"
     t.float    "ymax"
     t.string   "unit"
+    t.float    "mol_weight"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
   end
 
   create_table "lids", :force => true do |t|
+    t.float    "surface_area"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
