@@ -27,25 +27,4 @@ describe Flux do
     end
   end
 
-  describe 'flux calculations' do
-    it 'should return the flux' do
-      measurement = Measurement.new
-      measurement.stub(:seconds).and_return(1)
-      measurement.stub(:ppm).and_return(10)
-      flux.measurements << measurement
-      incubation = Incubation.new
-      incubation.stub(:headspace).and_return(1.0)
-      lid = Lid.new
-      lid.stub(:surface_area).and_return(2.0)
-      incubation.lid = lid
-      flux.incubation = incubation
-      incubation.fluxes << flux
-      compound = Compound.new
-      compound.stub(:mol_weight).and_return(12.0)
-      flux.compound = compound
-
-      flux.flux.should be_within(0.1).of(38571.43)
-    end
-  end
-
 end

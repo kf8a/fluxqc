@@ -13,12 +13,6 @@ class Flux < ActiveRecord::Base
     end
   end
 
-  def flux
-    #c1 * headspace/surface_area * 100 * 1440 / 22.4 * compound.mol_weight #carbon or nitrogen 
-
-    headspace/surface_area * 100 * 1440 /22.4 * mol_weight
-  end
-
   # convenience methods to make the caluclation easier
   def ymax
     compound.ymax
