@@ -4,22 +4,25 @@ describe RunsController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      get 'index'
+      get :index
       response.should be_success
     end
     it 'renders the index template' do
-      get 'index'
+      get :index
       response.should render_template(:index)
     end
   end
 
   describe "GET 'show'" do
+    before(:all) do
+      @run = Factory.create :run
+    end
     it "returns http success" do
-      get 'show'
+      get :show, :id => @run
       response.should be_success
     end
     it 'renders the show template' do
-      get 'show'
+      get :show, :id => @run
       response.should render_template(:show)
     end
   end

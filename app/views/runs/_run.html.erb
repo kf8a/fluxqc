@@ -1,0 +1,10 @@
+<tr>
+  <td><%= run.run_on %></td>
+  <td><%= run.sampled_on %></td>
+  <td><%= run.name %></td>
+  <td><%= run.comment %></td>
+  <td><%= run.current_state %></td>
+  <td><%= run.study %></td>
+  <td><%= "#{run.approved_fluxes}/#{run.total_fluxes}" %></td>
+  <td><%= link_to 'qc', run %></td>
+</tr>

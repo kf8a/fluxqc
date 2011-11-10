@@ -22,4 +22,12 @@ class Run < ActiveRecord::Base
 
     state :rejected
   end
+
+  def total_fluxes
+    0
+  end
+  
+  def approved_fluxes
+    0
+  end
 end
