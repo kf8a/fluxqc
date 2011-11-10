@@ -50,4 +50,17 @@ namespace :deploy do
     stop
     start
   end
+
+  after 'deploy:symlink', :link_production_db
+  after 'deploy:symlink', :link_unicorn
+end
+
+desc "Link in the production database.yml"
+task :link_production_db do
+  run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+end
+
+desc "link unicorn.rb"
+task :link_unicorn do
+  run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
