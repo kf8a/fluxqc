@@ -1,12 +1,10 @@
 Fluxqc::Application.routes.draw do
-  scope 'tracegas' do
-    devise_for :users
+  devise_for :users
 
-    resources :runs
+  resources :runs
 
-    resources :incubations 
-    resources :fluxes
+  resources :incubations 
+  resources :fluxes
 
-    root :to => 'incubations#index'
-  end
+  root :to => 'runs#index'
 end
