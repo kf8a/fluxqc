@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require 'new_relic/recipes'
+load 'deploy/assets'
 
 set :application, "fluxqc"
 set :repository, "git@github.com:kf8a/fluxqc.git"
@@ -24,7 +25,7 @@ ssh_options[:forward_agent] = true
 
 set :unicorn_binary, "/usr/local/bin/unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "/var/u/apps/metadata/shared/pids/unicorn.pid"
+set :unicorn_pid, "/var/u/apps/fluxqc/shared/pids/unicorn.pid"
 
 namespace :deploy do
   desc "start unicorn appserves remote_file_exists?('/dev/null')"
