@@ -2,6 +2,9 @@ class Flux.Views.IncubationView extends Backbone.View
   tagName: 'li'
 
   initialize: ->
+    _.templateSettings = {
+      interpolate : /\{\{(.+?)\}\}/g
+    }
     @template = _.template($('#incubation-template').html())
     @.model.bind('change', @.render)
 
