@@ -1,6 +1,8 @@
 class Run < ActiveRecord::Base
   has_many :incubations
 
+  scope :by_state, ->(state){where(:workflow_state => state) }
+
   include Workflow
   workflow do
     state :uploaded do

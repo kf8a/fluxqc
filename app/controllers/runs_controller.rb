@@ -1,6 +1,8 @@
 class RunsController < ApplicationController
   def index
-    @runs = Run.order('sampled_on desc')
+    params[:state] ||= 'uploaded'
+    @state = params[:state]
+    @runs = Run.by_state(@state).order('sampled_on desc')
   end
 
   def show
