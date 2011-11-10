@@ -4,4 +4,4 @@
 #
 $ -> 
   window.myApp = new Flux.Routers.FluxesRouter
-  Backbone.history.start({pushState: true, root: '/incubations'}) 
+  Backbone.history.start({pushState: true, root: '/runs/' + window.run_id}) 
