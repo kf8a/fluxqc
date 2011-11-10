@@ -11,12 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031155547) do
+ActiveRecord::Schema.define(:version => 20111031230745) do
+
+  create_table "compounds", :force => true do |t|
+    t.string   "name"
+    t.float    "ymin"
+    t.float    "ymax"
+    t.string   "unit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fluxes", :force => true do |t|
     t.integer  "incubation_id"
     t.string   "compound"
     t.float    "value"
+    t.integer  "compound_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,6 +39,11 @@ ActiveRecord::Schema.define(:version => 20111031155547) do
     t.float    "average_height_cm"
     t.integer  "lid_id"
     t.integer  "run_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lids", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20111031155547) do
 
   create_table "runs", :force => true do |t|
     t.string   "name"
+    t.string   "workflow_state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

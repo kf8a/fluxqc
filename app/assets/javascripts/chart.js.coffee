@@ -13,9 +13,14 @@ window.scatterPlot = (model, el) ->
    .attr('width', height)
    .attr('height', height)
 
+  ymax = d3.max(data, (d) -> d.value)
+  ymax = 1.5 unless ymax > 1.5 
+  ymin = 0 #d3.min(data, (d) -> d.value)
+
   y = d3.scale.linear()
-   .domain([0, d3.max(data, (d)->d.value)])
+   .domain([ymin, ymax])
    .range([margin, height - margin])
+   .nice()
 
   x = d3.scale.linear()
     .domain([0, d3.max(data, (d) -> d.key)])
@@ -24,6 +29,35 @@ window.scatterPlot = (model, el) ->
   g = chart.append('svg:g')
     .attr('transform', 'translate(0,' + height + ' ) scale(1,-1)')
 
+  # add fit line
+  [m, b, r2] = model.fitLineByLeastSquares()
+
+  # find first and last point
+  a1 = 0 * m + b
+  a2 = d3.max(data, (d) -> d.key) * m + b
+
+  g.append('svg:text')
+    .attr('transform', 'scale(1,-1)')
+    .attr('x', 80)
+    .attr('y',-height+margin) 
+    .text("r2 = " + r2.toPrecision(3))
+
+  g.append('svg:text')
+    .attr('transform', 'scale(1,-1)')
+    .attr('x', 80)
+    .attr('y', -height+margin-20)
+    .text('flux = ' + m.toPrecision(4))
+
+  g.selectAll('.fitLine')
+    .data([a1,a2])
+    .enter().append('svg:line')
+    .attr('class', 'fitLine')
+    .attr('stroke', 'red')
+    .attr('x1',x(0))
+    .attr('y1', y(a1))
+    .attr('x2',x(d3.max(data, (d)->d.key)))
+    .attr('y2', y(a2))
+  
   # add dots
   g.selectAll('path')
     .data(data)
@@ -63,13 +97,13 @@ window.scatterPlot = (model, el) ->
     .attr('y', - (margin - 20 ))
     .attr('text-anchor', 'middle')
 
-  #  axis
+  #  yaxis
   g.append('svg:line')
     .attr('stroke', '#A8A8A8')
     .attr('x1', x(0))
     .attr('y1', y(0))
     .attr('x2', x(0))
-    .attr('y2', y(d3.max(data, (d)->d.value)))
+    .attr('y2', y(ymax))
 
   # tick labels 
   g.selectAll('.yLabel')
@@ -92,32 +126,4 @@ window.scatterPlot = (model, el) ->
     .attr('x2', margin - 5)
     .attr('y2',(d) -> y(d))
 
-  # add fit line
-  [m, b, r2] = model.fitLineByLeastSquares()
-
-  # find first and last point
-  a1 = 0 * m + b
-  a2 = d3.max(data, (d) -> d.key) * m + b
-
-  g.append('svg:text')
-    .attr('transform', 'scale(1,-1)')
-    .attr('x', 80)
-    .attr('y',-height+margin) 
-    .text("r2 = " + d3.round(r2,3))
-
-  g.append('svg:text')
-    .attr('transform', 'scale(1,-1)')
-    .attr('x', 80)
-    .attr('y', -height+margin+20)
-    .text('flux = ' + d3.round(m,3))
-
-  g.selectAll('.fitLine')
-    .data([a1,a2])
-    .enter().append('svg:line')
-    .attr('class', 'fitLine')
-    .attr('stroke', 'red')
-    .attr('x1',x(0))
-    .attr('y1', y(a1))
-    .attr('x2',x(d3.max(data, (d)->d.key)))
-    .attr('y2', y(a2))
 

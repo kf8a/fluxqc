@@ -9,6 +9,9 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 
 gem 'sqlite3'
 gem 'pg'
+gem 'formtastic'
+gem 'workflow'
+#gem 'spreadsheet'
 
 gem 'devise'
 #gem 'oa-openid', :require => 'omniauth/openid'
@@ -32,10 +35,7 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-group :test do
+group :test, :development do
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem "database_cleaner"

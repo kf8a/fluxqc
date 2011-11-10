@@ -1,6 +1,10 @@
 <h1>Incubations</h1>
 <div id='container'></div>
 
+<script>
+  INITIAL_DATA = <%=raw @incubations.to_json(:methods=>['co2','n2o','ch4']) %>
+</script>
+
 <script type='text/template' id='flux-list-template'>
   <h1>Model Fluxes</h1>
   <ul class='flux'></ul>

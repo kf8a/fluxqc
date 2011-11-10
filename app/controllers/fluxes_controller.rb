@@ -2,5 +2,10 @@ class FluxesController < ApplicationController
   respond_to :html, :json
 
   def show
+    @flux = Flux.find(params[:id])
+    respond_with do |format|
+      format.html
+      format.json {render :json => @flux.as_json(:methods=>['data','ymax','ymin']) }
+    end
   end
 end
