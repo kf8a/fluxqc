@@ -52,7 +52,7 @@ namespace :deploy do
     start
   end
 
-  after 'deploy:symlink', :link_production_db
+  before "deploy:assets:precompile", :link_production_db
   after 'deploy:symlink', :link_unicorn
 end
 
