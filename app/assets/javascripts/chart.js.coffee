@@ -46,7 +46,7 @@ window.scatterPlot = (model, el) ->
     .attr('transform', 'scale(1,-1)')
     .attr('x', 80)
     .attr('y', -height+margin-20)
-    .text('flux = ' + m.toPrecision(4))
+    .text('slope = ' + m.toPrecision(4))
 
   g.selectAll('.fitLine')
     .data([a1,a2])

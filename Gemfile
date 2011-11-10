@@ -7,7 +7,6 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'pg'
 gem 'formtastic'
 gem 'workflow'
@@ -36,6 +35,7 @@ gem 'unicorn'
 gem 'capistrano'
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem "database_cleaner"
