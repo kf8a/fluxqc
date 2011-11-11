@@ -24,7 +24,23 @@ describe Flux do
     end
 
     it 'should return a list of seconds and ppm' do
-      flux.data.should == [{key:1,value:10, deleted:false}]
+      flux.data.should == [{id:nil, key:1,value:10, deleted:false}]
+    end
+  end
+
+  describe 'data setting' do
+    before(:each) do
+      @measurement =  Factory.create :measurement
+      flux.data = [{id:@measurement.id,key:1, value:10, deleted:false}]
+    end
+    it 'updates the seconds' do
+      flux.measurements.first.seconds.should == 1
+    end
+    it 'updates the ppms' do
+      flux.measurements.first.ppm.should == 10
+    end
+    it 'updates the excluded setting' do
+      flux.measurements.first.excluded.should be_false
     end
   end
 

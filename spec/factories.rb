@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :measurement do
+    excluded  false
+  end
   factory :compound do
     name 'co2'
   end
