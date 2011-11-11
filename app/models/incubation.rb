@@ -1,5 +1,5 @@
 class Incubation < ActiveRecord::Base
-  has_many :fluxes
+  has_many :fluxes,  :dependent => :destroy
   belongs_to :run
   belongs_to :lid
 

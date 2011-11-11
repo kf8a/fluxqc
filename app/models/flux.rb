@@ -3,7 +3,7 @@ require File.expand_path("../../../lib/fitter.rb",__FILE__)
 class Flux < ActiveRecord::Base
   belongs_to :incubation
   belongs_to :compound
-  has_many   :measurements
+  has_many   :measurements,  :dependent => :destroy
 
   scope :co2, joins(:compound).where('compounds.name' => 'co2')
   scope :n2o, joins(:compound).where('compounds.name' => 'n2o') 

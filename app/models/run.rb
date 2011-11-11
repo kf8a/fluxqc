@@ -1,5 +1,5 @@
 class Run < ActiveRecord::Base
-  has_many :incubations
+  has_many :incubations,  :dependent => :destroy
 
   scope :by_state, ->(state){where(:workflow_state => state) }
 
