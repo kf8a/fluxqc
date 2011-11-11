@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 require 'new_relic/recipes'
-load 'deploy/assets'
+#load 'deploy/assets'
 
 set :application, "fluxqc"
 set :repository, "git@github.com:kf8a/fluxqc.git"
@@ -8,9 +8,9 @@ set :repository, "git@github.com:kf8a/fluxqc.git"
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "kalkaska.kbs.msu.edu"                          # Your HTTP server, Apache/etc
-role :app, "kalkaska.kbs.msu.edu"                          # This may be the same as your `Web` server
-role :db,  "kalkaska.kbs.msu.edu", :primary => true # This is where Rails migrations will run
+role :web, "gprpc28.kbs.msu.edu"                          # Your HTTP server, Apache/etc
+role :app, "gprpc28.kbs.msu.edu"                          # This may be the same as your `Web` server
+role :db,  "gprpc28.kbs.msu.edu", :primary => true # This is where Rails migrations will run
 
 set :deploy_to, "/var/u/apps/#{application}"
 
@@ -52,8 +52,9 @@ namespace :deploy do
     start
   end
 
-  before "deploy:assets:precompile", :link_production_db
+  before "deploy:symlink", :link_production_db
   after 'deploy:symlink', :link_unicorn
+  after 'deploy:symlink', :precompile_assets
 end
 
 desc "Link in the production database.yml"
@@ -64,4 +65,9 @@ end
 desc "link unicorn.rb"
 task :link_unicorn do
   run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
+end
+
+desc 'precompile assets'
+task :precompile_assets do
+  run "cd #{current_path};bundle exec rake assets:precompile:nondigest RAILS_ENV=production RAILS_GROUPS=assets"
 end
