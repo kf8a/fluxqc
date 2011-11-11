@@ -23,6 +23,10 @@ describe Run do
       it 'can be accepted' do
         run.accept!.should be_true
       end
+
+      it 'reports possible events' do
+        run.current_state.events.keys.should include(:accept)
+      end
     end
 
     describe 'an accepted run' do

@@ -1,5 +1,11 @@
+<div id='titile'>
 <h1><%= @run.name %></h1>
 <p>Sampled on: <%= @run.sampled_on %> Study: <%= @run.study %></p>
+<button id='save'>Save</button> 
+<% @run.current_state.events.keys.each do |event| %>
+  <button id="<%=event.to_s%>"><%= event.to_s %></button>
+<% end %>
+</div>
 <div id='container'></div>
 
 <script>
