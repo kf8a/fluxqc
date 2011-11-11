@@ -1,0 +1,4 @@
+sampled on, study, treatment, replicate, chamber, n2o, co2, ch4
+<% @run.incubations.each do |incubation | %>
+  <%= "#{@run.sampled_on}, #{@run.study}, #{incubation.treatment}, #{incubation.replicate}, #{incubation.chamber}, #{incubation.n2o.flux}, #{incubation.co2.flux}, #{incubation.ch4.flux}" %>
+<% end %> 

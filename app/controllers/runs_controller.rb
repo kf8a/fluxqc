@@ -1,6 +1,6 @@
 class RunsController < ApplicationController
 
-  respond_to :html, :json
+  respond_to :html, :json, :csv
 
   def index
     params[:state] ||= 'uploaded'

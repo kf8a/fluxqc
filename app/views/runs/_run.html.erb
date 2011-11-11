@@ -4,6 +4,7 @@
   <td><%= run.name %></td>
   <td><%= run.comment %></td>
   <td><%= run.study %></td>
-  <td><%= "#{run.approved_fluxes}/#{run.total_fluxes}" %></td>
+  <td><%= "#{run.total_fluxes}" %></td>
   <td><%= link_to 'qc', run %></td>
+  <td><%= link_to 'download', run_url(run, :format => :csv) %></td>
 </tr>

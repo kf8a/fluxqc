@@ -26,7 +26,7 @@ class Run < ActiveRecord::Base
   end
 
   def total_fluxes
-    0
+    incubations.count * 3
   end
   
   def approved_fluxes

@@ -12,14 +12,14 @@ class Incubation < ActiveRecord::Base
   end
 
   def co2
-    flux('co2').id
+    flux('co2')
   end
 
   def n2o
-    flux('n2o').id
+    flux('n2o')
   end
 
   def ch4
-    flux('ch4').id
+    flux('ch4')
   end
 end
