@@ -5,7 +5,7 @@ class FluxesController < ApplicationController
     @flux = Flux.find(params[:id])
     respond_with do |format|
       format.html
-      format.json {render :json => @flux.as_json(:methods=>['data','ymax','ymin','multiplier', 'fit_line']) }
+      format.json {render :json => @flux.as_json(:methods=>['data','ymax','ymin','multiplier','fit_line','flux']) }
     end
   end
 

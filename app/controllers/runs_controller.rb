@@ -17,4 +17,8 @@ class RunsController < ApplicationController
     end
   end
 
+  def recall
+
+  end
+
 end

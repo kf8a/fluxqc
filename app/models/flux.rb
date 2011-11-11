@@ -15,6 +15,12 @@ class Flux < ActiveRecord::Base
     end
   end
 
+  def flux
+    f = Fitter.new
+    f.flux = self
+    f.fit
+  end
+
   def multiplier
     f = Fitter.new
     f.flux = self
@@ -41,7 +47,7 @@ class Flux < ActiveRecord::Base
   end
 
   def surface_area
-    incubation.lid.surface_area
+    incubation.lid.try(:surface_area)
   end
 
   def mol_weight

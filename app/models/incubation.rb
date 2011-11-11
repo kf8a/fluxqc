@@ -3,6 +3,8 @@ class Incubation < ActiveRecord::Base
   belongs_to :run
   belongs_to :lid
 
+  NaN = (0.0/0.0)
+
   def flux(compound)
     fluxes.send(compound)[0]
   end
@@ -19,7 +21,7 @@ class Incubation < ActiveRecord::Base
         if avg_height_cm.nil?
           avg_height_cm = 19.5
         end
-        ((avg_height_cm-(lid.height-1)) * 745)/1000 + lid.volume
+        ((avg_height_cm-(lid.height-1)) * lid.surface_area)/1000 + lid.volume
       rescue NoMethodError
         return NaN
       end

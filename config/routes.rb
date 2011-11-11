@@ -1,7 +1,16 @@
 Fluxqc::Application.routes.draw do
   devise_for :users
 
-  resources :runs
+  resources :runs do
+    member do
+      post 'recall'
+      post 'accept'
+      post 'approve'
+      post 'unapprove'
+      post 'reject'
+    end
+  end
+
 
   resources :incubations 
   resources :fluxes

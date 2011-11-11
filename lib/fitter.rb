@@ -5,7 +5,7 @@ class Fitter
     @data = flux.data
     result = linear_fit
 
-    [result[:slope] * multiplier, result[:r2]] 
+    result[:slope] * multiplier
   end
 
   def multiplier

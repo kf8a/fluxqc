@@ -2,7 +2,7 @@
 <h1><%= @run.name %></h1>
 <p>Sampled on: <%= @run.sampled_on %> Study: <%= @run.study %></p>
 <% @run.current_state.events.keys.each do |event| %>
-  <button id="<%=event.to_s%>"><%= event.to_s %></button>
+  <%= button_to "#{event.to_s}", :action=> event, :remote=>true %>
 <% end %>
 </div>
 <div id='spacer'></div>
@@ -19,5 +19,5 @@
 </script>
 
 <script type='text/template' id='incubation-template'>
-  <span class='treatment-label'>T{{ treatment }}R{{ replicate }} C:{{chamber}}</span>
+  <a href='/incubations/{{id}}/edit' class='treatment-label'>T{{ treatment }}R{{ replicate }} C:{{chamber}}</a>
 </script>
