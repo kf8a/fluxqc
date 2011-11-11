@@ -9,11 +9,11 @@ class Flux < ActiveRecord::Base
 
   def data
     measurements.collect do |measurement|
-      {key:measurement.seconds, value:measurement.ppm}
+      {key:measurement.seconds, value:measurement.ppm, deleted:measurement.excluded}
     end
   end
 
-  # convenience methods to make the caluclation easier
+  # convenience methods to make the calculations easier
   def ymax
     compound.ymax
   end
