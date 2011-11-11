@@ -1,3 +1,5 @@
+require File.expand_path("../../../lib/fitter.rb",__FILE__)
+
 class Flux < ActiveRecord::Base
   belongs_to :incubation
   belongs_to :compound
@@ -11,6 +13,12 @@ class Flux < ActiveRecord::Base
     measurements.collect do |measurement|
       {key:measurement.seconds, value:measurement.ppm, deleted:measurement.excluded}
     end
+  end
+
+  def multiplier
+    f = Fitter.new
+    f.flux = self
+    f.multiplier
   end
 
   # convenience methods to make the calculations easier

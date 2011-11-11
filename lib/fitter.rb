@@ -4,13 +4,16 @@ class Fitter
   def fit
     @data = flux.data
     slope, offset, r2 = linear_fit
+
+    [slope * multiplier, r2] 
+  end
+
+  def multiplier
     headspace     = @flux.headspace.to_f
     surface_area  = @flux.surface_area.to_f
     mol_weight    = @flux.mol_weight.to_f
 
-    result = slope * headspace/surface_area * 100 * 1440 /22.4 * mol_weight
-
-    [result, r2] 
+    headspace/surface_area * 100 * 1440 /22.4 * mol_weight
   end
 
   def linear_fit

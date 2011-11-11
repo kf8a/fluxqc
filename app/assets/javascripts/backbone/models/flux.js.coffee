@@ -39,7 +39,8 @@ class Flux.Models.Flux extends Backbone.Model
     correlation = correlation * correlation
 
     r2 = correlation
-    [m, b, r2]
+    f = m * @attributes.multiplier
+    [m, b, r2, f]
 
 class Flux.Collections.FluxesCollection extends Backbone.Collection
   model: Flux.Models.Flux

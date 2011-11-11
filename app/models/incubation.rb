@@ -8,7 +8,22 @@ class Incubation < ActiveRecord::Base
   end
 
   def headspace
-
+    return NaN unless lid
+    
+    if 'Z' == lid.name
+      # compute gas bucket volume 
+      # divide by 1000 to convert from cm^3 to liters
+      return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 # one cm from the top of the bucket to the mark
+    else
+      begin
+        if avg_height_cm.nil?
+          avg_height_cm = 19.5
+        end
+        ((avg_height_cm-(lid.height-1)) * 745)/1000 + lid.volume
+      rescue NoMethodError
+        return NaN
+      end
+    end
   end
 
   def co2

@@ -30,7 +30,7 @@ window.scatterPlot = (model, el) ->
     .attr('transform', 'translate(0,' + height + ' ) scale(1,-1)')
 
   # add fit line
-  [m, b, r2] = model.fitLineByLeastSquares()
+  [m, b, r2, f] = model.fitLineByLeastSquares()
 
   # find first and last point
   a1 = 0 * m + b
@@ -46,7 +46,7 @@ window.scatterPlot = (model, el) ->
     .attr('transform', 'scale(1,-1)')
     .attr('x', 80)
     .attr('y', -height+margin-20)
-    .text('slope = ' + m.toPrecision(4))
+    .text(f.toPrecision(4) + ' g\u207B\u00B9 m\u207B\u00B2 day\u207B\u00B9')
 
   g.selectAll('.fitLine')
     .data([a1,a2])
