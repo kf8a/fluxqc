@@ -1,3 +1,5 @@
+<h1><%= @run.name %></h1>
+<p>Sampled on: <%= @run.sampled_on %> Study: <%= @run.study %></p>
 <div id='container'></div>
 
 <script>
@@ -11,5 +13,5 @@
 </script>
 
 <script type='text/template' id='incubation-template'>
-  <span class='treatment-label'>{{ treatment }} R:{{ replicate }} C:{{chamber}}</span>
+  <span class='treatment-label'>T{{ treatment }}R{{ replicate }} C:{{chamber}}</span>
 </script>
