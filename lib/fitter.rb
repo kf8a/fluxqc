@@ -3,9 +3,9 @@ class Fitter
 
   def fit
     @data = flux.data
-    slope, offset, r2 = linear_fit
+    result = linear_fit
 
-    [slope * multiplier, r2] 
+    [result[:slope] * multiplier, result[:r2]] 
   end
 
   def multiplier
@@ -42,6 +42,6 @@ class Fitter
     correlation = (count * sum_xy - sum_x * sum_y)/Math.sqrt((count * sum_xx - sum_x * sum_x)*(count * sum_yy - sum_y * sum_y))
     r2 = correlation * correlation
 
-    [m, b, r2]
+    {:slope=>m, :offset=>b, :r2=>r2}
   end
 end

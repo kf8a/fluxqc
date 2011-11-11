@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
     t.float    "seconds"
     t.float    "ppm"
     t.float    "area"
+    t.boolean  "excluded"
     t.datetime "starting_time"
     t.datetime "ending_time"
     t.datetime "created_at"
@@ -62,6 +63,10 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
   end
 
   create_table "runs", :force => true do |t|
+    t.date     "sampled_on"
+    t.date     "run_on"
+    t.string   "study"
+    t.text     "comment"
     t.string   "name"
     t.string   "workflow_state"
     t.datetime "created_at"

@@ -6,17 +6,18 @@ describe Fitter do
     before(:each) do
       fit = Fitter.new
       fit.data = [{:key => 1, :value=>1, :deleted => false}, {:key =>2, :value => 2, :deleted => false}]
+      @result = fit.linear_fit
       @slope, @offset, @r2 = fit.linear_fit
     end
     it 'computes the slope' do
-      @slope.should == 1
+      @result[:slope].should == 1
     end
     it 'computes r2' do
-      @r2.should == 1
+      @result[:r2].should == 1
     end
 
     it 'computes the offset' do
-      @offset.should == 0
+      @result[:offset].should == 0
     end
   end
 
@@ -24,10 +25,10 @@ describe Fitter do
     before(:each) do
       fit = Fitter.new
       fit.data = [{:key => 1, :value=>1, :deleted => false}, {:key =>2, :value => 2, :deleted => false}, {:key=>2, :value => 4, :deleted => true}]
-      @slope, @offset, @r2 = fit.linear_fit
+      @result = fit.linear_fit
     end
     it 'computes the slope' do
-      @slope.should == 1
+      @result[:slope].should == 1
     end
   end 
 

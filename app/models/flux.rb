@@ -21,6 +21,12 @@ class Flux < ActiveRecord::Base
     f.multiplier
   end
 
+  def fit_line
+    f = Fitter.new
+    f.data = data
+    f.linear_fit
+  end
+
   # convenience methods to make the calculations easier
   def ymax
     compound.ymax

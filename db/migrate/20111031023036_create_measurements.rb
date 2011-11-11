@@ -5,6 +5,7 @@ class CreateMeasurements < ActiveRecord::Migration
       t.float     :seconds
       t.float     :ppm
       t.float     :area
+      t.boolean   :excluded
       t.datetime  :starting_time
       t.datetime  :ending_time
 

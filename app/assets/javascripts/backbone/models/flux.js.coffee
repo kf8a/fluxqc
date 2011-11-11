@@ -8,6 +8,7 @@ class Flux.Models.Flux extends Backbone.Model
   
   togglePoint: (point) ->
     point.deleted = !point.deleted
+    @.fitLineByLeastSquares()
     @.change()
     @
 
@@ -39,8 +40,11 @@ class Flux.Models.Flux extends Backbone.Model
     correlation = correlation * correlation
 
     r2 = correlation
-    f = m * @attributes.multiplier
-    [m, b, r2, f]
+    @attributes.flux = m * @attributes.multiplier
+    @attributes.fit_line.slope = m
+    @attributes.fit_line.offeset = b
+    @attributes.fit_line.r2 = r2
+    @.save()
 
 class Flux.Collections.FluxesCollection extends Backbone.Collection
   model: Flux.Models.Flux

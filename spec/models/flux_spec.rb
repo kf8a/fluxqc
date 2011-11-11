@@ -23,7 +23,7 @@ describe Flux do
     end
 
     it 'should return a list of seconds and ppm' do
-      flux.data.should == [{key:1,value:10}]
+      flux.data.should == [{key:1,value:10, deleted:false}]
     end
   end
 
