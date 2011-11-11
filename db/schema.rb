@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
     t.text     "comment"
     t.string   "name"
     t.string   "workflow_state"
+    t.boolean  "released"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -18,7 +18,6 @@ class Run < ActiveRecord::Base
       event :unapprove, :transitions_to => :accepted
     end
     state :published do
-      event :reject, :transitions_to => :rejected
       event :recall, :transitions_to => :approved
     end
 
@@ -28,8 +27,12 @@ class Run < ActiveRecord::Base
   def total_fluxes
     incubations.count * 3
   end
+
+  def publish
+    self.released = true
+  end
   
-  def approved_fluxes
-    0
+  def recall
+    self.released = false
   end
 end

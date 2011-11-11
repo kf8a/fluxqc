@@ -9,12 +9,8 @@ describe Run do
   it 'reports the total number of fluxes' do
     run.total_fluxes.should == 0
   end
-  
-  it 'reports the number of approved fluxes' do
-    run.approved_fluxes.should == 0
-  end
 
-  describe 'the workflow' do
+  describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
         run.uploaded?.should be_true
@@ -66,11 +62,15 @@ describe Run do
         run.publish!
       end
 
-      it 'can be rejected' do
-        run.reject!.should be_true
-      end
       it 'can be recalled' do
         run.recall!.should be_true
+      end
+      it 'has released set to true' do
+        run.released.should be_true
+      end
+      it 'sets released to false when recalled' do
+        run.recall!
+        run.released.should be_false
       end
     end
   end

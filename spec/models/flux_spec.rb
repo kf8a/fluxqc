@@ -19,6 +19,7 @@ describe Flux do
       measurement =  Measurement.new
       measurement.stub(:seconds).and_return(1)
       measurement.stub(:ppm).and_return(10)
+      measurement.stub(:excluded).and_return(false)
       flux.measurements << measurement
     end
 

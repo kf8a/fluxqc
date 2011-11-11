@@ -7,6 +7,7 @@ class CreateRuns < ActiveRecord::Migration
       t.text      :comment
       t.string    :name
       t.string    :workflow_state
+      t.boolean   :released
 
       t.timestamps
     end
