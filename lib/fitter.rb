@@ -1,6 +1,7 @@
 class Fitter
   attr_accessor :data, :flux
 
+  NaN = (0.0/0.0)
   def fit
     @data = flux.data
     result = linear_fit
@@ -33,7 +34,7 @@ class Fitter
       count  += 1
     end
     
-    return ([[],[]]) if count == 0
+    return ({:slope=>NaN, :offset=>NaN, :r2=>NaN}) if count == 0
 
     m = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
     b = (sum_y/count) - (m * sum_x)/count
