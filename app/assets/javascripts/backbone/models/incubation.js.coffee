@@ -6,13 +6,13 @@ class Flux.Models.Incubation extends Backbone.Model
 
   initialize: ->
     @co2_model = new Flux.Models.Flux({id: @attributes.co2.id})
-    @co2_model.fetch()
+    @co2_model.set(@attributes.co2)
 
     @n2o_model = new Flux.Models.Flux({id: @attributes.n2o.id})
-    @n2o_model.fetch()
+    @n2o_model.set(@attributes.n2o)
 
     @ch4_model = new Flux.Models.Flux({id: @attributes.ch4.id})
-    @ch4_model.fetch()
+    @ch4_model.set(@attributes.ch4)
   
 class Flux.Collections.IncubationsCollection extends Backbone.Collection
   model: Flux.Models.Incubation

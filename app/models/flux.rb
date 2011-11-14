@@ -5,6 +5,8 @@ class Flux < ActiveRecord::Base
   belongs_to :compound
   has_many   :measurements,  :dependent => :destroy
 
+  attr_reader :flux, :muliplier, :data
+
   scope :co2, joins(:compound).where('compounds.name' => 'co2')
   scope :n2o, joins(:compound).where('compounds.name' => 'n2o') 
   scope :ch4, joins(:compound).where('compounds.name' => 'ch4')
@@ -41,6 +43,17 @@ class Flux < ActiveRecord::Base
     f = Fitter.new
     f.data = data
     f.linear_fit
+  end
+
+  def as_json(options= {})
+    h = super(options)
+    h[:data] = data
+    h[:ymax] = ymax
+    h[:ymin] = ymin
+    h[:fit_line] = fit_line
+    h[:multiplier] = multiplier
+    h[:flux] = flux
+    h
   end
 
   # convenience methods to make the calculations easier

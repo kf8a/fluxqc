@@ -28,6 +28,7 @@ class Incubation < ActiveRecord::Base
     end
   end
 
+
   def co2
     flux('co2')
   end
