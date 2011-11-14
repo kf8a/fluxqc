@@ -42,9 +42,10 @@ class Flux.Models.Flux extends Backbone.Model
     r2 = correlation
     @attributes.flux = m * @attributes.multiplier
     @attributes.fit_line.slope = m
-    @attributes.fit_line.offeset = b
+    @attributes.fit_line.offset = b
     @attributes.fit_line.r2 = r2
     @.save()
+    [m,b,r2, @attributes.flux]
 
 class Flux.Collections.FluxesCollection extends Backbone.Collection
   model: Flux.Models.Flux

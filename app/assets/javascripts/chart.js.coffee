@@ -3,10 +3,6 @@ window.scatterPlot = (model, el) ->
   json_data = model.toJSON()
   data = json_data.data
   return unless data
-  m  = json_data.fit_line.slope
-  b  = json_data.fit_line.offset
-  r2 = json_data.fit_line.r2
-  f  = json_data.flux
 
   height = 300
   width  = 300
@@ -35,7 +31,11 @@ window.scatterPlot = (model, el) ->
     .attr('transform', 'translate(0,' + height + ' ) scale(1,-1)')
 
   # add fit line
-  # [m, b, r2, f] = model.fitLineByLeastSquares()
+  m  = json_data.fit_line.slope
+  b  = json_data.fit_line.offset
+  r2 = json_data.fit_line.r2
+  f  = json_data.flux
+  #[m, b, r2, f] = model.fitLineByLeastSquares()
 
   # find first and last point
   a1 = 0 * m + b
