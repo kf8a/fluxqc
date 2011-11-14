@@ -17,7 +17,7 @@ class Flux < ActiveRecord::Base
 
   def data=(measurement_hash=[])
     measurement_hash.each do |d|
-      measurement = Measurement.find(d[:id])
+      measurement = measurements.find(d[:id])
       measurement.seconds = d[:key]
       measurement.ppm = d[:value]
       measurement.excluded = d[:deleted]

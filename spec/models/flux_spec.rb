@@ -5,7 +5,7 @@ describe Flux do
   it {should belong_to :compound}
   it {should have_many :measurements}
 
-  let(:flux) {Flux.new}
+  let(:flux) {Factory.create :flux}
 
   it 'has methods to make the flux calculation easier' do
     flux.respond_to?(:headspace).should be_true
@@ -24,23 +24,27 @@ describe Flux do
     end
 
     it 'should return a list of seconds and ppm' do
-      flux.data.should == [{id:nil, key:1,value:10, deleted:false}]
+      flux.data.should == [{id:1, key:1,value:10, deleted:false}]
     end
   end
 
-  describe 'data setting' do
+  describe 'data writing' do
     before(:each) do
       @measurement =  Factory.create :measurement
-      flux.data = [{id:@measurement.id,key:1, value:10, deleted:false}]
+      flux.measurements << @measurement
+      flux.data = [{id:@measurement.id,key:4, value:10, deleted:true}]
+    end
+    it 'should have one measurement' do
+      flux.measurements.size.should == 1
     end
     it 'updates the seconds' do
-      flux.measurements.first.seconds.should == 1
+      flux.measurements.first.seconds.should == 4
     end
     it 'updates the ppms' do
       flux.measurements.first.ppm.should == 10
     end
     it 'updates the excluded setting' do
-      flux.measurements.first.excluded.should be_false
+      flux.measurements.first.excluded.should be_true
     end
   end
 

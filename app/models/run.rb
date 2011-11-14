@@ -18,7 +18,7 @@ class Run < ActiveRecord::Base
       event :unapprove, :transitions_to => :accepted
     end
     state :published do
-      event :recall, :transitions_to => :approved
+      event :unpublish, :transitions_to => :approved
     end
 
     state :rejected
@@ -32,7 +32,7 @@ class Run < ActiveRecord::Base
     self.released = true
   end
   
-  def recall
+  def unpublish
     self.released = false
   end
 end

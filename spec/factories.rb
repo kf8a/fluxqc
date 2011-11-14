@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :measurement do
     excluded  false
   end
+  factory :flux do
+  end
   factory :compound do
     name 'co2'
   end
