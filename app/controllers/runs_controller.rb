@@ -17,8 +17,38 @@ class RunsController < ApplicationController
     end
   end
 
-  def recall
+  def new
+    @run = Run.new
+  end
 
+  def reject
+    run = Run.find(params[:id])
+    run.reject!
+    render :nothing => true
+  end
+
+  def accept
+    run = Run.find(params[:id])
+    run.accept!
+    render :nothing => true
+  end
+  
+  def approve
+    run = Run.find(params[:id])
+    run.approve!
+    render :nothing => true
+  end
+
+  def unapprove
+    run = Run.find(params[:id])
+    run.unapprove!
+    render :nothing => true
+  end
+
+  def unpublish
+    run = Run.find(params[:id])
+    run.unpublish!
+    render :nothing => true
   end
 
 end

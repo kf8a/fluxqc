@@ -3,7 +3,7 @@ Fluxqc::Application.routes.draw do
 
   resources :runs do
     member do
-      post 'recall'
+      post 'reject'
       post 'accept'
       post 'approve'
       post 'unapprove'

@@ -33,4 +33,64 @@ describe RunsController do
     end
   end
 
+  describe 'GET :new' do
+    it 'returns http success' do
+      get :new
+      response.should be_success
+    end
+
+    it' renders the new template' do
+      get :new
+      response.should render_template(:new)
+    end
+  end
+
+  describe 'a run workflow' do
+    before(:each) do
+      @run = Factory.create :run
+      Run.stub(:find).and_return(@run)
+    end
+
+    describe 'POST reject' do
+      it 'rejects a run' do
+        @run.stub('reject!').and_return(true)
+        post :reject, :id => @run
+        response.should be_success
+      end
+
+    end
+
+    describe 'POST accept' do
+      it 'accepts a run' do
+        @run.stub('accept!')
+        post :accept, :id => @run
+        response.should be_success
+      end
+    end
+
+    describe 'POST approve' do
+      it 'approves a run' do
+        @run.stub('approve!')
+        post :approve, :id => @run
+        response.should be_success
+      end
+    end
+
+    describe 'POST unapprove' do
+      it 'unapproves a run' do
+        @run.stub('unapprove!')
+        post :unapprove, :id => @run
+        response.should be_success
+      end
+    end
+
+    describe 'POST unpublish' do
+      it 'unpublishes a run' do
+        @run.stub('unpublish!').and_return(true)
+        post :unpublish, :id=>@run
+        response.should be_success 
+      end
+    end
+  end
+
 end
