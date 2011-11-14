@@ -34,13 +34,26 @@ describe Fitter do
 
   describe 'a flux with only deleted points' do
     before(:each) do
-      fit = Fitter.new
-      fit.data = [{:key => 1, :value=>1, :deleted => true}, {:key =>2, :value => 2, :deleted => true}, {:key=>2, :value => 4, :deleted => true}]
-      @result = fit.linear_fit
+      @fit = Fitter.new
+      @fit.data = [{:key => 1, :value=>1, :deleted => true}, {:key =>2, :value => 2, :deleted => true}, {:key=>2, :value => 4, :deleted => true}]
+
     end
     it 'does not fail' do
-    
+      @fit.linear_fit.should be_true
     end
+  end
+
+  describe 'a flux with missing ppms' do
+    before(:each) do
+      fit = Fitter.new
+      fit.data = [{:key => 1, :value=>1, :deleted => false}, {:key =>2, :value => nil, :deleted => false}, {:key=>2, :value => 4, :deleted => false}]
+      @result = fit.linear_fit
+    end
+
+    it 'computes the slope' do
+      @result[:slope].should == 3
+    end
+
   end
 
   describe 'using a flux object' do
