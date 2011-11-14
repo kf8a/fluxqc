@@ -32,6 +32,8 @@ class Fitter
       sum_xy += x*y
       count  += 1
     end
+    
+    return ([[],[]]) if count == 0
 
     m = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
     b = (sum_y/count) - (m * sum_x)/count

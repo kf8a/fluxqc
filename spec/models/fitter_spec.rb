@@ -32,6 +32,17 @@ describe Fitter do
     end
   end 
 
+  describe 'a flux with only deleted points' do
+    before(:each) do
+      fit = Fitter.new
+      fit.data = [{:key => 1, :value=>1, :deleted => true}, {:key =>2, :value => 2, :deleted => true}, {:key=>2, :value => 4, :deleted => true}]
+      @result = fit.linear_fit
+    end
+    it 'does not fail' do
+    
+    end
+  end
+
   describe 'using a flux object' do
     before(:each) do
       @flux = stub
