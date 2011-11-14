@@ -12,6 +12,7 @@ class Flux < ActiveRecord::Base
   scope :ch4, joins(:compound).where('compounds.name' => 'ch4')
 
   def data
+    p measurements
     measurements.collect do |measurement|
       {id:measurement.id, key:measurement.seconds, value:measurement.ppm, deleted:measurement.excluded}
     end

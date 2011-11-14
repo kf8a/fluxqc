@@ -24,6 +24,8 @@ class Fitter
 
     data.each do |datum|
       next if datum[:deleted]
+      next unless datum[:key]
+      next unless datum[:value]
       x = datum[:key]
       y = datum[:value]
       sum_x  += x
