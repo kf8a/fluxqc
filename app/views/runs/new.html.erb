@@ -1,1 +1,9 @@
-New Run
+<%= semantic_form_for @run do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :sampled_on %>
+    <%= f.input :name %>
+    <%= f.input :study %>
+    <%= f.input :comment %>
+  <% end %>
+  <%= f.buttons %>
+<% end %> 

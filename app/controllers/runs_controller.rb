@@ -24,31 +24,36 @@ class RunsController < ApplicationController
   def reject
     run = Run.find(params[:id])
     run.reject!
-    render :nothing => true
+    redirect_to runs_path
   end
 
   def accept
     run = Run.find(params[:id])
     run.accept!
-    render :nothing => true
+    redirect_to runs_path
   end
   
   def approve
     run = Run.find(params[:id])
     run.approve!
-    render :nothing => true
+    redirect_to runs_path
   end
 
+  def publish
+    run = Run.find(params[:id])
+    run.publish!
+    redirect_to runs_path
+  end
   def unapprove
     run = Run.find(params[:id])
     run.unapprove!
-    render :nothing => true
+    redirect_to runs_path
   end
 
   def unpublish
     run = Run.find(params[:id])
     run.unpublish!
-    render :nothing => true
+    redirect_to runs_path
   end
 
 end

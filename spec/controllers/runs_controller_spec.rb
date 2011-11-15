@@ -55,7 +55,7 @@ describe RunsController do
       it 'rejects a run' do
         @run.stub('reject!').and_return(true)
         post :reject, :id => @run
-        response.should be_success
+        response.should redirect_to(runs_path)
       end
 
     end
@@ -64,7 +64,7 @@ describe RunsController do
       it 'accepts a run' do
         @run.stub('accept!')
         post :accept, :id => @run
-        response.should be_success
+        response.should redirect_to(runs_path)
       end
     end
 
@@ -72,7 +72,15 @@ describe RunsController do
       it 'approves a run' do
         @run.stub('approve!')
         post :approve, :id => @run
-        response.should be_success
+        response.should redirect_to(runs_path)
+      end
+    end
+
+    describe 'POST publish' do
+      it 'publishes a run' do
+        @run.stub('publish!')
+        post :publish, :id => @run
+        response.should redirect_to(runs_path)
       end
     end
 
@@ -80,7 +88,7 @@ describe RunsController do
       it 'unapproves a run' do
         @run.stub('unapprove!')
         post :unapprove, :id => @run
-        response.should be_success
+        response.should redirect_to(runs_path)
       end
     end
 
@@ -88,7 +96,7 @@ describe RunsController do
       it 'unpublishes a run' do
         @run.stub('unpublish!').and_return(true)
         post :unpublish, :id=>@run
-        response.should be_success 
+        response.should redirect_to(runs_path)
       end
     end
   end

@@ -81,10 +81,8 @@ GEM
       factory_girl (~> 2.2.0)
       railties (>= 3.0.0)
     ffi (1.0.9)
-    formtastic (1.2.4)
-      actionpack (>= 2.3.7)
-      activesupport (>= 2.3.7)
-      i18n (~> 0.4)
+    formtastic (2.0.2)
+      rails (~> 3.0)
     gherkin (2.5.4)
       json (>= 1.4.6)
     highline (1.6.2)
@@ -214,7 +212,7 @@ DEPENDENCIES
   devise
   execjs
   factory_girl_rails
-  formtastic
+  formtastic (>= 2.0.2)
   jquery-rails
   launchy
   pg

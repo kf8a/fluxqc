@@ -6,6 +6,7 @@ Fluxqc::Application.routes.draw do
       post 'reject'
       post 'accept'
       post 'approve'
+      post 'publish'
       post 'unapprove'
       post 'unpublish'
     end

@@ -8,7 +8,7 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'formtastic'
+gem 'formtastic', '>=2.0.2'
 gem 'workflow'
 #gem 'spreadsheet'
 
