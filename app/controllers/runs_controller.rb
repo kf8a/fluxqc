@@ -21,6 +21,15 @@ class RunsController < ApplicationController
     @run = Run.new
   end
 
+  def create
+    @run = Run.new(params[:run])
+    if @run.save
+      redirect_to run_path(@run)
+    else
+      redirect_to new_run_path
+    end
+  end
+
   def reject
     run = Run.find(params[:id])
     run.reject!

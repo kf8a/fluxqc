@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031230745) do
+ActiveRecord::Schema.define(:version => 20111115132342) do
 
   create_table "compounds", :force => true do |t|
     t.string   "name"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20111031230745) do
     t.boolean  "released"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "setup_file"
+    t.string   "data_file"
   end
 
   create_table "users", :force => true do |t|

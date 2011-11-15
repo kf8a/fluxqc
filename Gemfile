@@ -10,6 +10,7 @@ gem 'jquery-rails' #, :git => "../jquery-rails"
 gem 'pg'
 gem 'formtastic', '>=2.0.2'
 gem 'workflow'
+gem 'carrierwave'
 #gem 'spreadsheet'
 
 gem 'devise'

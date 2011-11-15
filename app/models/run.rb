@@ -1,5 +1,7 @@
 class Run < ActiveRecord::Base
   has_many :incubations,  :dependent => :destroy
+  mount_uploader :setup_file, SetupUploader
+  mount_uploader :data_file, DataUploader
 
   scope :by_state, ->(state){where(:workflow_state => state) }
 

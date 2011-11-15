@@ -45,6 +45,24 @@ describe RunsController do
     end
   end
 
+  describe ':POST create' do
+    describe 'with a valid object' do 
+     it 'redirects to show' do
+       Run.any_instance.stub(:save).and_return(true)
+       Run.any_instance.stub(:id).and_return(1)
+       post :create, {:name => 'test'}
+       response.should redirect_to(run_path(assigns(:run)))
+     end
+    end
+    describe 'with an invalid object' do
+      it 'redirects back to new' do
+        Run.any_instance.stub(:save).and_return(false)
+        post :create, {}
+        response.should redirect_to(new_run_path)
+      end
+    end
+  end
+
   describe 'a run workflow' do
     before(:each) do
       @run = Factory.create :run
