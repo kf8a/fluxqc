@@ -30,6 +30,19 @@ class RunsController < ApplicationController
     end
   end
 
+  def edit
+    @run = Run.find(params[:id])
+  end
+
+  def update
+    @run = Run.find(params[:id])
+    if @run.update_attributes(params[:run])
+      redirect_to run_path(@run)
+    else
+      redirect_to edit_run_path(@run)
+    end
+  end
+
   def reject
     run = Run.find(params[:id])
     run.reject!

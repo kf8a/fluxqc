@@ -63,6 +63,33 @@ describe RunsController do
     end
   end
 
+  describe 'GET :edit' do
+    it 'is succesfull' do
+      run = Factory.create :run
+      get :edit, :id=>run
+      response.should be_success
+    end
+  end
+
+  describe 'PUT update' do 
+    describe 'with a valid object' do
+      it 'redirects to show' do
+       Run.any_instance.stub(:save).and_return(true)
+       Run.any_instance.stub(:id).and_return(1)
+       post :update, :id=>1, :run=> {:name => 'test'}
+       response.should redirect_to(run_path(assigns(:run)))
+      end
+    end
+    describe 'with an invalid object' do
+      it 'redirects back to new' do
+        Run.any_instance.stub(:save).and_return(false)
+        Run.any_instance.stub(:id).and_return(1)
+        post :update, :id=>1 
+        response.should redirect_to(edit_run_path(assigns(:run)))
+      end
+    end
+  end
+
   describe 'a run workflow' do
     before(:each) do
       @run = Factory.create :run
