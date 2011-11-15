@@ -18,9 +18,7 @@ class Incubation < ActiveRecord::Base
       return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 # one cm from the top of the bucket to the mark
     else
       begin
-        if avg_height_cm.nil?
-          avg_height_cm = 19.5
-        end
+        avg_height_cm = 19.5 unless avg_height_cm
         ((avg_height_cm-(lid.height-1)) * lid.surface_area)/1000 + lid.volume
       rescue NoMethodError
         return NaN
