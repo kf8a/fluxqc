@@ -1,0 +1,8 @@
+<tr>
+  <td><%= incubation.treatment %></td>
+  <td><%= incubation.replicate %></td>
+  <td><%= incubation.chamber %></td>
+  <td><%= incubation.lid.try(:name) %></td>
+  <td><%= incubation.fluxes.first.measurements.collect {|x| x.seconds}%></td>
+  <td><%= incubation.fluxes.first.measurements.collect {|x| x.ppm }%> </td>
+</tr>
