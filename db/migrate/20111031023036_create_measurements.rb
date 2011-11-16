@@ -2,6 +2,7 @@ class CreateMeasurements < ActiveRecord::Migration
   def change
     create_table :measurements do |t|
       t.integer   :flux_id
+      t.string    :vial
       t.float     :seconds
       t.float     :ppm
       t.float     :area
