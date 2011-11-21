@@ -7,6 +7,11 @@ FactoryGirl.define do
   factory :compound do
     name 'co2'
   end
+  factory :incubation do
+  end
+  factory :lid do
+    headspace 1
+  end
   factory :run do
   end
   factory :user do

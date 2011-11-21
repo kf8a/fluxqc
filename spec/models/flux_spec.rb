@@ -31,6 +31,8 @@ describe Flux do
   describe 'data writing' do
     before(:each) do
       @measurement =  Factory.create :measurement
+      flux.incubation = Factory.create :incubation
+      flux.compound = Factory.create :compound
       flux.measurements << @measurement
       flux.data = [{id:@measurement.id,key:4, value:10, deleted:true}]
     end
@@ -45,6 +47,10 @@ describe Flux do
     end
     it 'updates the excluded setting' do
       flux.measurements.first.excluded.should be_true
+    end
+    it 'updates the flux' do
+      #TODO need a good way to test this. propably set up two points
+      #flux.value.should == 2
     end
   end
 

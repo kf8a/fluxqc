@@ -23,8 +23,9 @@ class Flux < ActiveRecord::Base
       measurement.seconds = d[:key]
       measurement.ppm = d[:value]
       measurement.excluded = d[:deleted]
-      measurements << measurement
+      measurement.save
     end
+    value = flux
   end
 
   def flux
