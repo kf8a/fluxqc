@@ -30,14 +30,17 @@ describe Flux do
 
   describe 'data writing' do
     before(:each) do
-      @measurement =  Factory.create :measurement
-      flux.incubation = Factory.create :incubation
-      flux.compound = Factory.create :compound
-      flux.measurements << @measurement
-      flux.data = [{id:@measurement.id,key:4, value:10, deleted:true}]
+      @m1 = Factory.create :measurement
+      @m2 = Factory.create :measurement
+      flux.measurements << @m1
+      flux.measurements << @m2 
+      flux.stub(:headspace).and_return(1)
+      flux.stub(:mol_weight).and_return(1)
+      flux.stub(:surface_area).and_return(1)
+      flux.data = [{id:@m1.id,key:4, value:10, deleted:true}]
     end
     it 'should have one measurement' do
-      flux.measurements.size.should == 1
+      flux.measurements.size.should == 2
     end
     it 'updates the seconds' do
       flux.measurements.first.seconds.should == 4
@@ -49,8 +52,8 @@ describe Flux do
       flux.measurements.first.excluded.should be_true
     end
     it 'updates the flux' do
-      #TODO need a good way to test this. propably set up two points
-      #flux.value.should == 2
+      flux.data = [{id:@m1.id, key:1, value:1, deleted:false}, {id:@m2.id, key:2,value:2,deleted:false}]
+      flux.value.should == 6428.571428571429
     end
   end
 

@@ -25,7 +25,8 @@ class Flux < ActiveRecord::Base
       measurement.excluded = d[:deleted]
       measurement.save
     end
-    value = flux
+    measurements.reload   #TODO I'm missing something here
+    self.value = flux
   end
 
   def flux
