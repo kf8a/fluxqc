@@ -32,7 +32,9 @@ class Flux < ActiveRecord::Base
   def flux
     f = Fitter.new
     f.flux = self
-    self.value = f.fit
+    v = f.fit
+    v = nil if v.nan?
+    self.value = v
   end
 
   def multiplier
