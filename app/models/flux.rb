@@ -26,13 +26,13 @@ class Flux < ActiveRecord::Base
       measurement.save
     end
     measurements.reload   #TODO I'm missing something here
-    self.value = flux
+    flux
   end
 
   def flux
     f = Fitter.new
     f.flux = self
-    f.fit
+    self.value = f.fit
   end
 
   def multiplier
