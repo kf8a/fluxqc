@@ -37,7 +37,6 @@ gem 'unicorn'
 gem 'capistrano'
 
 group :test, :development do
-  gem 'sqlite3'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem "database_cleaner"
@@ -45,4 +44,8 @@ group :test, :development do
   gem "cucumber-rails"
   gem "capybara"
   gem "launchy"
+end
+
+group :test do
+  gem 'sqlite3'
 end

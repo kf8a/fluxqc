@@ -38,4 +38,8 @@ class Incubation < ActiveRecord::Base
   def ch4
     flux('ch4')
   end
+
+  def vials
+    fluxes.first.measurements
+  end
 end

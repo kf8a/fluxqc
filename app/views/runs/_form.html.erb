@@ -20,6 +20,7 @@
       <%= incubation.input :replicate, :input_html => {:size => 5} %>
       <%= incubation.input :chamber,   :input_html => {:size => 5} %>
       <%= incubation.input :lid %>
+      <%= debug incubation.vials %>
     </fieldset>
   <% end %>
   <%= f.hidden_field :setup_file_cache %>
