@@ -4,3 +4,6 @@ log/*.log
 tmp/
 .sass-cache/
 config/database.yml
+.~lock*
+LTER Main site series 10.xls
+RESULTS.CSV
