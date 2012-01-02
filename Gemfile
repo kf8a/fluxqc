@@ -1,20 +1,16 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.0.rc'
 gem "rails-backbone"
 gem 'jquery-rails' 
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
 gem 'formtastic', '>=2.0.2'
 gem 'workflow'
-gem 'carrierwave'
+gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
 #gem 'spreadsheet'
 
 gem 'devise'
-#gem 'oa-openid', :require => 'omniauth/openid'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,7 +34,7 @@ gem 'capistrano'
 
 group :test, :development do
   gem 'shoulda-matchers'
-  gem 'rspec-rails'
+  gem 'rspec-rails', :git=>'git://github.com/rspec/rspec-rails.git'
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "cucumber-rails"
