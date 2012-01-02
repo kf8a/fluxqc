@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.0.rc'
 gem "rails-backbone"
@@ -8,7 +8,7 @@ gem 'pg'
 gem 'formtastic', '>=2.0.2'
 gem 'workflow'
 gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
-#gem 'spreadsheet'
+gem 'spreadsheet'
 
 gem 'devise'
 

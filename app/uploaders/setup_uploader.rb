@@ -12,9 +12,22 @@ class SetupUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def extension_white_list
+    %w(csv xls)
+  end
+
+
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
+  
+  #
+  # Parse the input and generate the required samples
+  process :parse
 
+  # Parse the input file here 
+  def parse 
+    
+  end
 end
