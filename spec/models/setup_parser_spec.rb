@@ -4,17 +4,7 @@ require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
 describe SetupParser do
 
   before do
-    @result1 = {:sample_date => '2011-08-19', 
-                :treatment => 'T6', 
-                :replicate => 'R1', 
-                :chamber=>'1', 
-                :vial =>'1',
-                :lid=>'C', 
-                :height =>[18, 19.5, 19, 20.5], 
-                :soil_temperature => 18.5,
-                :seconds => 0.0, 
-                :comments => nil}
-    @result2 = {:sample_date => '2011-08-19',
+    @result2 = {:sample_date => '2011-08-19 12:00:00 -4000',
                 :treatment => 'T2', 
                 :replicate => 'R1', 
                 :chamber=>'1', 
@@ -37,16 +27,68 @@ describe SetupParser do
       @result.class.should == Array
     end
 
-    it 'returns the right data for the first row' do
-      @result[0].should == @result1
+    describe 'first row' do
+      it 'has the right sample date' do
+        @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+      end
+      it 'has the right treatment' do
+        @result[0][:treatment].should == 'T6'
+      end
+      it 'has the right replicate' do
+        @result[0][:replicate].should == 'R1'
+      end
+      it 'has the right chamber' do
+        @result[0][:chamber].should == '1'
+      end
+      it 'has the right vial' do
+        @result[0][:vial].should == '1'
+      end
+      it 'has the right lid' do
+        @result[0][:lid].should == 'C'
+      end
+      it 'has the right height' do
+        @result[0][:height].should == [18, 19.5, 19, 20.5]
+      end
+      it 'has the right soil_temperature' do
+        @result[0][:soil_temperature].should == 18.5
+      end
+      it 'has the right seconds' do
+        @result[0][:seconds].should == 0
+      end
     end
 
     it 'returns the right data for a string treatment second row' do
       @result[1][:treatment].should == 'TDF'
     end
 
-    it 'returns the right data for another row' do
-      @result[5].should == @result2
+    describe 'other row' do
+      it 'has the right sample date' do
+        @result[5][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+      end
+      it 'has the right treatment' do
+        @result[5][:treatment].should == 'T2'
+      end
+      it 'has the right replicate' do
+        @result[5][:replicate].should == 'R1'
+      end
+      it 'has the right chamber' do
+        @result[5][:chamber].should == '1'
+      end
+      it 'has the right vial' do
+        @result[5][:vial].should == '6'
+      end
+      it 'has the right lid' do
+        @result[5][:lid].should == 'D'
+      end
+      it 'has the right height' do
+        @result[5][:height].should == [19.5, 19.0, 19.0, 19.0]
+      end
+      it 'has the right soil_temperature' do
+        @result[5][:soil_temperature].should == 19
+      end
+      it 'has the right seconds' do
+        @result[5][:seconds].should == 20 
+      end
     end
   end
 
@@ -62,15 +104,68 @@ describe SetupParser do
       @result.class.should == Array
     end
 
-    it 'returns the right data for the first row' do
-      @result[0].should == @result1
+    describe 'first row' do
+      it 'has the right sample date' do
+        @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+      end
+      it 'has the right treatment' do
+        @result[0][:treatment].should == 'T6'
+      end
+      it 'has the right replicate' do
+        @result[0][:replicate].should == 'R1'
+      end
+      it 'has the right chamber' do
+        @result[0][:chamber].should == '1'
+      end
+      it 'has the right vial' do
+        @result[0][:vial].should == '1'
+      end
+      it 'has the right lid' do
+        @result[0][:lid].should == 'C'
+      end
+      it 'has the right height' do
+        @result[0][:height].should == [18, 19.5, 19, 20.5]
+      end
+      it 'has the right soil_temperature' do
+        @result[0][:soil_temperature].should == 18.5
+      end
+      it 'has the right seconds' do
+        @result[0][:seconds].should == 0
+      end
     end
 
-    it 'returns the right data for a string treatment' do
+    it 'returns the right data for a string treatment second row' do
       @result[1][:treatment].should == 'TDF'
     end
-    it 'returns the right data for another row' do
-      @result[5].should == @result2
+
+    describe 'other row' do
+      it 'has the right sample date' do
+        @result[5][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+      end
+      it 'has the right treatment' do
+        @result[5][:treatment].should == 'T2'
+      end
+      it 'has the right replicate' do
+        @result[5][:replicate].should == 'R1'
+      end
+      it 'has the right chamber' do
+        @result[5][:chamber].should == '1'
+      end
+      it 'has the right vial' do
+        @result[5][:vial].should == '6'
+      end
+      it 'has the right lid' do
+        @result[5][:lid].should == 'D'
+      end
+      it 'has the right height' do
+        @result[5][:height].should == [19.5, 19.0, 19.0, 19.0]
+      end
+      it 'has the right soil_temperature' do
+        @result[5][:soil_temperature].should == 19
+      end
+      it 'has the right seconds' do
+        @result[5][:seconds].should == 20 
+      end
     end
   end
 

@@ -8,7 +8,7 @@ class SetupParser
   def parse_xls(file)
     book = Spreadsheet.open(file)
     sheet = book.worksheets.first
-    sample_date = Chronic.parse(sheet.row(3)[0].gsub /sample date: /,'').to_date.to_s
+    sample_date = Chronic.parse(sheet.row(3)[0].gsub /sample date: /,'')
     # sheet should implement enumerable
     result = []
     sheet.each 5 do |row|
@@ -23,7 +23,7 @@ class SetupParser
     lines = CSV::readlines(file)
     3.times { lines.shift } # remove the header limes TODO this is different for GLBRC
     row = lines.shift
-    sample_date = Chronic.parse(row[0].gsub /sample date: /,'').to_date.to_s
+    sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
     lines.shift
     result = lines.collect do |row|
      parse_sample(row, sample_date)
