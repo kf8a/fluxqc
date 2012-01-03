@@ -81,3 +81,13 @@ class Flux < ActiveRecord::Base
     compound.mol_weight
   end
 end
+# == Schema Information
+#
+# Table name: fluxes
+#
+#  id            :integer         not null, primary key
+#  incubation_id :integer
+#  value         :float
+#  compound_id   :integer
+#
+

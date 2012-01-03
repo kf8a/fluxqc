@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 032565653b98e0790ddd8a070579566eb60a850c
+  specs:
+    annotate (2.4.1.beta1)
+
+GIT
   remote: git://github.com/jnicklas/carrierwave.git
   revision: bc03d8c90de7216c0191430779d4fa2cc3016da6
   specs:
@@ -219,6 +225,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   bcrypt-ruby
   capistrano
   capybara

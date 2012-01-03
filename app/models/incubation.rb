@@ -43,3 +43,18 @@ class Incubation < ActiveRecord::Base
     fluxes.first.measurements
   end
 end
+# == Schema Information
+#
+# Table name: incubations
+#
+#  id               :integer         not null, primary key
+#  name             :string(25)
+#  run_id           :integer
+#  soil_temperature :float
+#  treatment        :string(255)
+#  replicate        :string(255)
+#  lid_id           :integer
+#  chamber          :string(255)
+#  avg_height_cm    :float
+#
+

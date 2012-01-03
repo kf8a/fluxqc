@@ -40,3 +40,21 @@ class Run < ActiveRecord::Base
     self.released = false
   end
 end
+# == Schema Information
+#
+# Table name: runs
+#
+#  id             :integer         not null, primary key
+#  run_on         :date
+#  sampled_on     :date
+#  name           :string(50)
+#  comment        :text
+#  approved       :boolean         default(FALSE)
+#  group_id       :integer
+#  study          :string(25)
+#  released       :boolean         default(FALSE)
+#  workflow_state :string(255)
+#  setup_file     :string(255)
+#  data_file      :string(255)
+#
+

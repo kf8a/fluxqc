@@ -8,3 +8,19 @@ class Measurement < ActiveRecord::Base
 
   end
 end
+# == Schema Information
+#
+# Table name: measurements
+#
+#  id          :integer         not null, primary key
+#  response    :float
+#  excluded    :boolean         default(FALSE)
+#  flux_id     :integer
+#  seconds     :integer
+#  ppm         :float
+#  comment     :string(255)
+#  vial        :integer
+#  run_id      :integer
+#  compound_id :integer
+#
+
