@@ -34,14 +34,12 @@ class SetupParser
     height    = [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
     soil_temp = row[10].to_f
 
-    seconds = row[15]
-    if seconds.class.name == 'Spreadsheet::Formula'
-      seconds = seconds.value
-    end
-    seconds = seconds.to_f
+    seconds   = row[15]
+    seconds   = seconds.value if seconds.class.name == 'Spreadsheet::Formula'
+    seconds   = seconds.to_f
 
-    comments = row[16]
-    comments = nil if comments == '-'
+    comments  = row[16]
+    comments  = nil if comments == '-'
 
     {:treatment => treatment, :replicate => replicate,
       :chamber => chamber, :vial => vial,
