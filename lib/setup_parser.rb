@@ -26,8 +26,7 @@ class SetupParser
   end
 
   def parse_sample(row)
-    treatment = row[0].to_s
-    replicate = row[1].to_s
+    plot      = "T#{row[0]}R#{row[1]}"
     chamber   = row[3].to_s
     vial      = row[4].to_s
     lid       = row[5].to_s
@@ -41,8 +40,7 @@ class SetupParser
     comments  = row[16]
     comments  = nil if comments == '-'
 
-    {:treatment => treatment, :replicate => replicate,
-      :chamber => chamber, :vial => vial,
+    {:plot => plot, :chamber => chamber, :vial => vial,
       :lid => lid, :height => height,
       :soil_temperature => soil_temp, 
       :seconds => seconds, :comments => comments }

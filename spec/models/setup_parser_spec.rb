@@ -1,12 +1,10 @@
 require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
 
-RESULT1 = {:treatment => '6', :replicate=>'1', 
-           :chamber=>'1', :vial =>'1',
+RESULT1 = {:plot => 'T6R1', :chamber=>'1', :vial =>'1',
            :lid=>'C', :height =>[18, 19.5, 19, 20.5], 
            :soil_temperature => 18.5,
            :seconds => 0.0, :comments => nil}
-RESULT2 = {:treatment => '2', :replicate=>'1',
-           :chamber=>'1', :vial => '6',
+RESULT2 = {:plot=> 'T2R1', :chamber=>'1', :vial => '6',
            :lid => 'D', :height=> [19.5, 19, 19, 19], 
            :soil_temperature => 19,
            :seconds => 20.0, :comments => nil}
@@ -28,8 +26,8 @@ describe SetupParser do
       @result[0].should == RESULT1
     end
 
-    it 'returns the right data for a string treatment' do
-      @result[1][:treatment].should == 'DF'
+    it 'returns the right data for a string treatment second row' do
+      @result[1][:plot].should == 'TDFR1'
     end
 
     it 'returns the right data for another row' do
@@ -54,7 +52,7 @@ describe SetupParser do
     end
 
     it 'returns the right data for a string treatment' do
-      @result[1][:treatment].should == 'DF'
+      @result[1][:plot].should == 'TDFR1'
     end
     it 'returns the right data for another row' do
       @result[5].should == RESULT2
