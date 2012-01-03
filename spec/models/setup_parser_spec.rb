@@ -1,15 +1,30 @@
 require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
 
-RESULT1 = {:plot => 'T6R1', :chamber=>'1', :vial =>'1',
-           :lid=>'C', :height =>[18, 19.5, 19, 20.5], 
-           :soil_temperature => 18.5,
-           :seconds => 0.0, :comments => nil}
-RESULT2 = {:plot=> 'T2R1', :chamber=>'1', :vial => '6',
-           :lid => 'D', :height=> [19.5, 19, 19, 19], 
-           :soil_temperature => 19,
-           :seconds => 20.0, :comments => nil}
 
 describe SetupParser do
+
+  before do
+    @result1 = {:sample_date => '2011-08-19', 
+                :treatment => 'T6', 
+                :replicate => 'R1', 
+                :chamber=>'1', 
+                :vial =>'1',
+                :lid=>'C', 
+                :height =>[18, 19.5, 19, 20.5], 
+                :soil_temperature => 18.5,
+                :seconds => 0.0, 
+                :comments => nil}
+    @result2 = {:sample_date => '2011-08-19',
+                :treatment => 'T2', 
+                :replicate => 'R1', 
+                :chamber=>'1', 
+                :vial => '6',
+                :lid => 'D', 
+                :height=> [19.5, 19, 19, 19], 
+                :soil_temperature => 19,
+                :seconds => 20.0, 
+                :comments => nil}
+  end
   describe 'parsing a csv setup file' do
     before do
       parser = SetupParser.new
@@ -23,15 +38,15 @@ describe SetupParser do
     end
 
     it 'returns the right data for the first row' do
-      @result[0].should == RESULT1
+      @result[0].should == @result1
     end
 
     it 'returns the right data for a string treatment second row' do
-      @result[1][:plot].should == 'TDFR1'
+      @result[1][:treatment].should == 'TDF'
     end
 
     it 'returns the right data for another row' do
-      @result[5].should == RESULT2
+      @result[5].should == @result2
     end
   end
 
@@ -48,14 +63,14 @@ describe SetupParser do
     end
 
     it 'returns the right data for the first row' do
-      @result[0].should == RESULT1
+      @result[0].should == @result1
     end
 
     it 'returns the right data for a string treatment' do
-      @result[1][:plot].should == 'TDFR1'
+      @result[1][:treatment].should == 'TDF'
     end
     it 'returns the right data for another row' do
-      @result[5].should == RESULT2
+      @result[5].should == @result2
     end
   end
 

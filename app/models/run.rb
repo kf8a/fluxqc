@@ -45,15 +45,15 @@ end
 # Table name: runs
 #
 #  id             :integer         not null, primary key
-#  run_on         :date
 #  sampled_on     :date
-#  name           :string(50)
+#  run_on         :date
+#  study          :string(255)
 #  comment        :text
-#  approved       :boolean         default(FALSE)
-#  group_id       :integer
-#  study          :string(25)
-#  released       :boolean         default(FALSE)
+#  name           :string(255)
 #  workflow_state :string(255)
+#  released       :boolean
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
 #  setup_file     :string(255)
 #  data_file      :string(255)
 #

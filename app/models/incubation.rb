@@ -47,14 +47,16 @@ end
 #
 # Table name: incubations
 #
-#  id               :integer         not null, primary key
-#  name             :string(25)
-#  run_id           :integer
-#  soil_temperature :float
-#  treatment        :string(255)
-#  replicate        :string(255)
-#  lid_id           :integer
-#  chamber          :string(255)
-#  avg_height_cm    :float
+#  id                :integer         not null, primary key
+#  sampled_at        :datetime
+#  chamber           :string(255)
+#  treatment         :string(255)
+#  replicate         :string(255)
+#  soil_temperature  :float
+#  average_height_cm :float
+#  lid_id            :integer
+#  run_id            :integer
+#  created_at        :datetime        not null
+#  updated_at        :datetime        not null
 #
 

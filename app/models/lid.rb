@@ -6,9 +6,11 @@ end
 # Table name: lids
 #
 #  id           :integer         not null, primary key
-#  name         :string(1)
+#  surface_area :float
+#  name         :string(255)
 #  volume       :float
 #  height       :float
-#  surface_area :float
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
 #
 

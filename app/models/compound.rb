@@ -6,9 +6,12 @@ end
 # Table name: compounds
 #
 #  id         :integer         not null, primary key
-#  name       :string(10)
-#  mol_weight :float
-#  unit       :string(255)
+#  name       :string(255)
+#  ymin       :float
 #  ymax       :float
+#  unit       :string(255)
+#  mol_weight :float
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
 #
 

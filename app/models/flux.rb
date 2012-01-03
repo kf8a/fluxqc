@@ -87,7 +87,10 @@ end
 #
 #  id            :integer         not null, primary key
 #  incubation_id :integer
+#  compound      :string(255)
 #  value         :float
 #  compound_id   :integer
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
 #
 

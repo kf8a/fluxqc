@@ -12,15 +12,16 @@ end
 #
 # Table name: measurements
 #
-#  id          :integer         not null, primary key
-#  response    :float
-#  excluded    :boolean         default(FALSE)
-#  flux_id     :integer
-#  seconds     :integer
-#  ppm         :float
-#  comment     :string(255)
-#  vial        :integer
-#  run_id      :integer
-#  compound_id :integer
+#  id            :integer         not null, primary key
+#  flux_id       :integer
+#  vial          :string(255)
+#  seconds       :float
+#  ppm           :float
+#  area          :float
+#  excluded      :boolean
+#  starting_time :datetime
+#  ending_time   :datetime
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
 #
 

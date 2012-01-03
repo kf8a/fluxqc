@@ -3,7 +3,8 @@ class CreateIncubations < ActiveRecord::Migration
     create_table :incubations do |t|
       t.datetime :sampled_at
       t.string   :chamber
-      t.string   :plot
+      t.string   :treatment
+      t.string   :replicate
       t.float    :soil_temperature
       t.float    :average_height_cm
 

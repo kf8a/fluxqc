@@ -8,9 +8,9 @@ FactoryGirl.define do
     name 'co2'
   end
   factory :incubation do
+    headspace 1
   end
   factory :lid do
-    headspace 1
   end
   factory :run do
   end

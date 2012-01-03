@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
     t.float    "ymax"
     t.string   "unit"
     t.float    "mol_weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "fluxes", :force => true do |t|
@@ -28,38 +28,43 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
     t.string   "compound"
     t.float    "value"
     t.integer  "compound_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "incubations", :force => true do |t|
     t.datetime "sampled_at"
     t.string   "chamber"
-    t.string   "plot"
+    t.string   "treatment"
+    t.string   "replicate"
     t.float    "soil_temperature"
     t.float    "average_height_cm"
     t.integer  "lid_id"
     t.integer  "run_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "lids", :force => true do |t|
     t.float    "surface_area"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "name"
+    t.float    "volume"
+    t.float    "height"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "measurements", :force => true do |t|
     t.integer  "flux_id"
+    t.string   "vial"
     t.float    "seconds"
     t.float    "ppm"
     t.float    "area"
     t.boolean  "excluded"
     t.datetime "starting_time"
     t.datetime "ending_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "runs", :force => true do |t|
@@ -70,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
     t.string   "name"
     t.string   "workflow_state"
     t.boolean  "released"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "setup_file"
     t.string   "data_file"
   end
@@ -87,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
