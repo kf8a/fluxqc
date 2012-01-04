@@ -24,4 +24,8 @@ describe SetupFileLoader do
     @run.incubations.size.should == 37
   end
 
+  it 'has 3 vials for the first incubation' do
+    @run.incubations.first.flux('n2o').measurements.count.should == 3
+  end
+
 end
