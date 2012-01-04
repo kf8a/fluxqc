@@ -1,21 +1,27 @@
-require File.expand_path("../../../app/uploaders/setup_file_loader.rb",__FILE__)
+#require File.expand_path("../../../app/uploaders/setup_file_loader.rb",__FILE__)
+require 'spec_helper'
 
-class Run 
-end
+# class Run 
+# end
 
-class SetupParser
-end
+# class SetupParser
+# end
 
 describe SetupFileLoader do
 
-  it 'has a perform method with the run_id for resque to call' do
-    Run.should_receive(:find).with('1').and_return(true)
-    SetupFileLoader.perform('1').should be_true
+  include ActionDispatch::TestProcess
+
+  before do
+    Factory(:compound, :name=>'co2')
+    Factory(:compound, :name=>'n2o')
+    Factory(:compound, :name=>'ch4')
+
+    @run = FactoryGirl.create :run, :setup_file => fixture_file_upload('/setup_test.csv')
+    SetupFileLoader.perform(@run.id).should_not be_false
   end
 
-  it 'calls the setup parser' do
-    SetupParser.should_receive(:parse).and_return(true)
-    SetupFileLoader.perform('1').should be true
+  it 'creates incubations' do
+    @run.incubations.size.should == 37
   end
 
 end

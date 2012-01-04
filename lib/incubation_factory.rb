@@ -25,10 +25,11 @@ class IncubationFactory
       ['n2o','co2','ch4'].each do |compound|
         compound = Compound.find_by_name(compound)
         flux = Flux.new(:compound => compound)
+        incubation.fluxes << flux
+
         measurement = Measurement.new(:vial => sample[:vial], 
                                       :seconds => sample[:seconds])
         flux.measurements << measurement
-        incubation.fluxes << flux
       end
     end
     incubation

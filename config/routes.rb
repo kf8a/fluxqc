@@ -16,7 +16,9 @@ Fluxqc::Application.routes.draw do
   resources :incubations 
   resources :fluxes
 
-  mount Resque::Server, :at => "/resque"
+  authenticated(:user) do
+    mount Resque::Server, :at => "/resque"
+  end
  
   root :to => 'runs#index'
 end

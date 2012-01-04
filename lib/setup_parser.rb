@@ -5,7 +5,7 @@ require 'csv'
 class SetupParser
 
   # This should parse the file and return a hash of sample objects
-  def parse_xls(file)
+  def self.parse_xls(file)
     book = Spreadsheet.open(file)
     sheet = book.worksheets.first
     sample_date = Chronic.parse(sheet.row(3)[0].gsub /sample date: /,'')
@@ -19,7 +19,7 @@ class SetupParser
     result
   end
 
-  def parse_csv(file)
+  def self.parse_csv(file)
     lines = CSV::readlines(file)
     3.times { lines.shift } # remove the header limes TODO this is different for GLBRC
     row = lines.shift
@@ -30,7 +30,7 @@ class SetupParser
     end
   end
 
-  def parse_sample(row, sample_date)
+  def self.parse_sample(row, sample_date)
     treatment = "T#{row[0]}"
     replicate = "R#{row[1]}"
     chamber   = row[3].to_s
