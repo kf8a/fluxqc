@@ -19,6 +19,7 @@
   <%#   </tr> %>
   <%#   <%= render @run.incubations %1> %>
   <%# </table> %>
+  <%= debug @run.incubations %>
   <%= f.semantic_fields_for :incubations do |incubation| %>
     <fieldset class='inline'>
       <%= incubation.input :treatment, :input_html => {:size => 5} %>

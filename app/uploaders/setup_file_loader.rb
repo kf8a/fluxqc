@@ -11,7 +11,7 @@ class SetupFileLoader
     file_path = run.setup_file.file.path
     samples = SetupParser.parse_csv(file_path)
     samples.each do |sample|
-      run.incubations << IncubationFactory.create(sample)
+      run.incubations << IncubationFactory.create(run.id, sample)
     end
     run.save
   end

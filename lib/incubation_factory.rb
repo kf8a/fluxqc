@@ -1,10 +1,11 @@
 class IncubationFactory
 
-  def self.create(sample = {})
+  def self.create(run_id, sample = {})
     incubation = Incubation.where(:treatment => sample[:treatment],
                                  :replicate  => sample[:replicate],
                                  :chamber    => sample[:chamber],
-                                 :sampled_at => sample[:sampled_at]).first
+                                 :sampled_at => sample[:sampled_at],
+                                 :run_id     => run_id).first
 
     if incubation
       ['n2o','co2','ch4'].each do |compound|
@@ -15,6 +16,7 @@ class IncubationFactory
       end
     else
       incubation = Incubation.new
+      incubation.run_id             = run_id
       incubation.treatment          = sample[:treatment]
       incubation.replicate          = sample[:replicate]
       incubation.chamber            = sample[:chamber]
