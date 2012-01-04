@@ -10,23 +10,24 @@
   <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
   <%= f.input :data_file %>
   <%= f.hidden_field :data_file_cache %>
-  <%# <table> %>
-  <%#   <tr> %>
-  <%#     <th>Treatment</th> %>
-  <%#     <th>Replicate</th> %>
-  <%#     <th>Chamber</th> %>
-  <%#     <th>Lid</th> %>
-  <%#   </tr> %>
-  <%#   <%= render @run.incubations %1> %>
-  <%# </table> %>
-  <%= debug @run.incubations %>
-  <%= f.semantic_fields_for :incubations do |incubation| %>
-    <fieldset class='inline'>
-      <%= incubation.input :treatment, :input_html => {:size => 5} %>
-      <%= incubation.input :replicate, :input_html => {:size => 5} %>
-      <%= incubation.input :chamber,   :input_html => {:size => 5} %>
-      <%= incubation.input :lid %>
-      <%= debug incubation.vials %>
-    </fieldset>
-  <% end %>
+  <table>
+    <tr>
+      <th>Treatment</th>
+      <th>Replicate</th>
+      <th>Chamber</th>
+      <th>Lid</th>
+      <th>Seconds</th>
+      <th>ppm</th>
+    </tr>
+    <%= render @run.incubations %>
+  </table>
+  <%# <%= f.semantic_fields_for :incubations do |incubation| %1> %>
+  <%#   <fieldset class='inline'> %>
+  <%#     <%= incubation.input :treatment, :input_html => {:size => 5} %1> %>
+  <%#     <%= incubation.input :replicate, :input_html => {:size => 5} %1> %>
+  <%#     <%= incubation.input :chamber,   :input_html => {:size => 5} %1> %>
+  <%#     <%= incubation.input :lid %1> %>
+  <%#     <%= incubation.object.fluxes.first.measurements.collect {|x| x.vial}.join(' ') %1> %>
+  <%#   </fieldset> %>
+  <%# <% end %1> %>
 <% end %>
