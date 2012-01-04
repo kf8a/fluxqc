@@ -4,7 +4,7 @@ class IncubationFactory
     incubation = Incubation.where(:treatment => sample[:treatment],
                                  :replicate  => sample[:replicate],
                                  :chamber    => sample[:chamber],
-                                 :sampled_at=> sample[:sampled_at]).first
+                                 :sampled_at => sample[:sampled_at]).first
 
     if incubation
       ['n2o','co2','ch4'].each do |compound|
