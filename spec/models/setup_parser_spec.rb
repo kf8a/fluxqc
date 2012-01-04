@@ -17,10 +17,9 @@ describe SetupParser do
   end
   describe 'parsing a csv setup file' do
     before do
-      parser = SetupParser.new
-      file = File.expand_path("../../data/setup_test.csv", __FILE__)
+      file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
       File.exists?(file).should be_true
-      @result = parser.parse_csv(file)
+      @result = SetupParser.parse_csv(file)
     end
 
     it 'returns an array of sample hashes' do
@@ -94,10 +93,9 @@ describe SetupParser do
 
   describe 'parsing a xls setup file' do
     before do
-      parser = SetupParser.new
-      file = File.expand_path("../../data/setup_test.xls", __FILE__)
+      file = File.expand_path("../../fixtures/setup_test.xls", __FILE__)
       File.exists?(file).should be_true
-      @result = parser.parse_xls(file)
+      @result = SetupParser.parse_xls(file)
     end
 
     it 'returns an array of sample hashes' do
