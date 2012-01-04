@@ -9,7 +9,7 @@ class SetupFileLoader
   def self.perform(run_id)
     run = Run.find(run_id)
     file_path = run.setup_file.file.path
-    samples = SetupParser.parse_csv(file_path)
+    samples = SetupParser.parse(file_path)
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
     end

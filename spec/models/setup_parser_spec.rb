@@ -19,7 +19,7 @@ describe SetupParser do
     before do
       file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
       File.exists?(file).should be_true
-      @result = SetupParser.parse_csv(file)
+      @result = SetupParser.parse(file)
     end
 
     it 'returns an array of sample hashes' do
@@ -95,7 +95,7 @@ describe SetupParser do
     before do
       file = File.expand_path("../../fixtures/setup_test.xls", __FILE__)
       File.exists?(file).should be_true
-      @result = SetupParser.parse_xls(file)
+      @result = SetupParser.parse(file)
     end
 
     it 'returns an array of sample hashes' do

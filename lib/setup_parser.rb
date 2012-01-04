@@ -4,6 +4,15 @@ require 'csv'
 
 class SetupParser
 
+  # convenience method to call the parsers depending on file type
+  def self.parse(file_path)
+    if File.extname(file_path) == '.csv'
+      parse_csv(file_path)
+    elsif File.extname(file_path) == '.xls'
+      parse_xls(file_path)
+    end
+  end
+
   # This should parse the file and return a hash of sample objects
   def self.parse_xls(file)
     book = Spreadsheet.open(file)
