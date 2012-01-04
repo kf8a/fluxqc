@@ -40,7 +40,11 @@ class Incubation < ActiveRecord::Base
   end
 
   def vials
-    fluxes.first.measurements
+    fluxes.first.measurements.map(&:vial)
+  end
+  
+  def seconds
+    fluxes.first.measurements.map(&:seconds)
   end
 end
 # == Schema Information
