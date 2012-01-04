@@ -73,6 +73,9 @@ describe IncubationFactory do
       it 'has the right vials' do
         @incubation.vials.include?('2').should be_true
       end
+      it 'has the right seconds' do
+        @incubation.seconds.include?(20).should be_true
+      end
     end
 
   end

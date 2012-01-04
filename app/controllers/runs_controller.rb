@@ -10,6 +10,7 @@ class RunsController < ApplicationController
 
   def show
     @run = Run.find(params[:id])
+ 
     @incubations = @run.incubations
     respond_with do |format|
       format.html
@@ -24,6 +25,12 @@ class RunsController < ApplicationController
   def create
     @run = Run.new(params[:run])
     if @run.save
+      if params[:run][:setup_file]
+        Resque.enqueue(SetupFileLoader, @run.id)
+      end
+      if params[:run][:data_file]
+        Resque.enqueue(DataFileLoader, @run.id)
+      end
       redirect_to run_path(@run)
     else
       redirect_to new_run_path

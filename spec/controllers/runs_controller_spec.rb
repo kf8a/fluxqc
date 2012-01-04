@@ -50,7 +50,7 @@ describe RunsController do
      it 'redirects to show' do
        Run.any_instance.stub(:save).and_return(true)
        Run.any_instance.stub(:id).and_return(1)
-       post :create, {:name => 'test'}
+       post :create, :run => {:name => 'test'}
        response.should redirect_to(run_path(assigns(:run)))
      end
     end
