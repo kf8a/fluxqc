@@ -88,4 +88,9 @@ class RunsController < ApplicationController
     redirect_to runs_path(:state => 'approved')
   end
 
+  def destroy
+    Run.destroy(parasm[:id])
+    redirect_to runs_path(:state => 'uploaded')
+  end
+
 end
