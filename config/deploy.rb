@@ -54,6 +54,7 @@ namespace :deploy do
 
   before "deploy:symlink", :link_production_db
   after 'deploy:symlink', :link_unicorn
+  after 'deploy:symlink', :link_file_storage
 #  after 'deploy:symlink', :precompile_assets
 end
 
@@ -65,6 +66,11 @@ end
 desc "link unicorn.rb"
 task :link_unicorn do
   run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
+end
+
+desc "link file storage"
+task :link_file_storage do
+  run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
 end
 
 desc 'precompile assets'
