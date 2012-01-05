@@ -10,6 +10,7 @@
   <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
   <%= f.input :data_file %>
   <%= f.hidden_field :data_file_cache %>
+  <%= link_to 'back to index', runs_path %>
   <table>
     <tr>
       <th>Treatment</th>
