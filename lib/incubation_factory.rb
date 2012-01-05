@@ -21,7 +21,7 @@ class IncubationFactory
       incubation.replicate          = sample[:replicate]
       incubation.chamber            = sample[:chamber]
       incubation.soil_temperature   = sample[:soil_temperature]
-      incubation.average_height_cm  = sample[:height].inject(:+)/sample[:height].count
+      incubation.avg_height_cm  = sample[:height].inject(:+)/sample[:height].count
       incubation.lid                = Lid.find_by_name(sample[:lid])
       incubation.sampled_at         = sample[:sample_at]
       ['n2o','co2','ch4'].each do |compound|

@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
 
   create_table "fluxes", :force => true do |t|
     t.integer  "incubation_id"
-    t.string   "compound"
     t.float    "value"
     t.integer  "compound_id"
     t.datetime "created_at",    :null => false
@@ -38,11 +37,11 @@ ActiveRecord::Schema.define(:version => 20111115132342) do
     t.string   "treatment"
     t.string   "replicate"
     t.float    "soil_temperature"
-    t.float    "average_height_cm"
+    t.float    "avg_height_cm"
     t.integer  "lid_id"
     t.integer  "run_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "lids", :force => true do |t|

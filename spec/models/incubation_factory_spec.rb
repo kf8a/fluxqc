@@ -35,7 +35,7 @@ describe IncubationFactory do
       @incubation.chamber.should  == '1'
     end
     it 'has the right height' do
-      @incubation.average_height_cm.should == 19.25
+      @incubation.avg_height_cm.should == 19.25
     end
     it 'has the right sample date' do
       @incubation.sampled_at = '2011-10-13'

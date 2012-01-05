@@ -6,7 +6,7 @@ class CreateIncubations < ActiveRecord::Migration
       t.string   :treatment
       t.string   :replicate
       t.float    :soil_temperature
-      t.float    :average_height_cm
+      t.float    :avg_height_cm
 
       t.integer  :lid_id
       t.integer  :run_id
