@@ -17,10 +17,6 @@ describe Run do
    run.sampled_on.should == Date.today
   end
 
-  it 'reports nil if there are no incubations' do
-    run.sampled_on.should be_nil
-  end
-
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
