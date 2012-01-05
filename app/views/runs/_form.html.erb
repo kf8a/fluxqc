@@ -1,14 +1,15 @@
 <%= f.inputs do %>
-  <%= f.input :setup_file %> 
-  <%= f.hidden_field :setup_file_cache %>
-  <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
-  <%= f.input :data_file %>
-  <%= f.hidden_field :data_file_cache %>
+  <%= f.input :sampled_on %>
   <%= f.input :name %>
   <%= f.input :study %>
   <%= f.input :comment, :input_html => {  :rows => 5 } %>
   <%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
   </li>
+  <%= f.input :setup_file %> 
+  <%= f.hidden_field :setup_file_cache %>
+  <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
+  <%= f.input :data_file %>
+  <%= f.hidden_field :data_file_cache %>
   <table>
     <tr>
       <th>Treatment</th>
