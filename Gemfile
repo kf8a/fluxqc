@@ -51,5 +51,5 @@ group :test do
 end
 
 group :production do
-  gem 'SyslogLogger'
+  gem 'SyslogLogger', :require => 'syslog_logger'
 end
