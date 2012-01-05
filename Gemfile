@@ -8,7 +8,6 @@ gem 'pg'
 gem 'formtastic', '>=2.0.2'
 gem 'workflow'
 gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
-gem 'spreadsheet'
 gem 'chronic'
 
 gem 'devise'
