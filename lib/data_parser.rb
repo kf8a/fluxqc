@@ -1,14 +1,12 @@
+# encoding: utf-8
 require 'csv'
 class DataParser
 
-  attr_accessor :data
-
-  def parse_line(data)
-    parsed_data = CSV.parse_line(data, :col_sep=>" ")
-    {:vial=>parsed_data[7].to_i, :ch4=>{:value=>parsed_data[10].to_f}, :co2=>{:value => parsed_data[14].to_f}, :n2o=>{:value => parsed_data[18].to_f}}
-  end
-
-  def parse
-    true
+  def self.parse(file_name)
+    lines = CSV::readlines(file_name, :encoding => "UTF-16LE:UTF-8", :col_sep=>"\t")
+    lines.shift # remove title row
+    lines.collect do |row|
+      {:vial=>row[3], :ch4=>row[7].to_f, :co2=>row[11].to_f, :n2o=>row[15].to_f}
+    end
   end
 end

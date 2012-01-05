@@ -1,23 +1,53 @@
 require File.expand_path("../../../lib/data_parser.rb",__FILE__)
 
 describe DataParser do
-  describe 'parsing a line of data' do
-    it 'is succesful' do
-      parser = DataParser.new
-      data = "19 09/26/11 11:24:15 AM  18  26-Sep-11, 11:18:46 4 CH4 0.363163  38.807774 38.807774 co2 1.991239  71590.445312  71590.445312  N2O 4.327775  388.435394  388.435394  AutoInt Z:\GLBR    C SER11 092611 TRY3\GLBRC SER11 092611 TRY3 2011-09-26 09-19-16\4.D"
-      parser.parse_line(data).should == {:vial=>4, :ch4=>{:value => 38.807774}, :co2=>{:value => 71590.445312}, :n2o=>{:value=>388.435394} } 
+
+  describe 'parsing a results file' do
+    before do
+      file = File.expand_path("../../fixtures/result.txt", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.parse(file)
     end
 
-  end
+    it 'finds the correct number of samples' do
+      @result.size.should == 305
+    end
+    
+    describe 'row 17' do
+      before do
+        @row = @result[17]
+      end
+      it 'finds the right vial' do
+        @row[:vial].should == '4'
+      end
+      it 'finds the right ch4 value' do
+        @row[:ch4].should == 27.806454
+      end
+      it 'finds the right co2 value' do
+        @row[:co2].should == 117673.960937
+      end
+      it 'finds the right n2o value' do
+        @row[:n2o].should == 392.561584
+      end
+    end
 
-  describe 'parsing a file of data' do
-
-  end
-
-  it 'parses gc files' do
-    parser = DataParser.new
-    parser.data = "abc"
-    parser.parse.should be_true
+    describe 'row 7' do
+      before do
+        @row = @result[7]
+      end
+      it 'finds the right vial' do
+        @row[:vial].should == '15b'
+      end
+      it 'finds the right ch4 value' do
+        @row[:ch4].should == 23.846161 
+      end
+      it 'finds the right co2 value' do
+        @row[:co2].should == 55572.550781
+      end
+      it 'finds the right n2o value' do
+        @row[:n2o].should == 590.933777
+      end
+    end
   end
 
 end
