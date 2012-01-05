@@ -12,6 +12,11 @@ class SetupFileLoader
     samples = SetupParser.parse(file_path)
     run.sampled_on = samples[0][:sample_date].try(:to_date)
     run.name = samples[0][:run_name]
+    if run.name.start_with?('LTER')
+      run.study = 'lter'
+    elsif run.name.start_with?('GLBRC')
+      run.study = 'glbrc'
+    end
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
     end

@@ -35,7 +35,10 @@ describe SetupFileLoader do
 
   it 'sets the run name' do
     @run.name.should =='LTER 2011 Series 10'
+  end
 
+  it 'sets the run study' do
+    @run.study.should == 'lter'
   end
 
 end
