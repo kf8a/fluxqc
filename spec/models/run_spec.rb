@@ -10,13 +10,6 @@ describe Run do
     run.total_fluxes.should == 0
   end
 
-  it 'reports the date of the first incubation as the run sample date' do
-   incubation = Incubation.new
-   incubation.sampled_at = Date.today 
-   run.incubations << incubation
-   run.sampled_on.should == Date.today
-  end
-
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do

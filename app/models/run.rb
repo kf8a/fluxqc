@@ -32,12 +32,6 @@ class Run < ActiveRecord::Base
     incubations.count * 3
   end
 
-  def sampled_on
-    incubations.first.sampled_at.to_date
-  end
-
-  # Legacy methods to update the old released column, which is used by the data 
-  # query to push data out to the web.
   def publish
     self.released = true
   end
