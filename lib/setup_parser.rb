@@ -17,29 +17,32 @@ class SetupParser
   def self.parse_xls(file)
     book = Spreadsheet.open(file)
     sheet = book.worksheets.first
+    title = sheet.row(0)[0]
     sample_date = Chronic.parse(sheet.row(3)[0].gsub /sample date: /,'')
     # sheet should implement enumerable
     result = []
     sheet.each 5 do |row|
       next if row[0].nil?
      
-      result << parse_sample(row,sample_date)
+      result << parse_sample(row,sample_date,title)
     end
     result
   end
 
   def self.parse_csv(file)
     lines = CSV::readlines(file)
-    3.times { lines.shift } # remove the header limes TODO this is different for GLBRC
+    row = lines.shift
+    title = row[0]
+    2.times { lines.shift } # remove the header limes TODO this is different for GLBRC
     row = lines.shift
     sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
     lines.shift
     result = lines.collect do |row|
-     parse_sample(row, sample_date)
+     parse_sample(row, sample_date,title)
     end
   end
 
-  def self.parse_sample(row, sample_date)
+  def self.parse_sample(row, sample_date=nil, title=nil)
     treatment = "T#{row[0]}"
     replicate = "R#{row[1]}"
     chamber   = row[3].to_s
@@ -55,7 +58,7 @@ class SetupParser
     comments  = row[16]
     comments  = nil if comments == '-'
 
-    {:sample_date => sample_date, 
+    {:run_name => title, :sample_date => sample_date, 
       :treatment => treatment, :replicate => replicate,
       :chamber => chamber, :vial => vial,
       :lid => lid, :height => height,

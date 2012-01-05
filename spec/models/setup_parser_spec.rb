@@ -3,18 +3,6 @@ require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
 
 describe SetupParser do
 
-  before do
-    @result2 = {:sample_date => '2011-08-19 12:00:00 -4000',
-                :treatment => 'T2', 
-                :replicate => 'R1', 
-                :chamber=>'1', 
-                :vial => '6',
-                :lid => 'D', 
-                :height=> [19.5, 19, 19, 19], 
-                :soil_temperature => 19,
-                :seconds => 20.0, 
-                :comments => nil}
-  end
   describe 'parsing a csv setup file' do
     before do
       file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
@@ -27,6 +15,9 @@ describe SetupParser do
     end
 
     describe 'first row' do
+      it 'has the right run title' do
+        @result[0][:run_name].should == 'LTER 2011 Series 10'
+      end
       it 'has the right sample date' do
         @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
       end
@@ -103,6 +94,9 @@ describe SetupParser do
     end
 
     describe 'first row' do
+      it 'has the right run title' do
+        @result[0][:run_name].should == 'LTER 2011 Series 10'
+      end
       it 'has the right sample date' do
         @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
       end

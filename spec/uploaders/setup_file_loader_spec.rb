@@ -16,8 +16,9 @@ describe SetupFileLoader do
     Factory(:compound, :name=>'n2o')
     Factory(:compound, :name=>'ch4')
 
-    @run = FactoryGirl.create :run, :setup_file => fixture_file_upload('/setup_test.csv')
-    SetupFileLoader.perform(@run.id).should_not be_false
+    run = FactoryGirl.create :run, :setup_file => fixture_file_upload('/setup_test.csv')
+    SetupFileLoader.perform(run.id).should_not be_false
+    @run = Run.find(run.id)
   end
 
   it 'creates incubations' do
@@ -29,8 +30,12 @@ describe SetupFileLoader do
   end
 
   it 'sets the sampled_on field' do
-    run = Run.find(@run.id)
-    run.sampled_on.should == Date.new(2011,8,19)
+    @run.sampled_on.should == Date.new(2011,8,19)
+  end
+
+  it 'sets the run name' do
+    @run.name.should =='LTER 2011 Series 10'
+
   end
 
 end
