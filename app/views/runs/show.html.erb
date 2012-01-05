@@ -1,4 +1,5 @@
 <div id='title-block'>
+  <%= link_to 'Index', runs_path %>
 <h1><%= @run.name %></h1>
 <p>Sampled on: <%= @run.sampled_on %> Study: <%= @run.study %></p>
 <% @run.current_state.events.keys.each do |event| %>

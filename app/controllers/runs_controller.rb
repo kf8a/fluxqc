@@ -46,7 +46,7 @@ class RunsController < ApplicationController
   def update
     @run = Run.find(params[:id])
     if @run.update_attributes(params[:run])
-      redirect_to edit_run_path(@run)
+      redirect_to run_path(@run)
     else
       redirect_to edit_run_path(@run)
     end
