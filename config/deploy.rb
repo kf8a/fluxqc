@@ -70,7 +70,7 @@ end
 
 desc "link file storage"
 task :link_file_storage do
-  run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
+  run "ln -nfs #{deploy_to}/shared/uploads #{release_path}/public/uploads"
 end
 
 desc 'precompile assets'
