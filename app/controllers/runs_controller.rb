@@ -89,7 +89,7 @@ class RunsController < ApplicationController
   end
 
   def destroy
-    Run.destroy(parasm[:id])
+    Run.destroy(params[:id])
     redirect_to runs_path(:state => 'uploaded')
   end
 
