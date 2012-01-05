@@ -26,10 +26,12 @@ class RunsController < ApplicationController
     @run = Run.new(params[:run])
     if @run.save
       if params[:run][:setup_file]
-        Resque.enqueue(SetupFileLoader, @run.id)
+        # Resque.enqueue(SetupFileLoader, @run.id)
+        SetupFileLoader.perform(@run.id)
       end
       if params[:run][:data_file]
-        Resque.enqueue(DataFileLoader, @run.id)
+        # Resque.enqueue(DataFileLoader, @run.id)
+        DataFileLoader.perform(@run.id)
       end
       redirect_to run_path(@run)
     else
