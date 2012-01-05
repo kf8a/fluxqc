@@ -26,7 +26,7 @@ describe SetupFileLoader do
   end
 
   it 'has 3 vials for the first incubation' do
-    @run.incubations.first.flux('n2o').measurements.count.should == 3
+    @run.incubations.first.flux('n2o').measurements.count.should == 4
   end
 
   it 'sets the sampled_on field' do
