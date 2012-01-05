@@ -28,4 +28,9 @@ describe SetupFileLoader do
     @run.incubations.first.flux('n2o').measurements.count.should == 3
   end
 
+  it 'sets the sampled_on field' do
+    run = Run.find(@run.id)
+    run.sampled_on.should == Date.new(2011,8,19)
+  end
+
 end

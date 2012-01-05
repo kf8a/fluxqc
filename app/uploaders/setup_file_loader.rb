@@ -10,6 +10,7 @@ class SetupFileLoader
     run = Run.find(run_id)
     file_path = run.setup_file.file.path
     samples = SetupParser.parse(file_path)
+    run.sampled_on = samples[0][:sample_date].try(:to_date)
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
     end
