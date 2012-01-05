@@ -33,7 +33,7 @@ class Run < ActiveRecord::Base
   end
 
   def sampled_on
-    incubations.first.sampled_at.to_date
+    incubations.first.sampled_at.try(:to_date)
   end
 
   # Legacy methods to update the old released column, which is used by the data 
