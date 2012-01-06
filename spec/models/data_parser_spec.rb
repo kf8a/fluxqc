@@ -10,7 +10,7 @@ describe DataParser do
     end
 
     it 'finds the correct number of samples' do
-      @result.size.should == 305
+      @result.size.should == 304
     end
     
     describe 'row 17' do
@@ -50,4 +50,17 @@ describe DataParser do
     end
   end
 
+  describe 'parsing a reprocessed results file' do
+
+    before do
+      file = File.expand_path("../../fixtures/results_2.txt", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.parse(file)
+    end
+
+    it 'finds the correct number of samples' do
+      @result.size.should == 364
+    end
+
+  end
 end
