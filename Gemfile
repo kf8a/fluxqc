@@ -37,7 +37,7 @@ gem 'capistrano'
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'shoulda-matchers'
-  gem 'rspec-rails', :git=>'git://github.com/rspec/rspec-rails.git'
+  gem 'rspec-rails' #, :git=>'git://github.com/rspec/rspec-rails.git'
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "cucumber-rails"
