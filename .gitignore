@@ -5,7 +5,6 @@ tmp/
 .sass-cache/
 config/database.yml
 public/uploads/
+doc/*.dot
 .~lock*
-LTER Main site series 10.xls
-RESULTS.CSV
 redis.txt
