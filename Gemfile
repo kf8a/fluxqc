@@ -44,6 +44,7 @@ group :test, :development do
   gem "cucumber-rails"
   gem "capybara"
   gem "launchy"
+  gem 'railroady'
 end
 
 group :test do

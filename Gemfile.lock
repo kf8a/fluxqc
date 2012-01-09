@@ -144,6 +144,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    railroady (1.0.4)
     rails (3.2.0.rc2)
       actionmailer (= 3.2.0.rc2)
       actionpack (= 3.2.0.rc2)
@@ -245,6 +246,7 @@ DEPENDENCIES
   launchy
   pg
   qu-redis
+  railroady
   rails (~> 3.2.0.rc)
   rails-backbone
   rspec-rails
