@@ -1,4 +1,5 @@
 class Measurement < ActiveRecord::Base
+  belongs_to :sample
   belongs_to :flux
 
   # return the millivolts readings that are associatated with this measurement
