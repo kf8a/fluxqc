@@ -3,7 +3,7 @@ class CreateSamples < ActiveRecord::Migration
     create_table :samples do |t|
       t.string :vial
       t.integer :run_id
-      t.timestamp :sampled_date
+      t.timestamp :sampled_at
 
       t.timestamps
     end
