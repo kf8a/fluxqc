@@ -1,39 +1,54 @@
 class IncubationFactory
 
-  def self.create(run_id, sample = {})
-    incubation = Incubation.where(:treatment => sample[:treatment],
-                                 :replicate  => sample[:replicate],
-                                 :chamber    => sample[:chamber],
-                                 :sampled_at => sample[:sampled_at],
-                                 :run_id     => run_id).first
+  def self.create(run_id, input= {})
+    run = Run.find(run_id)
+    incubation = run.incubations.where(:treatment => input[:treatment],
+                                 :replicate  => input[:replicate],
+                                 :chamber    => input[:chamber],
+                                 :sampled_at => input[:sampled_at]).first
 
     if incubation
       ['n2o','co2','ch4'].each do |compound|
         flux = incubation.flux(compound)
-        measurement = Measurement.new(:vial => sample[:vial], 
-                                      :seconds => sample[:seconds])
+        measurement = Measurement.new(:seconds => input[:seconds])
         flux.measurements << measurement
+        update_sample(measurement, run, input[:vial])
       end
     else
       incubation = Incubation.new
       incubation.run_id             = run_id
-      incubation.treatment          = sample[:treatment]
-      incubation.replicate          = sample[:replicate]
-      incubation.chamber            = sample[:chamber]
-      incubation.soil_temperature   = sample[:soil_temperature]
-      incubation.avg_height_cm  = sample[:height].inject(:+)/sample[:height].count
-      incubation.lid                = Lid.find_by_name(sample[:lid])
-      incubation.sampled_at         = sample[:sample_at]
+      incubation.treatment          = input[:treatment]
+      incubation.replicate          = input[:replicate]
+      incubation.chamber            = input[:chamber]
+      incubation.soil_temperature   = input[:soil_temperature]
+      incubation.avg_height_cm  = input[:height].inject(:+)/input[:height].count
+      incubation.lid                = Lid.find_by_name(input[:lid])
+      incubation.sampled_at         = input[:input_at]
       ['n2o','co2','ch4'].each do |compound|
         compound = Compound.find_by_name(compound)
         flux = Flux.new(:compound => compound)
         incubation.fluxes << flux
 
-        measurement = Measurement.new(:vial => sample[:vial], 
-                                      :seconds => sample[:seconds])
+        measurement = Measurement.new(:seconds => input[:seconds])
         flux.measurements << measurement
+
+        update_sample(measurement, run, input[:vial])
       end
+      incubation.save
     end
     incubation
+  end
+
+  def self.update_sample(measurement, run, vial)
+      sample = run.samples.where(:vial => vial).first
+      if sample
+        sample.measurements << measurement
+      else
+        sample = Sample.new(:vial => vial)
+        sample.measurements << measurement
+        run.samples << sample
+
+        sample.save
+      end
   end
 end

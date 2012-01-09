@@ -40,7 +40,11 @@ class Incubation < ActiveRecord::Base
   end
 
   def vials
-    fluxes.first.measurements.map(&:vial)
+    fluxes.first.measurements.collect {|measurement| measurement.sample.vial }
+  end
+
+  def samples
+    fluxes.first.measurements.collect(&:sample)
   end
   
   def seconds
@@ -51,16 +55,16 @@ end
 #
 # Table name: incubations
 #
-#  id                :integer         not null, primary key
-#  sampled_at        :datetime
-#  chamber           :string(255)
-#  treatment         :string(255)
-#  replicate         :string(255)
-#  soil_temperature  :float
-#  average_height_cm :float
-#  lid_id            :integer
-#  run_id            :integer
-#  created_at        :datetime        not null
-#  updated_at        :datetime        not null
+#  id               :integer         not null, primary key
+#  sampled_at       :datetime
+#  chamber          :string(255)
+#  treatment        :string(255)
+#  replicate        :string(255)
+#  soil_temperature :float
+#  avg_height_cm    :float
+#  lid_id           :integer
+#  run_id           :integer
+#  created_at       :datetime        not null
+#  updated_at       :datetime        not null
 #
 

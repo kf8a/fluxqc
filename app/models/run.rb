@@ -1,5 +1,7 @@
 class Run < ActiveRecord::Base
   has_many :incubations,  :dependent => :destroy, :order => 'treatment, replicate'
+  has_many :samples, :dependent => :destroy
+
   mount_uploader :setup_file, SetupUploader
   mount_uploader :data_file, DataUploader
 

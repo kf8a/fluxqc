@@ -40,10 +40,13 @@ describe IncubationFactory do
     it 'has the right sample date' do
       @incubation.sampled_at = '2011-10-13'
     end
-    it 'should have 3 fluxes' do
+    it 'has 1 sample' do
+      @incubation.samples.size.should == 1
+    end
+    it 'has 3 fluxes' do
       @incubation.fluxes.size.should == 3
     end
-    it 'should have a co2 flux' do
+    it 'has a co2 flux' do
       @incubation.fluxes('co2').should_not be_nil
     end
     it 'has the right vial in the measurements' do

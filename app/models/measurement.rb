@@ -15,7 +15,6 @@ end
 #
 #  id            :integer         not null, primary key
 #  flux_id       :integer
-#  vial          :string(255)
 #  seconds       :float
 #  ppm           :float
 #  area          :float
@@ -24,5 +23,6 @@ end
 #  ending_time   :datetime
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
+#  sample_id     :integer
 #
 

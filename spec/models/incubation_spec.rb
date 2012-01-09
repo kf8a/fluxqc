@@ -24,6 +24,11 @@ describe Incubation do
       incubation.fluxes << @n2o_flux
       incubation.save
     end
+
+    it 'has vials' do
+      incubation.vials.respond_to?('[]').should be_true
+    end
+
     describe 'selecting a specific flux' do
 
       it 'returns the right flux for the co2 flux' do

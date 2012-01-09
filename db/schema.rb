@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20120109183730) do
 
   create_table "measurements", :force => true do |t|
     t.integer  "flux_id"
-    t.string   "vial"
     t.float    "seconds"
     t.float    "ppm"
     t.float    "area"
@@ -82,7 +81,8 @@ ActiveRecord::Schema.define(:version => 20120109183730) do
   end
 
   create_table "samples", :force => true do |t|
-    t.integer  "vial"
+    t.string   "vial"
+    t.integer  "run_id"
     t.datetime "sampled_date"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
