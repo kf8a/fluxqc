@@ -12,7 +12,8 @@ gem 'chronic'
 
 gem 'devise'
 
-gem 'resque', :require => "resque/server"
+#gem 'resque', :require => "resque/server"
+gem 'qu-redis'
 
 # Gems used only for assets and not required
 # in production environments by default.
