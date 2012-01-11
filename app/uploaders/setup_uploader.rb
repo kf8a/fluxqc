@@ -21,18 +21,4 @@ class SetupUploader < CarrierWave::Uploader::Base
   # def default_url
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  
-  #
-  # # Parse the input and generate the required samples
-  # process :parse
-
-  # # Parse the input file here 
-  # def parse 
-  #   # check the file extension
-  #   samples = parse_csv(file)
-  #   samples.each do |sample|
-  #     incubation = IncbuationFactory.create(sample)
-  #     incubation.save
-  #   end
-  # end
 end

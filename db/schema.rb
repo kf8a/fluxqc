@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120109183730) do
 
   create_table "measurements", :force => true do |t|
     t.integer  "flux_id"
+    t.string   "vial"
     t.float    "seconds"
     t.float    "ppm"
     t.float    "area"

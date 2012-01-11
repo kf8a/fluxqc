@@ -4,7 +4,21 @@ class DataFileLoader
   @queue = :data_queue
 
   def self.perform(run_id)
-    true
+    run = Run.find(run_id)
+    file_path = run.data_file.file.path
+    samples = DataParser.parse(file_path)
+    
+    samples.each do |s|
+      sample = run.samples.where(:vial => s[:vial]).first
+      if sample
+        ['co2','n2o','ch4'].each do |c|
+          measurement = sample.measurements.by_compound(c).first
+          measurement.area = s[c.to_sym]
+          measurement.save
+        end
+      else
+      end
+    end
   end
 
 end
