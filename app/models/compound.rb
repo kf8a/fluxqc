@@ -1,5 +1,8 @@
 class Compound < ActiveRecord::Base
-  has_many :fluxes
+  has_many :measurements
+  has_many :standards
+
+  validates_uniqueness_of :name
 end
 # == Schema Information
 #

@@ -1,10 +1,10 @@
 class Measurement < ActiveRecord::Base
   belongs_to :sample
   belongs_to :flux
+  belongs_to :compound
 
-  def self.by_compound(name)
-    includes(:flux=>:compound).where('compounds.name' => name)
-  end
+  scope :by_compound, 
+    lambda {|name| joins(:compound).where(:compounds => {:name => name}).readonly(false)}
 
   # return the millivolts readings that are associatated with this measurement
   # i don't know if they should be stored with the object or somewhere else and
@@ -19,14 +19,15 @@ end
 #
 #  id            :integer         not null, primary key
 #  flux_id       :integer
+#  vial          :string(255)
 #  seconds       :float
 #  ppm           :float
 #  area          :float
+#  type          :string(255)
 #  excluded      :boolean
 #  starting_time :datetime
 #  ending_time   :datetime
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
-#  sample_id     :integer
 #
 

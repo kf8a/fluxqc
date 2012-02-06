@@ -2,14 +2,17 @@ require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
 class Flux < ActiveRecord::Base
   belongs_to :incubation
-  belongs_to :compound
   has_many   :measurements,  :dependent => :destroy
 
   attr_reader :flux, :muliplier, :data
 
-  scope :co2, joins(:compound).where('compounds.name' => 'co2')
-  scope :n2o, joins(:compound).where('compounds.name' => 'n2o') 
-  scope :ch4, joins(:compound).where('compounds.name' => 'ch4')
+  scope :co2, includes(:measurements => :compound).where('compounds.name' => 'co2')
+  scope :n2o, includes(:measurements => :compound).where('compounds.name' => 'n2o') 
+  scope :ch4, includes(:measurements => :compound).where('compounds.name' => 'ch4')
+
+  def compound
+    measurements.first.compound
+  end
 
   def data
     measurements.collect do |measurement|
@@ -30,8 +33,7 @@ class Flux < ActiveRecord::Base
   end
 
   def flux
-    f = Fitter.new
-    f.flux = self
+    f = Fitter.new(self)
     v = f.fit
     v = nil if v.nan?
     self.value = v

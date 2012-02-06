@@ -6,5 +6,6 @@ tmp/
 config/database.yml
 public/uploads/
 doc/*.dot
+doc/*.pdf
 .~lock*
 redis.txt

@@ -1,9 +1,14 @@
 class Fitter
-  attr_accessor :data, :flux
+  attr_accessor :data
 
   NaN = (0.0/0.0)
+
+  def initialize(flux=nil)
+    @flux = flux
+    @data = @flux.try(:data)
+  end
+
   def fit
-    @data = flux.data
     result = linear_fit
 
     result[:slope] * multiplier

@@ -1,5 +1,7 @@
 class Lid < ActiveRecord::Base
   has_many :incubations
+
+  validates_uniqueness_of :name
 end
 # == Schema Information
 #

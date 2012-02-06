@@ -7,9 +7,8 @@ class CreateSamples < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_column :measurements, :sample_id, :integer
   end
+
   def up 
     remove_column :measuremnts, :vial
   end

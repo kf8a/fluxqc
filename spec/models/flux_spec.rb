@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Flux do
   it {should belong_to :incubation}
-  it {should belong_to :compound}
   it {should have_many :measurements}
 
   let(:flux) {Factory.create :flux}
@@ -56,5 +55,4 @@ describe Flux do
       flux.value.should == 6428.571428571429
     end
   end
-
 end

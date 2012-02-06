@@ -25,6 +25,11 @@ describe SetupFileLoader do
     @run.incubations.size.should == 37
   end
 
+  it 'adds compounds to all of the measurements' do
+    @run.samples.collect {|s| s.measurements.collect {|m| p s unless m.compound.present? } }
+    @run.samples.collect {|s| s.measurements.collect {|m| m.compound.present? } }.flatten.should_not include(false)
+  end
+
   it 'has 3 vials for the first incubation' do
     @run.incubations.first.flux('n2o').measurements.count.should == 4
   end

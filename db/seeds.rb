@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Compound.create([{name: 'n2o'},{name: 'co2'},{name: 'ch4'}])
+Lid.create([{name: 'A'},{name: 'B'},{name: 'C'},{name: 'D'},{name:'Y'}])

@@ -11,7 +11,8 @@ describe Measurement do
 
   it 'is selectable by compound' do
     compound  = Factory.create :compound, :name=>'co2'
-    flux      = Factory.create :flux, :compound => compound, :measurements => [measurement]
+    measurement = Factory.create :measurement, :compound => compound
+    flux      = Factory.create :flux, :measurements => [measurement]
     Measurement.by_compound('co2').include?(measurement).should be_true
   end
 end

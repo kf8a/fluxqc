@@ -8,11 +8,10 @@ class IncubationFactory
                                  :sampled_at => input[:sampled_at]).first
 
     if incubation
-      ['n2o','co2','ch4'].each do |compound|
-        flux = incubation.flux(compound)
-        measurement = Measurement.new(:seconds => input[:seconds])
-        flux.measurements << measurement
-        update_sample(measurement, run, input[:vial])
+      ['n2o','co2','ch4'].each do |c|
+        compound = Compound.find_by_name(c)
+        flux = incubation.flux(c)
+        update_measurement(flux, input, compound, run)
       end
     else
       incubation = Incubation.new
@@ -24,15 +23,12 @@ class IncubationFactory
       incubation.avg_height_cm  = input[:height].inject(:+)/input[:height].count
       incubation.lid                = Lid.find_by_name(input[:lid])
       incubation.sampled_at         = input[:input_at]
-      ['n2o','co2','ch4'].each do |compound|
-        compound = Compound.find_by_name(compound)
-        flux = Flux.new(:compound => compound)
+      ['n2o','co2','ch4'].each do |c|
+        compound = Compound.find_by_name(c)
+        flux = Flux.new
         incubation.fluxes << flux
 
-        measurement = Measurement.new(:seconds => input[:seconds])
-        flux.measurements << measurement
-
-        update_sample(measurement, run, input[:vial])
+        update_measurement(flux, input, compound, run)
       end
       incubation.save
     end
@@ -40,15 +36,21 @@ class IncubationFactory
   end
 
   def self.update_sample(measurement, run, vial)
-      sample = run.samples.where(:vial => vial).first
-      if sample
-        sample.measurements << measurement
-      else
-        sample = Sample.new(:vial => vial)
-        sample.measurements << measurement
-        run.samples << sample
+    sample = run.samples.where(:vial => vial).first
+    if sample
+      sample.measurements << measurement
+    else
+      sample = Sample.new(:vial => vial)
+      sample.measurements << measurement
+      run.samples << sample
 
-        sample.save
-      end
+      sample.save
+    end
+  end
+
+  def self.update_measurement(flux,input, compound, run)
+    measurement = Measurement.new(:seconds => input[:seconds], :compound => compound)
+    flux.measurements << measurement
+    update_sample(measurement, run, input[:vial])
   end
 end

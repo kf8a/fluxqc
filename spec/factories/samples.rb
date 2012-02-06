@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :sample do
     vial 1
-    sampled_date "2012-01-09 13:37:35"
+    sampled_at "2012-01-09 13:37:35"
   end
 end

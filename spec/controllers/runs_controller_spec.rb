@@ -90,6 +90,13 @@ describe RunsController do
     end
   end
 
+  describe 'computing the standards' do
+    it 'computes the standard equation'
+      # Run.any_instance.sub(:standardize).and_return(true)
+      # Run.any_instance.stub(:id).and_return(1)
+    it 'computes measurement ppms using the standard'
+  end
+
   describe 'a run workflow' do
     before(:each) do
       @run = Factory.create :run

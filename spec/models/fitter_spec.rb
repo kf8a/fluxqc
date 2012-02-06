@@ -66,8 +66,7 @@ describe Fitter do
     end
 
     it 'computes the flux' do
-      fitter = Fitter.new
-      fitter.flux = @flux
+      fitter = Fitter.new(@flux)
       slope, r2 = fitter.fit
       slope.should be_within(0.1).of(38571.43)
     end

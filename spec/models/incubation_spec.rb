@@ -15,10 +15,12 @@ describe Incubation do
       co2 = Factory(:compound, :name=>'co2')
       n2o = Factory(:compound, :name=>'n2o')
 
-      @co2_flux = Flux.new(:compound => co2)
-      @n2o_flux = Flux.new(:compound => n2o)
+      sample          = Factory(:sample)
+      co2_measurement = Factory(:measurement, :compound => co2, :sample => sample)
+      n2o_measurement = Factory(:measurement, :compound => n2o, :sample => sample)
 
-      @n2o_flux.measurements << Measurement.new
+      @co2_flux = Flux.new(:measurements => [co2_measurement])
+      @n2o_flux = Flux.new(:measurements => [n2o_measurement])
 
       incubation.fluxes << @co2_flux
       incubation.fluxes << @n2o_flux
