@@ -6,8 +6,11 @@ An internal app to visually check the quality of trace gas fluxes
 A standard is measurement for which we know the result!
 
 Workflow:
-* upload setup file
+* create a sample campaign
+(* upload setup file)
 * upload data file
 * check standards
 * check fluxes
 * approve
+
+How to create a sample campaign template? 

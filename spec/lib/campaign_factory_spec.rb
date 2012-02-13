@@ -1,0 +1,3 @@
+describe CampaignFactory do
+
+end

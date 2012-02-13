@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109183730) do
+ActiveRecord::Schema.define(:version => 20120213163925) do
+
+  create_table "campaign_plots", :force => true do |t|
+    t.integer  "plot_id"
+    t.integer  "campaign_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "compounds", :force => true do |t|
     t.string   "name"
@@ -67,6 +80,12 @@ ActiveRecord::Schema.define(:version => 20120109183730) do
     t.datetime "ending_time"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "plots", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "runs", :force => true do |t|
