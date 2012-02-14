@@ -14,3 +14,5 @@ Workflow:
 * approve
 
 How to create a sample campaign template? 
+
+TODO: add groups
