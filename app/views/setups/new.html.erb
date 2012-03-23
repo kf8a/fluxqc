@@ -1,5 +1,6 @@
 <%= simple_form_for @template, :html=>{:class=>'form-horizontal'} do |f| %>
-  <%= f.input :sampled_on , :label=>'Sample Date' , :as => :string, :input_html =>{ :datepicker=>'datepicker', :value=>'10/10/2012'}%>
-  <%= f.input :study %>
+  <%= f.input :name,:input_html => {:class=>'span8' }%> 
+  <%= f.input :sampled_on , :label=>'Sample Date' , :as => :string, :input_html =>{ :class=>'span2', :datepicker=>'datepicker' }%>
+  <%= f.input :study, :collection => ['lter','glbrc']%>
   <%= f.button :submit %>
 <% end %>

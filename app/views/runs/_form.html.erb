@@ -1,5 +1,4 @@
-<%= f.inputs do %>
-  <%= f.input :sampled_on %>
+  <%= f.input :sampled_on , :label=>'Sample Date' , :as => :string, :input_html =>{ :class=>'span2', :datepicker=>'datepicker' }%>
   <%= f.input :name %>
   <%= f.input :study %>
   <%= f.input :comment, :input_html => {  :rows => 5 } %>
@@ -32,4 +31,3 @@
   <%#     <%= incubation.object.fluxes.first.measurements.collect {|x| x.vial}.join(' ') %1> %>
   <%#   </fieldset> %>
   <%# <% end %1> %>
-<% end %>
