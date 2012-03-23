@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214162208) do
+ActiveRecord::Schema.define(:version => 20120323163338) do
 
   create_table "campaign_plots", :force => true do |t|
     t.integer  "plot_id"
@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(:version => 20120214162208) do
     t.datetime "sampled_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "templates", :force => true do |t|
+    t.string   "name"
+    t.string   "study"
+    t.text     "plots"
+    t.integer  "samples_per_plot"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "users", :force => true do |t|

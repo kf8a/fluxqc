@@ -1,4 +1,6 @@
 Fluxqc::Application.routes.draw do
+  resources :templates
+
   devise_for :users
 
   resources :runs do

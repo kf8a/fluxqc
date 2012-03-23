@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @template.name %>
+</p>
+
+<p>
+  <b>Study:</b>
+  <%= @template.study %>
+</p>
+
+<p>
+  <b>Plots:</b>
+  <%= @template.plots %>
+</p>
+
+<p>
+  <b>Samples per plot:</b>
+  <%= @template.samples_per_plot %>
+</p>
+
+
+<%= link_to 'Edit', edit_template_path(@template) %> |
+<%= link_to 'Back', templates_path %>

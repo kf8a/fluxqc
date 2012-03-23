@@ -1,0 +1,29 @@
+<h1>Listing templates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Study</th>
+    <th>Plots</th>
+    <th>Samples per plot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @templates.each do |template| %>
+  <tr>
+    <td><%= template.name %></td>
+    <td><%= template.study %></td>
+    <td><%= template.plots %></td>
+    <td><%= template.samples_per_plot %></td>
+    <td><%= link_to 'Show', template %></td>
+    <td><%= link_to 'Edit', edit_template_path(template) %></td>
+    <td><%= link_to 'Destroy', template, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Template', new_template_path %>
