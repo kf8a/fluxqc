@@ -5,7 +5,8 @@ gem "rails-backbone"
 gem 'jquery-rails' 
 
 gem 'pg'
-gem 'formtastic', '>=2.0.2'
+#gem 'formtastic', '>=2.0.2'
+gem 'simple_form'
 gem 'workflow'
 gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
 gem 'chronic'

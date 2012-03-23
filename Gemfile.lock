@@ -99,8 +99,6 @@ GEM
       factory_girl (~> 2.6.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
-    formtastic (2.1.1)
-      actionpack (~> 3.0)
     gherkin (2.9.1)
       json (>= 1.4.6)
     highline (1.6.11)
@@ -203,6 +201,9 @@ GEM
       multi_json (~> 1.0)
       rubyzip
     shoulda-matchers (1.0.0)
+    simple_form (2.0.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     simple_uuid (0.2.0)
     sprockets (2.1.2)
       hike (~> 1.2)
@@ -252,7 +253,6 @@ DEPENDENCIES
   devise
   execjs
   factory_girl_rails
-  formtastic (>= 2.0.2)
   jquery-rails
   launchy
   pg
@@ -263,6 +263,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   shoulda-matchers
+  simple_form
   sqlite3
   therubyracer
   twitter-bootstrap-rails
