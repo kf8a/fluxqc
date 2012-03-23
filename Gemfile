@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.1'
+gem 'rails', '~> 3.2.2'
 gem "rails-backbone"
 gem 'jquery-rails' 
 
@@ -37,18 +37,18 @@ gem 'capistrano'
 
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-  gem 'shoulda-matchers'
   gem 'rspec-rails' #, :git=>'git://github.com/rspec/rspec-rails.git'
-  gem "database_cleaner"
-  gem "factory_girl_rails"
-  gem "cucumber-rails"
-  gem "capybara"
-  gem "launchy"
   gem 'railroady'
 end
 
 group :test do
   gem 'sqlite3'
+  gem 'shoulda-matchers'
+  gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "launchy"
+  gem "cucumber-rails", require: false
 end
 
 group :production do
