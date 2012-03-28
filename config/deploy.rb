@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 #require 'new_relic/recipes'
-#load 'deploy/assets'
+load 'deploy/assets'
 
 set :application, "fluxqc"
 set :repository, "git@github.com:kf8a/fluxqc.git"
@@ -55,7 +55,6 @@ namespace :deploy do
   before "deploy:symlink", :link_production_db
   after 'deploy:symlink', :link_unicorn
   after 'deploy:symlink', :link_file_storage
-  after 'deploy:symlink', :precompile_assets
 end
 
 desc "Link in the production database.yml"
@@ -71,9 +70,4 @@ end
 desc "link file storage"
 task :link_file_storage do
   run "ln -nfs #{deploy_to}/shared/uploads #{release_path}/public/uploads"
-end
-
-desc 'precompile assets'
-task :precompile_assets do
-  run "cd #{current_path};bundle exec rake assets:precompile:nondigest RAILS_ENV=production RAILS_GROUPS=assets"
 end
