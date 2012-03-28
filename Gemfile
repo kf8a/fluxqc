@@ -12,10 +12,10 @@ gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
-gem 'strong_parameters'
+#gem 'strong_parameters'
 
-#gem 'resque', :require => "resque/server"
-gem 'qu-redis'
+gem 'resque', :require => "resque/server"
+#gem 'qu-redis'
 
 # Gems used only for assets and not required
 # in production environments by default.

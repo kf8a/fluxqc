@@ -18,6 +18,8 @@ window.scatterPlot = (model, el) ->
   ymax = 1.5 unless ymax > 1.5 
   ymin = 0 #d3.min(data, (d) -> d.value)
 
+  label_format = d3.format('3.4r')
+
   y = d3.scale.linear()
    .domain([ymin, ymax])
    .range([margin, height - margin])
@@ -51,7 +53,7 @@ window.scatterPlot = (model, el) ->
     .attr('transform', 'scale(1,-1)')
     .attr('x', 80)
     .attr('y', -height+margin-20)
-    .text(f.toPrecision(4) + ' g m\u207B\u00B2 day\u207B\u00B9')
+    .text(label_format(f) + ' g m\u207B\u00B2 day\u207B\u00B9')
 
   g.selectAll('.fitLine')
     .data([a1,a2])

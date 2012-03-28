@@ -7,6 +7,8 @@ describe Loader do
     loader.respond_to?(:parse).should be_true
   end
 
+  it 'should parse simple files as well'
+
   it 'should parse a line correctly' do
     input = <<-eos
       08/22/11 10:58:58 AM	1	22-Aug-11, 10:53:22	blkA	CH4	0.437258	16.46376	16.46376	co2	200	0	0	N2O	1.2	0	0	AutoInt	Z:\GLBRC SER9 2011 0817\GLBRC SERIES 9 2011 2011-08-22 10-50-33\BLKA.D

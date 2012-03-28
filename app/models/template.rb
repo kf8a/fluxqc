@@ -1,3 +1,3 @@
 class Template < ActiveRecord::Base
-  belongs_to :setup
+  has_many :setups
 end

@@ -1,3 +1,3 @@
 class Setup < ActiveRecord::Base
-  has_one :template
+  belongs_to :template
 end

@@ -36,6 +36,10 @@ describe SetupFileLoader do
     @run.incubations.first.flux('n2o').measurements.count.should == 4
   end
 
+  it 'has the vial 1 for the first sample' do
+    @run.incubations.first.samples.first.vial.should == "45"
+  end
+
   it 'sets the sampled_on field' do
     @run.sampled_on.should == Date.new(2011,8,19)
   end

@@ -40,8 +40,7 @@ class Flux < ActiveRecord::Base
   end
 
   def multiplier
-    f = Fitter.new
-    f.flux = self
+    f = Fitter.new(self)
     f.multiplier
   end
 

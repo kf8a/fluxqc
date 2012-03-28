@@ -26,12 +26,18 @@ class RunsController < ApplicationController
     @run = Run.new(params[:run])
     if @run.save
       if params[:run][:setup_file]
-        # Resque.enqueue(SetupFileLoader, @run.id)
-        SetupFileLoader.perform(@run.id)
+        if Rails.env == 'production'
+          Resque.enqueue(SetupFileLoader, @run.id)
+        else
+          SetupFileLoader.perform(@run.id)
+        end
       end
       if params[:run][:data_file]
-        # Resque.enqueue(DataFileLoader, @run.id)
-        DataFileLoader.perform(@run.id)
+        if Rails.env == 'production'
+          Resque.enqueue(DataFileLoader, @run.id)
+        else
+          DataFileLoader.perform(@run.id)
+        end
       end
       redirect_to edit_run_path(@run)
     else
@@ -46,6 +52,20 @@ class RunsController < ApplicationController
   def update
     @run = Run.find(params[:id])
     if @run.update_attributes(params[:run])
+      if params[:run][:setup_file]
+        if Rails.env == 'production'
+          Resque.enqueue(SetupFileLoader, @run.id)
+        else
+          SetupFileLoader.perform(@run.id)
+        end
+      end
+      if params[:run][:data_file]
+        if Rails.env == 'production'
+          Resque.enqueue(DataFileLoader, @run.id)
+        else
+          DataFileLoader.perform(@run.id)
+        end
+      end
       redirect_to run_path(@run)
     else
       redirect_to edit_run_path(@run)
