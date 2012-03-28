@@ -55,7 +55,7 @@ namespace :deploy do
   before "deploy:symlink", :link_production_db
   after 'deploy:symlink', :link_unicorn
   after 'deploy:symlink', :link_file_storage
-#  after 'deploy:symlink', :precompile_assets
+  after 'deploy:symlink', :precompile_assets
 end
 
 desc "Link in the production database.yml"
