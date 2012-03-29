@@ -37,16 +37,13 @@ class IncubationFactory
 
   def self.update_sample(measurement, run, vial)
     sample = run.samples.where(:vial => vial).first
-    if sample
-      sample.measurements << measurement
-    else
+    unless sample
       sample = Sample.new(:vial => vial)
-      sample.measurements << measurement
       sample.save
-
       run.samples << sample
-      sample.save
     end
+    sample.measurements << measurement
+    sample.save
   end
 
   def self.update_measurement(flux,input, compound, run)

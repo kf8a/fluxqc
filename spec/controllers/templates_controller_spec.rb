@@ -34,131 +34,131 @@ describe TemplatesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all templates as @templates" do
-      template = Template.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:templates).should eq([template])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all templates as @templates" do
+  #     template = Template.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:templates).should eq([template])
+  #   end
+  # end
 
-  describe "GET show" do
-    it "assigns the requested template as @template" do
-      template = Template.create! valid_attributes
-      get :show, {:id => template.to_param}, valid_session
-      assigns(:template).should eq(template)
-    end
-  end
+  # describe "GET show" do
+  #   it "assigns the requested template as @template" do
+  #     template = Template.create! valid_attributes
+  #     get :show, {:id => template.to_param}, valid_session
+  #     assigns(:template).should eq(template)
+  #   end
+  # end
 
-  describe "GET new" do
-    it "assigns a new template as @template" do
-      get :new, {}, valid_session
-      assigns(:template).should be_a_new(Template)
-    end
-  end
+  # describe "GET new" do
+  #   it "assigns a new template as @template" do
+  #     get :new, {}, valid_session
+  #     assigns(:template).should be_a_new(Template)
+  #   end
+  # end
 
-  describe "GET edit" do
-    it "assigns the requested template as @template" do
-      template = Template.create! valid_attributes
-      get :edit, {:id => template.to_param}, valid_session
-      assigns(:template).should eq(template)
-    end
-  end
+  # describe "GET edit" do
+  #   it "assigns the requested template as @template" do
+  #     template = Template.create! valid_attributes
+  #     get :edit, {:id => template.to_param}, valid_session
+  #     assigns(:template).should eq(template)
+  #   end
+  # end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Template" do
-        expect {
-          post :create, {:template => valid_attributes}, valid_session
-        }.to change(Template, :count).by(1)
-      end
+  # describe "POST create" do
+  #   describe "with valid params" do
+  #     it "creates a new Template" do
+  #       expect {
+  #         post :create, {:template => valid_attributes}, valid_session
+  #       }.to change(Template, :count).by(1)
+  #     end
 
-      it "assigns a newly created template as @template" do
-        post :create, {:template => valid_attributes}, valid_session
-        assigns(:template).should be_a(Template)
-        assigns(:template).should be_persisted
-      end
+  #     it "assigns a newly created template as @template" do
+  #       post :create, {:template => valid_attributes}, valid_session
+  #       assigns(:template).should be_a(Template)
+  #       assigns(:template).should be_persisted
+  #     end
 
-      it "redirects to the created template" do
-        post :create, {:template => valid_attributes}, valid_session
-        response.should redirect_to(Template.last)
-      end
-    end
+  #     it "redirects to the created template" do
+  #       post :create, {:template => valid_attributes}, valid_session
+  #       response.should redirect_to(Template.last)
+  #     end
+  #   end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved template as @template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Template.any_instance.stub(:save).and_return(false)
-        post :create, {:template => {}}, valid_session
-        assigns(:template).should be_a_new(Template)
-      end
+  #   describe "with invalid params" do
+  #     it "assigns a newly created but unsaved template as @template" do
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Template.any_instance.stub(:save).and_return(false)
+  #       post :create, {:template => {}}, valid_session
+  #       assigns(:template).should be_a_new(Template)
+  #     end
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Template.any_instance.stub(:save).and_return(false)
-        post :create, {:template => {}}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
+  #     it "re-renders the 'new' template" do
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Template.any_instance.stub(:save).and_return(false)
+  #       post :create, {:template => {}}, valid_session
+  #       response.should render_template("new")
+  #     end
+  #   end
+  # end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested template" do
-        template = Template.create! valid_attributes
-        # Assuming there are no other templates in the database, this
-        # specifies that the Template created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Template.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => template.to_param, :template => {'these' => 'params'}}, valid_session
-      end
+  # describe "PUT update" do
+  #   describe "with valid params" do
+  #     it "updates the requested template" do
+  #       template = Template.create! valid_attributes
+  #       # Assuming there are no other templates in the database, this
+  #       # specifies that the Template created on the previous line
+  #       # receives the :update_attributes message with whatever params are
+  #       # submitted in the request.
+  #       Template.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+  #       put :update, {:id => template.to_param, :template => {'these' => 'params'}}, valid_session
+  #     end
 
-      it "assigns the requested template as @template" do
-        template = Template.create! valid_attributes
-        put :update, {:id => template.to_param, :template => valid_attributes}, valid_session
-        assigns(:template).should eq(template)
-      end
+  #     it "assigns the requested template as @template" do
+  #       template = Template.create! valid_attributes
+  #       put :update, {:id => template.to_param, :template => valid_attributes}, valid_session
+  #       assigns(:template).should eq(template)
+  #     end
 
-      it "redirects to the template" do
-        template = Template.create! valid_attributes
-        put :update, {:id => template.to_param, :template => valid_attributes}, valid_session
-        response.should redirect_to(template)
-      end
-    end
+  #     it "redirects to the template" do
+  #       template = Template.create! valid_attributes
+  #       put :update, {:id => template.to_param, :template => valid_attributes}, valid_session
+  #       response.should redirect_to(template)
+  #     end
+  #   end
 
-    describe "with invalid params" do
-      it "assigns the template as @template" do
-        template = Template.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Template.any_instance.stub(:save).and_return(false)
-        put :update, {:id => template.to_param, :template => {}}, valid_session
-        assigns(:template).should eq(template)
-      end
+  #   describe "with invalid params" do
+  #     it "assigns the template as @template" do
+  #       template = Template.create! valid_attributes
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Template.any_instance.stub(:save).and_return(false)
+  #       put :update, {:id => template.to_param, :template => {}}, valid_session
+  #       assigns(:template).should eq(template)
+  #     end
 
-      it "re-renders the 'edit' template" do
-        template = Template.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Template.any_instance.stub(:save).and_return(false)
-        put :update, {:id => template.to_param, :template => {}}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
+  #     it "re-renders the 'edit' template" do
+  #       template = Template.create! valid_attributes
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Template.any_instance.stub(:save).and_return(false)
+  #       put :update, {:id => template.to_param, :template => {}}, valid_session
+  #       response.should render_template("edit")
+  #     end
+  #   end
+  # end
 
-  describe "DELETE destroy" do
-    it "destroys the requested template" do
-      template = Template.create! valid_attributes
-      expect {
-        delete :destroy, {:id => template.to_param}, valid_session
-      }.to change(Template, :count).by(-1)
-    end
+  # describe "DELETE destroy" do
+  #   it "destroys the requested template" do
+  #     template = Template.create! valid_attributes
+  #     expect {
+  #       delete :destroy, {:id => template.to_param}, valid_session
+  #     }.to change(Template, :count).by(-1)
+  #   end
 
-    it "redirects to the templates list" do
-      template = Template.create! valid_attributes
-      delete :destroy, {:id => template.to_param}, valid_session
-      response.should redirect_to(templates_url)
-    end
-  end
+  #   it "redirects to the templates list" do
+  #     template = Template.create! valid_attributes
+  #     delete :destroy, {:id => template.to_param}, valid_session
+  #     response.should redirect_to(templates_url)
+  #   end
+  # end
 
 end
