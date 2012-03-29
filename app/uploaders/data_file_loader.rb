@@ -9,9 +9,7 @@ class DataFileLoader
     samples = DataParser.parse(file_path)
     
     samples.each do |s|
-      p s
       sample = run.samples.where(:vial => s[:vial]).first
-      p sample
       if sample
         ['co2','n2o','ch4'].each do |c|
           measurement = sample.measurements.by_compound(c).first
