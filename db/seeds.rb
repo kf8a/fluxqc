@@ -6,5 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Compound.create([{name: 'n2o'},{name: 'co2'},{name: 'ch4'}])
-Lid.create([{name: 'A'},{name: 'B'},{name: 'C'},{name: 'D'},{name:'Y'}])
+Compound.create([{:name => 'n2o'},{:name=> 'co2'},{:name => 'ch4'}])
+Lid.create([{:name => 'A', :volume => 8, :surface_area => 765, :height=>9},
+            {:name => 'B', :volume => 8, :surface_area => 765, :height=>9},
+            {:name => 'C', :volume => 8, :surface_area => 765, :height=>9},
+            {:name => 'D', :volume => 8, :surface_area => 765, :height=>9},
+            {:name => 'Y'}])

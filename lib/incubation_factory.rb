@@ -42,8 +42,9 @@ class IncubationFactory
     else
       sample = Sample.new(:vial => vial)
       sample.measurements << measurement
-      run.samples << sample
+      sample.save
 
+      run.samples << sample
       sample.save
     end
   end
