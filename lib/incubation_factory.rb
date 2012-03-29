@@ -43,7 +43,7 @@ class IncubationFactory
       run.samples << sample
     end
     sample.measurements << measurement
-    sample.save
+    measurement.save
   end
 
   def self.update_measurement(flux,input, compound, run)
