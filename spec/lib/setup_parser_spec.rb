@@ -14,10 +14,11 @@ describe SetupParser do
       @result.class.should == Array
     end
 
+    it 'has the right run title' do
+      @result[0][:run_name].should == 'LTER 2011 Series 10'
+    end
+
     describe 'first row' do
-      it 'has the right run title' do
-        @result[0][:run_name].should == 'LTER 2011 Series 10'
-      end
       it 'has the right sample date' do
         @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
       end
@@ -78,6 +79,77 @@ describe SetupParser do
       end
       it 'has the right seconds' do
         @result[5][:seconds].should == 20 
+      end
+    end
+  end
+
+  describe 'parsing a GLBRC file' do
+
+    before do
+      file = File.expand_path("../../fixtures/glbrc_setup.csv", __FILE__)
+      File.exists?(file).should be_true
+      @result = SetupParser.parse(file)
+    end
+
+    it 'has the right title' do
+        @result[0][:run_name].should == 'GLBRC 2011 Series 1'
+    end
+
+    it 'has the right sample date' do
+      @result[0][:sample_date].should == Time.parse('2011-4-7 12:00:00')
+    end
+
+    describe 'the first row' do
+      it 'is G1' do
+        @result[0][:treatment].should == 'G1'
+      end
+      it 'is lid Y' do
+        @result[0][:lid].should == 'Y'
+      end
+      it 'is rep 1' do
+        @result[0][:replicate].should == 'R1'
+      end
+      it 'is the right height' do
+        @result[0][:height].should == [18,17.5,18,17]
+      end
+      it 'is the right soil temperature' do
+        @result[0][:soil_temperature].should == 8
+      end
+      it 'is the right time' do
+        @result[0][:seconds].should == 0
+      end
+      it 'is the right chamber' do
+        @result[0][:chamber].should == "1"
+      end
+      it 'is the right vial' do
+        @result[0][:vial].should == '1'
+      end
+    end
+
+    describe 'the second row' do
+      it 'is G1' do
+        @result[1][:treatment].should == 'G1'
+      end
+      it 'is lid Y' do
+        @result[1][:lid].should == 'Y'
+      end
+      it 'is rep 1' do
+        @result[1][:replicate].should == 'R1'
+      end
+      it 'is the right height' do
+        @result[1][:height].should == [18,17.5,18,17]
+      end
+      it 'is the right soil temperature' do
+        @result[1][:soil_temperature].should == 8
+      end
+      it 'is the right time' do
+        @result[1][:seconds].should == 18 
+      end
+      it 'is the right chamber' do
+        @result[1][:chamber].should == "1"
+      end
+      it 'is the right vial' do
+        @result[1][:vial].should == '2'
       end
     end
   end

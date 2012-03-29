@@ -20,17 +20,31 @@ class SetupParser
     row = lines.shift
     sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
     lines.shift
+    lines.shift if title =~ /GLBRC/
     result = lines.collect do |row|
-      treatment = "T#{row[0]}"
-      replicate = "R#{row[1]}"
-      chamber   = row[3]
-      vial      = row[4]
-      lid       = row[5]
-      height    = [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
-      soil_temp = row[10].to_f
-      seconds   = row[15].to_f
-      comments  = row[16]
-      comments  = nil if comments == '-'
+      if title =~ /GLBRC/
+        treatment = "#{row[0]}#{row[3]}"
+        replicate = "R#{row[1]}"
+        chamber   = row[4]
+        vial      = row[5]
+        lid       = row[6]
+        height    = [row[7].to_f,row[8].to_f, row[9].to_f, row[10].to_f]
+        soil_temp = row[11].to_f
+        seconds   = row[16].to_f
+        comments  = row[17]
+        comments  = nil if comments == '-'
+      else
+        treatment = "T#{row[0]}"
+        replicate = "R#{row[1]}"
+        chamber   = row[3]
+        vial      = row[4]
+        lid       = row[5]
+        height    = [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
+        soil_temp = row[10].to_f
+        seconds   = row[15].to_f
+        comments  = row[16]
+        comments  = nil if comments == '-'
+      end
 
       {:run_name => title, :sample_date => sample_date, 
         :treatment => treatment, :replicate => replicate,
