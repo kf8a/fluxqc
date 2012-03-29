@@ -49,7 +49,7 @@ class IncubationFactory
   end
 
   def self.update_measurement(flux,input, compound, run)
-    vial = input[:vial].to_i
+    vial = input[:vial]
     measurement = Measurement.new(:seconds => input[:seconds], :compound => compound, :vial=>vial)
     flux.measurements << measurement
     update_sample(measurement, run, vial)
