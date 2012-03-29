@@ -40,10 +40,14 @@ class Flux.Models.Flux extends Backbone.Model
     correlation = correlation * correlation
 
     r2 = correlation
-    @attributes.flux = m * @attributes.multiplier
-    @attributes.fit_line.slope = m
-    @attributes.fit_line.offset = b
-    @attributes.fit_line.r2 = r2
+    new_flux = m  * @attributes.multiplier
+    @.set({flux: new_flux})
+    @.set({fit_line: {slope: m, r2: r2, offset: b}})
+
+    # @attributes.flux = m * @attributes.multiplier
+    # @attributes.fit_line.slope = m
+    # @attributes.fit_line.offset = b
+    # @attributes.fit_line.r2 = r2
     @.save()
     [m,b,r2, @attributes.flux]
 
