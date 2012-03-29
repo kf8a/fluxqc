@@ -20,9 +20,9 @@ class SetupParser
     row = lines.shift
     sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
     lines.shift
-    lines.shift if title =~ /GLBRC/
+    lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
-      if title =~ /GLBRC/
+      if title.strip =~ /^GLBRC.+\d$/
         treatment = "#{row[0]}#{row[3]}"
         replicate = "R#{row[1]}"
         chamber   = row[4]
