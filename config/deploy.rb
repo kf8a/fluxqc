@@ -1,5 +1,4 @@
 require "bundler/capistrano"
-#require 'new_relic/recipes'
 load 'deploy/assets'
 
 set :application, "fluxqc"
@@ -52,7 +51,8 @@ namespace :deploy do
     start
   end
 
-  before "deploy:symlink", :link_production_db
+  #before "deploy:symlink", :link_production_db
+  before "deploy:assets:precompile", "link_production_db"
   after 'deploy:symlink', :link_unicorn
   after 'deploy:symlink', :link_file_storage
 end

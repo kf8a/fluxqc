@@ -20,12 +20,11 @@ gem 'resque', :require => "resque/server"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'execjs'
-  gem 'therubyracer'
+  gem 'therubyracer', :require => 'v8'
 
   gem 'sass-rails'
   gem 'coffee-rails'
-  gem 'uglifier'
+#  gem 'uglifier'
   gem 'twitter-bootstrap-rails'
 end
 
