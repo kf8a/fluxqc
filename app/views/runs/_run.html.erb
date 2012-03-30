@@ -5,8 +5,8 @@
   <td><%= run.comment %></td>
   <td><%= run.study %></td>
   <td><%= "#{run.total_fluxes}" %></td>
-  <td><%= link_to 'qc', run %></td>
-  <td><%= link_to 'edit', edit_run_path(run) %></td>
-  <td><%= link_to 'download', run_url(run, :format => :csv) %></td>
-  <td><%= link_to 'destroy',  run, :method=>:delete, :confirm => 'Are you sure you want to delete this run?' %></td>
+  <td><%= link_to 'qc', run ,:class =>'btn btn-success'%></td>
+  <td><%= link_to 'edit', edit_run_path(run), :class=>'btn' %></td>
+  <td><%= link_to 'download', run_url(run, :format => :csv), :class=>'btn' %></td>
+  <td><%= link_to 'destroy',  run, :method=>:delete, :confirm => 'Are you sure you want to delete this run?' ,:class=>'btn'%></td>
 </tr>
