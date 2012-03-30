@@ -7,10 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">FluxQC</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><%= link_to 'Uploaded', runs_url({:state => :uploaded}) %></li>
+            <li><%= link_to 'Accepted', runs_url({:state => :accepted}) %></li>
+            <li><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
+            <li><%= link_to 'Published', runs_url({:state => :published}) %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class='container-fluid'>
-  <%= yield %>
-</div>
+  <div class='container-fluid'>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

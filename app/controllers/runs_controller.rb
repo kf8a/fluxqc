@@ -13,7 +13,7 @@ class RunsController < ApplicationController
  
     @incubations = @run.incubations
     respond_with do |format|
-      format.html
+      format.html { render  :layout=> 'qc'}
       format.json {render :json  => @incubations.as_json(:methods=>['co2','n2o','ch4'])}
     end
   end

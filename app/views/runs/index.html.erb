@@ -1,8 +1,4 @@
-<h1>Runs <%= @state %> </h1>
-<%= link_to 'Uploaded', runs_url({:state => :uploaded}) %>
-<%= link_to 'Accepted', runs_url({:state => :accepted}) %>
-<%= link_to 'Approved', runs_url({:state => :approved}) %>
-<%= link_to 'Published', runs_url({:state => :published}) %>
+<h3>Runs <%= @state %> </h3>
 <table class="table table-condensed table-striped">
   <tr>
     <th>Run on</th>
