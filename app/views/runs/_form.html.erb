@@ -1,25 +1,27 @@
-  <%= f.input :sampled_on , :label=>'Sample Date' , :as => :string, :input_html =>{ :class=>'span2', :datepicker=>'datepicker' }%>
-  <%= f.input :run_on, :label=>'Run Date', :as => :string, :input_html=>{:class=>'span2', :datepicker=>'datepicker'} %>
-  <%= f.input :name %>
-  <%= f.input :study %>
-  <%= f.input :comment, :input_html => {  :rows => 5 } %>
-  <%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
-  </li>
-  <%= f.input :setup_file %> 
-  <%= f.hidden_field :setup_file_cache %>
-  <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
-  <%= f.input :data_file %>
-  <%= f.hidden_field :data_file_cache %>
-  <%= link_to 'back to index', runs_path %>
-  <table class='table table-condensed'>
-    <tr>
-      <th>Treatment</th>
-      <th>Replicate</th>
-      <th>Chamber</th>
-      <th>Lid</th>
-      <th>Vials</th>
-      <th>Seconds</th>
-      <th>ppm</th>
-    </tr>
-    <%= render @run.incubations %>
-  </table>
+<%= f.input :sampled_on , :label=>'Sample Date' , :as => :string, :input_html =>{ :class=>'span2', :datepicker=>'datepicker' }%>
+<%= f.input :run_on, :label=>'Run Date', :as => :string, :input_html=>{:class=>'span2', :datepicker=>'datepicker'} %>
+<%= f.input :name %>
+<%= f.input :study %>
+<%= f.input :comment, :input_html => {  :rows => 5 } %>
+<%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
+</li>
+<%= f.input :setup_file %> 
+<%= f.hidden_field :setup_file_cache %>
+<%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
+<%= f.input :data_file %>
+<%= f.hidden_field :data_file_cache %>
+<%= link_to 'back to index', runs_path %>
+<table class='table table-condensed'>
+  <tr>
+    <th>Treatment</th>
+    <th>Replicate</th>
+    <th>Chamber</th>
+    <th>Lid</th>
+    <th>Vials</th>
+    <th>Seconds</th>
+    <th>N2O ppm</th>
+    <th>CO2 ppm</th>
+    <th>CH4 ppm</th>
+  </tr>
+  <%= render @run.incubations %>
+</table>

@@ -6,6 +6,10 @@ class Sample < ActiveRecord::Base
   def data(compound_name)
     measurements.by_compound(compound_name)
   end
+
+  def seconds
+    measurements.first.seconds
+  end
 end
 # == Schema Information
 #

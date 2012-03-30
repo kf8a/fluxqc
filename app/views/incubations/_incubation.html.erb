@@ -1,11 +1,16 @@
+<% samples = incubation.samples %>
 <tr>
-  <td><%= incubation.treatment %></td>
-  <td><%= incubation.replicate %></td>
-  <td><%= incubation.chamber %></td>
-  <td><%= incubation.lid.try(:name) %></td>
-  <% measurements = incubation.fluxes.first.measurements %>
-
-  <td><%= measurements.collect {|x| x.vial}%></td>
-  <td><%= measurements.collect {|x| x.seconds}%></td>
-  <td><%= measurements.collect {|x| x.ppm }%> </td>
+  <td rowspan=<%=samples.count+1%>><%=incubation.treatment %></td>
+  <td rowspan=<%=samples.count+1%>><%= incubation.replicate %></td>
+  <td rowspan=<%=samples.count+1%>><%= incubation.chamber %></td>
+  <td rowspan=<%=samples.count+1%>><%= incubation.lid.try(:name) %></td>
 </tr>
+<% samples.each do |sample| %>
+  <tr>
+    <td><%= sample.vial %></td>
+    <td><%= sample.seconds %> </td>
+    <td><%= sample.data(:n2o).first.try(:ppm) %></td>
+    <td><%= sample.data(:co2).first.try(:ppm) %></td>
+    <td><%= sample.data(:ch4).first.try(:ppm) %></td>
+  </tr>
+<% end %>
