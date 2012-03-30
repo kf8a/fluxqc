@@ -10,8 +10,8 @@ class RunsController < ApplicationController
 
   def show
     @run = Run.find(params[:id])
+    @state = @run.current_state.name.to_s
  
-    @incubations = @run.incubations
     respond_with do |format|
       format.html { render  :layout=> 'qc'}
       format.json {render :json  => @incubations.as_json(:methods=>['co2','n2o','ch4'])}
@@ -47,6 +47,7 @@ class RunsController < ApplicationController
 
   def edit
     @run = Run.find(params[:id])
+    @state = @run.current_state.name.to_s
   end
 
   def update
