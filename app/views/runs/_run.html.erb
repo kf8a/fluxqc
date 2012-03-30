@@ -4,7 +4,11 @@
   <td><%= run.name %></td>
   <td><%= run.comment %></td>
   <td><%= run.study %></td>
-  <td><%= "#{run.total_fluxes}" %></td>
+  <td><%= "#{run.total_fluxes}" %> 
+    <% if run.data_file.current_path %>
+      <i class="icon-ok"></i>
+    <% end %>
+    </td>
   <td><%= link_to 'qc', run ,:class =>'btn btn-success'%></td>
   <td><%= link_to 'edit', edit_run_path(run), :class=>'btn' %></td>
   <td><%= link_to 'download', run_url(run, :format => :csv), :class=>'btn' %></td>
