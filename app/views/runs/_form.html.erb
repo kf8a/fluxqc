@@ -10,7 +10,14 @@
 <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
 <%= f.input :data_file %>
 <%= f.hidden_field :data_file_cache %>
-<%= link_to 'back to index', runs_path %>
+
+<div>
+<%= link_to 'back to index', runs_path, :class=>'btn' %>
+<% unless @run.new_record? %>
+<%= link_to 'qc', run_path(@run), :class=>'btn' %>
+<% end %>
+<%= f.button :submit , :class=>'btn btn-primary'%>
+</div>
 <table class='table table-condensed'>
   <tr>
     <th>Treatment</th>

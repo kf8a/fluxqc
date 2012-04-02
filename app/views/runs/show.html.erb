@@ -1,12 +1,3 @@
-<div id='title-block'>
-  <%= link_to 'Index', runs_path %>
-<h1><%= @run.name %></h1>
-<p>Sampled on: <%= @run.sampled_on %> Study: <%= @run.study %></p>
-<% @run.current_state.events.keys.each do |event| %>
-  <%= button_to "#{event.to_s}", :action=> event, :remote=>true %>
-<% end %>
-</div>
-<div id='spacer'></div>
 <div id='container'></div>
 
 <script>
