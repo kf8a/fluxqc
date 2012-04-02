@@ -27,7 +27,7 @@
           <ul class='nav pull-right'>
             <li><%= link_to 'edit', edit_run_url(@run) %></li>
             <% @run.current_state.events.keys.each do |event| %>
-              <li><%=button_to "#{event.to_s}", :action=> event, :remote=>true %></li>
+              <li><%=link_to "#{event.to_s}", {:action=> event}, :method=>:post %></li>
             <% end %>
           </ul>
         </div>
