@@ -48,10 +48,9 @@ describe RunsController do
   describe ':POST create' do
     describe 'with a valid object' do 
      it 'redirects to show' do
-       Run.any_instance.stub(:save).and_return(true)
        Run.any_instance.stub(:id).and_return(1)
-       post :create, :run => {:name => 'test'}
-       response.should redirect_to(edit_run_path(assigns(:run)))
+       post :create , :run => {:name => 'test'}
+       response.should redirect_to(edit_run_path(1))
      end
     end
     describe 'with an invalid object' do
@@ -95,6 +94,14 @@ describe RunsController do
       # Run.any_instance.sub(:standardize).and_return(true)
       # Run.any_instance.stub(:id).and_return(1)
     it 'computes measurement ppms using the standard'
+  end
+
+  describe 'getting the sample table for the gc' do
+    it 'delivers a sample table' do
+      run = Factory.create :run
+      get :gcinput, :id=>run, :format=>:csv
+      response.should be_success
+    end
   end
 
   describe 'a run workflow' do

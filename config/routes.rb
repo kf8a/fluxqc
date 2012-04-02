@@ -5,6 +5,7 @@ Fluxqc::Application.routes.draw do
 
   resources :runs do
     member do
+      get  'gcinput'
       post 'reject'
       post 'accept'
       post 'approve'

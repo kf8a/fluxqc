@@ -27,7 +27,9 @@ class Run < ActiveRecord::Base
       event :unpublish, :transitions_to => :approved
     end
 
-    state :rejected
+    state :rejected do
+      event :upload, :transitions_to => :uploaded
+    end
   end
 
   def total_fluxes
@@ -40,6 +42,10 @@ class Run < ActiveRecord::Base
   
   def unpublish
     self.released = false
+  end
+
+  def upload
+    self.uploaded = true
   end
 end
 # == Schema Information
