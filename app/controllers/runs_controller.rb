@@ -11,7 +11,7 @@ class RunsController < ApplicationController
   def show
     @run = Run.find(params[:id])
     @state = @run.current_state.name.to_s
- 
+
     @incubations = @run.incubations
     respond_with do |format|
       format.html { render  :layout=> 'qc'}
@@ -30,14 +30,14 @@ class RunsController < ApplicationController
         # if Rails.env == 'production'
         #   Resque.enqueue(SetupFileLoader, @run.id)
         # else
-          SetupFileLoader.perform(@run.id)
+        SetupFileLoader.perform(@run.id)
         # end
       end
       if params[:run][:data_file]
         # if Rails.env == 'production'
         #   Resque.enqueue(DataFileLoader, @run.id)
         # else
-          DataFileLoader.perform(@run.id)
+        DataFileLoader.perform(@run.id)
         # end
       end
       redirect_to edit_run_path(@run)
@@ -58,14 +58,14 @@ class RunsController < ApplicationController
         # if Rails.env == 'production'
         #   Resque.enqueue(SetupFileLoader, @run.id)
         # else
-          SetupFileLoader.perform(@run.id)
+        SetupFileLoader.perform(@run.id)
         # end
       end
       if params[:run][:data_file]
         # if Rails.env == 'production'
         #   Resque.enqueue(DataFileLoader, @run.id)
         # else
-          DataFileLoader.perform(@run.id)
+        DataFileLoader.perform(@run.id)
         # end
       end
       redirect_to run_path(@run)
@@ -75,9 +75,7 @@ class RunsController < ApplicationController
   end
 
   def gcinput
-    run = Run.find(params[:id])
-    render :gcinput
-
+    @run = Run.find(params[:id])
   end
 
   def reject
@@ -91,7 +89,7 @@ class RunsController < ApplicationController
     run.accept!
     redirect_to runs_path(:state=>'accepted')
   end
-  
+
   def approve
     run = Run.find(params[:id])
     run.approve!
