@@ -74,6 +74,12 @@ class RunsController < ApplicationController
     end
   end
 
+  def gcinput
+    run = Run.find(params[:id])
+    render :gcinput
+
+  end
+
   def reject
     run = Run.find(params[:id])
     run.reject!
