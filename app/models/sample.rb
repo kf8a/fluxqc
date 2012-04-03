@@ -3,12 +3,20 @@ class Sample < ActiveRecord::Base
   has_many :standards
   belongs_to :run
 
+  # TODO need to do this before save
+  before_save :make_uuid, :if => Proc.new {|object| object.uuid.nil? }
+
   def data(compound_name)
     measurements.by_compound(compound_name)
   end
 
   def seconds
     measurements.first.seconds
+  end
+
+  private
+  def make_uuid
+    self.uuid = UUID.new.generate
   end
 end
 # == Schema Information

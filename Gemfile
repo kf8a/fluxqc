@@ -14,6 +14,8 @@ gem 'chronic'
 gem 'devise'
 #gem 'strong_parameters'
 
+gem 'uuid'
+
 gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
 

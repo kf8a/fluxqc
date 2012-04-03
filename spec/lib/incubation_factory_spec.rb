@@ -43,6 +43,9 @@ describe IncubationFactory do
     it 'has 1 sample' do
       @incubation.samples.size.should == 1
     end
+    it 'has a uuid on the sample' do
+      @incubation.samples.first.uuid.should_not be_nil
+    end
     it 'has 3 fluxes' do
       @incubation.fluxes.size.should == 3
     end
