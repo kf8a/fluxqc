@@ -16,7 +16,6 @@ class DataFileLoader
           measurement.ppm = s[c.to_sym]
           measurement.save
         end
-      else
       end
     end
   end

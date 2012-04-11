@@ -6,9 +6,9 @@ describe DataFileLoader do
   include ActionDispatch::TestProcess
 
   before do
-    Factory(:compound, :name=>'co2')
-    Factory(:compound, :name=>'n2o')
-    Factory(:compound, :name=>'ch4')
+    FactoryGirl.create(:compound, :name=>'co2')
+    FactoryGirl.create(:compound, :name=>'n2o')
+    FactoryGirl.create(:compound, :name=>'ch4')
 
     run = FactoryGirl.create :run, :data_file => fixture_file_upload('/2011_results.csv'), :setup_file => fixture_file_upload('/setup_test.csv')
     SetupFileLoader.perform(run.id).should_not be_false
@@ -28,6 +28,9 @@ describe DataFileLoader do
     end
     it 'updates the measurement with the ch4 area' do
       @incubation.flux('ch4').measurements.first.ppm.should == 1.854
+    end
+    it 'has a flux' do
+      @incubation.flux('ch4').should == 34
     end
 
   end

@@ -23,7 +23,6 @@ class DataParser
     # We want to use the last version of the data for the vial that is in the file
     vials = {}
     lines.each do |row|
-      p row
     #  vials[row[1]] = {:vial=>row[3], :ch4=>row[7].to_f, :co2=>row[11].to_f, :n2o=>row[15].to_f}
       vials[row[0]] = {:vial=>row[0], :n2o=>row[1].to_f, :co2=>row[2].to_f, :ch4=>row[3].to_f}
     end

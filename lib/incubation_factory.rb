@@ -1,3 +1,4 @@
+# This class creates incubations based on the setup file
 class IncubationFactory
 
   def self.create(run_id, input= {})

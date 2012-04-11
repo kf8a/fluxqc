@@ -13,7 +13,7 @@ class FluxesController < ApplicationController
     flux = Flux.find(params[:id])
     flux.data = params[:data]
     flux.save
-    
+
     render :nothing => true
   end
 end

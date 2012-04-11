@@ -1,3 +1,6 @@
+# This file represents a flux, that is a series of measuremnemnts of the ssame gas over time. The linear regression slope of the
+# meeasurements is the computeed flux. It uses the fitter class to do it's work.
+#
 require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
 class Flux < ActiveRecord::Base
@@ -14,6 +17,7 @@ class Flux < ActiveRecord::Base
     measurements.first.compound
   end
 
+  # Collect the measurements associate with this flux into a hash for display as jason
   def data
     measurements.collect do |measurement|
       {id:measurement.id, key:measurement.seconds, value:measurement.ppm, deleted:measurement.excluded}
