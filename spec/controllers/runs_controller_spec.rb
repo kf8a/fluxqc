@@ -4,7 +4,7 @@ describe RunsController do
  include Devise::TestHelpers 
 
   before(:each) do
-    @user = Factory.create(:user)
+    @user = FactoryGirl.create(:user)
     sign_in @user
   end
 
@@ -21,7 +21,7 @@ describe RunsController do
 
   describe "GET 'show'" do
     before(:all) do
-      @run = Factory.create :run
+      @run = FactoryGirl.create :run
     end
     it "returns http success" do
       get :show, :id => @run
@@ -64,7 +64,7 @@ describe RunsController do
 
   describe 'GET :edit' do
     it 'is succesfull' do
-      run = Factory.create :run
+      run = FactoryGirl.create :run
       get :edit, :id=>run
       response.should be_success
     end
@@ -98,7 +98,7 @@ describe RunsController do
 
   describe 'getting the sample table for the gc' do
     it 'delivers a sample table' do
-      run = Factory.create :run
+      run = FactoryGirl.create :run
       get :gcinput, :id=>run, :format=>:csv
       response.should be_success
     end
@@ -106,7 +106,7 @@ describe RunsController do
 
   describe 'a run workflow' do
     before(:each) do
-      @run = Factory.create :run
+      @run = FactoryGirl.create :run
       Run.stub(:find).and_return(@run)
     end
 

@@ -12,7 +12,7 @@ describe SetupFileLoader do
   include ActionDispatch::TestProcess
 
   before do
-    ['co2','n2o','ch4'].collect { |name| Factory(:compound, :name=>name)}
+    ['co2','n2o','ch4'].collect { |name| FactoryGirl.create(:compound, :name=>name)}
 
     run = FactoryGirl.create :run, :setup_file => fixture_file_upload('/setup_test.csv')
     SetupFileLoader.perform(run.id).should_not be_false

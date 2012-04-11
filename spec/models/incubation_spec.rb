@@ -12,12 +12,12 @@ describe Incubation do
   
   describe 'an incubation with fluxes' do
     before(:each) do
-      co2 = Factory(:compound, :name=>'co2')
-      n2o = Factory(:compound, :name=>'n2o')
+      co2 = FactoryGirl.create(:compound, :name=>'co2')
+      n2o = FactoryGirl.create(:compound, :name=>'n2o')
 
-      sample          = Factory(:sample)
-      co2_measurement = Factory(:measurement, :compound => co2, :sample => sample)
-      n2o_measurement = Factory(:measurement, :compound => n2o, :sample => sample)
+      sample          = FactoryGirl.create(:sample)
+      co2_measurement = FactoryGirl.create(:measurement, :compound => co2, :sample => sample)
+      n2o_measurement = FactoryGirl.create(:measurement, :compound => n2o, :sample => sample)
 
       @co2_flux = Flux.new(:measurements => [co2_measurement])
       @n2o_flux = Flux.new(:measurements => [n2o_measurement])

@@ -4,7 +4,7 @@ describe Flux do
   it {should belong_to :incubation}
   it {should have_many :measurements}
 
-  let(:flux) {Factory.create :flux}
+  let(:flux) {FactoryGirl.create :flux}
 
   it 'has methods to make the flux calculation easier' do
     flux.respond_to?(:headspace).should be_true
@@ -29,8 +29,8 @@ describe Flux do
 
   describe 'data writing' do
     before(:each) do
-      @m1 = Factory.create :measurement
-      @m2 = Factory.create :measurement
+      @m1 = FactoryGirl.create :measurement
+      @m2 = FactoryGirl.create :measurement
       flux.measurements << @m1
       flux.measurements << @m2 
       flux.stub(:headspace).and_return(1)

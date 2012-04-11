@@ -4,9 +4,9 @@ require File.expand_path("../../../lib/incubation_factory.rb",__FILE__)
 describe IncubationFactory do
 
   before do
-    Factory(:compound, :name=>'co2')
-    Factory(:compound, :name=>'n2o')
-    Factory(:compound, :name=>'ch4')
+    FactoryGirl.create(:compound, :name=>'co2')
+    FactoryGirl.create(:compound, :name=>'n2o')
+    FactoryGirl.create(:compound, :name=>'ch4')
 
     @lid = FactoryGirl.create :lid, :name => 'C'
 
@@ -88,7 +88,7 @@ describe IncubationFactory do
     before do
       @incubation.save
       @existing = @incubation
-      run = Factory.create :run 
+      run = FactoryGirl.create :run 
       @incubation = IncubationFactory.create(run.id,
         {:sample_date => '2011-10-18', 
           :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',
