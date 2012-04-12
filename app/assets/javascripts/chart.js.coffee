@@ -52,8 +52,7 @@ window.scatterPlot = (model, el) ->
 
   g.append('svg:text')
     .attr('transform', 'scale(1,-1)')
-    .attr('fill', (d) -> 'black')
-    .attr('stroke', (d) -> if (m > 0 && expected_slope == 'positive') || (m < 0 && expected_slope == 'negative') then 'none' else 'red')
+    .attr('fill', (d) -> if (m > 0 && expected_slope == 'positive') || (m < 0 && expected_slope == 'negative') then 'black' else 'red')
     .attr('x', 80)
     .attr('y', -height+margin-20)
     .text(label_format(f) + ' g m\u207B\u00B2 day\u207B\u00B9')
