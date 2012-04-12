@@ -28,7 +28,7 @@ class Run < ActiveRecord::Base
     end
 
     state :rejected do
-      event :upload, :transitions_to => :uploaded
+      event :unreject, :transitions_to => :uploaded
     end
   end
 

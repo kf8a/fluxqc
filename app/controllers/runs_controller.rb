@@ -49,6 +49,9 @@ class RunsController < ApplicationController
   def edit
     @run = Run.find(params[:id])
     @state = @run.current_state.name.to_s
+    respond_with do |format|
+      format.html { render  :layout=> 'qc'}
+    end
   end
 
   def update
@@ -112,6 +115,12 @@ class RunsController < ApplicationController
     run = Run.find(params[:id])
     run.unpublish!
     redirect_to runs_path(:state => 'approved')
+  end
+
+  def unreject
+    run = Run.find(params[:id])
+    run.unreject!
+    redirect_to runs_path(:state=>'uploaded')
   end
 
   def destroy

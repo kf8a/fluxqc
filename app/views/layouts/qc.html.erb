@@ -26,9 +26,8 @@
             <li class=<%= 'active' if @state == 'rejected'%> ><%= link_to 'Rejected',   runs_url({:state => :rejected}) %></li>
           </ul>
           <ul class='nav pull-right'>
-            <li><%= link_to 'edit', edit_run_url(@run) %></li>
             <% @run.current_state.events.keys.each do |event| %>
-              <li><%=link_to "#{event.to_s}", {:action=> event}, :method=>:post %></li>
+              <li class='workflow'><%=button_to "#{event.to_s}", :action=>event %></li>
             <% end %>
           </ul>
         </div>
