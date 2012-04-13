@@ -10,7 +10,7 @@ describe DataFileLoader do
     FactoryGirl.create(:compound, :name=>'n2o')
     FactoryGirl.create(:compound, :name=>'ch4')
 
-    run = FactoryGirl.create :run, :data_file => fixture_file_upload('/2011_results.csv'), :setup_file => fixture_file_upload('/setup_test.csv')
+    run = FactoryGirl.create :run, :data_file => fixture_file_upload('/result.txt'), :setup_file => fixture_file_upload('/setup_test.csv')
     SetupFileLoader.perform(run.id).should_not be_false
     DataFileLoader.perform(run.id).should_not be_false
     @run = Run.find(run.id)

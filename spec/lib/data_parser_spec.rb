@@ -63,4 +63,17 @@ describe DataParser do
     end
 
   end
+
+  # TODO do I need to deal with encoding issues..
+  # describe 'parsing a macro generated file' do
+  #   before do
+  #     file = File.expand_path("../../fixtures/2011_results.csv", __FILE__)
+  #     File.exists?(file).should be_true
+  #     @result = DataParser.parse(file)
+  #   end
+
+  #   it 'finds the correct number of samples' do
+  #     @result.size.should == 364
+  #   end
+  # end
 end
