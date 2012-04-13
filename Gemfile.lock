@@ -266,7 +266,7 @@ DEPENDENCIES
   launchy
   pg
   railroady
-  rails (~> 3.2.2)
+  rails (~> 3.2.3)
   rails-backbone
   resque
   rspec-rails
