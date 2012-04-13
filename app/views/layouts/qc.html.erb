@@ -30,6 +30,10 @@
               <li class='workflow'><%=button_to "#{event.to_s}", :action=>event %></li>
             <% end %>
           </ul>
+          <ul class='nav pull-right'>
+            <li><%= link_to 'edit', edit_run_path(@run) if params[:action]=='show' %></li>
+            <li><%= link_to 'qc', run_path(@run) if params[:action]=='edit' %></li>
+          </ul>
         </div>
         <p class='navbar-text pull-right'><%= @run.name %></p>
       </div>
@@ -39,5 +43,6 @@
     <%= yield %>
   </div>
 
+  <%= debug params[:action]%>
 </body>
 </html>
