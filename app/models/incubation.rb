@@ -1,6 +1,6 @@
 class Incubation < ActiveRecord::Base
   has_many :fluxes,  :dependent => :destroy
-  has_many :measurements
+  has_many :measurements, :order => :vial
   belongs_to :run
   belongs_to :lid
 
