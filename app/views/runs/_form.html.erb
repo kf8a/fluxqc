@@ -13,9 +13,6 @@
 
 <div>
 <%= link_to 'back to index', runs_path, :class=>'btn' %>
-<% unless @run.new_record? %>
-<%= link_to 'qc', run_path(@run), :class=>'btn' %>
-<% end %>
 <%= f.button :submit , :class=>'btn btn-primary'%>
 </div>
 <table class='table table-condensed'>
