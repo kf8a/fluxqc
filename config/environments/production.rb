@@ -51,7 +51,7 @@ Fluxqc::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'gprpc28.kbs.msu.edu:5000' }
+  config.action_mailer.default_url_options = { :host => 'fluxqc.kbs.msu.edu' }
 
   # Enable threaded mode
   # config.threadsafe!
