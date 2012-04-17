@@ -22,7 +22,7 @@ class Incubation < ActiveRecord::Base
       # if they calculate and install the chambers correctly.  This accounts for the
       # clamped lid after they measure H.  The 0.2 accounts for the decrease in
       # ht due to the lid groove.
-      return (Math::PI * 14.1**2 * (avg_height_cm - 0.2))
+      return (Math::PI * 14.1**2 * (avg_height_cm - 0.2)/1000)
     else
       begin
         avg_height_cm = 19.5 unless avg_height_cm
