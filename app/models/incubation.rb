@@ -13,10 +13,16 @@ class Incubation < ActiveRecord::Base
   def headspace
     return NaN unless lid
     
-    if 'Z' == lid.name
+    if 'Z' == lid.name 
       # compute gas bucket volume 
       # divide by 1000 to convert from cm^3 to liters
       return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 # one cm from the top of the bucket to the mark
+    elsif 'Y' == lid.name
+      # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  Should be around 10.8L
+      # if they calculate and install the chambers correctly.  This accounts for the
+      # clamped lid after they measure H.  The 0.2 accounts for the decrease in
+      # ht due to the lid groove.
+      return (Math::PI * 14.1**2 * (incubation.avg_height_cm - 0.2))
     else
       begin
         avg_height_cm = 19.5 unless avg_height_cm
