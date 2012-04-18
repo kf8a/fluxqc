@@ -1,8 +1,11 @@
 class Incubation < ActiveRecord::Base
   has_many :fluxes,  :dependent => :destroy
   has_many :measurements, :order => :vial
+  has_many :samples
   belongs_to :run
   belongs_to :lid
+
+  accepts_nested_attributes_for :samples
 
   NaN = (0.0/0.0)
 
@@ -32,10 +35,6 @@ class Incubation < ActiveRecord::Base
     end
   end
 
-  def lid_name
-    self.lid.try(:name)
-  end
-
   def co2
     flux('co2')
   end
@@ -52,8 +51,8 @@ class Incubation < ActiveRecord::Base
     fluxes.first.measurements.collect {|measurement| measurement.sample.vial }
   end
 
-  def samples
-    fluxes.first.measurements.collect(&:sample)
+  def update_samples
+    self.samples << fluxes.first.measurements.collect(&:sample)
   end
   
   def seconds

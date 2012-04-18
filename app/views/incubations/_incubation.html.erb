@@ -1,6 +1,6 @@
 <% samples = incubation.samples %>
 <% rows = samples.count + 1%>
-<%= f.simple_fields_for incubation, :defaults => {:label => false, :input_html => {:class=>'incubation-input'}}  do |incubation_field| %>
+<%= f.simple_fields_for incubation, :index => incubation.id, :defaults => {:label => false, :input_html => {:class=>'incubation-input'}}  do |incubation_field| %>
 <tr>
   <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
@@ -8,15 +8,13 @@
   <td rowspan=<%=rows%>><%= incubation_field.association :lid %>
   <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
 </tr>
-<% samples.each do |sample| %>
-  <%= incubation_field.simple_fields_for sample, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
+  <%= incubation_field.simple_fields_for samples, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
   <tr>
     <td><%= sample_field.input :vial %></td>
     <td><%= sample_field.input :seconds %> </td>
-    <td><%= sample.data(:n2o).first.try(:ppm) %></td>
-    <td><%= sample.data(:co2).first.try(:ppm) %></td>
-    <td><%= sample.data(:ch4).first.try(:ppm) %></td>
+    <td><%= sample_field.object.data(:n2o).first.try(:ppm) %></td>
+    <td><%= sample_field.object.data(:co2).first.try(:ppm) %></td>
+    <td><%= sample_field.object.data(:ch4).first.try(:ppm) %></td>
   </tr>
-<% end %>
 <% end %>
 <% end %>

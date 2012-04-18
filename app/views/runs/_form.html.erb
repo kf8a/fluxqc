@@ -15,6 +15,7 @@
 <%= f.button :submit , :class=>'btn btn-primary'%>
 </div>
 <table class='table table-condensed'>
+  <thead>
   <tr>
     <th>Treatment</th>
     <th>Replicate</th>
@@ -27,5 +28,27 @@
     <th>CO2 ppm</th>
     <th>CH4 ppm</th>
   </tr>
-  <%= render @run.incubations, :f => f %>
+</thead>
+<tbody>
+<%= f.simple_fields_for :incubations, :defaults => {:label => false, :input_html => {:class=>'incubation-input'}}  do |incubation_field| %>
+<% rows = 5 %> 
+<tr>
+  <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :chamber %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.association :lid %>
+  <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
+    <%= incubation_field.simple_fields_for :samples, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
+      <tr>
+    <td><%= sample_field.input :vial %></td>
+    <td><%= sample_field.input :seconds %> </td>
+    <td><%= sample_field.object.data(:n2o).first.try(:ppm) %></td>
+    <td><%= sample_field.object.data(:co2).first.try(:ppm) %></td>
+    <td><%= sample_field.object.data(:ch4).first.try(:ppm) %></td>
+    </tr>
+  <% end %>
+</tr>
+<% end %>
+</tbody>
+  <%# <%= render @run.incubations, :f => f %1> %>
 </table>

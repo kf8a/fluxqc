@@ -5,7 +5,7 @@ class Run < ActiveRecord::Base
   mount_uploader :setup_file, SetupUploader
   mount_uploader :data_file, DataUploader
 
-  accepts_nested_attributes_for :incubations
+  accepts_nested_attributes_for :incubations, :samples
 
   scope :by_state, ->(state){where(:workflow_state => state) }
 

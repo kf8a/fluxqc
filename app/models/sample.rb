@@ -2,12 +2,22 @@ class Sample < ActiveRecord::Base
   has_many :measurements
   has_many :standards
   belongs_to :run
+  belongs_to :incubation
+
+  attr :seconds
 
   # TODO need to do this before save
   before_save :make_uuid, :if => Proc.new {|object| object.uuid.nil? }
 
   def data(compound_name)
     measurements.by_compound(compound_name)
+  end
+
+  def seconds=(s)
+    measurements.each do |m|
+      m.seconds = s
+      m.save
+    end
   end
 
   def seconds
