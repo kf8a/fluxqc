@@ -25,7 +25,6 @@ class Incubation < ActiveRecord::Base
       return (Math::PI * 14.1**2 * (avg_height_cm - 0.2)/1000)
     else
       begin
-        avg_height_cm = 19.5 unless avg_height_cm
         ((avg_height_cm-(lid.height-1)) * lid.surface_area)/1000 + lid.volume
       rescue NoMethodError
         return NaN

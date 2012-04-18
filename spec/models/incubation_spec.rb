@@ -42,4 +42,22 @@ describe Incubation do
 
     end
   end
+
+  describe 'headspace calculation' do
+    before(:each) do
+      @incubation = Incubation.new
+      lid = Lid.new
+      lid.stub(:name).and_return('Y')
+      @incubation.lid = lid
+    end
+    it 'returns the right headspace for lid Y' do
+      @incubation.avg_height_cm = 19
+      @incubation.headspace.should be_within(0.1).of(11.74)
+    end
+    it 'uses the avg_height if given' do
+      @incubation.avg_height_cm = 123
+      @incubation.headspace.should be_within(0.1).of(76.69)
+      @incubation.avg_height_cm.should == 123
+    end
+  end
 end
