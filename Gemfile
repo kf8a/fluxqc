@@ -14,7 +14,6 @@ gem 'chronic'
 gem 'devise'
 #gem 'strong_parameters'
 
-gem 'best_in_place'
 gem 'uuid'
 
 gem 'resque', :require => "resque/server"

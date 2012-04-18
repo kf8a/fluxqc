@@ -19,11 +19,11 @@
         <a class="brand" href="#">FluxQC</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li class=<%= 'active' if @state == 'uploaded'%> ><%= link_to 'Uploaded', runs_url({:state => :uploaded}) %></li>
-            <li class=<%= 'active' if @state == 'accepted'%> ><%= link_to 'Accepted', runs_url({:state => :accepted}) %></li>
-            <li class=<%= 'active' if @state == 'approved'%> ><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
-            <li class=<%= 'active' if @state == 'published'%> ><%= link_to 'Published', runs_url({:state => :published}) %></li>
-            <li class=<%= 'active' if @state == 'rejected'%> ><%= link_to 'Rejected', runs_url({:state=>:rejected}) %></li>
+            <li <%="class= 'active'" if @state == 'uploaded'%> ><%= link_to 'Uploaded', runs_url({:state => :uploaded}) %></li>
+            <li <%="class= 'active'" if @state == 'accepted'%> ><%= link_to 'Accepted', runs_url({:state => :accepted}) %></li>
+            <li <%= "class='active'" if @state == 'approved'%> ><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
+            <li <%= "class= 'active'" if @state == 'published'%> ><%= link_to 'Published', runs_url({:state => :published}) %></li>
+            <li <%= "class= 'active'" if @state == 'rejected'%> ><%= link_to 'Rejected', runs_url({:state=>:rejected}) %></li>
           </ul>
         </div>
       </div>

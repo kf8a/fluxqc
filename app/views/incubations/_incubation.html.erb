@@ -1,16 +1,18 @@
 <% samples = incubation.samples %>
 <% rows = samples.count + 1%>
+<%= f.simple_fields_for incubation, :defaults => {:label => false, :input_html => {:class=>'incubation-input'}}  do |incubation_field| %>
 <tr>
-  <td rowspan=<%=rows%>><%= best_in_place incubation, :treatment %></td>
-  <td rowspan=<%=rows%>><%= best_in_place incubation, :replicate %></td>
-  <td rowspan=<%=rows%>><%= best_in_place incubation, :chamber %></td>
-  <td rowspan=<%=rows%>><%= best_in_place incubation, :lid_name %>
-  <td rowspan=<%=rows%>><%= best_in_place incubation, :soil_temperature %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :chamber %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :lid_name, :collection => Lid.all.collect {|a| a.name} %>
+  <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
 </tr>
+<% end %>
 <% samples.each do |sample| %>
   <tr>
-    <td><%= best_in_place sample, :vial %></td>
-    <td><%= best_in_place sample, :seconds %> </td>
+    <td><%= sample.vial %></td>
+    <td><%= sample.seconds %> </td>
     <td><%= sample.data(:n2o).first.try(:ppm) %></td>
     <td><%= sample.data(:co2).first.try(:ppm) %></td>
     <td><%= sample.data(:ch4).first.try(:ppm) %></td>

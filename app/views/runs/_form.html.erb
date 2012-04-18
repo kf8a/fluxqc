@@ -4,7 +4,6 @@
 <%= f.input :study %>
 <%= f.input :comment, :input_html => {  :rows => 5 } %>
 <%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
-</li>
 <%= f.input :setup_file %> 
 <%= f.hidden_field :setup_file_cache %>
 <%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.setup_file? %>
@@ -28,5 +27,5 @@
     <th>CO2 ppm</th>
     <th>CH4 ppm</th>
   </tr>
-  <%= render @run.incubations %>
+  <%= render @run.incubations, :f => f %>
 </table>
