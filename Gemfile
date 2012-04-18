@@ -14,10 +14,20 @@ gem 'chronic'
 gem 'devise'
 #gem 'strong_parameters'
 
+gem 'best_in_place'
 gem 'uuid'
 
 gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby'
+
+# Use unicorn as the web server
+gem 'unicorn'
+
+# Deploy with Capistrano
+gem 'capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,14 +40,6 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
-
-# Use unicorn as the web server
-gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano'
 
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
