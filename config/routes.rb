@@ -1,4 +1,5 @@
 Fluxqc::Application.routes.draw do
+
   resources :templates
 
   devise_for :users
@@ -20,6 +21,7 @@ Fluxqc::Application.routes.draw do
   resources :incubations 
   resources :fluxes
   resources :setups
+  resources :samples
 
   authenticated(:user) do
     mount Resque::Server, :at => "/resque"

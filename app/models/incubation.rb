@@ -32,6 +32,9 @@ class Incubation < ActiveRecord::Base
     end
   end
 
+  def lid_name
+    self.lid.try(:name)
+  end
 
   def co2
     flux('co2')

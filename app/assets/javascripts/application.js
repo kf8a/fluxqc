@@ -12,5 +12,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require d3
+//= require best_in_place
 //= require backbone/fluxqc
 //= require_tree .

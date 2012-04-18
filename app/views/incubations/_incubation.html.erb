@@ -1,14 +1,16 @@
 <% samples = incubation.samples %>
+<% rows = samples.count + 1%>
 <tr>
-  <td rowspan=<%=samples.count+1%>><%=incubation.treatment %></td>
-  <td rowspan=<%=samples.count+1%>><%= incubation.replicate %></td>
-  <td rowspan=<%=samples.count+1%>><%= incubation.chamber %></td>
-  <td rowspan=<%=samples.count+1%>><%= incubation.lid.try(:name) %></td>
+  <td rowspan=<%=rows%>><%= best_in_place incubation, :treatment %></td>
+  <td rowspan=<%=rows%>><%= best_in_place incubation, :replicate %></td>
+  <td rowspan=<%=rows%>><%= best_in_place incubation, :chamber %></td>
+  <td rowspan=<%=rows%>><%= best_in_place incubation, :lid_name %>
+  <td rowspan=<%=rows%>><%= best_in_place incubation, :soil_temperature %></td>
 </tr>
 <% samples.each do |sample| %>
   <tr>
-    <td><%= sample.vial %></td>
-    <td><%= sample.seconds %> </td>
+    <td><%= best_in_place sample, :vial %></td>
+    <td><%= best_in_place sample, :seconds %> </td>
     <td><%= sample.data(:n2o).first.try(:ppm) %></td>
     <td><%= sample.data(:co2).first.try(:ppm) %></td>
     <td><%= sample.data(:ch4).first.try(:ppm) %></td>
