@@ -5,16 +5,18 @@
   <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :chamber %></td>
-  <td rowspan=<%=rows%>><%= incubation_field.input :lid_name, :collection => Lid.all.collect {|a| a.name} %>
+  <td rowspan=<%=rows%>><%= incubation_field.association :lid %>
   <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
 </tr>
-<% end %>
 <% samples.each do |sample| %>
+  <%= incubation_field.simple_fields_for sample, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
   <tr>
-    <td><%= sample.vial %></td>
-    <td><%= sample.seconds %> </td>
+    <td><%= sample_field.input :vial %></td>
+    <td><%= sample_field.input :seconds %> </td>
     <td><%= sample.data(:n2o).first.try(:ppm) %></td>
     <td><%= sample.data(:co2).first.try(:ppm) %></td>
     <td><%= sample.data(:ch4).first.try(:ppm) %></td>
   </tr>
+<% end %>
+<% end %>
 <% end %>
