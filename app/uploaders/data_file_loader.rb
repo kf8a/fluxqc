@@ -7,7 +7,7 @@ class DataFileLoader
     run = Run.find(run_id)
     file_path = run.data_file.file.path
     samples = DataParser.parse(file_path)
-    
+
     samples.each do |s|
       sample = run.samples.where(:vial => s[:vial]).first
       if sample

@@ -12,7 +12,7 @@ class IncubationFactory
       ['n2o','co2','ch4'].each do |c|
         compound = Compound.find_by_name(c)
         flux = incubation.flux(c)
-        update_measurement(flux, input, compound, run)
+        update_measurement(flux, input, compound, run, incubation)
       end
     else
       incubation = Incubation.new
@@ -29,17 +29,18 @@ class IncubationFactory
         flux = Flux.new
         incubation.fluxes << flux
 
-        update_measurement(flux, input, compound, run)
+        update_measurement(flux, input, compound, run, incubation)
       end
       incubation.save
     end
     incubation
   end
 
-  def self.update_sample(measurement, run, vial)
+  def self.update_sample(measurement, run, vial,incubation)
     sample = run.samples.where(:vial => vial).first
     unless sample
       sample = Sample.new(:vial => vial)
+      sample.incubation = incubation
       sample.save
       run.samples << sample
     end
@@ -47,10 +48,10 @@ class IncubationFactory
     measurement.save
   end
 
-  def self.update_measurement(flux,input, compound, run)
+  def self.update_measurement(flux,input, compound, run, incubation)
     vial = input[:vial]
     measurement = Measurement.new(:seconds => input[:seconds], :compound => compound, :vial=>vial)
     flux.measurements << measurement
-    update_sample(measurement, run, vial)
+    update_sample(measurement, run, vial,incubation)
   end
 end

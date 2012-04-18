@@ -10,7 +10,7 @@ describe DataFileLoader do
     FactoryGirl.create(:compound, :name=>'n2o')
     FactoryGirl.create(:compound, :name=>'ch4')
 
-    run = FactoryGirl.create :run, :data_file => fixture_file_upload('/result.txt'), :setup_file => fixture_file_upload('/setup_test.csv')
+    run = FactoryGirl.create :run, :data_file => fixture_file_upload('/2011_results.csv'), :setup_file => fixture_file_upload('/setup_test.csv')
     SetupFileLoader.perform(run.id).should_not be_false
     DataFileLoader.perform(run.id).should_not be_false
     @run = Run.find(run.id)
@@ -30,7 +30,8 @@ describe DataFileLoader do
       @incubation.flux('ch4').measurements.first.ppm.should == 1.854
     end
     it 'has a flux' do
-      @incubation.flux('ch4').should == 34
+      @incubation.flux('ch4').should_not be_nil
+      @incubation.flux('ch4').value.should_not be_nil
     end
 
   end
