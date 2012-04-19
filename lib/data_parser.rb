@@ -32,11 +32,13 @@ class DataParser
     vials = {}
     if chemstation
       lines.each do |row|
-        vials[row[1]] = {:vial=>row[3], :ch4=>row[7].to_f, :co2=>row[11].to_f, :n2o=>row[15].to_f}
+        vials[row[1]] = {:vial=>row[3], :ch4=>{:area => row[7].to_f}, 
+          :co2=>{:area => row[11].to_f}, :n2o=>{:area => row[15].to_f}}
       end
     else
       lines.each do |row|
-        vials[row[0]] = {:vial=>row[0], :n2o=>row[1].to_f, :co2=>row[2].to_f, :ch4=>row[3].to_f}
+        vials[row[0]] = {:vial=>row[0], :n2o=>{:ppm => row[1].to_f}, 
+          :co2=>{:ppm => row[2].to_f}, :ch4=>{:ppm => row[3].to_f}}
       end
     end
     vials.values

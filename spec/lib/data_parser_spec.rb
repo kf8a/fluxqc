@@ -21,13 +21,13 @@ describe DataParser do
         @row[:vial].should == '4'
       end
       it 'finds the right ch4 value' do
-        @row[:ch4].should == 27.806454
+        @row[:ch4][:area].should == 27.806454
       end
       it 'finds the right co2 value' do
-        @row[:co2].should == 117673.960937
+        @row[:co2][:area].should == 117673.960937
       end
       it 'finds the right n2o value' do
-        @row[:n2o].should == 392.561584
+        @row[:n2o][:area].should == 392.561584
       end
     end
 
@@ -39,13 +39,13 @@ describe DataParser do
         @row[:vial].should == '15b'
       end
       it 'finds the right ch4 value' do
-        @row[:ch4].should == 23.846161 
+        @row[:ch4][:area].should == 23.846161 
       end
       it 'finds the right co2 value' do
-        @row[:co2].should == 55572.550781
+        @row[:co2][:area].should == 55572.550781
       end
       it 'finds the right n2o value' do
-        @row[:n2o].should == 590.933777
+        @row[:n2o][:area].should == 590.933777
       end
     end
   end

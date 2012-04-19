@@ -6,14 +6,16 @@ class DataFileLoader
   def self.perform(run_id)
     run = Run.find(run_id)
     file_path = run.data_file.file.path
-    samples = DataParser.parse(file_path)
+    vials = DataParser.parse(file_path)
 
-    samples.each do |s|
-      sample = run.samples.where(:vial => s[:vial]).first
+    vials.each do |vial|
+      sample = run.samples.where(:vial => vial[:vial]).first
       if sample
         ['co2','n2o','ch4'].each do |c|
           measurement = sample.measurements.by_compound(c).first
-          measurement.ppm = s[c.to_sym]
+          value = vial[c.to_sym]
+          measurement.ppm = value[:ppm]
+          measurement.area = value[:area]
           measurement.save
         end
       end
