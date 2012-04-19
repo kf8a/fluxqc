@@ -1,6 +1,5 @@
 class Sample < ActiveRecord::Base
   has_many :measurements
-  has_many :standards
   belongs_to :run
   belongs_to :incubation
 

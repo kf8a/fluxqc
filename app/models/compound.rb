@@ -1,6 +1,5 @@
 class Compound < ActiveRecord::Base
   has_many :measurements
-  has_many :standards
 
   validates_uniqueness_of :name
 end
