@@ -9,6 +9,8 @@ class Run < ActiveRecord::Base
 
   scope :by_state, ->(state){where(:workflow_state => state) }
 
+  after_save :recompute_fluxes
+
   include Workflow
   workflow do
     state :uploaded do
@@ -46,6 +48,15 @@ class Run < ActiveRecord::Base
 
   def upload
     self.uploaded = true
+  end
+
+  def recompute_fluxes
+    incubations.each do |i|
+      i.fluxes.each do |f|
+        f.flux
+        f.save
+      end
+    end
   end
 end
 # == Schema Information

@@ -11,6 +11,12 @@ describe Run do
     run.total_fluxes.should == 0
   end
 
+  it 'recomputes the fluxes' do
+    run.respond_to?('recompute_fluxes').should be_true
+    run.recompute_fluxes # just to run through it
+    # TODO figure out what the assertion is here
+  end
+
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
@@ -75,4 +81,5 @@ describe Run do
       end
     end
   end
+
 end
