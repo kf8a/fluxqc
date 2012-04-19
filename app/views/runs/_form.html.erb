@@ -40,7 +40,7 @@
   <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
     <%= incubation_field.simple_fields_for :samples, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
       <tr>
-    <td><%= sample_field.input :vial %></td>
+    <td><%= sample_field.object.vial %></td>
     <td><%= sample_field.input :seconds %> </td>
     <td><%= sample_field.object.data(:n2o).first.try(:ppm) %></td>
     <td><%= sample_field.object.data(:co2).first.try(:ppm) %></td>
