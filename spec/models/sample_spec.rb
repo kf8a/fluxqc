@@ -16,5 +16,11 @@ describe Sample do
     sample.uuid.should_not be_nil
   end
 
-  it 'keeps the sampe uuid'
+  it 'keeps the sampe uuid' do
+    uuid = sample.uuid
+    sample.save
+    sample.uuid.should == uuid
+    sample.save
+    sample.uuid.should == uuid
+  end
 end

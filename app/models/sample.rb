@@ -25,7 +25,9 @@ class Sample < ActiveRecord::Base
 
   private
   def make_uuid
-    self.uuid = UUID.new.generate
+    if self.uuid.nil?
+      self.uuid = UUID.new.generate
+    end
   end
 end
 # == Schema Information
