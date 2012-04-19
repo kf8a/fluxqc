@@ -57,6 +57,11 @@ describe DataFileLoader do
     it 'updates the measurement with the ch4 area' do
       @incubation.flux('ch4').measurements.first.area.should == 27.884953
     end
+    
+    it 'keeps standards and check standards' do
+      @run.standards('co2').measurements.first.area.should == 39
+      @run.standards('co2').measurements.first.ppm.should = 4
+    end
   end
 
 end

@@ -38,6 +38,11 @@ class Run < ActiveRecord::Base
     incubations.count * 3
   end
 
+  def standards(compound)
+    # samples where the measurements are standards
+    samples.where('is_standard = true')
+  end
+
   def publish
     self.released = true
   end
