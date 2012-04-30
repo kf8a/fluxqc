@@ -2,6 +2,7 @@ class Measurement < ActiveRecord::Base
   belongs_to :sample
   belongs_to :flux
   belongs_to :compound
+  belongs_to :standard
 
   scope :by_compound, 
     lambda {|name| joins(:compound).where(:compounds => {:name => name}).readonly(false)}

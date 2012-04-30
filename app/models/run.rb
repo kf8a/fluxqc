@@ -1,6 +1,7 @@
 class Run < ActiveRecord::Base
   has_many :incubations,  :dependent => :destroy, :order => 'treatment, replicate'
   has_many :samples, :dependent => :destroy
+  has_many :standards
 
   mount_uploader :setup_file, SetupUploader
   mount_uploader :data_file, DataUploader
@@ -36,11 +37,6 @@ class Run < ActiveRecord::Base
 
   def total_fluxes
     incubations.count * 3
-  end
-
-  def standards(compound)
-    # samples where the measurements are standards
-    samples.where('is_standard = true')
   end
 
   def publish

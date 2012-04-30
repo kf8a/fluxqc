@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419140545) do
+ActiveRecord::Schema.define(:version => 20120419192715) do
 
   create_table "campaign_plots", :force => true do |t|
     t.integer  "plot_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20120419140545) do
     t.datetime "ending_time"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "standard_id"
   end
 
   create_table "memberships", :force => true do |t|
@@ -120,17 +121,25 @@ ActiveRecord::Schema.define(:version => 20120419140545) do
     t.string   "vial"
     t.integer  "run_id"
     t.datetime "sampled_at"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "uuid"
     t.integer  "incubation_id"
-    t.boolean  "is_standard",   :default => false
   end
 
   create_table "setups", :force => true do |t|
     t.integer  "template_id"
     t.date     "sample_date"
     t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "standards", :force => true do |t|
+    t.integer  "run_id"
+    t.integer  "compound_id"
+    t.float    "slope"
+    t.float    "intercept"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

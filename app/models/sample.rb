@@ -3,7 +3,9 @@ class Sample < ActiveRecord::Base
   belongs_to :run
   belongs_to :incubation
 
-  attr :seconds
+  attr_reader :seconds
+
+  scope :with_compound, lambda {|compound| where(:compound => compound) }
 
   # TODO need to do this before save
   before_save :make_uuid, :if => Proc.new {|object| object.uuid.nil? }
