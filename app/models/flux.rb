@@ -1,5 +1,7 @@
-# This file represents a flux, that is a series of measuremnemnts of the ssame gas over time. The linear regression slope of the
-# meeasurements is the computeed flux. It uses the fitter class to do it's work.
+# This file represents a flux, that is a series of measuremnemnts of the
+# same gas over time. The linear regression slope of the
+# meeasurements is the computeed flux.
+# It uses the fitter class to do it's work.
 #
 require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
@@ -9,18 +11,27 @@ class Flux < ActiveRecord::Base
 
   attr_reader :flux, :muliplier, :data
 
-  scope :co2, includes(:measurements => :compound).where('compounds.name' => 'co2')
-  scope :n2o, includes(:measurements => :compound).where('compounds.name' => 'n2o') 
-  scope :ch4, includes(:measurements => :compound).where('compounds.name' => 'ch4')
+  def co2
+    includes(:measurements => :compound).where('compounds.name' => 'co2')
+  end
 
+  def n2o
+  includes(:measurements => :compound).where('compounds.name' => 'n2o')
+  end
+
+  def ch4
+    includes(:measurements => :compound).where('compounds.name' => 'ch4')
+  end
   def compound
     measurements.first.compound
   end
 
-  # Collect the measurements associate with this flux into a hash for display as jason
+  # Collect the measurements associate with this flux into a hash
+  # for display as jason
   def data
     measurements.collect do |measurement|
-      {id:measurement.id, key:measurement.seconds, value:measurement.ppm, deleted:measurement.excluded}
+      {id:measurement.id, key:measurement.seconds,
+        value:measurement.ppm, deleted:measurement.excluded}
     end
   end
 

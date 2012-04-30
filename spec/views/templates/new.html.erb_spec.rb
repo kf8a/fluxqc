@@ -13,7 +13,8 @@ describe "templates/new" do
   it "renders new template form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
+    # Run the generator again with the --webrat flag
+    # if you want to use webrat matchers
     assert_select "form", :action => templates_path, :method => "post" do
       assert_select "input#template_name", :name => "template[name]"
       assert_select "input#template_study", :name => "template[study]"

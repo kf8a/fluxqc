@@ -1,7 +1,7 @@
 #require File.expand_path("../../../app/uploaders/setup_file_loader.rb",__FILE__)
 require 'spec_helper'
 
-# class Run 
+# class Run
 # end
 
 # class SetupParser
@@ -22,7 +22,7 @@ describe SetupFileLoader do
   it 'creates incubations' do
     @run.incubations.size.should == 37
   end
-  
+
   it 'creates samples' do
     @run.samples.size.should == 144
   end

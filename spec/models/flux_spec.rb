@@ -32,7 +32,7 @@ describe Flux do
       @m1 = FactoryGirl.create :measurement
       @m2 = FactoryGirl.create :measurement
       flux.measurements << @m1
-      flux.measurements << @m2 
+      flux.measurements << @m2
       flux.stub(:headspace).and_return(1)
       flux.stub(:mol_weight).and_return(1)
       flux.stub(:surface_area).and_return(1)
@@ -51,7 +51,8 @@ describe Flux do
       flux.measurements.first.excluded.should be_true
     end
     it 'updates the flux' do
-      flux.data = [{id:@m1.id, key:1, value:1, deleted:false}, {id:@m2.id, key:2,value:2,deleted:false}]
+      flux.data = [{id:@m1.id, key:1, value:1, deleted:false},
+                    {id:@m2.id, key:2,value:2,deleted:false}]
       flux.value.should == 6428.571428571429
     end
   end

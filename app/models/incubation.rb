@@ -15,16 +15,18 @@ class Incubation < ActiveRecord::Base
 
   def headspace
     return NaN unless lid
-    
-    if 'Z' == lid.name 
-      # compute gas bucket volume 
+
+    if 'Z' == lid.name
+      # compute gas bucket volume
       # divide by 1000 to convert from cm^3 to liters
-      return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 # one cm from the top of the bucket to the mark
+      #
+      # There is one cm from the top of the bucket to the mark
+      return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 
     elsif 'Y' == lid.name
-      # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  Should be around 10.8L
-      # if they calculate and install the chambers correctly.  This accounts for the
-      # clamped lid after they measure H.  The 0.2 accounts for the decrease in
-      # ht due to the lid groove.
+      # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  
+      # It should be around 10.8L if they install the chambers correctly.  
+      # This accounts for the clamped lid after they measure H.  
+      # The 0.2 accounts for the decrease in ht due to the lid groove.
       return (Math::PI * 14.1**2 * (avg_height_cm - 0.2)/1000)
     else
       begin
@@ -54,7 +56,7 @@ class Incubation < ActiveRecord::Base
   def update_samples
     self.samples << fluxes.first.measurements.collect(&:sample)
   end
-  
+
   def seconds
     fluxes.first.measurements.map(&:seconds)
   end

@@ -78,7 +78,7 @@ describe SetupParser do
         @result[5][:soil_temperature].should == 19
       end
       it 'has the right seconds' do
-        @result[5][:seconds].should == 20 
+        @result[5][:seconds].should == 20
       end
     end
   end
@@ -155,7 +155,7 @@ describe SetupParser do
   end
 
   describe 'parsing a GLBRC scaleup setup file' do
-  
+
     before do
       file = File.expand_path("../../fixtures/lux_setup.csv", __FILE__)
       File.exists?(file).should be_true
@@ -211,7 +211,7 @@ describe SetupParser do
         @result[1][:height].should == [19,19,18,18]
       end
       it 'is the right soil temperature' do
-        @result[1][:soil_temperature].should == 9.5 
+        @result[1][:soil_temperature].should == 9.5
       end
       it 'is the right time' do
         @result[1][:seconds].should == 15.0

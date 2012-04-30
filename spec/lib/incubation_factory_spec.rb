@@ -13,9 +13,9 @@ describe IncubationFactory do
     @run = FactoryGirl.create :run
 
     @incubation = IncubationFactory.create(@run.id,
-      {:sample_date => '2011-10-18', 
+      {:sample_date => '2011-10-18',
         :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'1',
-        :lid=>'C', :height =>[18, 19.5, 19, 20.5], 
+        :lid=>'C', :height =>[18, 19.5, 19, 20.5],
         :soil_temperature => 18.5,
         :seconds => 0.0, :comments => nil})
   end
@@ -66,9 +66,9 @@ describe IncubationFactory do
       @incubation.save
       @existing = @incubation
       @incubation = IncubationFactory.create(@run.id,
-        {:sample_date => '2011-10-18', 
+        {:sample_date => '2011-10-18',
           :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',
-          :lid=>'C', :height =>[18, 19.5, 19, 20.5], 
+          :lid=>'C', :height =>[18, 19.5, 19, 20.5],
           :soil_temperature => 18.5,
           :seconds => 20, :comments => nil})
     end
@@ -90,9 +90,9 @@ describe IncubationFactory do
       @existing = @incubation
       run = FactoryGirl.create :run 
       @incubation = IncubationFactory.create(run.id,
-        {:sample_date => '2011-10-18', 
+        {:sample_date => '2011-10-18',
           :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',
-          :lid=>'C', :height =>[18, 19.5, 19, 20.5], 
+          :lid=>'C', :height =>[18, 19.5, 19, 20.5],
           :soil_temperature => 18.5,
           :seconds => 20, :comments => nil})
     end

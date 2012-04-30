@@ -12,7 +12,7 @@ describe DataParser do
     it 'finds the correct number of samples' do
       @result.size.should == 304
     end
-    
+
     describe 'row 17' do
       before do
         @row = @result[17]
@@ -39,7 +39,7 @@ describe DataParser do
         @row[:vial].should == '15b'
       end
       it 'finds the right ch4 value' do
-        @row[:ch4][:area].should == 23.846161 
+        @row[:ch4][:area].should == 23.846161
       end
       it 'finds the right co2 value' do
         @row[:co2][:area].should == 55572.550781
