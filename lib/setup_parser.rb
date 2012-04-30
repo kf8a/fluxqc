@@ -19,7 +19,7 @@ class SetupParser
     lines = CSV::readlines(file)
     row = lines.shift
     title = row[0]
-    2.times { lines.shift } # remove the header limes TODO this is different for GLBRC
+    2.times { lines.shift } # remove the header limes
     row = lines.shift
     sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
     lines.shift

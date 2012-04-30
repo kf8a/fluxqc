@@ -1,5 +1,11 @@
 # encoding: utf-8
 require 'csv'
+
+#TODO what happens if a data file is uploaded before a setup is created
+#
+# The data parser parses the data files that come from the GC.
+# It uses the vial number to match up the data with the previously created 
+# incubations and samples from the setup file.
 class DataParser
 
   def self.parse(file_name)
