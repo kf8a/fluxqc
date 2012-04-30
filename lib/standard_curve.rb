@@ -13,7 +13,8 @@ class StandardCurve
     samples = sample_array
   end
 
-  # Recomputes the standard curve for all of the compounds in the samples supplied
+  # Recomputes the standard curve for all of the compounds
+  # using the samples supplied
   def standardize
     compounds = samples.collect do |s|
       s.measurements.collect {|m| m.compound }
@@ -27,7 +28,8 @@ class StandardCurve
     end
   end
 
-  # Takes measurement object and returns the ppm based on the current standard curve
+  # Takes measurement object and returns the ppm
+  # based on the current standard curve
   def ppm(measurement)
 
   end

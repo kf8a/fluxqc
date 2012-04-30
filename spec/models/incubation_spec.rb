@@ -16,8 +16,12 @@ describe Incubation do
       n2o = FactoryGirl.create(:compound, :name=>'n2o')
 
       sample          = FactoryGirl.create(:sample)
-      co2_measurement = FactoryGirl.create(:measurement, :compound => co2, :sample => sample)
-      n2o_measurement = FactoryGirl.create(:measurement, :compound => n2o, :sample => sample)
+      co2_measurement = FactoryGirl.create :measurement,
+                                           :compound => co2,
+                                           :sample => sample
+      n2o_measurement = FactoryGirl.create :measurement,
+                                           :compound => n2o,
+                                           :sample => sample
 
       @co2_flux = Flux.new(:measurements => [co2_measurement])
       @n2o_flux = Flux.new(:measurements => [n2o_measurement])
