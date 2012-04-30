@@ -12,9 +12,13 @@ describe SetupFileLoader do
   include ActionDispatch::TestProcess
 
   before do
-    ['co2','n2o','ch4'].collect { |name| FactoryGirl.create(:compound, :name=>name)}
+    ['co2','n2o','ch4'].collect do |name|
+      FactoryGirl.create(:compound, :name=>name)
+    end
 
-    run = FactoryGirl.create :run, :setup_file => fixture_file_upload('/setup_test.csv')
+    run = FactoryGirl.create :run,
+      :setup_file => fixture_file_upload('/setup_test.csv')
+
     SetupFileLoader.perform(run.id).should_not be_false
     @run = Run.find(run.id)
   end
@@ -28,8 +32,14 @@ describe SetupFileLoader do
   end
 
   it 'adds compounds to all of the measurements' do
-    @run.samples.collect {|s| s.measurements.collect {|m| p s unless m.compound.present? } }
-    @run.samples.collect {|s| s.measurements.collect {|m| m.compound.present? } }.flatten.should_not include(false)
+    @run.samples.collect do |s|
+      s.measurements.collect {|m| p s unless m.compound.present? }
+    end
+
+    samples = @run.samples.collect do |s|
+      s.measurements.collect {|m| m.compound.present? }
+    end
+    samples.flatten.should_not include(false)
   end
 
   it 'has 4 vials for the first incubation' do
