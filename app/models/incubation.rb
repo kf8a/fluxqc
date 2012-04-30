@@ -1,3 +1,9 @@
+# An incubation is the period during which the chamber is closed
+# The gas accumulating in the chamber during the incubation
+# is used to compute the flux of the gas escaping
+# into the atmosphere
+#
+# Incubations are part of run and are specific to a particular plot
 class Incubation < ActiveRecord::Base
   has_many :fluxes,  :dependent => :destroy
   has_many :measurements, :order => :vial
