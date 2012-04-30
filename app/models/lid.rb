@@ -1,3 +1,6 @@
+# This represent the chamber lids used during the incubation
+# Different lids are used for different studies and at different times
+# The lid is indicated in the setup of the run
 class Lid < ActiveRecord::Base
   has_many :incubations
 

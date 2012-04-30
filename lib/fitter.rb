@@ -1,3 +1,6 @@
+# The Fitter class does a linear regression on the flux object
+# it gets used by fluxes to compute the flux value.
+# Fluxes pass themselvs to the Fitter
 class Fitter
   attr_accessor :data
 

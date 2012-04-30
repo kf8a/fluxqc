@@ -1,3 +1,5 @@
+# The Compound class represents the analyte that is of interest
+# It is currently N2O, CO2, and CH4.
 class Compound < ActiveRecord::Base
   has_many :measurements
   has_many :standards

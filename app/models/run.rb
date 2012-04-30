@@ -1,3 +1,7 @@
+# The Run class is the root class of the system.
+# It holds references to incubations and standards.
+# A run represents one sampling time. It consists of all of the samples
+# taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
   has_many :incubations,  :dependent => :destroy, :order => 'treatment, replicate'
   has_many :samples, :dependent => :destroy
