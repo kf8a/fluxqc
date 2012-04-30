@@ -3,7 +3,8 @@
 # A run represents one sampling time. It consists of all of the samples
 # taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
-  has_many :incubations,  :dependent => :destroy, :order => 'treatment, replicate'
+  has_many :incubations,  :dependent => :destroy,
+    :order => 'treatment, replicate'
   has_many :samples, :dependent => :destroy
   has_many :standards
 
@@ -46,7 +47,7 @@ class Run < ActiveRecord::Base
   def publish
     self.released = true
   end
-  
+
   def unpublish
     self.released = false
   end

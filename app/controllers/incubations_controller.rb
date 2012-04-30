@@ -16,7 +16,7 @@ class IncubationsController < ApplicationController
 
   def update
     incubation = Incubation.find(params[:id])
-    
+
     if incubation.update_attributes(params[:incubation])
       flash[:notice] = 'Incubation was successfully updated'
     end

@@ -9,7 +9,7 @@ describe Incubation do
   it 'has some headspace' do
     incubation.respond_to?(:headspace).should be_true
   end
-  
+
   describe 'an incubation with fluxes' do
     before(:each) do
       co2 = FactoryGirl.create(:compound, :name=>'co2')

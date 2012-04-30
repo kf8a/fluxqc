@@ -26,7 +26,7 @@ class Fitter
   end
 
   def linear_fit
-    sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
+    sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
 
     return([ [], [] ]) if data.length == 0
 
@@ -43,7 +43,7 @@ class Fitter
       sum_xy += x*y
       count  += 1
     end
-    
+
     return ({:slope=>NaN, :offset=>NaN, :r2=>NaN}) if count == 0
 
     m = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)

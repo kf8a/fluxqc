@@ -46,7 +46,7 @@ describe RunsController do
   end
 
   describe ':POST create' do
-    describe 'with a valid object' do 
+    describe 'with a valid object' do
      it 'redirects to show' do
        Run.any_instance.stub(:id).and_return(1)
        post :create , :run => {:name => 'test'}
@@ -70,7 +70,7 @@ describe RunsController do
     end
   end
 
-  describe 'PUT update' do 
+  describe 'PUT update' do
     describe 'with a valid object' do
       it 'redirects to show' do
        Run.any_instance.stub(:save).and_return(true)
@@ -83,7 +83,7 @@ describe RunsController do
       it 'redirects back to new' do
         Run.any_instance.stub(:save).and_return(false)
         Run.any_instance.stub(:id).and_return(1)
-        post :update, :id=>1 
+        post :update, :id=>1
         response.should redirect_to(edit_run_path(assigns(:run)))
       end
     end

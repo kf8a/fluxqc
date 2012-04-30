@@ -46,11 +46,11 @@ class SetupParser
         comments  = nil if comments == '-'
       end
 
-      {:run_name => title, :sample_date => sample_date, 
+      {:run_name => title, :sample_date => sample_date,
         :treatment => treatment, :replicate => replicate,
         :chamber => chamber, :vial => vial,
         :lid => lid, :height => height,
-        :soil_temperature => soil_temp, 
+        :soil_temperature => soil_temp,
         :seconds => seconds, :comments => comments }
     end
   end

@@ -21,7 +21,7 @@ class Incubation < ActiveRecord::Base
       # divide by 1000 to convert from cm^3 to liters
       #
       # There is one cm from the top of the bucket to the mark
-      return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000 
+      return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000
     elsif 'Y' == lid.name
       # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  
       # It should be around 10.8L if they install the chambers correctly.  

@@ -11,17 +11,18 @@ class Flux < ActiveRecord::Base
 
   attr_reader :flux, :muliplier, :data
 
-  def co2
+  def self.co2
     includes(:measurements => :compound).where('compounds.name' => 'co2')
   end
 
-  def n2o
+  def self.n2o
   includes(:measurements => :compound).where('compounds.name' => 'n2o')
   end
 
-  def ch4
+  def self.ch4
     includes(:measurements => :compound).where('compounds.name' => 'ch4')
   end
+
   def compound
     measurements.first.compound
   end

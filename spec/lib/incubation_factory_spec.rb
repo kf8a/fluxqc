@@ -88,7 +88,7 @@ describe IncubationFactory do
     before do
       @incubation.save
       @existing = @incubation
-      run = FactoryGirl.create :run 
+      run = FactoryGirl.create :run
       @incubation = IncubationFactory.create(run.id,
         {:sample_date => '2011-10-18',
           :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',

@@ -13,7 +13,7 @@ describe DataFileLoader do
 
   # describe '2011 style data file' do
   #   before do
-  #     run = FactoryGirl.create :run, 
+  #     run = FactoryGirl.create :run,
   #                               :data_file => fixture_file_upload('/2011_results.csv'),
   #                               :setup_file => fixture_file_upload('/setup_test.csv')
   #     SetupFileLoader.perform(run.id).should_not be_false

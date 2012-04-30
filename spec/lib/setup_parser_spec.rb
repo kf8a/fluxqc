@@ -143,7 +143,7 @@ describe SetupParser do
         @result[1][:soil_temperature].should == 8
       end
       it 'is the right time' do
-        @result[1][:seconds].should == 18 
+        @result[1][:seconds].should == 18
       end
       it 'is the right chamber' do
         @result[1][:chamber].should == "1"

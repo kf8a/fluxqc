@@ -11,7 +11,7 @@ describe Sample do
     sample.measurements << measurement
     sample.data('co2').first == measurement
   end
-  
+
   it 'has a uuid' do
     sample.uuid.should_not be_nil
   end
