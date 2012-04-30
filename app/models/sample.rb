@@ -1,3 +1,7 @@
+# Represents a vial of gas collected.
+# The vial is collected at a particular time after the start of the incubation
+# and will be analysed for one or more compounds
+# the data from several samples are used to compute the flux
 class Sample < ActiveRecord::Base
   has_many :measurements
   belongs_to :run

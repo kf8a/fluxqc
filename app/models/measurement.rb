@@ -1,3 +1,6 @@
+# Measurement represents a measurement that is made on a sample
+# For example in a particular sample vial a measurement might
+# be made for CO2 and another measurement for N2O.
 class Measurement < ActiveRecord::Base
   belongs_to :sample
   belongs_to :flux

@@ -1,6 +1,9 @@
 require 'chronic'
 require 'csv'
 
+# The SetupParser parses the run setup file and returns the
+# results as a hash. It is called by the setup parser loader
+# when a setup file is uplaoded.
 class SetupParser
 
   # convenience method to call the parsers depending on file type

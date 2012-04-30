@@ -1,3 +1,6 @@
+# A user that can log into the system
+# Users are created from the console as there are only a few
+# and users should not be able to sign up
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable,
