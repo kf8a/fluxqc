@@ -2,6 +2,3 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
-$ -> 
-  window.myApp = new Flux.Routers.FluxesRouter
-  Backbone.history.start({pushState: true, root: '/runs/' + window.run_id}) 
