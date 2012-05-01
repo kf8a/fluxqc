@@ -88,7 +88,10 @@ class RunsController < ApplicationController
   end
 
   def standards
-    run = Run.find(params[:id])
+    @run = Run.find(params[:id])
+    @state = @run.current_state.name.to_s
+
+    @standard_curves = @run.standard_curves
   end
 
   def accept
