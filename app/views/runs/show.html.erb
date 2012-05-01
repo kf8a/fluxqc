@@ -12,9 +12,10 @@
 
 <script>
   INITIAL_DATA = <%=raw @incubations.to_json(:methods=>['co2','n2o','ch4']) %>;
+  window.run_id = <%= @run.id %>
   $(function() {
     window.myApp = new Flux.Routers.FluxesRouter;
-    Backbone.history.start({pushState: true, root: '/runs/' + <%= @run.id %>});
+    Backbone.history.start({pushState: true, root: '/runs/' + window.run_id});
   });
 </script>
 

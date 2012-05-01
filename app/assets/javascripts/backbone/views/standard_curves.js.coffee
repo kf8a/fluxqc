@@ -12,13 +12,13 @@ class Flux.Views.StandardCurveView extends Backbone.View
     $(@el).empty()
     $(@el).append(@template(@model.toJSON()))
 
-    view = new Flux.Views.FluxView(model: @model.n2o_model)
+    view = new Flux.Views.StandardCurveView(model: @model.n2o_model)
     $(@el).append(view.render().el)
 
-    view = new Flux.Views.FluxView(model: @model.co2_model)
+    view = new Flux.Views.StandardCurveView(model: @model.co2_model)
     $(@el).append(view.render().el)
 
-    view = new Flux.Views.FluxView(model: @model.ch4_model)
+    view = new Flux.Views.StandardCurveView(model: @model.ch4_model)
     $(@el).append(view.render().el)
     @
 

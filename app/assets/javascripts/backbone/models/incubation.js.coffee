@@ -16,4 +16,4 @@ class Flux.Models.Incubation extends Backbone.Model
   
 class Flux.Collections.IncubationsCollection extends Backbone.Collection
   model: Flux.Models.Incubation
-  url: '/runs/' + window.run_id
+  # url: '/runs/' + window.run_id
