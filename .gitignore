@@ -9,3 +9,4 @@ doc/*.dot
 doc/*.pdf
 .~lock*
 redis.txt
+data/*
