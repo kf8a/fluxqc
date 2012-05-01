@@ -1,6 +1,6 @@
-class CreateStandards < ActiveRecord::Migration
+class CreateStandardCurves < ActiveRecord::Migration
   def change
-    create_table  :standards do |t|
+    create_table  :standard_curves do |t|
       t.integer   :run_id
       t.integer   :compound_id
       t.float     :slope
@@ -8,7 +8,5 @@ class CreateStandards < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_column :measurements, :standard_id, :integer
   end
 end

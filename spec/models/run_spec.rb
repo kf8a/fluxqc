@@ -6,7 +6,7 @@ describe Run do
 
   it {should have_many :incubations}
   it {should have_many :samples}
-  it {should have_many :standards}
+  it {should have_many :standard_curves}
 
   it 'reports the total number of fluxes' do
     run.total_fluxes.should == 0
