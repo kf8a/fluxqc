@@ -87,11 +87,11 @@ class RunsController < ApplicationController
     redirect_to runs_path(:state=>'rejected')
   end
 
-  def standards
-    @run = Run.find(params[:id])
-    @state = @run.current_state.name.to_s
+  def standard_curves
+    run = Run.find(params[:id])
 
-    @standard_curves = @run.standard_curves
+    standard_curves = run.standard_curves
+    render :json => standard_curves.to_json()
   end
 
   def accept

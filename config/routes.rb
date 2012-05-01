@@ -7,6 +7,7 @@ Fluxqc::Application.routes.draw do
   resources :runs do
     member do
       get  'gcinput'
+      get  'standard_curves'
       post 'reject'
       post 'accept'
       post 'approve'
