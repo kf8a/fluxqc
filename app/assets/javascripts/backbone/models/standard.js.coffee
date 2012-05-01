@@ -1,4 +1,4 @@
-class Fluxqc.Models.Standard extends Backbone.Model
+class Flux.Models.Standard extends Backbone.Model
   paramRoot: 'standard'
 
   defaults:
@@ -6,6 +6,6 @@ class Fluxqc.Models.Standard extends Backbone.Model
     data:     null
     compound: null
 
-class Fluxqc.Collections.StandardsCollection extends Backbone.Collection
-  model: Fluxqc.Models.Standard
+class Flux.Collections.StandardsCollection extends Backbone.Collection
+  model: Flux.Models.Standard
   url: '/standards'

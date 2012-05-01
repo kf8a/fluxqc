@@ -21,6 +21,7 @@ Fluxqc::Application.routes.draw do
 
   resources :incubations 
   resources :fluxes
+  resources :standard_curves
   resources :setups
   resources :samples
 
