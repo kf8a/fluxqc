@@ -87,6 +87,10 @@ class RunsController < ApplicationController
     redirect_to runs_path(:state=>'rejected')
   end
 
+  def standards
+    run = Run.find(params[:id])
+  end
+
   def accept
     run = Run.find(params[:id])
     run.accept!

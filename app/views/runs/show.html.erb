@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
-  <li><a href='#'>Standards</a></li>
-  <li class="active"><a href='#'>Samples</a></li>
+  <li><%= link_to 'Standards', standards_run_path(@run) %></li>
+  <li class='active'><%= link_to 'Samples', run_path(@run) %></li>
 </ul>
 <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>
