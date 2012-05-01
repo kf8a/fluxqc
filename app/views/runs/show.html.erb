@@ -2,6 +2,12 @@
   <li><a href='#'>Standards</a></li>
   <li class="active"><a href='#'>Samples</a></li>
 </ul>
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+  <p class="error"><%= flash[:error] %></p>
+<% end %>
 <div id='container'></div>
 
 <script>
