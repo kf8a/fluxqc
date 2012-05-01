@@ -50,7 +50,7 @@ describe DataFileLoader do
       DataFileLoader.perform(run.id).should_not be_false
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
-      @standards = @run.standards
+      @standard_curves = @run.standard_curves
     end
 
     it 'updates the measurement with the co2 area' do
@@ -64,8 +64,8 @@ describe DataFileLoader do
     end
 
     it 'keeps standards and check standards' do
-      @run.standards.reload
-      @run.standards.size.should == 3
+      @run.standard_curves.reload
+      @run.standard_curves.size.should == 3
     end
   end
 

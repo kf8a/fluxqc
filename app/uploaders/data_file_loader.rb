@@ -46,23 +46,23 @@ class DataFileLoader
       ['co2','n2o','ch4'].each do |c|
         value = vial[c.to_sym]
         compound = Compound.find_by_name(c)
-        standard = Standard.find_by_run_id_and_compound_id(@run,compound)
+        standard_curve = StandardCurve.find_by_run_id_and_compound_id(@run,compound)
 
-        unless standard
-          standard = Standard.create(:run=>@run, :compound=>compound)
-          @run.standards << standard
-          standard.save
+        unless standard_curve
+          standard_curve = StandardCurve.create(:run=>@run, :compound=>compound)
+          @run.standard_curves << standard_curve
+          standard_curve.save
         end
 
-        measurement = Measurement.create(:vial=> vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
-        standard.measurements << measurement
+        standard = Standard.create(:vial=> vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
+        standard_curve.standards << standard
 
-        if measurement.area == measurement.ppm  # we don't have ppm's in the file. Try to deduce it from the name
-          case measurement.name
+        if standard.area == standard.ppm  # we don't have ppm's in the file. Try to deduce it from the name
+          case standard.name
           when 'n23'
           end
         end
-        measurement.save
+        standard.save
       end
     end
   end

@@ -2,5 +2,5 @@
 class StandardCurve < ActiveRecord::Base
   belongs_to :run
   belongs_to :compound
-  has_many :measurements
+  has_many :standards
 end

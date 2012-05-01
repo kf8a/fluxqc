@@ -4,7 +4,7 @@ require File.expand_path('./lib/fitter.rb')
 # It takes an array of standards and then uses the Fitter class
 # to perform the fitting. It then hold on to the equation so that measurements
 # can be converted from area to ppm by calling ppm(meaurement.area)
-class StandardCurve
+class StandardCurveFitter
 
   attr_accessor :samples
 

@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Measurement do
   it {should belong_to :flux}
   it {should belong_to :sample}
-  it {should belong_to :standard}
 
   let(:measurement) {FactoryGirl.create :measurement}
   it "should have millivolts" do
