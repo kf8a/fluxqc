@@ -6,7 +6,6 @@ Fluxqc::Application.routes.draw do
 
   resources :runs do
     member do
-      get 'standards'
       get  'gcinput'
       post 'reject'
       post 'accept'
@@ -29,5 +28,6 @@ Fluxqc::Application.routes.draw do
     mount Resque::Server, :at => "/resque"
   end
  
+  match "runs/:id/standards" => 'runs#show'
   root :to => 'runs#index'
 end

@@ -7,16 +7,24 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     @incubationsView = new Flux.Views.IncubationsListView({ 'collection' : incubations})
 
   routes: {
-    ''          : 'home',
-    'standards' : 'standards'
+    ''           : 'home',
+    'standards'  : 'standards'
   }
 
   home: -> 
+    sampleTab = $('#sample-tab')
+    sampleTab.addClass('active')
+    standardTab = $('#standard-tab')
+    standardTab.removeClass('active')
     container = $('#container')
     container.empty()
     container.append(@incubationsView.render().el)
 
   standards: ->
+    sampleTab = $('#sample-tab')
+    sampleTab.removeClass('active')
+    standardTab = $('#standard-tab')
+    standardTab.addClass('active')
     container = $('#container')
-    container.empty()
-    container.append(@standardsView.render().el)
+    # container.empty()
+    # container.append(@standardCurves.render().el)
