@@ -3,6 +3,18 @@
 class DataFileLoader
   @queue = :data_queue
 
+  STANDARDS = {
+    'STD0'  => {'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000},
+    'STD07' => {'n2o' => 0.294, 'co2' =>  350.423, 'ch4' => 0.565},
+    'STD10' => {'n2o' => 0.420, 'co2' =>  500.605, 'ch4' => 0.806},
+    'STD15' => {'n2o' => 0.629, 'co2' =>  750.907, 'ch4' => 1.210},
+    'STD20' => {'n2o' => 0.839, 'co2' => 1001.201, 'ch4' => 1.613},
+    'STD30' => {'n2o' => 1.259, 'co2' => 1501.815, 'ch4' => 2.419},
+    'STD40' => {'n2o' => 1.678, 'co2' => 2002.419, 'ch4' => 3.226}
+  }
+
+  AIR = {'n2o' => 0.3, 'co2' => 350, 'ch4' => 0.2 }
+
   def initialize(run=nil)
     @run = run
   end
@@ -57,9 +69,13 @@ class DataFileLoader
         standard = Standard.create(:vial=> vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
         standard_curve.standards << standard
 
-        if standard.area == standard.ppm  # we don't have ppm's in the file. Try to deduce it from the name
-          case standard.name
-          when 'n23'
+        if standard.area == standard.ppm  || standard.ppm.nil? # we don't have ppm's in the file. Try to deduce it from the name
+          standard_values = STANDARDS[standard.vial.chop]
+          if standard_values
+            standard.ppm = standard_values[c]
+          else
+            # we propably have a check standard ie air
+            standard.ppm = AIR[c]
           end
         end
         standard.save
