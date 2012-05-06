@@ -16,6 +16,8 @@ gem 'devise'
 
 gem 'uuid'
 
+gem 'foreigner'
+
 gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
 

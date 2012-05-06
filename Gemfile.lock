@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/carrierwave.git
-  revision: 024f3029927c3ba82789576d081cee55b16398d6
+  revision: 7747e9e991e9ac6a81212c8068e80faf869bce56
   specs:
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
@@ -43,7 +43,7 @@ GEM
     activesupport (3.2.3)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.7)
+    addressable (2.2.8)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
@@ -98,6 +98,8 @@ GEM
       factory_girl (~> 3.2.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
+    foreigner (1.1.6)
+      activerecord (>= 3.0.0)
     gherkin (2.9.3)
       json (>= 1.4.6)
     highline (1.6.11)
@@ -265,6 +267,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
+  foreigner
   jquery-rails
   launchy
   pg
