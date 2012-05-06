@@ -18,4 +18,6 @@ FactoryGirl.define do
     email     'bob@test.com'
     password  'testing'
   end
+  factory :standard_curve do
+  end
 end

@@ -1,3 +1,3 @@
 class Standard < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :standard_curve
 end
