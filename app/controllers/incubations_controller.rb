@@ -6,7 +6,7 @@ class IncubationsController < ApplicationController
     @incubation = Incubation.find(params[:id])
     respond_with do |format|
       format.html
-      format.json #{render :json  => @incubation.as_json(:methods=>['co2','n2o','ch4'])}
+      format.json {render :json  => @incubation.as_json(:methods=>['co2','n2o','ch4'])}
     end
   end
 

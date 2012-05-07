@@ -17,8 +17,11 @@ describe StandardCurve do
    end
 
    it 'returns a list of areas and ppms' do
-     p standard_curve.data
      standard_curve.data[0].should == {id:1, key:10, value:2, deleted: false}
+   end
+
+   it 'returns a fitline' do
+    standard_curve.fitLine.should_not be_null
    end
   end
 end

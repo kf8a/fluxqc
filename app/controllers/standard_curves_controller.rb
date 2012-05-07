@@ -2,7 +2,7 @@ class StandardCurvesController < ApplicationController
 
   def show
     standard_curve = StandardCurve.find(params[:id])
-    render :json => @standard_curve.as_json(:methods=>['data','ymax','ymin',
+    render :json => standard_curve.as_json(:methods=>['data','ymax','ymin',
            'multiplier','fit_line','slope'])
   end
 

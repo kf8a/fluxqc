@@ -1,35 +1,23 @@
 class Flux.Views.StandardCurveView extends Backbone.View
-  tagName: 'li'
+  tagName: 'span'
 
   initialize: ->
-    _.templateSettings = {
-      interpolate : /\{\{(.+?)\}\}/g
-    }
-    @template = _.template($('#incubation-template').html())
     @.model.bind('change', @.render)
 
   render: =>
+    # need to remove the plot i think
     $(@el).empty()
-    $(@el).append(@template(@model.toJSON()))
-
-    view = new Flux.Views.StandardCurveView(model: @model.n2o_model)
-    $(@el).append(view.render().el)
-
-    view = new Flux.Views.StandardCurveView(model: @model.co2_model)
-    $(@el).append(view.render().el)
-
-    view = new Flux.Views.StandardCurveView(model: @model.ch4_model)
-    $(@el).append(view.render().el)
+    scatterPlot(@model, @el)
     @
 
 class Flux.Views.StandardCurvesListView extends Backbone.View
-  tagName: 'ul'
+  tagName: 'p'
 
   initialize: ->
     @collection.bind('reset', @.render)
 
   listItemView: (standardCurve) -> 
-    view = new Flux.Views.StandardCurveViewView(model: standardCurve)
+    view = new Flux.Views.StandardCurveView(model: standardCurve)
     view.render().el
 
   render: =>
