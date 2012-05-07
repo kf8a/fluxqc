@@ -5,7 +5,7 @@ class StandardCurve < ActiveRecord::Base
   has_many :standards
 
   def data
-    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :deleted => s.excluded}}
+    standards.collect {|s| {:id=>s.id, :key=> s.ppm , :value=> s.area, :deleted => s.excluded}}
   end
 
   def fit_line
