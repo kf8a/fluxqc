@@ -13,7 +13,7 @@ class DataFileLoader
     'STD40' => {'n2o' => 1.678, 'co2' => 2002.419, 'ch4' => 3.226}
   }
 
-  AIR = {'n2o' => 0.3, 'co2' => 350, 'ch4' => 0.2 }
+  CHK = {'n2o' => 0.294, 'co2' => 350.423, 'ch4' => 0.565 }
 
   def initialize(run=nil)
     @run = run
@@ -27,10 +27,13 @@ class DataFileLoader
 
     standard_vials, sample_vials = vials.partition {|x| x[:vial] =~ /CHK|STD|check|.*[a-z]$/i }
 
+    # standards, checks = standard_vials.partition {|x| x[;vial] =~ /STD*/i }
+
     dataloader.process_samples(sample_vials)
 
     dataloader.process_standard(standard_vials)
 
+    # dataloger.process_checks(checks)
   end
 
   def process_samples(sample_vials)
@@ -73,13 +76,17 @@ class DataFileLoader
           standard_values = STANDARDS[standard.vial.chop]
           if standard_values
             standard.ppm = standard_values[c]
-          else
+          else 
             # we propably have a check standard ie air
-            standard.ppm = AIR[c]
+            standard.ppm = CHK[c]
           end
         end
         standard.save
       end
     end
+  end
+
+  def process_checks(check_vials)
+
   end
 end
