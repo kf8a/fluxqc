@@ -1,11 +1,10 @@
-window.scatterPlot = (model, el) -> 
+window.scatterPlot = (model, el, height=300) -> 
 
   json_data = model.toJSON()
   data = json_data.data
   expected_slope = json_data.expected_slope
   return unless data
 
-  height = 300
   width  = 300
   margin = 50
 

@@ -5,7 +5,7 @@ class Flux.Models.Flux extends Backbone.Model
     id:       null
     data:     null
     compound: null
-  
+
   togglePoint: (point) ->
     point.deleted = !point.deleted
     @.fitLineByLeastSquares()

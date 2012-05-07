@@ -7,7 +7,7 @@ class Flux.Views.StandardCurveView extends Backbone.View
   render: =>
     # need to remove the plot i think
     $(@el).empty()
-    scatterPlot(@model, @el)
+    scatterPlot(@model, @el,600)
     @
 
 class Flux.Views.StandardCurvesListView extends Backbone.View
