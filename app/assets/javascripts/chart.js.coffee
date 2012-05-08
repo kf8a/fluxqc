@@ -1,4 +1,4 @@
-window.scatterPlot = (model, el, height=300) -> 
+window.scatterPlot = (model, el) -> 
 
   json_data = model.toJSON()
   data = json_data.data
@@ -6,6 +6,7 @@ window.scatterPlot = (model, el, height=300) ->
   return unless data
 
   width  = 300
+  height = 300
   margin = 50
 
   chart = d3.select(el)
