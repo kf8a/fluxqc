@@ -12,13 +12,13 @@ class Flux.Views.IncubationView extends Backbone.View
     $(@el).empty()
     $(@el).append(@template(@model.toJSON()))
 
-    view = new Flux.Views.FluxView(model: @model.n2o_model)
+    view = new Flux.Views.FluxView(model: @model.fluxes['n2o'])
     $(@el).append(view.render().el)
 
-    view = new Flux.Views.FluxView(model: @model.co2_model)
+    view = new Flux.Views.FluxView(model: @model.fluxes['co2'])
     $(@el).append(view.render().el)
 
-    view = new Flux.Views.FluxView(model: @model.ch4_model)
+    view = new Flux.Views.FluxView(model: @model.fluxes['ch4'])
     $(@el).append(view.render().el)
     @
 

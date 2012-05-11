@@ -5,14 +5,15 @@ class Flux.Models.Incubation extends Backbone.Model
     chamber: null
 
   initialize: ->
-    @co2_model = new Flux.Models.Flux({id: @attributes.co2.id})
-    @co2_model.set(@attributes.co2)
+    @fluxes = {}
+    @fluxes['co2'] = new Flux.Models.Flux({id: @attributes.co2.id})
+    @fluxes['co2'].set(@attributes.co2)
 
-    @n2o_model = new Flux.Models.Flux({id: @attributes.n2o.id})
-    @n2o_model.set(@attributes.n2o)
+    @fluxes['n2o'] = new Flux.Models.Flux({id: @attributes.n2o.id})
+    @fluxes['n2o'].set(@attributes.n2o)
 
-    @ch4_model = new Flux.Models.Flux({id: @attributes.ch4.id})
-    @ch4_model.set(@attributes.ch4)
+    @fluxes['ch4']= new Flux.Models.Flux({id: @attributes.ch4.id})
+    @fluxes['ch4'].set(@attributes.ch4)
   
 class Flux.Collections.IncubationsCollection extends Backbone.Collection
   model: Flux.Models.Incubation
