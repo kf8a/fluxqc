@@ -31,7 +31,7 @@ class Flux < ActiveRecord::Base
   def data
     measurements.collect do |measurement|
       {id:measurement.id, key:measurement.seconds,
-        value:measurement.ppm, deleted:measurement.excluded}
+        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded}
     end
   end
 
