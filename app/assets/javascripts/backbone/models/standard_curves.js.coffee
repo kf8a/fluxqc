@@ -4,6 +4,19 @@ class Flux.Models.StandardCurve extends Backbone.Model
   togglePoint: (point) ->
     point.deleted = !point.deleted
     @.fitLineByLeastSquares()
+    for incubation in incubations.models
+      co2_model = incubation.co2_model
+      data = co2_model.get('data')
+
+      for datum in  data
+        eq = @.get('fit_line')
+
+        datum.value = datum.area * eq.slope + eq.offset
+
+
+      co2_model.change()
+      co2_model.save()
+
     @.change()
     @
 
