@@ -1,24 +1,29 @@
 class Flux.Models.StandardCurve extends Backbone.Model
   urlRoot: '/standard_curves'
 
+  initialize: ->
+    @.updateSamples()
+
   togglePoint: (point) ->
     point.deleted = !point.deleted
+    @.updateSamples()
+    @.change()
+    @
+
+  updateSamples: ->
     @.fitLineByLeastSquares()
     for incubation in incubations.models
-      co2_model = incubation.co2_model
-      data = co2_model.get('data')
+      compound = @.get('compound')
+      console.log(compound.name)
+      model = incubation.fluxes[compound.name]
+      data = model.get('data')
 
       for datum in  data
         eq = @.get('fit_line')
-
         datum.value = datum.area * eq.slope + eq.offset
 
-
-      co2_model.change()
-      co2_model.save()
-
-    @.change()
-    @
+      model.change()
+      model.save()
 
   fitLineByLeastSquares: =>
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
