@@ -51,10 +51,10 @@ namespace :deploy do
     start
   end
 
-  #before "deploy:symlink", :link_production_db
+#  before "deploy:finalize_update", :link_production_db
   before "deploy:assets:precompile", "link_production_db"
-  after 'deploy:symlink', :link_unicorn
-  after 'deploy:symlink', :link_file_storage
+  after 'deploy:finalize_update', :link_unicorn
+  after 'deploy:finalize_update', :link_file_storage
 end
 
 desc "Link in the production database.yml"
