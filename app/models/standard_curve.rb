@@ -3,6 +3,7 @@ class StandardCurve < ActiveRecord::Base
   belongs_to :run
   belongs_to :compound
   has_many :standards
+  has_many :check_standards
 
   def data
     standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :deleted => s.excluded}}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501122436) do
+ActiveRecord::Schema.define(:version => 20120521193116) do
 
   create_table "campaign_plots", :force => true do |t|
     t.integer  "plot_id"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(:version => 20120501122436) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "check_standards", :force => true do |t|
+    t.integer  "standard_curve_id"
+    t.integer  "compound_id"
+    t.string   "vial"
+    t.float    "ppm"
+    t.float    "area"
+    t.boolean  "excluded",          :default => true
+    t.datetime "starting_time"
+    t.datetime "ending_time"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "compounds", :force => true do |t|
