@@ -11,9 +11,6 @@ class StandardCurve < ActiveRecord::Base
   def data=(standard_hash=[])
     standard_hash.each do |d|
       standard = standards.find(d[:id])
-      standard.seconds = d[:key]
-      standard.ppm = d[:value]
-      standard.area = d[:area]
       standard.excluded = d[:deleted]
       standard.save
     end

@@ -26,6 +26,12 @@ describe StandardCurve do
   end
 
   describe 'data setting' do
-    it 'updates the data'
+    it 'updates the deleted flag on the standards' do
+      pending
+      standard = Standard.create()
+      standard.should_receive(:excluded).with(true)
+      standard_curve.standards << standard
+      standard_curve.data = [{:id => standard.id, :excluded => true}]
+    end
   end
 end
