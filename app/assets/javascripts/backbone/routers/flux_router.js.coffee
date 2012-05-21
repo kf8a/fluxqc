@@ -5,8 +5,9 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     incubations.reset(INITIAL_DATA)
     window.standardCurves = new Flux.Collections.StandardCurvesCollection
 
-    @incubationsView = new Flux.Views.IncubationsListView({ 'collection' : incubations})
-    @standardCurvesView = new Flux.Views.StandardCurvesListView( {'collection' : standardCurves })
+    standardCurves.reset(INITIAL_STANDARD_DATA)
+    window.incubationsView = new Flux.Views.IncubationsListView({ 'collection' : incubations})
+    window.standardCurvesView = new Flux.Views.StandardCurvesListView( {'collection' : standardCurves })
 
   routes: {
     ''           : 'home',
@@ -20,7 +21,7 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     standardTab.removeClass('active')
     container = $('#container')
     container.empty()
-    container.append(@incubationsView.render().el)
+    container.append(incubationsView.render().el)
 
   standards: ->
     sampleTab = $('#sample-tab')
@@ -30,5 +31,5 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     container = $('#container')
     container.empty()
     standardCurves.url = '/runs/' + window.run_id + '/standard_curves'
-    standardCurves.fetch()
-    container.append(@standardCurvesView.render().el)
+    # standardCurves.fetch()
+    container.append(standardCurvesView.render().el)

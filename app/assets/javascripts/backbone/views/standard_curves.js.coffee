@@ -11,15 +11,16 @@ class Flux.Views.StandardCurveView extends Backbone.View
     @
 
 class Flux.Views.StandardCurvesListView extends Backbone.View
-  tagName: 'p'
 
   initialize: ->
     @collection.bind('reset', @.render)
 
   listItemView: (standardCurve) -> 
     view = new Flux.Views.StandardCurveView(model: standardCurve)
-    view.render().el
+    $(@el).append(view.render().el)
+    #view.render()
+    @
 
   render: =>
-    $(@el).append(@.listItemView(standardCurve)) for standardCurve in @collection.models
+    @.listItemView(standardCurve) for standardCurve in @collection.models
     @

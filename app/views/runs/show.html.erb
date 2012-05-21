@@ -12,6 +12,7 @@
 
 <script>
   INITIAL_DATA = <%=raw @incubations.to_json(:methods=>['co2','n2o','ch4']) %>;
+  INITIAL_STANDARD_DATA = <%= raw @standard_curves.to_json %>;
   window.run_id = <%= @run.id %>
   $(function() {
     window.myApp = new Flux.Routers.FluxesRouter;
