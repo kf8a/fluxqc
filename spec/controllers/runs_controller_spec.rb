@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe RunsController do
- include Devise::TestHelpers
 
   before(:each) do
     @user = FactoryGirl.create(:user)

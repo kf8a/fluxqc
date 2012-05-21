@@ -74,7 +74,7 @@ describe DataFileLoader do
 
     it 'loads ppm into the standard' do
       @run.standard_curves.first.standards.first.ppm.should == 0
-      @run.standard_curves.first.standards.last.ppm.should == 350.0
+      @run.standard_curves.first.standards.last.ppm.should == 350.423
     end
   end
 

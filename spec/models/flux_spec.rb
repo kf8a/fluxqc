@@ -23,7 +23,7 @@ describe Flux do
     end
 
     it 'should return a list of seconds and ppm' do
-      flux.data.include?({id:1, key:1,value:10, deleted:false}).should be_true
+      flux.data.should == [{id:1, key:1,value:10, area:nil, deleted:false}]
     end
   end
 

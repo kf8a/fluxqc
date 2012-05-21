@@ -8,6 +8,17 @@ class StandardCurve < ActiveRecord::Base
     standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :deleted => s.excluded}}
   end
 
+  def data=(standard_hash=[])
+    standard_hash.each do |d|
+      standard = standards.find(d[:id])
+      standard.seconds = d[:key]
+      standard.ppm = d[:value]
+      standard.area = d[:area]
+      standard.excluded = d[:deleted]
+      standard.save
+    end
+  end
+
   def fit_line
     f = Fitter.new
     f.data = data
@@ -18,7 +29,6 @@ class StandardCurve < ActiveRecord::Base
     h = super(options)
     h[:data] = data
     h[:compound] = compound
-    h[:expected_slope] = compound.name == 'ch4' ? 'negative' : 'positive'
     h[:ymax] = ymax
     h[:ymin] = ymin
     h[:fit_line] = fit_line
@@ -27,7 +37,7 @@ class StandardCurve < ActiveRecord::Base
 
   # convenience methods to make the calculations easier
   def ymax
-    compound.ymax
+    compound.ymax if compound
   end
 
   def ymin

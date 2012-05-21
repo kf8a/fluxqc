@@ -1,7 +1,6 @@
 require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
 describe Fitter do
-
   describe 'with valid points' do
     before(:each) do
       fit = Fitter.new
@@ -70,9 +69,26 @@ describe Fitter do
 
   end
 
+  describe 'a flux with no datapoints' do
+    it 'returns nil' do
+      fit = Fitter.new
+      fit.data = []
+      fit.linear_fit == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+    end
+  end
+
+  describe 'a flux with only one datapoint' do
+    it 'returns an empty array' do
+      fit = Fitter.new
+      fit.data = [ {:key => 1, :value=>1, :deleted => false} ]
+      fit.linear_fit == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+    end
+  end
+
   describe 'using a flux object' do
     before(:each) do
       @flux = stub
+      @flux.stub(:try).and_return nil
       @flux.stub(:headspace).and_return(1)
       @flux.stub(:surface_area).and_return(2)
       @flux.stub(:mol_weight).and_return(12)

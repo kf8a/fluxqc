@@ -4,11 +4,11 @@
 class Fitter
   attr_accessor :data
 
-  NaN = (0.0/0.0)
-
   def initialize(flux=nil)
-    @flux = flux
-    @data = @flux.try(:data)
+    if flux
+      @flux = flux
+      @data = @flux.data
+    end
   end
 
   def fit
@@ -28,7 +28,8 @@ class Fitter
   def linear_fit
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
 
-    return([ [], [] ]) if data.length == 0
+    raise 'no data to compute linear fit' unless data
+    return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if data.length < 2
 
     data.each do |datum|
       next if datum[:deleted]
@@ -44,7 +45,7 @@ class Fitter
       count  += 1
     end
 
-    return ({:slope=>NaN, :offset=>NaN, :r2=>NaN}) if count == 0
+    return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if count == 0
 
     m = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
     b = (sum_y/count) - (m * sum_x)/count

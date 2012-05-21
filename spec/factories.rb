@@ -6,6 +6,7 @@ FactoryGirl.define do
   end
   factory :compound do
     name 'co2'
+    ymax  5000
   end
   factory :incubation do
     headspace 1

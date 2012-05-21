@@ -20,8 +20,12 @@ describe StandardCurve do
      standard_curve.data[0].should == {id:1, key:10, value:2, deleted: false}
    end
 
-   it 'returns a fitline' do
-    standard_curve.fitLine.should_not be_null
+   it 'returns a fit_line' do
+    standard_curve.fit_line.should == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
    end
+  end
+
+  describe 'data setting' do
+    it 'updates the data'
   end
 end
