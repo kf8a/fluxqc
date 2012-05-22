@@ -7,7 +7,13 @@ class Flux.Views.FluxView extends Backbone.View
   render: =>
     # need to remove the plot i think
     $(@el).empty()
-    scatterPlot(@model, @el)
+    json_data = @model.toJSON()
+    plot = new Flux.ScatterPlot()
+    plot.data(json_data.data)
+    plot.fitLine(json_data.fit_line)
+    plot.setFlux(json_data.flux)
+    plot.model(@model)
+    plot.render(@el)
     @
 
 class Flux.Views.FluxesListView extends Backbone.View

@@ -17,7 +17,7 @@ describe StandardCurve do
    end
 
    it 'returns a list of areas and ppms' do
-     standard_curve.data[0].should == {id:1, key:10, value:2, deleted: false}
+     standard_curve.data[0].should == {id:1, key:10, value:2, :name => nil, deleted: false}
    end
 
    it 'returns a fit_line' do

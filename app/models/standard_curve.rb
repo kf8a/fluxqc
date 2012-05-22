@@ -6,7 +6,7 @@ class StandardCurve < ActiveRecord::Base
   has_many :check_standards
 
   def data
-    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :deleted => s.excluded}}
+    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => s.excluded}}
   end
 
   def data=(standard_hash=[])

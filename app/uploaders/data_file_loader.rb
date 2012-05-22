@@ -55,6 +55,8 @@ class DataFileLoader
   end
 
   def process_standard(standard_vials)
+    # checks, standard_vials = std_vials.partition {|x| x[:vial] =~ /CHK|check/i}
+
     standard_vials.each do |vial|
       # find or create a standard for the compound
       # create and add the measurement
@@ -76,14 +78,34 @@ class DataFileLoader
           standard_values = STANDARDS[standard.vial.chop]
           if standard_values
             standard.ppm = standard_values[c]
-          else 
-            # we propably have a check standard ie air
+          else
+            # we propably have a check standard
             standard.ppm = CHK[c]
+            standard.excluded = true
           end
         end
         standard.save
       end
     end
+    # checks.each do |vial|
+    #   ['co2','n2o','ch4'].each do |c|
+    #     value = vial[c.to_sym]
+    #     compound = Compound.find_by_name(c)
+    #     standard_curve = StandardCurve.find_by_run_id_and_compound_id(@run,compound)
+
+    #     unless standard_curve
+    #       standard_curve = StandardCurve.create(:run=>@run, :compound=>compound)
+    #       @run.standard_curves << standard_curve
+    #       standard_curve.save
+    #     end
+
+    #     check_standard = CheckStandard.create(:vial => vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
+    #     standard_curve.check_standards << check_standard
+
+    #     check_standard.ppm = CHK[c]
+    #     check_standard.save
+    #   end
+    # end
   end
 
   def process_checks(check_vials)
