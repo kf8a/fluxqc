@@ -18,7 +18,7 @@ gem 'uuid'
 
 gem 'foreigner'
 
-gem 'resque', :require => "resque/server"
+#gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
 
 # To use ActiveModel has_secure_password
