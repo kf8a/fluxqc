@@ -25,9 +25,9 @@ Fluxqc::Application.routes.draw do
   resources :setups
   resources :samples
 
-  authenticated(:user) do
-    mount Resque::Server, :at => "/resque"
-  end
+  # authenticated(:user) do
+  #   mount Resque::Server, :at => "/resque"
+  # end
  
   match "runs/:id/standards" => 'runs#show'
   root :to => 'runs#index'
