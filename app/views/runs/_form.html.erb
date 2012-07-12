@@ -21,6 +21,7 @@
     <th>Replicate</th>
     <th>Chamber</th>
     <th>Lid</th>
+    <th>Avg. Chamber Height cm</th>
     <th>Soil Temperature</th>
     <th>Vials</th>
     <th>Minutes</th>
@@ -36,7 +37,8 @@
   <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :chamber %></td>
-  <td rowspan=<%=rows%>><%= incubation_field.association :lid %>
+  <td rowspan=<%=rows%>><%= incubation_field.association :lid %></td>
+  <td rowspan=<%=rows%><<%= incubation_field.input :avg_height_cm%></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
     <%= incubation_field.simple_fields_for :samples, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
       <tr>
