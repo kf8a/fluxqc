@@ -48,25 +48,25 @@ class Flux < ActiveRecord::Base
   end
 
   def flux
-    compute_flux
-    self.value = v
+    self.value = compute_flux
   end
 
   def compute_flux
     f = Fitter.new(self)
     v = f.fit
-    if v.nan? ? nil : v
+    v.nan? ? nil : v
   end
 
   # reduced flux based on 3 points instead of 4
-  def reduced_flux
-    reduced = Flux.new
-    reduced.data = self.data.sort {|a,b| a[:key] <=> b[Key]}
-    reduced.data.pop
-    f = Fitter.new(reduced)
-    v = f.fit
-    if v.nan? ? nil : v
-  end
+  # I save the data so I can't just create an object
+  # def reduced_flux
+  #   reduced = Flux.new
+  #   reduced.data = self.data.sort {|a,b| a[:key] <=> b[:key]}
+  #   reduced.data.pop
+  #   f = Fitter.new(reduced)
+  #   v = f.fit
+  #   v.nan? ? nil : v
+  # end
 
   def multiplier
     f = Fitter.new(self)

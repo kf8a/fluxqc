@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Run do
 
-  let(:run) {Run.new}
+  let(:run) {Run.create}
 
   it {should have_many :incubations}
   it {should have_many :samples}
