@@ -36,6 +36,7 @@ group :assets do
   gem 'therubyracer', :require => 'v8'
 
   gem 'sass-rails'
+  gem 'less-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'twitter-bootstrap-rails'
