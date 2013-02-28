@@ -57,7 +57,3 @@ group :test do
   gem "launchy"
   gem "cucumber-rails", require: false
 end
-
-group :production do
-  gem 'SyslogLogger', :require => 'syslog_logger'
-end
