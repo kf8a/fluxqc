@@ -16,7 +16,7 @@ class Incubation < ActiveRecord::Base
   NaN = (0.0/0.0)
 
   def flux(compound)
-    fluxes.send(compound)[0]
+    fluxes.public_send(compound)[0]
   end
 
   def headspace
