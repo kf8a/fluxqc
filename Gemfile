@@ -12,7 +12,7 @@ gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
-#gem 'strong_parameters'
+gem 'active_model_serializers'
 
 gem 'uuid'
 

@@ -16,7 +16,7 @@ class RunsController < ApplicationController
     @standard_curves = @run.standard_curves
     respond_with do |format|
       format.html { render  :layout=> 'qc'}
-      format.json {render :json  => @incubations.as_json(:methods=>['co2','n2o','ch4'])}
+      format.json {render :json  => @incubations}
     end
   end
 

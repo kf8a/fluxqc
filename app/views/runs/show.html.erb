@@ -11,8 +11,9 @@
 <div id='container'>Loading...</div>
 
 <script>
-  INITIAL_DATA = <%=raw @incubations.to_json(:methods=>['co2','n2o','ch4']) %>;
-  INITIAL_STANDARD_DATA = <%= raw @standard_curves.to_json %>;
+  INITIAL_DATA = <%=raw json_for @incubations %>;
+  INITIAL_STANDARD_DATA = ''; 
+  <%# <%= raw json_for @standard_curves %1>; %>
   window.run_id = <%= @run.id %>
   $(function() {
     window.myApp = new Flux.Routers.FluxesRouter;
