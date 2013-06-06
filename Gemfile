@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.13'
-gem "rails-backbone"
+gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
 gem 'pg'
@@ -46,7 +46,6 @@ end
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'rspec-rails' #, :git=>'git://github.com/rspec/rspec-rails.git'
-  gem 'railroady'
 end
 
 group :test do
