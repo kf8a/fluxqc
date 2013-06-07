@@ -23,12 +23,14 @@ class Incubation < ActiveRecord::Base
     return NaN unless lid
 
     if 'Z' == lid.name
+      # plastic bucket
       # compute gas bucket volume
       # divide by 1000 to convert from cm^3 to liters
       #
       # There is one cm from the top of the bucket to the mark
       return (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000
     elsif 'Y' == lid.name
+      # metal buckets
       # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  
       # It should be around 10.8L if they install the chambers correctly.  
       # This accounts for the clamped lid after they measure H.  
