@@ -2,7 +2,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
   urlRoot: '/standard_curves'
 
   initialize: ->
-    @.updateSamples()
+    # @updateSamples()
 
   defaults:
     id:       null
@@ -11,14 +11,14 @@ class Flux.Models.StandardCurve extends Backbone.Model
 
   togglePoint: (point) ->
     point.deleted = !point.deleted
-    @.updateSamples()
-    @.change()
-    @
+    @updateSamples()
+    @trigger('change')
+    this
 
   updateSamples: ->
-    @.fitLineByLeastSquares()
+    @fitLineByLeastSquares()
     for incubation in incubations.models
-      compound = @.get('compound')
+      compound = @get('compound')
       model = incubation.fluxes[compound.name]
       data = model.get('data')
 
@@ -27,8 +27,9 @@ class Flux.Models.StandardCurve extends Backbone.Model
         datum.value = datum.area * eq.slope + eq.offset
 
       model.set({'data':data})
+
       model.fitLineByLeastSquares()
-      model.change()
+      # model.trigger('change')
 
   fitLineByLeastSquares: =>
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
@@ -58,9 +59,9 @@ class Flux.Models.StandardCurve extends Backbone.Model
     correlation = correlation * correlation
 
     r2 = correlation
-    @.set({fit_line: {slope: m, r2: r2, offset: b}})
+    @set({fit_line: {slope: m, r2: r2, offset: b}})
 
-    @.save()
+    @save()
     [m,b,r2, @attributes.flux]
 
 class Flux.Collections.StandardCurvesCollection extends Backbone.Collection

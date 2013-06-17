@@ -14,7 +14,6 @@ class Flux.ScatterPlot
     @b = fit_line.offset
     @r2 = fit_line.r2
 
-
   render: (el) ->
     return unless @data
     model = @model

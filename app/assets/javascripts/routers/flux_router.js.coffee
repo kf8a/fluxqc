@@ -31,5 +31,5 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     container = $('#container')
     container.empty()
     standardCurves.url = '/runs/' + window.run_id + '/standard_curves'
-    # standardCurves.fetch()
+    standardCurves.fetch()
     container.append(standardCurvesView.render().el)

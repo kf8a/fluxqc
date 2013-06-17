@@ -2,7 +2,8 @@ class Flux.Views.StandardCurveView extends Backbone.View
   tagName: 'span'
 
   initialize: ->
-    @.model.bind('change', @.render)
+    @model.on('reset', @render)
+    @model.on('change', @render)
 
   render: =>
     # need to remove the plot i think
@@ -19,11 +20,11 @@ class Flux.Views.StandardCurveView extends Backbone.View
     plot.model(@model)
     plot.render(@el)
 
-    plot = new Flux.ScatterPlot()
-    plot.data(chk)
-    plot.model(@model)
-    plot.render(@el)
-    @
+    # plot = new Flux.ScatterPlot()
+    # plot.data(chk)
+    # plot.model(@model)
+    # plot.render(@el)
+    this
 
 class Flux.Views.StandardCurvesListView extends Backbone.View
 
@@ -33,8 +34,8 @@ class Flux.Views.StandardCurvesListView extends Backbone.View
   listItemView: (standardCurve) -> 
     view = new Flux.Views.StandardCurveView(model: standardCurve)
     $(@el).append(view.render().el)
-    #view.render()
-    @
+    view.render()
+    this
 
   render: =>
     @.listItemView(standardCurve) for standardCurve in @collection.models
