@@ -29,7 +29,6 @@ class Flux.Models.StandardCurve extends Backbone.Model
       model.set({'data':data})
 
       model.fitLineByLeastSquares()
-      # model.trigger('change')
 
   fitLineByLeastSquares: =>
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
