@@ -57,3 +57,16 @@ describe Flux do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: fluxes
+#
+#  id            :integer          not null, primary key
+#  incubation_id :integer
+#  value         :float
+#  compound_id   :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+

@@ -16,3 +16,24 @@ describe Measurement do
     Measurement.by_compound('co2').include?(measurement).should be_true
   end
 end
+
+# == Schema Information
+#
+# Table name: measurements
+#
+#  id            :integer          not null, primary key
+#  flux_id       :integer
+#  compound_id   :integer
+#  sample_id     :integer
+#  vial          :string(255)
+#  seconds       :float
+#  ppm           :float
+#  area          :float
+#  type          :string(255)
+#  excluded      :boolean
+#  starting_time :datetime
+#  ending_time   :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+

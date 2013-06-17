@@ -69,11 +69,12 @@ class Incubation < ActiveRecord::Base
     fluxes.first.measurements.map(&:seconds)
   end
 end
+
 # == Schema Information
 #
 # Table name: incubations
 #
-#  id               :integer         not null, primary key
+#  id               :integer          not null, primary key
 #  sampled_at       :datetime
 #  chamber          :string(255)
 #  treatment        :string(255)
@@ -82,7 +83,7 @@ end
 #  avg_height_cm    :float
 #  lid_id           :integer
 #  run_id           :integer
-#  created_at       :datetime        not null
-#  updated_at       :datetime        not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 

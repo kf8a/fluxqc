@@ -65,3 +65,21 @@ describe Incubation do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: incubations
+#
+#  id               :integer          not null, primary key
+#  sampled_at       :datetime
+#  chamber          :string(255)
+#  treatment        :string(255)
+#  replicate        :string(255)
+#  soil_temperature :float
+#  avg_height_cm    :float
+#  lid_id           :integer
+#  run_id           :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+

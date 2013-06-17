@@ -41,4 +41,24 @@ class StandardCurve < ActiveRecord::Base
   def ymin
     0
   end
+
+  def compute!
+    result = fit_line
+    self.slope      = result[:slope]
+    self.intercept  = result[:offset]
+  end
 end
+
+# == Schema Information
+#
+# Table name: standard_curves
+#
+#  id          :integer          not null, primary key
+#  run_id      :integer
+#  compound_id :integer
+#  slope       :float
+#  intercept   :float
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+

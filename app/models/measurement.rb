@@ -17,12 +17,15 @@ class Measurement < ActiveRecord::Base
 
   end
 end
+
 # == Schema Information
 #
 # Table name: measurements
 #
-#  id            :integer         not null, primary key
+#  id            :integer          not null, primary key
 #  flux_id       :integer
+#  compound_id   :integer
+#  sample_id     :integer
 #  vial          :string(255)
 #  seconds       :float
 #  ppm           :float
@@ -31,7 +34,7 @@ end
 #  excluded      :boolean
 #  starting_time :datetime
 #  ending_time   :datetime
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 

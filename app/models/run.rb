@@ -65,11 +65,12 @@ class Run < ActiveRecord::Base
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: runs
 #
-#  id             :integer         not null, primary key
+#  id             :integer          not null, primary key
 #  sampled_on     :date
 #  run_on         :date
 #  study          :string(255)
@@ -77,8 +78,8 @@ end
 #  name           :string(255)
 #  workflow_state :string(255)
 #  released       :boolean
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #  setup_file     :string(255)
 #  data_file      :string(255)
 #
