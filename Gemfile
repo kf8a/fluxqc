@@ -42,7 +42,6 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'rspec-rails' #, :git=>'git://github.com/rspec/rspec-rails.git'
