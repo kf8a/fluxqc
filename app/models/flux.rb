@@ -15,7 +15,7 @@ class Flux < ActiveRecord::Base
   end
 
   def self.n2o
-  includes(:measurements => :compound).where('compounds.name' => 'n2o')
+    includes(:measurements => :compound).where('compounds.name' => 'n2o')
   end
 
   def self.ch4

@@ -50,6 +50,5 @@ class Standardizer
     intercept = intercept_params[:offset] + intercept_params[:slope] * measurement.position
 
     measurement.ppm = intercept + slope * measurement.area
-
   end
 end

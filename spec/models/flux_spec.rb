@@ -38,18 +38,23 @@ describe Flux do
       flux.stub(:surface_area).and_return(1)
       flux.data = [{id:@m1.id,key:4, value:10, deleted:true}]
     end
+
     it 'should have one measurement' do
       flux.measurements.size.should == 2
     end
+
     it 'updates the seconds' do
       flux.measurements.first.seconds.should == 4
     end
+
     it 'updates the ppms' do
       flux.measurements.first.ppm.should == 10
     end
+
     it 'updates the excluded setting' do
       flux.measurements.first.excluded.should be_true
     end
+
     it 'updates the flux' do
       flux.data = [{id:@m1.id, key:1, value:1, deleted:false},
                     {id:@m2.id, key:2,value:2,deleted:false}]
