@@ -16,6 +16,9 @@ class Measurement < ActiveRecord::Base
   def mv
 
   end
+
+  def position
+  end
 end
 
 # == Schema Information

@@ -46,6 +46,18 @@ describe Standardizer do
       end
 
       it 'computes ppm from two curves with drift correction' do 
+        curve2 = StandardCurve.new
+        curve2.stub(:slope).and_return(4)
+        curve2.stub(:intercept).and_return(10)
+
+        @curve1.stub(:position).and_return(1)
+        curve2.stub(:position).and_return(10)
+        st.standard_curves = [@curve1, curve2]
+
+        @m.stub(:position).and_return(7)
+
+        st.to_ppm_with_drift_correction(@m)
+        @m.ppm.should == 351.0
       end
     end
   end

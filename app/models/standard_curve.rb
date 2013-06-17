@@ -47,6 +47,9 @@ class StandardCurve < ActiveRecord::Base
     self.slope      = result[:slope]
     self.intercept  = result[:offset]
   end
+
+  def position
+  end
 end
 
 # == Schema Information
