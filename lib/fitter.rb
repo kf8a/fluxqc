@@ -35,8 +35,8 @@ class Fitter
       next if datum[:deleted]
       next unless datum[:key]
       next unless datum[:value]
-      x = datum[:key]
-      y = datum[:value]
+      x = datum[:key].to_f
+      y = datum[:value].to_f
       sum_x  += x
       sum_y  += y
       sum_xx += x*x
