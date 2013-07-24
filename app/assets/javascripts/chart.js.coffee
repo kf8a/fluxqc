@@ -62,7 +62,7 @@ class Flux.ScatterPlot
         .attr('fill', (d) -> if (@m > 0 && @expected_slope == 'positive') || (@m < 0 && @expected_slope == 'negative') then 'black' else 'red')
         .attr('x', 80)
         .attr('y', -@height + @margin-20)
-        .text(label_format(@flux) + ' g m\u207B\u00B2 day\u207B\u00B9')
+        .text(label_format(@flux) + ' g ha\u207B\u00B2 day\u207B\u00B9')
 
     g.selectAll('.fitLine')
       .data([a1,a2])

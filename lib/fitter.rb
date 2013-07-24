@@ -22,6 +22,9 @@ class Fitter
     surface_area  = @flux.surface_area.to_f
     mol_weight    = @flux.mol_weight.to_f
 
+    # these conversion factors here are from http://lter.kbs.msu.edu/protocols/23
+    # 1440 = 24 * 60
+    # 100 = 10000 cm^2/m^2 * 10000 m^2/ha * 1 mg/1000 ug * 1g /1000 ug
     headspace/surface_area * 100 * 1440 /22.4 * mol_weight
   end
 
