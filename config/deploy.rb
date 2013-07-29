@@ -7,9 +7,9 @@ set :repository, "git@github.com:kf8a/fluxqc.git"
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "gprpc28.kbs.msu.edu"                          # Your HTTP server, Apache/etc
-role :app, "gprpc28.kbs.msu.edu"                          # This may be the same as your `Web` server
-role :db,  "gprpc28.kbs.msu.edu", :primary => true # This is where Rails migrations will run
+role :web, "kalkaska.kbs.msu.edu"                          # Your HTTP server, Apache/etc
+role :app, "kalkaska.kbs.msu.edu"                          # This may be the same as your `Web` server
+role :db,  "kalkaska.kbs.msu.edu", :primary => true # This is where Rails migrations will run
 
 set :deploy_to, "/var/u/apps/#{application}"
 
@@ -51,20 +51,14 @@ namespace :deploy do
     start
   end
 
-#  before "deploy:finalize_update", :link_production_db
+  before "deploy:finalize_update", :link_production_db
   before "deploy:assets:precompile", "link_production_db"
-  after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_file_storage
 end
 
 desc "Link in the production database.yml"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
-end
-
-desc "link unicorn.rb"
-task :link_unicorn do
-  run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
 
 desc "link file storage"
