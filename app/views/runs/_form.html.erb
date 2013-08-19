@@ -20,6 +20,7 @@
     <th>Treatment</th>
     <th>Replicate</th>
     <th>Chamber</th>
+    <th>Sub plot</th>
     <th>Lid</th>
     <th>Avg. Chamber Height cm</th>
     <th>Soil Temperature</th>
@@ -37,6 +38,7 @@
   <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :chamber %></td>
+  <td rowspan=<%=rows%>><%= incubation_field.input :sub_plot %></td>
   <td rowspan=<%=rows%>><%= incubation_field.association :lid %></td>
   <td rowspan=<%=rows%><<%= incubation_field.input :avg_height_cm%></td>
   <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
