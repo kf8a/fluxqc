@@ -62,13 +62,34 @@ describe IncubationFactory do
 
   end
 
+  describe 'if there is one with a different sub_plot level' do
+    before do
+      @incubation2 = IncubationFactory.create(@run.id,
+                                              {:sample_date => '2011-10-18',
+                                                :sub_plot => 'F2',
+                                                :treatment => 'T6', :replicate=> 'R1', 
+                                                :chamber=>'1', :vial =>'1',
+                                                :lid=>'C', :height =>[18, 19.5, 19, 20.5],
+                                                :soil_temperature => 18.5,
+                                                :seconds => 0.0, :comments => nil})
+
+    end
+
+    it 'creates a new incubation' do
+      @incubation2.should_not == @incubation
+    end
+
+  end
+
+
   describe 'if there is an existing sample in the run' do
     before do
       @incubation.save
       @existing = @incubation
       @incubation = IncubationFactory.create(@run.id,
         {:sample_date => '2011-10-18',
-          :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',
+          :treatment => 'T6', :replicate=> 'R1', :sub_plot => 'F1', 
+          :chamber=>'1', :vial =>'2',
           :lid=>'C', :height =>[18, 19.5, 19, 20.5],
           :soil_temperature => 18.5,
           :seconds => 20, :comments => nil})
@@ -92,7 +113,8 @@ describe IncubationFactory do
       run = FactoryGirl.create :run
       @incubation = IncubationFactory.create(run.id,
         {:sample_date => '2011-10-18',
-          :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'2',
+          :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', 
+          :sub_plot => '', :vial =>'2',
           :lid=>'C', :height =>[18, 19.5, 19, 20.5],
           :soil_temperature => 18.5,
           :seconds => 20, :comments => nil})

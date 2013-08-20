@@ -5,6 +5,7 @@ class IncubationFactory
     run = Run.find(run_id)
     incubation = run.incubations.where(:treatment => input[:treatment],
                                  :replicate  => input[:replicate],
+                                 :sub_plot   => input[:sub_plot],
                                  :chamber    => input[:chamber],
                                  :sampled_at => input[:sampled_at]).first
 
