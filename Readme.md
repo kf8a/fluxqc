@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/kf8a/fluxqc.png)](https://codeclimate.com/github/kf8a/fluxqc)
+
 Flux QC app.
 ===========
 
