@@ -28,6 +28,9 @@ describe SetupParser do
       it 'has the right replicate' do
         @result[0][:replicate].should == 'R1'
       end
+      it 'has the right sub plot' do
+        @result[0][:sub_plot].should == 'F0'
+      end
       it 'has the right vial' do
         @result[0][:vial].should == '137'
       end
