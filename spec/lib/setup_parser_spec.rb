@@ -31,6 +31,9 @@ describe SetupParser do
       it 'has the right sub plot' do
         @result[0][:sub_plot].should == 'F0'
       end
+      it 'has the right chamber' do
+        @result[0][:chamber].should == nil
+      end
       it 'has the right vial' do
         @result[0][:vial].should == '137'
       end

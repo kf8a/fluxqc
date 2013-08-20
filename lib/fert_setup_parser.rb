@@ -22,9 +22,7 @@ class FertSetupParser
     "F#{row[1]}"
   end
 
-  def chamber
-    row[3]
-  end
+  def chamber; end
 
   def vial
     row[3]
