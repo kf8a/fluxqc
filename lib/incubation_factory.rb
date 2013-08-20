@@ -19,6 +19,7 @@ class IncubationFactory
       incubation.run_id             = run_id
       incubation.treatment          = input[:treatment]
       incubation.replicate          = input[:replicate]
+      incubation.sub_plot           = input[:sub_plot]
       incubation.chamber            = input[:chamber]
       incubation.soil_temperature   = input[:soil_temperature]
       incubation.avg_height_cm  = input[:height].inject(:+)/input[:height].count

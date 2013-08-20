@@ -14,6 +14,7 @@ describe IncubationFactory do
 
     @incubation = IncubationFactory.create(@run.id,
       {:sample_date => '2011-10-18',
+        :sub_plot => 'F1',
         :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', :vial =>'1',
         :lid=>'C', :height =>[18, 19.5, 19, 20.5],
         :soil_temperature => 18.5,
