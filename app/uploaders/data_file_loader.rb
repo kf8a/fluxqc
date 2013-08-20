@@ -18,6 +18,7 @@ class DataFileLoader
   def initialize(run=nil)
     @run = run
   end
+
   def self.perform(run_id)
     run = Run.find(run_id)
     dataloader = DataFileLoader.new(run)

@@ -64,6 +64,37 @@ describe DataParser do
 
   end
 
+  describe 'parsing an old results file' do
+    before do
+      file = File.expand_path("../../fixtures/lter2007-forestfert1.csv", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.parse(file)
+    end
+
+    it 'finds the correct number of samples' do
+      @result.size.should == 82
+    end
+
+    describe 'row 14' do
+      before do
+        @row = @result[14]
+      end
+      it 'finds the right vial' do
+        @row[:vial].should == '141'
+      end
+      it 'finds the right ch4 value' do
+        @row[:ch4][:ppm].should == 3.1506
+      end
+      it 'finds the right co2 value' do
+        @row[:co2][:ppm].should == 736.9668
+      end
+      it 'finds the right n2o value' do
+        @row[:n2o][:ppm].should == 0.292976
+      end
+    end
+
+  end
+
   # TODO do I need to deal with encoding issues..
   # describe 'parsing a macro generated file' do
   #   before do
