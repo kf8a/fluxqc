@@ -67,8 +67,10 @@ class DataParser
   end
 
   def self.forth_parse(row)
-    {vial: row[1], n2o: {ppm: row[11].to_f},
-      co2: {ppm: row[12].to_f}, ch4: {ppm: row[13].to_f}}
+    {vial: row[1], 
+      n2o: {area: row[2].to_f, ppm: row[11].to_f},
+      co2: {area: row[4].to_f, ppm: row[12].to_f}, 
+      ch4: {area: row[6].to_f, ppm: row[13].to_f}}
   end
 
   def self.first_row_of_data(lines)

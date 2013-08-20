@@ -85,11 +85,20 @@ describe DataParser do
       it 'finds the right ch4 value' do
         @row[:ch4][:ppm].should == 3.1506
       end
+      it 'finds the right ch4 area' do 
+        @row[:ch4][:area].should == 25384.0
+      end
       it 'finds the right co2 value' do
         @row[:co2][:ppm].should == 736.9668
       end
+      it 'finds the right co2 area' do
+        @row[:co2][:area].should == 1224.0
+      end
       it 'finds the right n2o value' do
         @row[:n2o][:ppm].should == 0.292976
+      end
+      it 'finds the right n2o area' do
+        @row[:n2o][:area].should == 96694.0
       end
     end
 
