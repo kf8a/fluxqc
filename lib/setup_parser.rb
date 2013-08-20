@@ -36,6 +36,19 @@ class SetupParser
         seconds   = row[16].to_f
         comments  = row[17]
         comments  = nil if comments == '-'
+      elsif title.strip =~/Fert/
+        treatment = "T#{row[0]}"
+        replicate = "R#{treatment[3]}"
+        treatment = treatment[0..2]
+        sub_plot  = "R#{row[1]}"
+        chamber   = row[3]
+        vial      = row[3]
+        lid       = row[4]
+        height    = [row[5].to_f,row[6].to_f, row[7].to_f, row[8].to_f]
+        soil_temp = row[9].to_f
+        seconds   = row[14].to_f
+        comments  = row[15]
+        comments  = nil if comments == '-'
       else
         treatment = "T#{row[0]}"
         replicate = "R#{row[1]}"

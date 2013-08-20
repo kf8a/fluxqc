@@ -3,6 +3,49 @@ require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
 
 describe SetupParser do
 
+  describe 'parsing an lter forest fert setup file' do
+    before do
+      file = File.expand_path("../../fixtures/fert4.csv", __FILE__)
+      File.exists?(file).should be_true
+      @result = SetupParser.parse(file)
+    end
+
+    it 'returns an array of sample hashes' do
+      @result.class.should == Array
+    end
+
+    it 'has the right run title' do
+      @result[0][:run_name].should == 'LTER 2007 Fert 4'
+    end
+
+    describe 'first row' do
+      it 'has the right sample date' do
+        @result[0][:sample_date].should == Time.parse('2007-6-13 12:00:00')
+      end
+      it 'has the right treatment' do
+        @result[0][:treatment].should == 'TDF'
+      end
+      it 'has the right replicate' do
+        @result[0][:replicate].should == 'R1'
+      end
+      it 'has the right vial' do
+        @result[0][:vial].should == '137'
+      end
+      it 'has the right lid' do
+        @result[0][:lid].should == 'A'
+      end
+      it 'has the right height' do
+        @result[0][:height].should == [17.5, 17.5, 17.5, 18.5]
+      end
+      it 'has the right soil_temperature' do
+        @result[0][:soil_temperature].should == 16.5
+      end
+      it 'has the right seconds' do
+        @result[0][:seconds].should == 0
+      end
+    end
+  end
+
   describe 'parsing an lter csv setup file' do
     before do
       file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
