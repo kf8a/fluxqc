@@ -1,5 +1,8 @@
 require 'chronic'
 require 'csv'
+require_relative 'glbrc_setup_parser'
+require_relative 'fert_setup_parser'
+require_relative 'lter_setup_parser'
 
 # The SetupParser parses the run setup file and returns the
 # results as a hash. It is called by the setup parser loader
@@ -25,13 +28,14 @@ class SetupParser
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
-      if title.strip =~ /^GLBRC.+\d$/
-        treatment, replicate, chamber, vial, lid, height, soil_temp, seconds, comments = glbrc_row(row)
+      parser = if title.strip =~ /^GLBRC.+\d$/
+        GLBRCSetupParser.new
       elsif title.strip =~/Fert/
-        treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comment = fert_row(row)
+        FertSetupParser.new
       else
-        treatment, replicate, chamber, vial, lid, height, soil_temp, seconds, comments = lter_row(row)
+        LTERSetupParser.new
       end
+      treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
 
       {:run_name => title, :sample_date => sample_date,
         :treatment => treatment, :replicate => replicate,
@@ -43,47 +47,4 @@ class SetupParser
     end
   end
 
-  def self.glbrc_row(row)
-    treatment = "#{row[0]}#{row[3]}"
-    replicate = "R#{row[1]}"
-    chamber   = row[4]
-    vial      = row[5]
-    lid       = row[6]
-    height    = [row[7].to_f,row[8].to_f, row[9].to_f, row[10].to_f]
-    soil_temp = row[11].to_f
-    seconds   = row[16].to_f
-    comments  = row[17]
-    comments  = nil if comments == '-'
-    [treatment, replicate, chamber, vial, lid, height, soil_temp, seconds, comments]
-  end
-
-  def self.fert_row(row)
-    treatment = "T#{row[0]}"
-    replicate = "R#{treatment[3]}"
-    treatment = treatment[0..2]
-    sub_plot  = "R#{row[1]}"
-    chamber   = row[3]
-    vial      = row[3]
-    lid       = row[4]
-    height    = [row[5].to_f,row[6].to_f, row[7].to_f, row[8].to_f]
-    soil_temp = row[9].to_f
-    seconds   = row[14].to_f
-    comments  = row[15]
-    comments  = nil if comments == '-'
-    [treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments]
-  end
-
-  def self.lter_row(row)
-    treatment = "T#{row[0]}"
-    replicate = "R#{row[1]}"
-    chamber   = row[3]
-    vial      = row[4]
-    lid       = row[5]
-    height    = [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
-    soil_temp = row[10].to_f
-    seconds   = row[15].to_f
-    comments  = row[16]
-    comments  = nil if comments == '-'
-    [treatment, replicate, chamber, vial, lid, height, soil_temp, seconds, comments]
-  end
 end
