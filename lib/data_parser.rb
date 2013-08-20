@@ -26,14 +26,7 @@ class DataParser
 
     #look for first row that starts with a number
     unless filetype == :forth
-      first_row_of_data = 0
-      lines.each do |row|
-        if row[1] =~ /\d+/
-          break
-        end
-        first_row_of_data = first_row_of_data + 1
-      end
-      first_row_of_data.times do
+      first_row_of_data(lines).times do
         lines.shift
       end
     end
@@ -77,4 +70,16 @@ class DataParser
     {vial: row[1], n2o: {ppm: row[11].to_f},
       co2: {ppm: row[12].to_f}, ch4: {ppm: row[13].to_f}}
   end
+
+  def self.first_row_of_data(lines)
+    result = 0
+    lines.each do |row|
+      if row[1] =~ /\d+/
+        break
+      end
+      result += 1
+    end
+    result
+  end
+
 end
