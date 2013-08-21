@@ -74,7 +74,7 @@ class Flux.ScatterPlot
       .attr('y1', y(a1))
       .attr('x2',x(d3.max(@data, (d)->d.key)))
       .attr('y2', y(a2))
-    
+
     # add dots
     g.selectAll('path')
       .data(@data)
@@ -99,7 +99,7 @@ class Flux.ScatterPlot
       .enter().append('svg:line')
       .attr('stroke', '#A8A8A8')
       .attr('x1', (d) -> x(d))
-      .attr('y1',y(0))
+      .attr('y1',y(ymin))
       .attr('x2', (d) -> x(d))
       .attr('y2',@margin - 5)
 
@@ -118,7 +118,7 @@ class Flux.ScatterPlot
     g.append('svg:line')
       .attr('stroke', '#A8A8A8')
       .attr('x1', x(0))
-      .attr('y1', y(0))
+      .attr('y1', y(ymin))
       .attr('x2', x(0))
       .attr('y2', y(ymax))
 
