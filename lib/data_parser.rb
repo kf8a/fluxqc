@@ -9,13 +9,7 @@ require 'csv'
 class DataParser
 
   def self.parse(file_name)
-    if file_name =~ /csv$/
-      lines = CSV::readlines(file_name)
-    else
-      lines = CSV::readlines(file_name,
-                             :encoding => "UTF-16LE:UTF-8",
-                             :col_sep=>"\t")
-    end
+    lines = self.read_file(file_name)
 
     # see if we have a chemstation file
     filetype = if lines[0][0] =~ /Analysis Date/
@@ -84,4 +78,13 @@ class DataParser
     result
   end
 
+  def self.read_file(file_name)
+    if file_name =~ /csv$/
+      CSV::readlines(file_name)
+    else
+      CSV::readlines(file_name,
+                     :encoding => "UTF-16LE:UTF-8",
+                     :col_sep=>"\t")
+    end
+  end
 end
