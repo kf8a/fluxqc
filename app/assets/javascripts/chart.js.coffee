@@ -26,7 +26,8 @@ class Flux.ScatterPlot
 
     ymax = d3.max(@data, (d) -> d.value)
     ymax = 1.5 unless ymax > 1.5 
-    ymin = 0 #d3.min(data, (d) -> d.value)
+    ymin = d3.min(data, (d) -> d.value)
+    ymin = 0 unless ymax < 0
 
     label_format = d3.format('3.4r')
 
