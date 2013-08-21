@@ -6,7 +6,7 @@ describe DataParser do
     before do
       file = File.expand_path("../../fixtures/result.txt", __FILE__)
       File.exists?(file).should be_true
-      @result = DataParser.parse(file)
+      @result = DataParser.new.parse(file)
     end
 
     it 'finds the correct number of samples' do
@@ -55,7 +55,7 @@ describe DataParser do
     before do
       file = File.expand_path("../../fixtures/results_2.txt", __FILE__)
       File.exists?(file).should be_true
-      @result = DataParser.parse(file)
+      @result = DataParser.new.parse(file)
     end
 
     it 'finds the correct number of samples' do
@@ -68,7 +68,7 @@ describe DataParser do
     before do
       file = File.expand_path("../../fixtures/lter2007-forestfert1.csv", __FILE__)
       File.exists?(file).should be_true
-      @result = DataParser.parse(file)
+      @result = DataParser.new.parse(file)
     end
 
     it 'finds the correct number of samples' do

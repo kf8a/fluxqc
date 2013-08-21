@@ -24,7 +24,7 @@ class DataFileLoader
     dataloader = DataFileLoader.new(run)
 
     file_path = run.data_file.file.path
-    vials = DataParser.parse(file_path)
+    vials = DataParser.new.parse(file_path)
 
     standard_vials, sample_vials = vials.partition {|x| x[:vial] =~ /CHK|STD|check|.*[a-z]$/i }
 
