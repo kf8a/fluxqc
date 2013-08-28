@@ -35,9 +35,7 @@ class Fitter
     return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if data.length < 2
 
     data.each do |datum|
-      next if datum[:deleted]
-      next unless datum[:key]
-      next unless datum[:value]
+      next if bad_datum(datum)
       x = datum[:key].to_f
       y = datum[:value].to_f
       sum_x  += x
@@ -60,5 +58,13 @@ class Fitter
     r2 = correlation * correlation
 
     {:slope=>m, :offset=>b, :r2=>r2}
+  end
+
+  def bad_datum(datum)
+    datum[:deleted] || no_key_value(datum)
+  end
+
+  def no_key_value(datum)
+    (!datum[:key] || !datum[:value])
   end
 end
