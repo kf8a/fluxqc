@@ -35,6 +35,9 @@ class DataFileLoader
     dataloader.process_standard(standard_vials)
 
     # dataloger.process_checks(checks)
+
+    #compute fluxes
+    run.recompute_fluxes
   end
 
   def process_samples(sample_vials)

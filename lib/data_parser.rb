@@ -91,7 +91,7 @@ class DataParser
   def filetype(lines)
     if lines[0][0] =~ /Analysis Date/
       :chemstation
-    elsif lines[0][0] =~ /standard/
+    elsif lines[2][0] =~ /standard/
       :forth
     end
   end
