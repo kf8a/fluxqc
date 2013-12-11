@@ -49,6 +49,8 @@ class DataFileLoader
 
           value = vial[c.to_sym]
 
+          measurement.column = value[:column]
+
           measurement.ppm   = value[:ppm]
           measurement.area  = value[:area]
 
@@ -75,7 +77,11 @@ class DataFileLoader
           standard_curve.save
         end
 
-        standard = Standard.create(:vial=> vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
+        standard = Standard.create(:vial=> vial[:vial], 
+                                   :compound_id => compound.id, 
+                                   :column => value[:column],
+                                   :area => value[:area], 
+                                   :ppm => value[:ppm])
         standard_curve.standards << standard
 
         if standard.area == standard.ppm  || standard.ppm.nil? # we don't have ppm's in the file. Try to deduce it from the name
