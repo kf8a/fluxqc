@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819183115) do
+ActiveRecord::Schema.define(:version => 20131211143108) do
 
   create_table "campaign_plots", :force => true do |t|
     t.integer  "plot_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20130819183115) do
     t.datetime "ending_time"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "column"
   end
 
   create_table "plots", :force => true do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20130819183115) do
     t.datetime "ending_time"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "column"
   end
 
   create_table "templates", :force => true do |t|
