@@ -47,7 +47,8 @@ class DataParser
   end
 
   def chemstation_parse(row)
-    {:vial=>row[3], 
+    {:vial=>row[3],
+      :column => row[1].to_i % 2,
       :ch4=>{:area => row[7].to_f},
       :co2=>{:area => row[11].to_f}, 
       :n2o=>{:area => row[15].to_f}}

@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20131211180508) do
     t.datetime "ending_time"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "column"
   end
 
   create_table "plots", :force => true do |t|
@@ -124,7 +125,6 @@ ActiveRecord::Schema.define(:version => 20131211180508) do
     t.datetime "updated_at",    :null => false
     t.string   "uuid"
     t.integer  "incubation_id"
-    t.integer  "column"
   end
 
   create_table "setups", :force => true do |t|
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20131211180508) do
     t.datetime "ending_time"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "column"
   end
 
   create_table "templates", :force => true do |t|

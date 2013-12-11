@@ -13,9 +13,20 @@ describe DataParser do
       @result.size.should == 304
     end
 
+    describe 'row 18' do
+      before do
+        @row = @result[18]
+      end
+      it 'sets the right column' do
+        @row[:column].should == 1
+      end
+    end
     describe 'row 17' do
       before do
         @row = @result[17]
+      end
+      it 'sets the right column' do
+        @row[:column].should == 0
       end
       it 'finds the right vial' do
         @row[:vial].should == '4'
