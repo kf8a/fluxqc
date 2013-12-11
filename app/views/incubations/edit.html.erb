@@ -1,4 +1,9 @@
 <%= simple_form_for @incubation  do |f| %>
-  <%= f.inputs %>
-  <%= f.buttons %>
+  <%= f.input :treatment %>
+  <%= f.input :replicate %>
+  <%= f.input :chamber %>
+  <%= f.input :sampled_at %>
+  <%= f.input :avg_height_cm %>
+  <%= f.input :soil_temperature %>
+  <%= f.button :submit %>
 <% end %> 
