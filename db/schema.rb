@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819183115) do
+ActiveRecord::Schema.define(:version => 20131211180508) do
 
   create_table "campaign_plots", :force => true do |t|
     t.integer  "plot_id"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20130819183115) do
     t.datetime "updated_at",    :null => false
     t.string   "uuid"
     t.integer  "incubation_id"
+    t.integer  "column"
   end
 
   create_table "setups", :force => true do |t|
