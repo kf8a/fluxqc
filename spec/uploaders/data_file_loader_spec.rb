@@ -53,6 +53,9 @@ describe DataFileLoader do
       @run.standard_curves.reload
     end
 
+    it 'updates the measurement with the column id' do
+      @incubation.flux('n2o').measurements.first.column.should == 1
+    end
     it 'updates the measurement with the co2 area' do
       @incubation.flux('co2').measurements.first.area.should == 70570.75
     end
