@@ -6,6 +6,7 @@ require File.expand_path("../../../lib/fitter.rb",__FILE__)
 # It uses the fitter class to do it's work.
 class Flux < ActiveRecord::Base
   belongs_to :incubation
+  belongs_to :compound
   has_many   :measurements,  :dependent => :destroy
 
   attr_reader :flux, :muliplier, :data
