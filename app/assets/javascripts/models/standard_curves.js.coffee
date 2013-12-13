@@ -2,7 +2,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
   urlRoot: '/standard_curves'
 
   initialize: ->
-    # @updateSamples()
+    @updateSamples()
 
   defaults:
     id:       null
