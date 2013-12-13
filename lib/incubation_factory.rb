@@ -29,6 +29,8 @@ class IncubationFactory
       ['n2o','co2','ch4'].each do |c|
         compound = Compound.find_by_name(c)
         flux = Flux.new
+        flux.compound = compound
+
         incubation.fluxes << flux
 
         update_measurement(flux, input, compound, run, incubation)
