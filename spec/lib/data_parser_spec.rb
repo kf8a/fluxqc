@@ -75,6 +75,63 @@ describe DataParser do
 
   end
 
+  describe 'parsing another chemstation result file' do
+    before do
+      file = File.expand_path("../../fixtures//2012_result.txt", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.new.parse(file)
+    end
+    describe 'row 17' do
+      before do
+        @row = @result[17]
+      end
+      it 'finds the right vial' do
+        @row[:vial].should == '4'
+      end
+      it 'finds the right ch4 area' do 
+        @row[:ch4][:area].should == 21.521156
+      end
+      it 'finds the right co2 area' do
+        @row[:co2][:area].should == 235565.078125
+      end
+      it 'finds the right n2o area' do
+        @row[:n2o][:area].should == 388.917969
+      end
+    end
+  end
+
+  describe 'parsing another chemstation result file' do
+    before do
+      file = File.expand_path("../../fixtures/LTER20130702S7.CSV", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.new.parse(file)
+    end
+
+    it 'finds the correct number of samples' do
+      @result.size.should == 299
+    end
+
+    describe 'row 17' do
+      before do
+        @row = @result[17]
+      end
+
+      it 'finds the right vial' do
+        @row[:vial].should == '11'
+      end
+      it 'finds the right ch4 area' do 
+        @row[:ch4][:area].should == 17.119198
+      end
+      it 'finds the right co2 area' do
+        @row[:co2][:area].should == 88616.09375
+      end
+      it 'finds the right n2o area' do
+        @row[:n2o][:area].should == 421.389252
+      end
+
+    end
+  end
+
   describe 'parsing an old results file' do
     before do
       file = File.expand_path("../../fixtures/lter2007-forestfert1.csv", __FILE__)

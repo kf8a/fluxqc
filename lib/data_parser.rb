@@ -47,10 +47,24 @@ class DataParser
   end
 
   def chemstation_parse(row)
-    {:vial=>row[3],
-      :ch4=>{:area => row[6].to_f},
-      :co2=>{:area => row[10].to_f}, 
-      :n2o=>{:column => row[1].to_i % 2, :area => row[14].to_f}}
+    # TODO this needs to check the compound column and then act appropriatly 
+    # the columns are not always in the same order
+    vial = row[3]
+    if vial =~ /-/
+      parameters = vial.split(/-/)
+      vial = parameters.last
+    end
+    results = {}
+    results[:vial] = vial
+
+    columns = [4,8,12]
+    columns = [5,9,13] unless row[4]
+    columns.each do |column|
+      key = row[column].downcase.to_sym
+      value = row[column + 2]
+      results[key] = {:column => row[1].to_i % 2, :area=> value.to_f}
+    end
+    results
   end
 
   def processed_parse(row)
