@@ -77,7 +77,7 @@ describe DataParser do
 
   describe 'parsing another chemstation result file' do
     before do
-      file = File.expand_path("../../fixtures//2012_result.txt", __FILE__)
+      file = File.expand_path("../../fixtures/2012_result.txt", __FILE__)
       File.exists?(file).should be_true
       @result = DataParser.new.parse(file)
     end

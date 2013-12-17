@@ -8,7 +8,7 @@ gem 'pg'
 #gem 'formtastic', '>=2.0.2'
 gem 'simple_form'
 gem 'workflow'
-gem 'carrierwave', :git=>'git://github.com/jnicklas/carrierwave.git'
+gem 'carrierwave' #, :git=>'git://github.com/jnicklas/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
@@ -44,7 +44,7 @@ end
 
 group :test, :development do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-  gem 'rspec-rails' #, :git=>'git://github.com/rspec/rspec-rails.git'
+  gem 'rspec-rails' 
 end
 
 group :test do
