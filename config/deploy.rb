@@ -61,6 +61,11 @@ task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
 end
 
+desc 'link local enviroment' 
+task :link_env do
+  run "ln -nfs #{deploy_to}/shared/config/local_env.yml #{release_path}/config/local_env.yml"
+end
+
 desc "link file storage"
 task :link_file_storage do
   run "ln -nfs #{deploy_to}/shared/uploads #{release_path}/public/uploads"

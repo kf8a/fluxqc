@@ -70,7 +70,7 @@ Devise.setup do |config|
 
   # Setup a pepper to generate the encrypted password.
   # config.pepper = "1cf0e0d5606319f0cc3b16d6b0c3218fe482abb25d8f053c0778f921f96f861bf98a4a5a04dc8b53af63ea7f5356d40555592138afbbfa3505b8ecf71c571fd0"
-  config.secret_key = <%= ENV["FLUXQC_DEVISE'"] %>
+  config.secret_key = ENV["DEVISE_SECRET"]
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
