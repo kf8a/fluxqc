@@ -51,8 +51,9 @@ namespace :deploy do
     start
   end
 
-  before "deploy:finalize_update", :link_production_db
-  before "deploy:assets:precompile", "link_production_db"
+  # before "deploy:finalize_update", :link_production_db
+  before "deploy:assets:precompile", :link_production_db
+  before "deploy:assets:precompile", :link_env
   after 'deploy:finalize_update', :link_file_storage
 end
 
