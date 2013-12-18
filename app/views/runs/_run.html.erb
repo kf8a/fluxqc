@@ -14,5 +14,5 @@
   <td><%= link_to 'edit', edit_run_path(run), :class=>'btn' %></td>
   <td><%= link_to 'download', run_url(run, :format => :csv), :class=>'btn' %></td>
   <td><%= link_to 'gc input', gcinput_run_url(run, :format=>:csv), :class=>'btn' %></td>
-  <td><%= link_to 'destroy',  run, :method=>:delete, :confirm => 'Are you sure you want to delete this run?' ,:class=>'btn'%></td>
+  <td><%= link_to 'destroy',  run, method: :delete, data: {confirm: "Are you sure you want to delete the #{run.name}?" } ,class: 'btn'%></td>
 </tr>

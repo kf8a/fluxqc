@@ -19,7 +19,7 @@
     <td><%= template.samples_per_plot %></td>
     <td><%= link_to 'Show', template %></td>
     <td><%= link_to 'Edit', edit_template_path(template) %></td>
-    <td><%= link_to 'Destroy', template, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', template, data: {confirm: 'Are you sure?'}, method: :delete %></td>
   </tr>
 <% end %>
 </table>

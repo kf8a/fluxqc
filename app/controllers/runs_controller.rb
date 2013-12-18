@@ -25,7 +25,7 @@ class RunsController < ApplicationController
   end
 
   def create
-    @run = Run.new(params[:run])
+    @run = Run.new(run_params)
     if @run.save
       if params[:run][:setup_file]
         # if Rails.env == 'production'
@@ -57,7 +57,7 @@ class RunsController < ApplicationController
 
   def update
     @run = Run.find(params[:id])
-    if @run.update_attributes(params[:run])
+    if @run.update_attributes(run_params)
       if params[:run][:setup_file]
         # if Rails.env == 'production'
         #   Resque.enqueue(SetupFileLoader, @run.id)
@@ -140,4 +140,9 @@ class RunsController < ApplicationController
     redirect_to runs_path(:state => 'uploaded')
   end
 
+  private 
+
+  def run_params
+    params.permit(:name)
+  end
 end

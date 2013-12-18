@@ -1,11 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.16'
+gem 'rails', '~> 4.0'
 gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
 gem 'pg'
-#gem 'formtastic', '>=2.0.2'
 gem 'simple_form'
 gem 'workflow'
 gem 'carrierwave' #, :git=>'git://github.com/jnicklas/carrierwave.git'

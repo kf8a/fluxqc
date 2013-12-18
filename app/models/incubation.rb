@@ -6,7 +6,7 @@
 # Incubations are part of run and are specific to a particular plot
 class Incubation < ActiveRecord::Base
   has_many :fluxes,  :dependent => :destroy
-  has_many :measurements, :order => :vial
+  has_many :measurements, -> { order :vial }
   has_many :samples
   belongs_to :run
   belongs_to :lid
