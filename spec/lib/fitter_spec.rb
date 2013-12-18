@@ -87,12 +87,12 @@ describe Fitter do
 
   describe 'using a flux object' do
     before(:each) do
-      @flux = double
-      @flux.double(:try).and_return nil
-      @flux.double(:headspace).and_return(1)
-      @flux.double(:surface_area).and_return(2)
-      @flux.double(:mol_weight).and_return(12)
-      @flux.double(:data).and_return([
+      @flux = double()
+      @flux.stub(:try).and_return nil
+      @flux.stub(:headspace).and_return(1)
+      @flux.stub(:surface_area).and_return(2)
+      @flux.stub(:mol_weight).and_return(12)
+      @flux.stub(:data).and_return([
                                    {:key => 1, :value=>1, :deleted => false},
                                    {:key =>2, :value => 2, :deleted => false}
                                    ])
