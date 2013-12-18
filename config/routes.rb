@@ -29,6 +29,6 @@ Fluxqc::Application.routes.draw do
   #   mount Resque::Server, :at => "/resque"
   # end
  
-  match "runs/:id/standards" => 'runs#show'
+  get "runs/:id/standards" => 'runs#show'
   root :to => 'runs#index'
 end
