@@ -23,7 +23,7 @@ class IncubationFactory
       incubation.sub_plot           = input[:sub_plot]
       incubation.chamber            = input[:chamber]
       incubation.soil_temperature   = input[:soil_temperature]
-      incubation.avg_height_cm  = input[:height].inject(:+)/input[:height].count
+      incubation.avg_height_cm      = input[:height].inject(:+)/input[:height].count
       incubation.lid                = Lid.find_by_name(input[:lid])
       incubation.sampled_at         = input[:input_at]
       ['n2o','co2','ch4'].each do |c|
