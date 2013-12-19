@@ -3,7 +3,7 @@
 # and will be analysed for one or more compounds
 # the data from several samples are used to compute the flux
 class Sample < ActiveRecord::Base
-  has_many :measurements
+  has_many :measurements, dependent: :destroy
   belongs_to :run
   belongs_to :incubation
 

@@ -4,8 +4,8 @@
 # taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
   has_many :incubations, -> {order 'treatment, replicate' },  :dependent => :destroy
-  has_many :samples, :dependent => :destroy
-  has_many :standard_curves
+  has_many :samples, dependent: :destroy
+  has_many :standard_curves, dependent: :destroy
 
   mount_uploader :setup_file, SetupUploader
   mount_uploader :data_file, DataUploader

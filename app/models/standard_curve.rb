@@ -2,8 +2,8 @@
 class StandardCurve < ActiveRecord::Base
   belongs_to :run
   belongs_to :compound
-  has_many :standards
-  has_many :check_standards
+  has_many :standards, dependent: :destroy
+  has_many :check_standards, dependent: :destroy
 
   def data
     standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => s.excluded}}
