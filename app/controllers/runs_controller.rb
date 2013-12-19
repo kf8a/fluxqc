@@ -143,6 +143,6 @@ class RunsController < ApplicationController
   private 
 
   def run_params
-    params.permit(:name, :sampled_on, :run_on, :comment, :study)
+    params.require(:run).permit(:name, :sampled_on, :run_on, :comment, :study, :setup_file, :data_file)
   end
 end

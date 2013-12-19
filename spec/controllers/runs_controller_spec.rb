@@ -23,11 +23,11 @@ describe RunsController do
       @run = FactoryGirl.create :run
     end
     it "returns http success" do
-      get :show, :id => @run
+      get :show, id: @run
       response.should be_success
     end
     it 'renders the show template' do
-      get :show, :id => @run
+      get :show, id: @run
       response.should render_template(:show)
     end
   end
@@ -48,14 +48,14 @@ describe RunsController do
     describe 'with a valid object' do
      it 'redirects to show' do
        Run.any_instance.stub(:id).and_return(1)
-       post :create , :run => {:name => 'test'}
+       post :create , run: {name: 'test'}
        response.should redirect_to(edit_run_path(1))
      end
     end
     describe 'with an invalid object' do
       it 'redirects back to new' do
         Run.any_instance.stub(:save).and_return(false)
-        post :create, {}
+        post :create, run: {name: 'test'}
         response.should redirect_to(new_run_path)
       end
     end
@@ -64,7 +64,7 @@ describe RunsController do
   describe 'GET :edit' do
     it 'is succesfull' do
       run = FactoryGirl.create :run
-      get :edit, :id=>run
+      get :edit, id: run
       response.should be_success
     end
   end
@@ -74,7 +74,7 @@ describe RunsController do
       it 'redirects to show' do
        Run.any_instance.stub(:save).and_return(true)
        Run.any_instance.stub(:id).and_return(1)
-       post :update, :id=>1, :run=> {:name => 'test'}
+       post :update, id: 1, run: {name: 'test'}
        response.should redirect_to(run_path(assigns(:run)))
       end
     end
@@ -82,7 +82,7 @@ describe RunsController do
       it 'redirects back to new' do
         Run.any_instance.stub(:save).and_return(false)
         Run.any_instance.stub(:id).and_return(1)
-        post :update, :id=>1
+        post :update, id: 1, run: {name: 'test'}
         response.should redirect_to(edit_run_path(assigns(:run)))
       end
     end
@@ -98,7 +98,7 @@ describe RunsController do
   describe 'getting the sample table for the gc' do
     it 'delivers a sample table' do
       run = FactoryGirl.create :run
-      get :gcinput, :id=>run, :format=>:csv
+      get :gcinput, id: run, format: :csv
       response.should be_success
     end
   end
@@ -112,7 +112,7 @@ describe RunsController do
     describe 'POST reject' do
       it 'rejects a run' do
         @run.stub('reject!').and_return(true)
-        post :reject, :id => @run
+        post :reject, id: @run
         response.should redirect_to(runs_path(:state=>'rejected'))
       end
 
@@ -121,7 +121,7 @@ describe RunsController do
     describe 'POST accept' do
       it 'accepts a run' do
         @run.stub('accept!')
-        post :accept, :id => @run
+        post :accept, id: @run
         response.should redirect_to(runs_path(:state=>'accepted'))
       end
     end
@@ -129,7 +129,7 @@ describe RunsController do
     describe 'POST approve' do
       it 'approves a run' do
         @run.stub('approve!')
-        post :approve, :id => @run
+        post :approve, id: @run
         response.should redirect_to(runs_path(:state=>'approved'))
       end
     end
@@ -137,7 +137,7 @@ describe RunsController do
     describe 'POST publish' do
       it 'publishes a run' do
         @run.stub('publish!')
-        post :publish, :id => @run
+        post :publish, id: @run
         response.should redirect_to(runs_path(:state => 'published'))
       end
     end
@@ -145,7 +145,7 @@ describe RunsController do
     describe 'POST unapprove' do
       it 'unapproves a run' do
         @run.stub('unapprove!')
-        post :unapprove, :id => @run
+        post :unapprove, id: @run
         response.should redirect_to(runs_path(:state => 'accepted'))
       end
     end
@@ -153,7 +153,7 @@ describe RunsController do
     describe 'POST unpublish' do
       it 'unpublishes a run' do
         @run.stub('unpublish!').and_return(true)
-        post :unpublish, :id=>@run
+        post :unpublish, id: @run
         response.should redirect_to(runs_path(:state => 'approved'))
       end
     end
