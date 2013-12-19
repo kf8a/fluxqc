@@ -56,22 +56,23 @@ class DataParser
     end
     results = {}
     results[:vial] = vial
+    results[:acquired_at] = Time.strptime(row[0], "%m/%d/%y %l:%M:%S %p")
 
     columns = [4,8,12]
     columns = [5,9,13] unless row[4]
     columns.each do |column|
       key = row[column].downcase.to_sym
       value = row[column + 2]
-      results[key] = {:column => row[1].to_i % 2, :area=> value.to_f}
+      results[key] = {column: row[1].to_i % 2, area: value.to_f}
     end
     results
   end
 
   def processed_parse(row)
-    {:vial=>row[0], 
-      :n2o=>{:ppm => row[1].to_f},
-      :co2=>{:ppm => row[2].to_f}, 
-      :ch4=>{:ppm => row[3].to_f}}
+    {vial: row[0], 
+      n2o: {ppm: row[1].to_f},
+      co2: {ppm: row[2].to_f}, 
+      ch4: {ppm: row[3].to_f}}
   end
 
   def forth_parse(row)
