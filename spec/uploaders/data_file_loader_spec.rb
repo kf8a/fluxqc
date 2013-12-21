@@ -21,6 +21,12 @@ describe DataFileLoader do
       @run = Run.find(run.id)
     end
 
+		# describe 'standard curves' do
+		# 	it 'has the right number of standard curves' do
+		# 		@run.standard_curves.size.should == 6
+		# 	end
+		# end
+
     describe 'when there are measurements available' do
       before do
         @incubation = @run.incubations.first
