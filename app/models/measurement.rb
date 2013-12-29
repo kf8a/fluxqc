@@ -17,7 +17,9 @@ class Measurement < ActiveRecord::Base
 
   end
 
+  #This is used to compute the distance for the drift correction
   def position
+    acquired_at.to_s
   end
 end
 

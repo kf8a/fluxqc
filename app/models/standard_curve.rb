@@ -48,7 +48,9 @@ class StandardCurve < ActiveRecord::Base
     self.intercept  = result[:offset]
   end
 
+  #This is used to compute the distance for the drift correction
   def position
+    acquired_at.to_s
   end
 end
 
