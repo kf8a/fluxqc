@@ -7,11 +7,6 @@ describe FluxesController do
     sign_in @user
   end
 
-  describe 'GET show' do
-
-    pending 'test the show action'
-  end
-
   describe 'PUT update point' do
     before do
       @flux         = FactoryGirl.create :flux
