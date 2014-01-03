@@ -26,6 +26,8 @@ class Incubation < ActiveRecord::Base
       z_lid_headspace
     elsif 'Y' == lid.name
       y_lid_headspace
+    elsif 'X' == lid.name
+      x_lid_headspace
     else
       lter_lid_headspace
     end
@@ -55,6 +57,12 @@ class Incubation < ActiveRecord::Base
   # The 0.2 accounts for the decrease in ht due to the lid groove.
   def y_lid_headspace
     (Math::PI * 14.1**2 * (avg_height_cm - 0.2)/1000)
+  end
+
+  # cimmyt buckets
+  # Pi * 25/2 * H
+  def x_lid_headspace
+    (Math::PI * (25/2.0)**2 * avg_height_cm)/1000
   end
 
   def co2
