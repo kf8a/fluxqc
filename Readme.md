@@ -9,7 +9,7 @@ A standard is measurement for which we know the result!
 
 Workflow:
 * create a sample campaign
-(* upload setup file)
+* upload setup file)
 * upload data file
 * check standards
 * check fluxes
