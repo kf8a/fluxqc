@@ -46,20 +46,23 @@ class DataParser
     vials.values
   end
 
-  def chemstation_parse(row)
-    # TODO this needs to check the compound column and then act appropriatly 
-    # the columns are not always in the same order
-    vial = row[3]
+  def parse_vial(row)
+    vial = row[3] # the vial number is in columns 3 normally
     if vial =~ /-/
-      parameters = vial.split(/-/)
-      vial = parameters.last
+      vial.split(/-/).last
+    else
+      vial
     end
+  end
+
+  def chemstation_parse(row)
     results = {}
-    results[:vial] = vial
+
+    results[:vial] = parse_vial(row)
     results[:acquired_at] = Time.strptime(row[0], "%m/%d/%y %l:%M:%S %p")
 
-    columns = [4,8,12]
-    columns = [5,9,13] unless row[4]
+    columns = [4,8,12] # the location of the compound names
+    columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
     columns.each do |column|
       key = row[column].downcase.to_sym
       value = row[column + 2]
