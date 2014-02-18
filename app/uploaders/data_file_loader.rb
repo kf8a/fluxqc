@@ -26,34 +26,49 @@ class DataFileLoader
     file_path = run.data_file.file.path
     vials = DataParser.new.parse(file_path)
 
-		# new_standard_curve = false
-		# vials.each do |vial|
-		# 	if vial[:vial] =~ /CKH|STD|check|.*[a-z]$/i
-		# 		#process standard
-		# 	else
-		# 		new_standard_curve = true
-		# 	# process sample
-		# 	end
-		# end
+    dataloader.process_vials(vials)
 
-    standard_vials, sample_vials = vials.partition {|x| x[:vial] =~ /CHK|STD|check|.*[a-z]$/i }
-
-    # standards, checks = standard_vials.partition {|x| x[;vial] =~ /STD*/i }
-
-    dataloader.process_samples(sample_vials)
-
-    dataloader.process_standards(standard_vials)
-
-    # dataloger.process_checks(checks)
+    # standard_vials, sample_vials = vials.partition {|x| x[:vial] =~ /CHK|STD|check|.*[a-z]$/i }
+    # # standards, checks = standard_vials.partition {|x| x[;vial] =~ /STD/i }
+    # dataloader.process_samples(sample_vials)
+    # dataloader.process_standards(standard_vials)
+    # # dataloger.process_checks(checks)
 
     #compute fluxes
     run.recompute_fluxes
+  end
+
+  def process_vials(vials)
+    get_new_standard_curves = true
+    standard_curves = nil
+
+		vials.each do |vial|
+			if vial[:vial] =~ /CKH|STD|check|.*[a-z]$/i
+        if get_new_standard_curves
+          get_new_standard_curves = false
+		      standard_curves = new_standard_curves
+        end
+				process_standard(vial, standard_curves)
+			else
+        get_new_standard_curves = true
+			  process_sample(vial)
+			end
+		end
   end
 
   def process_samples(sample_vials)
     sample_vials.each do |vial|
 			process_sample(vial)
     end
+  end
+
+  def new_standard_curves
+    result = {}
+    ['co2','n2o','ch4'].each do |name|
+      compound = Compound.find_by(name: name)
+      result[name.to_sym] = StandardCurve.create(run_id: @run.id, compound_id: compound.id)
+    end
+    result
   end
 
 	def process_sample(vial)
@@ -76,38 +91,20 @@ class DataFileLoader
 
   def process_standards(standard_vials)
     # checks, standard_vials = std_vials.partition {|x| x[:vial] =~ /CHK|check/i}
-
+    standard_curves = new_standard_curves
     standard_vials.each do |vial|
-			process_standard(vial)
+			process_standard(vial, standard_curves)
     end
-    # checks.each do |vial|
-    #   ['co2','n2o','ch4'].each do |c|
-    #     value = vial[c.to_sym]
-    #     compound = Compound.find_by_name(c)
-    #     standard_curve = StandardCurve.find_by_run_id_and_compound_id(@run,compound)
-
-    #     unless standard_curve
-    #       standard_curve = StandardCurve.create(:run=>@run, :compound=>compound)
-    #       @run.standard_curves << standard_curve
-    #       standard_curve.save
-    #     end
-
-    #     check_standard = CheckStandard.create(:vial => vial[:vial], :compound_id => compound.id, :area => value[:area], :ppm => value[:ppm])
-    #     standard_curve.check_standards << check_standard
-
-    #     check_standard.ppm = CHK[c]
-    #     check_standard.save
-    #   end
-    # end
   end
 
-	def process_standard(vial)
+	def process_standard(vial, standard_curves)
 		# find or create a standard for the compound
 		# create and add the measurement
 		['co2','n2o','ch4'].each do |c|
 			value = vial[c.to_sym]
 			compound = Compound.find_by_name(c)
-			standard_curve = find_or_create_standard_curve(compound)
+      standard_curve = standard_curves[c.to_sym]
+			# standard_curve = find_or_create_standard_curve(compound)
 
 			standard = Standard.create(:vial         => vial[:vial], 
 																 :compound_id  => compound.id, 

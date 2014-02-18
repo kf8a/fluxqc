@@ -21,12 +21,6 @@ describe DataFileLoader do
       @run = Run.find(run.id)
     end
 
-		# describe 'standard curves' do
-		# 	it 'has the right number of standard curves' do
-		# 		@run.standard_curves.size.should == 6
-		# 	end
-		# end
-
     describe 'when there are measurements available' do
       before do
         @incubation = @run.incubations.first
@@ -79,14 +73,23 @@ describe DataFileLoader do
       @run.standard_curves.size.should == 3
     end
 
-    it 'loads an area' do
-      @run.standard_curves.first.standards.first.area.should == 0
-      @run.standard_curves.first.standards.last.area.should == 90863.210937
+    it 'has an n2o standard curve' do
+      compound = Compound.find_by(name: 'n2o')
+      @run.standard_curves.where(compound_id: compound.id).first.should_not be_nil
+    end
+
+    it 'loads an area for the n2o standard' do
+      compound = Compound.find_by(name: 'n2o')
+      curve = @run.standard_curves.find_by(compound_id: compound.id)
+      curve.standards.first.area.should == 0
+      curve.standards.last.area.should == 1542.303589
     end
 
     it 'loads ppm into the standard' do
-      @run.standard_curves.first.standards.first.ppm.should == 0
-      @run.standard_curves.first.standards.last.ppm.should == 350.423
+      compound = Compound.find_by(name: 'n2o')
+      curve = @run.standard_curves.find_by(compound_id: compound.id)
+      curve.standards.first.ppm.should == 0
+      curve.standards.last.ppm.should == 1.678
     end
   end
 
