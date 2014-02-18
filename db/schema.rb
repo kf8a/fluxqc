@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217234421) do
+ActiveRecord::Schema.define(version: 20140218202133) do
 
   create_table "campaign_plots", force: true do |t|
     t.integer  "plot_id"
@@ -137,6 +137,13 @@ ActiveRecord::Schema.define(version: 20140217234421) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "standard_curve_organizers", force: true do |t|
+    t.integer  "run_id"
+    t.text     "curves"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "standard_curves", force: true do |t|
     t.integer  "run_id"
     t.integer  "compound_id"
@@ -144,6 +151,7 @@ ActiveRecord::Schema.define(version: 20140217234421) do
     t.float    "intercept"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "column"
   end
 
   create_table "standards", force: true do |t|
