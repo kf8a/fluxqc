@@ -93,4 +93,25 @@ describe DataFileLoader do
     end
   end
 
+
+  describe 'a chemstation file with two standard sets' do
+    before do
+      run = FactoryGirl.create :run,
+                         :data_file => fixture_file_upload('/LTER20130520S4.CSV'),
+                         :setup_file => fixture_file_upload('/setup_test.csv')
+      SetupFileLoader.perform(run.id).should_not be_false
+      DataFileLoader.perform(run.id).should_not be_false
+      @run = Run.find(run.id)
+      @incubation = @run.incubations.first
+      @run.standard_curves.reload
+    end
+
+    it 'should have the right number of vials' do
+      @run.samples.size.should == 144
+    end
+
+    it 'should have two sets of standard curves' do
+      @run.standard_curves.size.should == 6
+    end
+  end
 end

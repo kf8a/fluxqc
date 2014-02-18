@@ -103,6 +103,33 @@ describe DataParser do
     end
   end
 
+  describe 'parsing a second chemstation file' do
+    before do
+      file = File.expand_path("../../fixtures//LTER20130520S4.CSV", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.new.parse(file)
+    end
+
+    it 'finds the correct number of samples' do
+      @result.size.should == 295
+    end
+
+    describe 'row 17' do
+      before do
+        @row = @result[17]
+      end
+
+      it 'should not be null' do
+        @row.should_not be_nil
+      end
+
+      it 'finds the right vial' do
+        @row[:vial].should == "11"
+      end
+    end
+
+  end
+
   describe 'parsing another chemstation result file' do
     before do
       file = File.expand_path("../../fixtures/LTER20130702S7.CSV", __FILE__)
@@ -120,7 +147,7 @@ describe DataParser do
       end
 
       it 'finds the right vial' do
-        @row[:vial].should == '11'
+        @row[:vial].should == "11"
       end
       it 'finds the right ch4 area' do 
         @row[:ch4][:area].should == 17.119198
