@@ -66,7 +66,10 @@ class DataFileLoader
     result = {}
     ['co2','n2o','ch4'].each do |name|
       compound = Compound.find_by(name: name)
-      result[name.to_sym] = StandardCurve.create(run_id: @run.id, compound_id: compound.id)
+      result[name] = {
+        0 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 0),
+        1 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 1)
+      }
     end
     result
   end
@@ -103,8 +106,7 @@ class DataFileLoader
 		['co2','n2o','ch4'].each do |c|
 			value = vial[c.to_sym]
 			compound = Compound.find_by_name(c)
-      standard_curve = standard_curves[c.to_sym]
-			# standard_curve = find_or_create_standard_curve(compound)
+      standard_curve = standard_curves[c][value[:column]]
 
 			standard = Standard.create(:vial         => vial[:vial], 
 																 :compound_id  => compound.id, 
