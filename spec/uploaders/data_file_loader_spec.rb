@@ -117,4 +117,21 @@ describe DataFileLoader do
       @run.standard_curves.size.should == 12
     end
   end
+
+  describe 'a glbrc chemstation file' do
+    before do
+      run = FactoryGirl.create :run,
+                         :data_file => fixture_file_upload('/glbrc-results.CSV'),
+                         :setup_file => fixture_file_upload('/setup_test.csv')
+      SetupFileLoader.perform(run.id).should_not be_false
+      DataFileLoader.perform(run.id).should_not be_false
+      @run = Run.find(run.id)
+      @run.standard_curves.reload
+    end
+
+    it 'should have the right area for vial 2' do
+      @run.incubations.last.flux('ch4').measurements.first.area.should == 42.389095
+    end
+
+  end
 end
