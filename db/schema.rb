@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218202133) do
+ActiveRecord::Schema.define(version: 20140226145656) do
 
   create_table "campaign_plots", force: true do |t|
     t.integer  "plot_id"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20140218202133) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "column"
+    t.string   "coeff"
   end
 
   create_table "standards", force: true do |t|
