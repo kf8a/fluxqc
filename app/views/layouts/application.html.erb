@@ -24,6 +24,11 @@
             <li <%= "class='active'" if @state == 'approved'%> ><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
             <li <%= "class= 'active'" if @state == 'published'%> ><%= link_to 'Published', runs_url({:state => :published}) %></li>
             <li <%= "class= 'active'" if @state == 'rejected'%> ><%= link_to 'Rejected', runs_url({:state=>:rejected}) %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to 'Sign In', new_user_session_path  %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -31,9 +36,9 @@
   </div>
 
   <!--[if lt IE 9]>
-    <div class='alert'>
-      outdated versions of internet explorer are not supported
-    </div>
+  <div class='alert'>
+    outdated versions of internet explorer are not supported
+  </div>
   <![endif]-->
   <div class='container-fluid'>
     <%= yield %>
