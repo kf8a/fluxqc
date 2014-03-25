@@ -43,7 +43,7 @@ class DataFileLoader
     standard_curves = nil
 
 		vials.each do |vial|
-			if vial[:vial] =~ /CKH|STD|check|.*[a-z]$/i
+			if vial[:vial] =~ /(CKH|STD|check|)?.*[a-z]$/i
         if get_new_standard_curves
           get_new_standard_curves = false
 		      standard_curves = new_standard_curves
@@ -117,7 +117,13 @@ class DataFileLoader
 			standard_curve.standards << standard
 
 			if standard.area == standard.ppm  || standard.ppm.nil? # we don't have ppm's in the file. Try to deduce it from the name
+        # check to see if the standard starts with the string STD
+        # TODO remove after we are done with the current runs
+        if !(standard.vial =~ /STD/)
+          standard.vial = "STD" + standard.vial
+        end
 				standard_values = STANDARDS[standard.vial.chop]
+
 				if standard_values
 					standard.ppm = standard_values[c]
 				else
