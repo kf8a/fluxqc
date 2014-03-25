@@ -6,21 +6,19 @@
 # Incubations are part of run and are specific to a particular plot
 class Incubation < ActiveRecord::Base
   has_many :fluxes,  :dependent => :destroy
-  has_many :measurements, -> { order :vial }
+  # has_many :measurements, -> { order :vial }
   has_many :samples
   belongs_to :run
   belongs_to :lid
 
   accepts_nested_attributes_for :samples
 
-  NaN = (0.0/0.0)
-
   def flux(compound)
     fluxes.send(compound)[0]
   end
 
   def headspace
-    return NaN unless lid
+    return Float::NAN unless lid
 
     if 'Z' == lid.name
       z_lid_headspace
@@ -37,7 +35,7 @@ class Incubation < ActiveRecord::Base
     begin
       ((avg_height_cm-(lid.height-1)) * lid.surface_area)/1000 + lid.volume
     rescue NoMethodError
-      NaN
+      Float::NAN
     end
   end
 
