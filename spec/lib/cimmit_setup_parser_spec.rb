@@ -28,7 +28,7 @@ describe CIMMITSetupParser do
   end
 
   it "gets the right height" do
-    @data[6].should == [18.0, 15.0, 14.0, 0.0]
+    @data[6].should == [18.0, 15.0, 14.0]
   end
 
   it 'gets the right time' do

@@ -202,6 +202,28 @@ describe DataParser do
 
   end
 
+  describe 'parsing a CIMMYT result file' do
+
+    before do
+      @parser = DataParser.new
+    end
+
+    it 'parses the vial correctly' do
+      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","F-107-T0","CH4",0.500317,22.6583])
+      vial.should == "F-107-T0"
+    end
+
+    it 'parses a shorted vial correctly' do
+      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","B107-T0","CH4",0.500317,22.6583])
+      vial.should == "B-107-T0"
+    end
+
+    it 'parses a vial with series correctly' do
+      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","513-CIM-B-107-T0","CH4",0.500317,22.6583])
+      vial.should == "B-107-T0"
+    end
+  end
+
   # TODO do I need to deal with encoding issues..
   # describe 'parsing a macro generated file' do
   #   before do

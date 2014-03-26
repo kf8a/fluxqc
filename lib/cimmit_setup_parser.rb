@@ -31,7 +31,7 @@ class CIMMITSetupParser
   end
 
   def height
-    [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
+    [row[6].to_f,row[7].to_f, row[8].to_f]
   end
 
   def soil_temp

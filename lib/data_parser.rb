@@ -48,7 +48,14 @@ class DataParser
 
   def parse_vial(row)
     vial = row[3] # the vial number is in columns 3 normally
-    if vial =~ /-/
+    if vial =~ /([a-z|A-Z]-?\d{3}-T\d)$/
+      if vial =~ /([a-z|A-Z]-\d{3}-T\d)$/
+        vial = $1
+      else
+        vial =~ /([a-z|A-Z])(\d{3}-T\d)$/
+        vial = "#{$1}-#{$2}"
+      end
+    elsif vial =~ /-/
       vial.split(/-/).last
     else
       vial
