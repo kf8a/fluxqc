@@ -24,19 +24,21 @@ class SetupParser
     title = row[0]
     2.times { lines.shift } # remove the header limes
     row = lines.shift
-    sample_date = Chronic.parse(row[0].gsub /sample date: /,'')
+    sample_date = Chronic.parse(row[0].gsub /sample date: ?/,'')
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
-      parser = if title.strip =~ /^GLBRC/
-        GLBRCSetupParser.new
-      elsif title.strip =~/Fert/
-        FertSetupParser.new
-      elsif title.strip =~ /CIMMIT/
-        CIMMITSetupParser.new
-      else
-        LTERSetupParser.new
-      end
+
+      parser = case title.strip
+               when /^GLBRC.*\d$/
+                 GLBRCSetupParser.new
+               when /Fert/
+                 FertSetupParser.new
+               when /^CIMMYT/
+                 CIMMITSetupParser.new
+               else
+                 LTERSetupParser.new
+               end
 
       treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
 
