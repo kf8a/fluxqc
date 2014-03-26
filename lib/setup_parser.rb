@@ -32,9 +32,12 @@ class SetupParser
         GLBRCSetupParser.new
       elsif title.strip =~/Fert/
         FertSetupParser.new
+      elsif title.strip =~ /CIMMIT/
+        CIMMITSetupParser.new
       else
         LTERSetupParser.new
       end
+
       treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
 
       {:run_name => title, :sample_date => sample_date,

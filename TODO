@@ -2,5 +2,3 @@ add standard_curve_organizer facade
 figure out which standard curve to use where
 
 check standardizer function
-check that we grab the area column for 624 and 625
-
