@@ -28,7 +28,7 @@ class SetupParser
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
-      parser = if title.strip =~ /^GLBRC.+\d$/
+      parser = if title.strip =~ /^GLBRC/
         GLBRCSetupParser.new
       elsif title.strip =~/Fert/
         FertSetupParser.new
