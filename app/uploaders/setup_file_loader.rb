@@ -16,6 +16,8 @@ class SetupFileLoader
       run.study = 'lter'
     elsif run.name.start_with?('GLBRC')
       run.study = 'glbrc'
+    elsif run.name.start_with?('CIMMYT')
+      run.study = 'cimmyt'
     end
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
