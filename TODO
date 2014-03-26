@@ -1,6 +1,5 @@
 add standard_curve_organizer facade
 figure out which standard curve to use where
-check https://fluxqc.kbs.msu.edu/runs/626/edit
 
 check standardizer function
 check that we grab the area column for 624 and 625
