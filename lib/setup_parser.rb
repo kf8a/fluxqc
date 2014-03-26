@@ -24,7 +24,7 @@ class SetupParser
     title = row[0]
     2.times { lines.shift } # remove the header limes
     row = lines.shift
-    sample_date = Chronic.parse(row[0].gsub /sample date: ?/,'')
+    sample_date = Chronic.parse(row[0].gsub /sample date:(\s+)?/,'')
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
