@@ -8,7 +8,7 @@ class Measurement < ActiveRecord::Base
   belongs_to :standard
 
   def self.by_compound(name)
-    joins(:compound).where(:compounds => {:name => name}) #.readonly(false)
+    joins(:compound).where(:compounds => {:name => name}).readonly(false)
   end
   # return the millivolts readings that are associatated with this measurement
   # i don't know if they should be stored with the object or somewhere else and
