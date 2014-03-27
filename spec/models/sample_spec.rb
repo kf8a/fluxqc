@@ -9,7 +9,7 @@ describe Sample do
     compound    = FactoryGirl.create(:compound, :name=>'co2')
     measurement = FactoryGirl.create(:measurement, :compound=> compound)
     sample.measurements << measurement
-    sample.data('co2').first == measurement
+    sample.data('co2')== measurement
   end
 
   it 'has a uuid' do

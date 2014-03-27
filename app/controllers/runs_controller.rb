@@ -48,7 +48,7 @@ class RunsController < ApplicationController
   end
 
   def edit
-    @run = Run.find(params[:id])
+    @run = Run.includes(samples: [{incubation: :lid}, {measurements: :compound}]).find(params[:id])
     @state = @run.current_state.name.to_s
     respond_with do |format|
       format.html { render  :layout=> 'qc'}

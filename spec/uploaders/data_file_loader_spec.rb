@@ -21,10 +21,6 @@ describe DataFileLoader do
       @run = Run.find(run.id)
     end
 
-    after do
-      @run.destroy
-    end
-
     describe 'when there are measurements available' do
       before do
         @incubation = @run.incubations.first
@@ -54,10 +50,6 @@ describe DataFileLoader do
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
       @run.standard_curves.reload
-    end
-
-    after do
-      @run.destroy
     end
 
     it 'updateds the acquired time' do

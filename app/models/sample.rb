@@ -15,7 +15,8 @@ class Sample < ActiveRecord::Base
   before_save :make_uuid, :if => Proc.new {|object| object.uuid.nil? }
 
   def data(compound_name)
-    measurements.by_compound(compound_name)
+    # measurements.by_compound(compound_name)
+    measurements.find {|x| x.compound.name == compound_name }
   end
 
   def seconds=(s)
