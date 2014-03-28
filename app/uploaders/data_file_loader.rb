@@ -64,11 +64,15 @@ class DataFileLoader
 
   def new_standard_curves
     result = {}
-    ['co2','n2o','ch4'].each do |name|
+    compound = Compound.find_by(name: 'n2o')
+    result['n2o'] = {
+      0 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 0),
+      1 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 1)
+    }
+    ['co2','ch4'].each do |name|
       compound = Compound.find_by(name: name)
       result[name] = {
         0 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 0),
-        1 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 1)
       }
     end
     result
@@ -103,10 +107,13 @@ class DataFileLoader
 	def process_standard(vial, standard_curves)
 		# find or create a standard for the compound
 		# create and add the measurement
+
 		['co2','n2o','ch4'].each do |c|
 			value = vial[c.to_sym]
 			compound = Compound.find_by_name(c)
-      standard_curve = standard_curves[c][value[:column]]
+      column = 0
+      column = value[:column] if c == 'n2o'
+      standard_curve = standard_curves[c][column]
 
 			standard = Standard.create(:vial         => vial[:vial], 
 																 :compound_id  => compound.id, 

@@ -70,7 +70,7 @@ describe DataFileLoader do
     end
 
     it 'keeps standards and check standards' do
-      @run.standard_curves.size.should == 6
+      @run.standard_curves.size.should == 4
     end
 
     it 'has an n2o standard curve' do
@@ -114,7 +114,7 @@ describe DataFileLoader do
     end
 
     it 'should have two sets of standard curves' do
-      @run.standard_curves.size.should == 12
+      @run.standard_curves.size.should == 8
     end
   end
 
