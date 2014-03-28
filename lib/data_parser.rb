@@ -104,12 +104,13 @@ class DataParser
   end
 
   def read_file(file_name)
-    if file_name =~ /csv$/
-      CSV::readlines(file_name)
-    else
+    bom = File.read(file_name, 2).unpack("C*")
+    if bom == [255,254]
       CSV::readlines(file_name,
                      :encoding => "UTF-16LE:UTF-8",
                      :col_sep=>"\t")
+    else
+      CSV::readlines(file_name)
     end
   end
 
