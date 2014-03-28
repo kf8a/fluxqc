@@ -143,6 +143,7 @@ class RunsController < ApplicationController
   private 
 
   def run_params
-    params.require(:run).permit(:name, :sampled_on, :run_on, :comment, :study, :setup_file, :data_file)
+    params.require(:run).permit!
+    # (:name, :sampled_on, :run_on, :comment, :study, :setup_file, :data_file, incubations_attributes: [{:samples_attributes}], :setup_file_cache, :data_file_cache)
   end
 end
