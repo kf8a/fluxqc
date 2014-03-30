@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226145656) do
+ActiveRecord::Schema.define(version: 20140327114012) do
 
   create_table "campaign_plots", force: true do |t|
     t.integer  "plot_id"
@@ -99,6 +99,9 @@ ActiveRecord::Schema.define(version: 20140226145656) do
     t.datetime "acquired_at"
   end
 
+  add_index "measurements", ["compound_id"], name: "index_measurements_on_compound_id", using: :btree
+  add_index "measurements", ["sample_id"], name: "index_measurements_on_sample_id", using: :btree
+
   create_table "plots", force: true do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -128,6 +131,8 @@ ActiveRecord::Schema.define(version: 20140226145656) do
     t.string   "uuid"
     t.integer  "incubation_id"
   end
+
+  add_index "samples", ["incubation_id"], name: "index_samples_on_incubation_id", using: :btree
 
   create_table "setups", force: true do |t|
     t.integer  "template_id"
