@@ -2,7 +2,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
   urlRoot: '/standard_curves'
 
   initialize: ->
-    @updateSamples()
+    # @updateSamples()
 
   defaults:
     id:       null
@@ -15,16 +15,19 @@ class Flux.Models.StandardCurve extends Backbone.Model
     @trigger('change')
     this
 
+  to_ppm: (area, eq) ->
+    area * eq.slope + eq.offset
+
   updateSamples: ->
     @fitLineByLeastSquares()
+    eq = @.get('fit_line')
     for incubation in incubations.models
       compound = @get('compound')
       model = incubation.fluxes[compound.name]
       data = model.get('data')
 
       for datum in  data
-        eq = @.get('fit_line')
-        datum.value = datum.area * eq.slope + eq.offset
+        datum.value = to_ppm(datum.area,eq)
 
       model.set({'data':data})
 
