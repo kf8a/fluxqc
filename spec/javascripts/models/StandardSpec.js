@@ -1,6 +1,6 @@
 describe("Standards", function() {
 
-  var MOCK_GET_DATA = {
+  var MOCK_STANDARD_DATA = {
     coeff: null, 
   column: 0,
   compound: {id:3, name:"ch4", mol_weight:12, unit:"ppm", ymax:2, ymin:0},
@@ -32,8 +32,10 @@ describe("Standards", function() {
   describe('computing the slope', function() {
     var eq;
     var curve;
+    var incubations; 
+
     beforeEach(function() {
-      curve = new Flux.Models.StandardCurve(MOCK_GET_DATA);
+      curve = new Flux.Models.StandardCurve(MOCK_STANDARD_DATA);
       curve.fitLineByLeastSquares();
       eq = curve.get('fit_line')
     });
