@@ -23,6 +23,10 @@ describe Sample do
     sample.save
     sample.uuid.should == uuid
   end
+
+  it 'finds the right standards to compute the ppms for its measurements' do
+    pending
+  end
 end
 
 # == Schema Information
