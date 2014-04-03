@@ -2,7 +2,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
   urlRoot: '/standard_curves'
 
   initialize: ->
-    # @updateSamples()
+    @updateSamples()
 
   defaults:
     id:       null
@@ -27,13 +27,13 @@ class Flux.Models.StandardCurve extends Backbone.Model
       data = model.get('data')
 
       for datum in  data
-        datum.value = to_ppm(datum.area,eq)
+        datum.value = @to_ppm(datum.area,eq)
 
       model.set({'data':data})
 
       model.fitLineByLeastSquares()
 
-  fitLineByLeastSquares: =>
+  fitLineByLeastSquares: ->
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
     x = y = 0
 

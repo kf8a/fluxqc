@@ -30,14 +30,19 @@ describe("Standards", function() {
   };
 
   describe('computing the slope', function() {
-    var eq;
-    var curve;
-    var incubations; 
+    var eq, curve = null;
 
     beforeEach(function() {
+      window.incubations = new Flux.Collections.IncubationsCollection();
+      console.log(incubations);
       curve = new Flux.Models.StandardCurve(MOCK_STANDARD_DATA);
       curve.fitLineByLeastSquares();
       eq = curve.get('fit_line')
+    });
+
+    it('should be a valid object', function() {
+      console.log(curve);
+      expect(curve).toBeDefined();
     });
 
     it("should return the right values from the line fit", function() {
