@@ -54,7 +54,7 @@ describe DataFileLoader do
 
     it 'updateds the acquired time' do
 			Time.zone = 'Eastern Time (US & Canada)' 
-      @incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,9,26)
+      @incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,3,35)
     end
     it 'updates the measurement with the column id' do
       @incubation.flux('n2o').measurements.first.column.should == 1

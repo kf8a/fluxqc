@@ -5,6 +5,7 @@ class DataFileLoader
 
   STANDARDS = {
     'STD0'  => {'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000},
+    'STD00'  => {'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000},
     'STD07' => {'n2o' => 0.294, 'co2' =>  350.423, 'ch4' => 0.565},
     'STD10' => {'n2o' => 0.420, 'co2' =>  500.605, 'ch4' => 0.806},
     'STD15' => {'n2o' => 0.629, 'co2' =>  750.907, 'ch4' => 1.210},
@@ -28,22 +29,18 @@ class DataFileLoader
 
     dataloader.process_vials(vials)
 
-    # standard_vials, sample_vials = vials.partition {|x| x[:vial] =~ /CHK|STD|check|.*[a-z]$/i }
-    # # standards, checks = standard_vials.partition {|x| x[;vial] =~ /STD/i }
-    # dataloader.process_samples(sample_vials)
-    # dataloader.process_standards(standard_vials)
-    # # dataloger.process_checks(checks)
-
+    #connect standards
+    # run.attach_standards_to_samples
     #compute fluxes
     run.recompute_fluxes
   end
 
   def process_vials(vials)
     get_new_standard_curves = true
-    standard_curves = nil
+    standard_curves = {}
 
-		vials.each do |vial|
-			if vial[:vial] =~ /(CKH|STD|check|)?.*[a-z]$/i
+    vials.each do |vial|
+      if vial[:vial] =~ /(CKH|STD|check|)?.*[a-z]$/i
         if get_new_standard_curves
           get_new_standard_curves = false
 		      standard_curves = new_standard_curves
@@ -132,9 +129,9 @@ class DataFileLoader
 				standard_values = STANDARDS[standard.vial.chop]
 
 				if standard_values
-					standard.ppm = standard_values[c]
+					standard.ppm = standard_values.fetch(c)
 				else
-					# we propably have a check standard
+					# we propably have a check standard or failed to look up a standard.
 					standard.ppm = CHK[c]
 					standard.excluded = true
 				end

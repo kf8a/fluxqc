@@ -18,6 +18,10 @@ describe Run do
     # TODO figure out what the assertion is here
   end
 
+  it 'attaches the standards' do
+    run.respond_to?("attach_standards_to_samples").should be_true
+  end
+
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do

@@ -86,7 +86,7 @@ describe DataParser do
         @row = @result[17]
       end
       it 'finds the right sample time' do
-        @row[:acquired_at].should  == Time.new(2012,04,12, 16, 00, 34)
+        @row[:acquired_at].should  == Time.new(2012, 04, 12, 15, 54, 47)
       end
       it 'finds the right vial' do
         @row[:vial].should == '4'
