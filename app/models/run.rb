@@ -64,6 +64,13 @@ class Run < ActiveRecord::Base
       end
     end
   end
+
+  def attach_standards_to_samples
+    samples.each do |sample|
+      sample.attach_standard_curves
+      sample.save
+    end
+  end
 end
 
 # == Schema Information
