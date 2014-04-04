@@ -5,7 +5,7 @@ class StandardCurve < ActiveRecord::Base
   has_many :standards, dependent: :destroy
   has_many :check_standards, dependent: :destroy
   has_many :calibrations
-  has_many :measurements, through: :calibrations
+  has_many :samples, through: :calibrations
 
   def data
     standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => s.excluded}}

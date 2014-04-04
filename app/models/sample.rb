@@ -6,6 +6,9 @@ class Sample < ActiveRecord::Base
   has_many :measurements, dependent: :destroy
   belongs_to :run
   belongs_to :incubation
+  has_many :calibrations
+  has_many :standard_curves, through: :calibrations
+ 
 
   attr_reader :seconds
 

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Sample do
   it {should have_many :measurements}
   it {should belong_to :run}
+  it {should have_many :standard_curves}
 
   let(:sample) {Sample.create}
   it 'reports its data for a compound' do
@@ -24,9 +25,12 @@ describe Sample do
     sample.uuid.should == uuid
   end
 
-  it 'finds the right standards to compute the ppms for its measurements' do
-    pending
+  def standard_curves
+    previous_standard_curve = run.standard_curves.where('sampled_at < ?', sampled_at).order('sampled_at desc').first
+    next_standard_curve = StandardCurves.where('sampled_at < ?', sampled_at).order('sampled_at').first
+    [previous_standard_curve, next_standard_curve]
   end
+
 end
 
 # == Schema Information

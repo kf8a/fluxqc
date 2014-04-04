@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20140404151948) do
 
   create_table "calibrations", force: true do |t|
     t.integer  "standard_curve_id"
-    t.integer  "measurement_id"
+    t.integer  "sample_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -257,8 +257,8 @@ ActiveRecord::Schema.define(version: 20140404151948) do
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "remember_created_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    # t.inet     "current_sign_in_ip"
+    # t.inet     "last_sign_in_ip"
     t.integer  "sign_in_count"
     t.datetime "reset_password_sent_at"
   end
