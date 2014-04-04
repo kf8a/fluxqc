@@ -5,7 +5,7 @@ class Measurement < ActiveRecord::Base
   belongs_to :sample
   belongs_to :flux
   belongs_to :compound
-  belongs_to :standard
+  belongs_to :standard_curve
 
   def self.by_compound(name)
     joins(:compound).where(:compounds => {:name => name}).readonly(false)

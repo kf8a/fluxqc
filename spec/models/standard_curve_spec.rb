@@ -4,6 +4,7 @@ describe StandardCurve do
   it {should have_many :standards}
   it {should belong_to :run}
   it {should belong_to :compound}
+  it {should have_many :measurements}
 
   let (:standard_curve) {FactoryGirl.create :standard_curve}
 
