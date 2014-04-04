@@ -8,7 +8,6 @@ class Sample < ActiveRecord::Base
   belongs_to :incubation
   has_many :calibrations
   has_many :standard_curves, through: :calibrations
- 
 
   attr_reader :seconds
 
@@ -31,6 +30,16 @@ class Sample < ActiveRecord::Base
 
   def seconds
     measurements.first.seconds
+  end
+
+  def find_standard_curves
+    previous_standard_curve = run.standard_curves.where('sampled_at < ?', sampled_at).order('sampled_at desc').first
+    next_standard_curve = run.standard_curves.where('sampled_at > ?', sampled_at).order('sampled_at').first
+    [previous_standard_curve, next_standard_curve]
+  end
+
+  def attach_standard_curves
+    self.standard_curves = find_standard_curves
   end
 
   private
