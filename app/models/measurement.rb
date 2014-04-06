@@ -20,6 +20,10 @@ class Measurement < ActiveRecord::Base
   def position
     acquired_at.to_s
   end
+
+  def standard_curves
+    sample.standard_curves
+  end
 end
 
 # == Schema Information

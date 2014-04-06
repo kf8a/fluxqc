@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404151948) do
+ActiveRecord::Schema.define(version: 20140404162140) do
 
   create_table "calibrations", force: true do |t|
     t.integer  "standard_curve_id"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20140404151948) do
     t.datetime "updated_at",  null: false
     t.integer  "column"
     t.string   "coeff"
+    t.datetime "sampled_at"
   end
 
   create_table "standards", force: true do |t|
@@ -257,8 +258,8 @@ ActiveRecord::Schema.define(version: 20140404151948) do
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "remember_created_at"
-    # t.inet     "current_sign_in_ip"
-    # t.inet     "last_sign_in_ip"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
     t.integer  "sign_in_count"
     t.datetime "reset_password_sent_at"
   end

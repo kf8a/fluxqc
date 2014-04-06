@@ -31,8 +31,11 @@ class Flux < ActiveRecord::Base
   # for display as jason
   def data
     measurements.collect do |measurement|
-      {id:measurement.id, key:measurement.seconds,
-        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded}
+      {
+        id:measurement.id, key:measurement.seconds,
+        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded, 
+        std_curve: measurement.standard_curves
+      }
     end
   end
 

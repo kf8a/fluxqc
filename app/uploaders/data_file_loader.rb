@@ -30,7 +30,7 @@ class DataFileLoader
     dataloader.process_vials(vials)
 
     #connect standards
-    # run.attach_standards_to_samples
+    run.attach_standards_to_samples
     #compute fluxes
     run.recompute_fluxes
   end

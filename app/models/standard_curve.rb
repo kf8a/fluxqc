@@ -25,6 +25,11 @@ class StandardCurve < ActiveRecord::Base
     f.linear_fit
   end
 
+  def get_dependent_fluxes
+    fluxes = samples.collect {|sample| sample.get_dependent_fluxes_for(self.compound) }
+    fluxes.uniq
+  end
+
   def as_json(options= {})
     h = super(options)
     h[:data] = data
@@ -32,6 +37,7 @@ class StandardCurve < ActiveRecord::Base
     h[:ymax] = ymax
     h[:ymin] = ymin
     h[:fit_line] = fit_line
+    h[:fluxes] = get_dependent_fluxes
     h
   end
 

@@ -71,6 +71,12 @@ describe StandardCurve do
     end
   end
 
+  describe 'json output' do
+    it 'should include a list of fluxes that are affected by the standard curve' do
+      pending
+    end
+  end
+
 end
 
 # == Schema Information
