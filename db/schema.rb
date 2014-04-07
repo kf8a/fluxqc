@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404162140) do
+ActiveRecord::Schema.define(version: 20140407163317) do
 
   create_table "calibrations", force: true do |t|
     t.integer  "standard_curve_id"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 20140404162140) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "aquired_at"
+  end
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "compounds", force: true do |t|
@@ -262,6 +268,7 @@ ActiveRecord::Schema.define(version: 20140404162140) do
     t.inet     "last_sign_in_ip"
     t.integer  "sign_in_count"
     t.datetime "reset_password_sent_at"
+    t.integer  "company_id"
   end
 
 end
