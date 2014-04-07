@@ -23,7 +23,7 @@ date,site,year,block,plot,key,trt,bucket_type,run_time,deployment_time,bucket_he
       lid = 'X' if bucket_type == 'plastic'
 
       setups[date] = [] unless setups[date]
-      sample_dates << Chronic.parse(date)
+      sample_dates << date
       setups[date] << {run_name: 'wisconsin', sample_date: date, treatment: key, replicate: block,
         sub_plot: '', chamber: '1', :vial => i.to_s, lid: lid, height: [bucket_height.to_f], seconds: deployment_time.to_f*60, comments: ''}
 
@@ -34,12 +34,12 @@ date,site,year,block,plot,key,trt,bucket_type,run_time,deployment_time,bucket_he
         ch4: {ppm: ch4_ppm.to_f}}
 
     end
-    sample_dates.sort!.uniq!
+    sample_dates.uniq!.sort! {|a,b| Chronic.parse(a) <=> Chronic.parse(b) }
     i = 0
     sample_dates.each do |sample_date|
       i = i+1
       p sample_date
-      run = Run.create(name: "UW GlBRC Series #{i}", study: "glbrc", sampled_on: sample_date, company_id: 2)
+      run = Run.create(name: "UW GlBRC Series #{i}", study: "glbrc", sampled_on: Chronic.parse(sample_date), company_id: 2)
       setups[sample_date].each do |sample|
         run.incubations << IncubationFactory.create(run.id, sample)
       end
