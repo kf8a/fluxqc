@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20140407163317) do
     t.string  "workflow_state"
     t.string  "setup_file"
     t.string  "data_file"
+    t.integer "company_id"
   end
 
   create_table "samples", force: true do |t|
