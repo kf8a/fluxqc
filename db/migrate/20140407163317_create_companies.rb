@@ -5,5 +5,6 @@ class CreateCompanies < ActiveRecord::Migration
       t.timestamps
     end
     add_column :users, :company_id, :integer
+    add_column :runs, :company_id, :intger
   end
 end

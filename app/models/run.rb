@@ -3,6 +3,7 @@
 # A run represents one sampling time. It consists of all of the samples
 # taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
+  belongs_to :company
   has_many :incubations, -> {order 'treatment, replicate' },  :dependent => :destroy
   has_many :samples, dependent: :destroy
   has_many :standard_curves, dependent: :destroy
