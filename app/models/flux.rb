@@ -116,6 +116,10 @@ class Flux < ActiveRecord::Base
   def mol_weight
     compound.mol_weight
   end
+
+  def company
+    incubation.company
+  end
 end
 
 # == Schema Information

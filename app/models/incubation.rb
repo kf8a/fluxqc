@@ -86,6 +86,10 @@ class Incubation < ActiveRecord::Base
   def seconds
     fluxes.first.measurements.map(&:seconds)
   end
+
+  def company
+    run.company
+  end
 end
 
 # == Schema Information
