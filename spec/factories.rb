@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
   factory :user do
     email     'bob@test.com'
-    password  'testing'
+    password  '123testing'
   end
   factory :standard_curve do
   end
