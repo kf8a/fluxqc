@@ -1,5 +1,7 @@
 class IncubationsController < ApplicationController
 
+  before_filter :check_company, except: [:show]
+
   respond_to :html, :json
 
   def show
@@ -22,5 +24,16 @@ class IncubationsController < ApplicationController
     end
 
     redirect_to run_path(incubation.run)
+  end
+
+  private
+
+  def check_company
+    if params[:id]
+      incubation = Incubation.find(params[:id])
+      if current_user.company != incubation.run.company
+        render status: :forbidden
+      end
+    end
   end
 end

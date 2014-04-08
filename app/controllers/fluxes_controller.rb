@@ -1,4 +1,6 @@
 class FluxesController < ApplicationController
+  before_filter :check_company, except: [:show]
+
   respond_to :html, :json
 
   def show
@@ -16,5 +18,16 @@ class FluxesController < ApplicationController
     flux.save
 
     render :nothing => true
+  end
+
+  private
+  def check_company
+    if params[:id]
+      flux = Flux.find(params[:id])
+      p current_user.company
+      if current_user.company != flux.company
+        head status: :forbidden
+      end
+    end
   end
 end
