@@ -1,7 +1,5 @@
 class RunsController < ApplicationController
 
-  before_filter :check_company,      except: [:index]
-
   respond_to :html, :json, :csv
 
   def index
@@ -28,6 +26,7 @@ class RunsController < ApplicationController
 
   def create
     @run = Run.new(run_params)
+    @run.company = current_user.company
     if @run.save
       if params[:run][:setup_file]
         # if Rails.env == 'production'
@@ -149,12 +148,4 @@ class RunsController < ApplicationController
     # (:name, :sampled_on, :run_on, :comment, :study, :setup_file, :data_file, incubations_attributes: [{:samples_attributes}], :setup_file_cache, :data_file_cache)
   end
 
-  def check_company
-    if params[:id]
-      run = Run.find(params[:id])
-      if current_user.company != run.company
-        render status: :forbidden
-      end
-    end
-  end
 end
