@@ -1,5 +1,6 @@
 Fluxqc::Application.routes.draw do
 
+  get "measurements/show"
   resources :templates
 
   devise_for :users
@@ -24,6 +25,8 @@ Fluxqc::Application.routes.draw do
   resources :standard_curves, only: [:show, :update]
   resources :setups
   resources :samples
+
+  resources :measurements, only: :index
 
   # authenticated(:user) do
   #   mount Resque::Server, :at => "/resque"

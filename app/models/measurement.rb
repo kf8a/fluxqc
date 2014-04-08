@@ -1,3 +1,4 @@
+require "csv"
 # Measurement represents a measurement that is made on a sample
 # For example in a particular sample vial a measurement might
 # be made for CO2 and another measurement for N2O.
@@ -23,6 +24,27 @@ class Measurement < ActiveRecord::Base
 
   def standard_curves
     sample.standard_curves
+  end
+
+  # CSV streaming support
+  def self.csv_header
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name], 
+                 ['id','sampled_on', 'study', 'treatment', 'replicate', 'lid', 'minutes','ppm', 'avg_height_cm', 'name'], true)
+  end
+
+  def to_csv_row
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name], 
+                 [flux.incubation.id, sample.run.sampled_on, sample.run.study,
+                   flux.incubation.treatment, flux.incubation.replicate, flux.incubation.lid.try(:name),
+                   seconds, ppm, flux.incubation.avg_height_cm, compound.name])
+  end
+
+  # def self.find_in_batches(filters, batch_size, &block)
+  def self.find_in_batches(&block)
+    #find_each will batch the results instead of getting all in one go
+    joins(flux: {incubation: :run}).where('company_id =2 and excluded is false').find_each(batch_size: 1000) do |measurement|
+      yield measurement 
+    end
   end
 end
 
