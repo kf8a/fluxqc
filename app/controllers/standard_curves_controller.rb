@@ -8,8 +8,10 @@ class StandardCurvesController < ApplicationController
 
   def update
     standard_curve = StandardCurve.find(params[:id])
-    standard_curve.data = params[:data]
-    standard_curve.save
+    unless standard_curve.run.published?
+      standard_curve.data = params[:data]
+      standard_curve.save
+    end
 
     #TODO: update the measurements of the run and recompute fluxes
     render :nothing => true
