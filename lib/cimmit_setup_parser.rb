@@ -1,5 +1,9 @@
 class CIMMITSetupParser
-  attr_reader :row
+  attr_reader :row, :series
+
+  def initialize(series)
+    @series = series
+  end
 
   def parse(row)
     @row = row
@@ -23,7 +27,7 @@ class CIMMITSetupParser
 
   def vial
     parts = /(\d{3})(.)/.match(row[0])
-    "#{parts[2]}-#{parts[1]}-T#{row[2]}"
+    "S#{series}-CIM-#{parts[2]}-#{parts[1]}-T#{row[2]}"
   end
 
   def lid

@@ -3,12 +3,12 @@ require File.expand_path("../../../lib/cimmit_setup_parser.rb",__FILE__)
 describe CIMMITSetupParser do
 
   before(:each) do
-    parser = CIMMITSetupParser.new
+    parser = CIMMITSetupParser.new(7)
     @data = parser.parse(["101F",1,1,nil,nil,"X",18,15,14,nil,19,0,10,11,10.5,10.2,"comment"])
   end
 
   it 'produces the right vial id' do
-    @data[4].should == "F-101-T1"
+    @data[4].should == "S7-CIM-F-101-T1"
   end
 
   it 'gets the right lid' do
