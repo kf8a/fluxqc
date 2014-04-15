@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407163317) do
+ActiveRecord::Schema.define(version: 20140415201035) do
 
   create_table "calibrations", force: true do |t|
     t.integer  "standard_curve_id"
@@ -155,18 +155,20 @@ ActiveRecord::Schema.define(version: 20140407163317) do
   end
 
   create_table "runs", force: true do |t|
-    t.date    "run_on"
-    t.date    "sampled_on"
-    t.string  "name",           limit: 50
-    t.text    "comment"
-    t.boolean "approved",                  default: false
-    t.integer "group_id"
-    t.string  "study",          limit: 25
-    t.boolean "released",                  default: false
-    t.string  "workflow_state"
-    t.string  "setup_file"
-    t.string  "data_file"
-    t.integer "company_id"
+    t.date     "run_on"
+    t.date     "sampled_on"
+    t.string   "name",           limit: 50
+    t.text     "comment"
+    t.boolean  "approved",                  default: false
+    t.integer  "group_id"
+    t.string   "study",          limit: 25
+    t.boolean  "released",                  default: false
+    t.string   "workflow_state"
+    t.string   "setup_file"
+    t.string   "data_file"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "samples", force: true do |t|
