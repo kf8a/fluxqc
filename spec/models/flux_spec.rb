@@ -15,6 +15,7 @@ describe Flux do
 
   describe 'data retrieval' do
     before(:each) do
+      Measurement.any_instance.stub(:standard_curves).and_return(1)
       measurement =  Measurement.new
       measurement.stub(:seconds).and_return(1)
       measurement.stub(:ppm).and_return(10)
@@ -23,12 +24,13 @@ describe Flux do
     end
 
     it 'should return a list of seconds and ppm' do
-      flux.data.should == [{id:1, key:1,value:10, area:nil, deleted:false}]
+      flux.data.should == [{id:1, key:1,value:10, area:nil, deleted:false, std_curve: 1}]
     end
   end
 
   describe 'data writing' do
     before(:each) do
+      Measurement.any_instance.stub(:standard_curves).and_return(1)
       @m1 = FactoryGirl.create :measurement
       @m2 = FactoryGirl.create :measurement
       flux.measurements << @m1
