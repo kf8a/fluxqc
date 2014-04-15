@@ -35,7 +35,8 @@ class SetupParser
                when /Fert/
                  FertSetupParser.new
                when /^CIMMYT/
-                 CIMMITSetupParser.new
+                 series = title.split(/ +/).last
+                 CIMMITSetupParser.new(series)
                else
                  LTERSetupParser.new
                end
