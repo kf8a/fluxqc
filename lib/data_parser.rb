@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'csv'
+require_relative "cimmit_vial"
 
 #TODO what happens if a data file is uploaded before a setup is created
 #
@@ -49,13 +50,8 @@ class DataParser
 
   def parse_vial(row)
     vial = row[3] # the vial number is in columns 3 normally
-    if vial =~ /([a-z|A-Z]-?\d{3}-T\d)$/
-      if vial =~ /([a-z|A-Z]-\d{3}-T\d)$/
-        vial = $1
-      else
-        vial =~ /([a-z|A-Z])(\d{3}-T\d)$/
-        vial = "#{$1}-#{$2}"
-      end
+    if CimmitVial.cimmit_vial?(vial)
+      vial = CimmitVial.process_cimmit_vial(vial)
     elsif vial =~ /-/
       vial.split(/-/).last
     else

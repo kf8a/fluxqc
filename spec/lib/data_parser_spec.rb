@@ -244,8 +244,8 @@ describe DataParser do
     end
 
     it 'parses a vial with series correctly' do
-      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","513-CIM-B-107-T0","CH4",0.500317,22.6583])
-      vial.should == "B-107-T0"
+      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","S13-CIM-B-107-T0","CH4",0.500317,22.6583])
+      vial.should == "S13-CIM-B-107-T0"
     end
   end
 
