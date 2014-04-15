@@ -36,7 +36,7 @@ class DataParser
       end
     when :forth
       lines.each do |row|
-        next if row[0] == 'standard'
+        next unless row[0] == 'sample'
         vials[row[1]] = forth_parse(row)
       end
     else

@@ -103,6 +103,31 @@ describe DataParser do
     end
   end
 
+  describe 'parsing a 2010 file with standards' do
+    before do
+      file = File.expand_path("../../fixtures//glbrc-2010.csv", __FILE__)
+      File.exists?(file).should be_true
+      @result = DataParser.new.parse(file)
+    end
+
+    it 'should have 4 rows' do
+      @result.size.should == 4
+    end
+    describe 'row 3' do
+      before do 
+        @row = @result[2]
+      end
+
+      it 'finds the right vial' do
+        @row[:vial].should == '3'
+      end
+
+      it 'finds the right ppm' do
+        @row[:n2o][:ppm].should == 0.300734331
+      end
+    end
+  end
+
   describe 'parsing a second chemstation file' do
     before do
       file = File.expand_path("../../fixtures//LTER20130520S4.CSV", __FILE__)
@@ -170,12 +195,12 @@ describe DataParser do
     end
 
     it 'finds the correct number of samples' do
-      @result.size.should == 82
+      @result.size.should == 72
     end
 
-    describe 'row 14' do
+    describe 'row 4' do
       before do
-        @row = @result[14]
+        @row = @result[4]
       end
       it 'finds the right vial' do
         @row[:vial].should == '141'
