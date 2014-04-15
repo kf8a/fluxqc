@@ -40,6 +40,22 @@ describe DataFileLoader do
     end
   end
 
+  describe 'a 2010 data file with standards' do
+    before do
+      run = FactoryGirl.create :run,
+                         :data_file => fixture_file_upload('/glbrc-2010.csv'),
+                         :setup_file => fixture_file_upload('/setup_test.csv')
+      SetupFileLoader.perform(run.id).should_not be_false
+      DataFileLoader.perform(run.id).should_not be_false
+      @run = Run.find(run.id)
+      @run.standard_curves.reload
+    end
+
+    it 'has no standard curve' do
+      @run.standard_curves.empty?.should be_true
+    end
+  end
+
   describe 'a GC data file' do
     before do
       run = FactoryGirl.create :run,
