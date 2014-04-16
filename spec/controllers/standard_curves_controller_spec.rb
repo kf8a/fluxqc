@@ -18,6 +18,7 @@ describe StandardCurvesController do
 
     describe "GET 'update'" do
       it "returns http success" do
+        StandardCurve.any_instance.stub(:run).and_return(Run.new)
         get 'update', :id => @curve, :data =>[]
         response.should be_success
       end
