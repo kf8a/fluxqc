@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.1'
 gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
@@ -28,6 +28,8 @@ gem 'unicorn'
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
+
+gem 'spring', group: :development
 
 # Gems used only for assets and not required
 # in production environments by default.
