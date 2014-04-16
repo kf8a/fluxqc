@@ -27,6 +27,10 @@ class Flux < ActiveRecord::Base
     measurements.first.compound
   end
 
+  def run
+    incubation.run
+  end
+
   # Collect the measurements associate with this flux into a hash
   # for display as jason
   def data

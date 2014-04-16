@@ -13,7 +13,7 @@ class FluxesController < ApplicationController
 
   def update
     flux = Flux.find(params[:id])
-    unless flux.incubation.run.published?
+    unless flux.run.published?
       flux.data = params[:data]
       flux.save
     end
