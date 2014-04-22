@@ -247,6 +247,14 @@ describe DataParser do
       vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","S13-CIM-B-107-T0","CH4",0.500317,22.6583])
       vial.should == "S13-CIM-B-107-T0"
     end
+
+    it 'parses the area correctly' do
+      row = @parser.chemstation_parse(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","S13-CIM-B-107-T0","CH4",0.500317,22.6583, 22.6, "co2",100, 200, 200, "n2o", 4, 40, 40])
+      row[:ch4][:area].should == 22.6583
+      row[:n2o][:area].should == 40
+      row[:co2][:area].should == 200
+    end
+
   end
 
   # TODO do I need to deal with encoding issues..
