@@ -5,6 +5,7 @@ class Flux.Models.Flux extends Backbone.Model
     id:       null
     data:     null
     compound: null
+    standards: null
 
   togglePoint: (point) ->
     point.deleted = !point.deleted
