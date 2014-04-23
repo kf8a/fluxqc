@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415201035) do
+ActiveRecord::Schema.define(version: 20140423174128) do
 
   create_table "calibrations", force: true do |t|
     t.integer  "standard_curve_id"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20140415201035) do
     t.datetime "updated_at",  null: false
     t.integer  "column"
     t.string   "coeff"
-    t.datetime "sampled_at"
+    t.datetime "aquired_at"
   end
 
   create_table "standards", force: true do |t|
