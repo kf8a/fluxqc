@@ -81,7 +81,10 @@ class DataFileLoader
 
 				value = vial[c.to_sym]
 
-				measurement.column      = value[:column]
+        if c == 'n2o'
+          measurement.column    = value[:column]
+        else
+          measurement.column    = 0
 				measurement.acquired_at = vial[:acquired_at]
 				measurement.ppm         = value[:ppm]
 				measurement.area        = value[:area]

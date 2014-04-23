@@ -53,11 +53,11 @@ class Measurement < ActiveRecord::Base
 
   private
   def previous_standard_curve
-    run.standard_curves.where('acquired_at < ?', acquired_at).order('acquired_at desc').first
+    run.standard_curves.where(column: column).where('acquired_at < ?', acquired_at).order('acquired_at desc').first
   end
 
   def next_standard_curve
-    run.standard_curves.where('acquired_at > ?', acquired_at).order('acquired_at').first
+    run.standard_curves.where(column: column).where('acquired_at > ?', acquired_at).order('acquired_at').first
   end
 end
 

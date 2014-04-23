@@ -21,9 +21,9 @@ describe Measurement do
       @compound    = FactoryGirl.create :compound, name: "co2"
       @run         = FactoryGirl.create :run
       sample       = FactoryGirl.create :sample, run: @run
-      @curve1      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-2.hours, run: @run
-      @curve2      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+2.hours, run: @run
-      @measurement = FactoryGirl.create :measurement, compound: @compound, acquired_at: Time.now(), sample: sample
+      @curve1      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-2.hours, run: @run, column: 0
+      @curve2      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+2.hours, run: @run, column: 0
+      @measurement = FactoryGirl.create :measurement, compound: @compound, acquired_at: Time.now(), sample: sample, column: 0
     end
 
     it "ignores later standard curves" do
@@ -45,6 +45,11 @@ describe Measurement do
     it "ignores other compounds standard curves" do
       compound    = FactoryGirl.create :compound, name: "H"
       FactoryGirl.create :standard_curve, compound: compound, acquired_at: Time.now()+4.hours, run: @run
+      @measurement.standard_curves().should == [@curve1, @curve2]
+    end
+
+    it "ignores other columns standard curves" do
+      FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-1.hours, run: @run, column: 1
       @measurement.standard_curves().should == [@curve1, @curve2]
     end
 
