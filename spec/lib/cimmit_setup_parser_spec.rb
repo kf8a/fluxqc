@@ -8,7 +8,7 @@ describe CIMMITSetupParser do
   end
 
   it 'produces the right vial id' do
-    @data[4].should == "S7-CIM-F-101-T1"
+    @data[4].should == "S7-F-101-T1"
   end
 
   it 'gets the right lid' do
