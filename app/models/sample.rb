@@ -68,4 +68,8 @@ end
 #  uuid          :string(255)
 #  incubation_id :integer
 #
-
+# Indexes
+#
+#  index_samples_on_incubation_id  (incubation_id)
+#  samples_run_id_vial_key         (run_id,vial) UNIQUE
+#

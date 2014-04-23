@@ -18,4 +18,6 @@ end
 #  ending_time       :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  column            :integer
+#  acquired_at       :datetime
 #

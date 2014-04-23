@@ -73,7 +73,10 @@ end
 #  incubation_id :integer
 #  value         :float
 #  compound_id   :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  created_at    :datetime
+#  updated_at    :datetime
 #
-
+# Indexes
+#
+#  fluxes_incubation_id  (incubation_id)
+#

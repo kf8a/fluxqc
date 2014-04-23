@@ -90,5 +90,7 @@ end
 #  intercept   :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  column      :integer
+#  coeff       :string(255)
+#  aquired_at  :datetime
 #
-

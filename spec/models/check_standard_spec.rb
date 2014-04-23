@@ -17,7 +17,7 @@ end
 #  excluded          :boolean          default(TRUE)
 #  starting_time     :datetime
 #  ending_time       :datetime
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#  aquired_at        :date
 #
-

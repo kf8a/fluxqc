@@ -18,11 +18,8 @@ end
 # Table name: lids
 #
 #  id           :integer          not null, primary key
-#  surface_area :float
-#  name         :string(255)
+#  name         :string(1)
 #  volume       :float
 #  height       :float
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  surface_area :float
 #
-

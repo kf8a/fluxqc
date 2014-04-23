@@ -97,15 +97,20 @@ end
 # Table name: incubations
 #
 #  id               :integer          not null, primary key
-#  sampled_at       :datetime
-#  chamber          :string(255)
+#  name             :string(25)
+#  run_id           :integer
+#  soil_temperature :float
 #  treatment        :string(255)
 #  replicate        :string(255)
-#  soil_temperature :float
-#  avg_height_cm    :float
 #  lid_id           :integer
-#  run_id           :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  chamber          :string(255)
+#  avg_height_cm    :float
+#  sampled_at       :datetime
+#  created_at       :datetime
+#  updated_at       :datetime
+#  sub_plot         :string(255)
 #
-
+# Indexes
+#
+#  incubation_run_id  (run_id)
+#

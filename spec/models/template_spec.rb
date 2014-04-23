@@ -13,7 +13,6 @@ end
 #  study            :string(255)
 #  plots            :text
 #  samples_per_plot :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #
-
