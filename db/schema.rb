@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.datetime "updated_at"
   end
 
-  add_index "fluxes", ["incubation_id"], name: "fluxes_incubation_id", using: :btree
+  add_index "fluxes", ["incubation_id"], name: "fluxes_incubation_id"
 
   create_table "group_affiliations", force: true do |t|
     t.integer "user_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.string   "sub_plot"
   end
 
-  add_index "incubations", ["run_id"], name: "incubation_run_id", using: :btree
+  add_index "incubations", ["run_id"], name: "incubation_run_id"
 
   create_table "lids", force: true do |t|
     t.string "name",         limit: 1
@@ -139,10 +139,10 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.integer  "original_seconds"
   end
 
-  add_index "measurements", ["compound_id"], name: "index_measurements_on_compound_id", using: :btree
-  add_index "measurements", ["flux_id"], name: "sample_flux_id", using: :btree
-  add_index "measurements", ["run_id"], name: "sample_run_id", using: :btree
-  add_index "measurements", ["sample_id"], name: "index_measurements_on_sample_id", using: :btree
+  add_index "measurements", ["compound_id"], name: "index_measurements_on_compound_id"
+  add_index "measurements", ["flux_id"], name: "sample_flux_id"
+  add_index "measurements", ["run_id"], name: "sample_run_id"
+  add_index "measurements", ["sample_id"], name: "index_measurements_on_sample_id"
 
   create_table "permissions", force: true do |t|
     t.string "name"
@@ -181,8 +181,8 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.integer  "incubation_id"
   end
 
-  add_index "samples", ["incubation_id"], name: "index_samples_on_incubation_id", using: :btree
-  add_index "samples", ["run_id", "vial"], name: "samples_run_id_vial_key", unique: true, using: :btree
+  add_index "samples", ["incubation_id"], name: "index_samples_on_incubation_id"
+  add_index "samples", ["run_id", "vial"], name: "samples_run_id_vial_key", unique: true
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -191,8 +191,8 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
   create_table "setups", force: true do |t|
     t.integer  "template_id"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.datetime "updated_at",  null: false
     t.integer  "column"
     t.string   "coeff"
-    t.datetime "aquired_at"
+    t.datetime "acquired_at"
   end
 
   create_table "standards", force: true do |t|
@@ -237,7 +237,7 @@ ActiveRecord::Schema.define(version: 20140423174128) do
   end
 
   create_table "standards_old", id: false, force: true do |t|
-    t.integer "id",       default: "nextval('standards_old_id_seq'::regclass)", null: false
+    t.integer "id",       default: 0,     null: false
     t.float   "ppm"
     t.float   "response"
     t.boolean "exclude",  default: false
@@ -267,8 +267,6 @@ ActiveRecord::Schema.define(version: 20140423174128) do
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "remember_created_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
     t.integer  "sign_in_count"
     t.datetime "reset_password_sent_at"
     t.integer  "company_id"
