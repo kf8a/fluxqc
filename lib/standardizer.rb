@@ -31,17 +31,18 @@ class Standardizer
   end
 
   def slope_data
-    [{key: standard_curves[0].position,
-      value: standard_curves[0].slope},
-     {key: standard_curves[1].position,
-      value: standard_curves[1].slope}]
+    fitter_data("slope")
   end
 
   def intercept_data
+    fitter_data("intercept")
+  end
+
+  def fitter_data(param)
     [{key: standard_curves[0].position,
-      value: standard_curves[0].intercept},
+      value: standard_curves[0].send(param)},
     {key: standard_curves[1].position,
-      value: standard_curves[1].intercept}]
+      value: standard_curves[1].send(param)}]
   end
 
 
