@@ -85,6 +85,7 @@ class DataFileLoader
           measurement.column    = value[:column]
         else
           measurement.column    = 0
+        end
 				measurement.acquired_at = vial[:acquired_at]
 				measurement.ppm         = value[:ppm]
 				measurement.area        = value[:area]
