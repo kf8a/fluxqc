@@ -30,20 +30,29 @@ class Standardizer
     measurement.ppm = intercept + slope * measurement.area
   end
 
+  def slope_data
+    [{key: standard_curves[0].position,
+      value: standard_curves[0].slope},
+     {key: standard_curves[1].position,
+      value: standard_curves[1].slope}]
+  end
+
+  def intercept_data
+    [{key: standard_curves[0].position,
+      value: standard_curves[0].intercept},
+    {key: standard_curves[1].position,
+      value: standard_curves[1].intercept}]
+  end
+
+
   def drift_corrected_ppm(measurement)
     #compute fit eq for slope correction
     fitter = Fitter.new
-    fitter.data = [{key: standard_curves[0].position,
-                    value: standard_curves[0].slope},
-                   {key: standard_curves[1].position,
-                    value: standard_curves[1].slope}]
+    fitter.data = slope_data 
     slope_params = fitter.linear_fit
 
     #compute fit eq for offset correction
-    fitter.data = [{key: standard_curves[0].position,
-                    value: standard_curves[0].intercept},
-                   {key: standard_curves[1].position,
-                    value: standard_curves[1].intercept}]
+    fitter.data = intercept_data
     intercept_params = fitter.linear_fit
 
     slope = slope_params[:offset] + slope_params[:slope] * measurement.position
