@@ -25,25 +25,6 @@ describe Sample do
     sample.uuid.should == uuid
   end
 
-  describe 'standard curves' do
-    before(:each) do
-      run = Run.create
-      standard_curve_1 = StandardCurve.create({sampled_at: Time.now() - 2.hour, run_id: run.id})
-      @standard_curve_2 = StandardCurve.create({sampled_at: Time.now() - 1.hour, run_id: run.id})
-      @standard_curve_3 = StandardCurve.create({sampled_at: Time.now() + 1.hour, run_id: run.id})
-      standard_curve_4 = StandardCurve.create({sampled_at: Time.now() + 2.hour, run_id: run.id})
-      @sample = Sample.new({sampled_at: Time.now(), run_id: run.id})
-    end
-
-    it "finds the right standard_curves" do
-      @sample.find_standard_curves.should == [@standard_curve_2, @standard_curve_3]
-    end
-
-    it "attaches the standard curve" do
-      @sample.attach_standard_curves
-      @sample.standard_curves.should == [@standard_curve_2, @standard_curve_3]
-    end
-  end
 end
 
 # == Schema Information

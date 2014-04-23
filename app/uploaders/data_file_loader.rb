@@ -29,8 +29,6 @@ class DataFileLoader
 
     dataloader.process_vials(vials)
 
-    #connect standards
-    run.attach_standards_to_samples
     #compute fluxes
     run.recompute_fluxes
   end
@@ -111,7 +109,7 @@ class DataFileLoader
       column = 0
       column = value[:column] if c == 'n2o'
       standard_curve = standard_curves[c][column]
-      standard_curve.sampled_at = vial[:acquired_at]
+      standard_curve.acquired_at = vial[:acquired_at]
       standard_curve.save
 
 			standard = Standard.create(:vial         => vial[:vial], 

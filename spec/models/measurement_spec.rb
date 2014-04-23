@@ -15,6 +15,38 @@ describe Measurement do
     flux        = FactoryGirl.create :flux, :measurements => [measurement]
     Measurement.by_compound('co2').include?(measurement).should be_true
   end
+
+  describe 'locating standard curves' do
+    before(:each) do
+      @compound    = FactoryGirl.create :compound, :name=>'co2'
+      @run         = FactoryGirl.create :run
+      sample      = FactoryGirl.create :sample, run: @run
+      @curve1      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-2.hours, run: @run
+      @curve2      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+2.hours, run: @run
+      @measurement = FactoryGirl.create :measurement, compound: @compound, acquired_at: Time.now(), sample: sample
+    end
+
+    it 'ignores later standard curves' do
+      curve3      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+4.hours, run: @run
+      @measurement.standard_curves().should == [@curve1, @curve2]
+    end
+
+    it 'ignores earlier standard curves' do
+      curve3      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: @run
+      @measurement.standard_curves().should == [@curve1, @curve2]
+    end 
+
+    it 'ignores other runs curves' do
+      run = FactoryGirl.create :run
+      curve3      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: run
+      @measurement.standard_curves().should == [@curve1, @curve2]
+    end
+
+    it 'returns what is there' do
+      @curve2.delete
+      @measurement.standard_curves().should == [@curve1]
+    end
+  end
 end
 
 # == Schema Information

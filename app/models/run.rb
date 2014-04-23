@@ -67,10 +67,7 @@ class Run < ActiveRecord::Base
   end
 
   def attach_standards_to_samples
-    samples.each do |sample|
-      sample.attach_standard_curves
-      sample.save
-    end
+    #TODO remove this once references have been removed
   end
 end
 

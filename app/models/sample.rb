@@ -32,16 +32,6 @@ class Sample < ActiveRecord::Base
     measurements.first.seconds
   end
 
-  def find_standard_curves
-    previous_standard_curve = run.standard_curves.where('sampled_at < ?', sampled_at).order('sampled_at desc').first
-    next_standard_curve = run.standard_curves.where('sampled_at > ?', sampled_at).order('sampled_at').first
-    [previous_standard_curve, next_standard_curve].compact
-  end
-
-  def attach_standard_curves
-    self.standard_curves = find_standard_curves
-  end
-
   def get_dependent_fluxes_for(compound)
     fluxes = measurements.by_compound(compound).collect {|measurement| measurement.flux }
     fluxes.uniq

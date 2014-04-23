@@ -22,8 +22,12 @@ class Measurement < ActiveRecord::Base
     acquired_at.to_s
   end
 
+  def run
+    sample.run
+  end
+
   def standard_curves
-    sample.standard_curves
+    [previous_standard_curve, next_standard_curve].compact
   end
 
   # CSV streaming support
@@ -45,6 +49,15 @@ class Measurement < ActiveRecord::Base
     joins(flux: {incubation: :run}).where('company_id =2 and excluded is false').find_each(batch_size: 1000) do |measurement|
       yield measurement 
     end
+  end
+
+  private
+  def previous_standard_curve
+    run.standard_curves.where('acquired_at < ?', acquired_at).order('acquired_at desc').first
+  end
+
+  def next_standard_curve
+    run.standard_curves.where('acquired_at > ?', acquired_at).order('acquired_at').first
   end
 end
 

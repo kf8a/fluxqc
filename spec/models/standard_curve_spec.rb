@@ -92,5 +92,5 @@ end
 #  updated_at  :datetime         not null
 #  column      :integer
 #  coeff       :string(255)
-#  aquired_at  :datetime
+#  acquired_at :datetime
 #
