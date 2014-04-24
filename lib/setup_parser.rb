@@ -28,7 +28,7 @@ class SetupParser
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
     result = lines.collect do |row|
-      break if row[0].nil?
+      break if row[0].empty?
 
       parser = case title.strip
                when /^GLBRC.*\d$/
