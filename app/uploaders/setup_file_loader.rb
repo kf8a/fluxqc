@@ -9,7 +9,7 @@ class SetupFileLoader
   def self.perform(run_id)
     run = Run.find(run_id)
     file_path = run.setup_file.file.path
-    samples = SetupParser.parse(file_path)
+    samples = SetupParser.parse(file_path).compact
     run.sampled_on = samples[0][:sample_date].try(:to_date)
     run.name = samples[0][:run_name]
     if run.name.start_with?('LTER')
