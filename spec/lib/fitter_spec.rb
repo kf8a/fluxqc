@@ -73,7 +73,31 @@ describe Fitter do
     it 'returns nil' do
       fit = Fitter.new
       fit.data = []
-      fit.linear_fit == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+      fit.linear_fit.should == {} #{:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+    end
+  end
+
+  describe 'a flux without times' do
+    it 'returns nil' do
+      fit = Fitter.new
+      fit.data = [
+        {key: 1, value: 1, deleted: false},
+        {key: 1, value: 2, deleted: false},
+        {key: 1, value: 4, deleted: false}
+      ]
+      fit.linear_fit.should == {}
+    end
+  end
+
+  describe 'a flux without values' do
+    it 'returns nil' do
+      fit = Fitter.new
+      fit.data = [
+        {key: 1, value: 1, deleted: false},
+        {key: 2, value: 1, deleted: false},
+        {key: 3, value: 1, deleted: false}
+      ]
+      fit.linear_fit.should == {}
     end
   end
 

@@ -61,6 +61,8 @@ class Fitter
     correlation = (count * sum_xy - sum_x * sum_y)/Math.sqrt((count * sum_xx - sum_x * sum_x)*(count * sum_yy - sum_y * sum_y))
     r2 = correlation * correlation
 
+    return {} if r2.nan?
+
     {:slope=>m, :offset=>b, :r2=>r2}
   end
 
