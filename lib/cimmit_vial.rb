@@ -5,7 +5,11 @@ class CimmitVial
     end
 
     def cimmit_vial_with_series
-      /(S\d+)(-CIM)?-?([a-z|A-Z])-(\d{3}-T\d)$/
+      /(S\d+)(-CIM)?[-| ]([a-z|A-Z])-(\d{3}-T\d)$/
+    end
+
+    def cimmit_vial_with_series_and_dash_plus_space
+      /(S\d+)(-CIM)?- ([a-z|A-Z])-(\d{3}-T\d)$/
     end
 
     def cimmit_vial_with_spaces
@@ -30,6 +34,8 @@ class CimmitVial
                "#{$1}#{$2}-#{$3}-#{$4}"
              when cimmit_vial_with_spaces
                "#{$1}-#{$2}"
+             when cimmit_vial_with_series_and_dash_plus_space
+               "#{$1}#{$2}-#{$3}-#{$4}"
              when vial_with_series_and_no_dash
                "#{$1}-#{$2}-#{$3}"
              when cimmit_vial_with_dashes
