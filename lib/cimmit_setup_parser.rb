@@ -27,8 +27,8 @@ class CIMMITSetupParser
 
   def vial
     parts = /(\d{3})(.)/.match(row[0])
-    # "S#{series}-CIM-#{parts[2]}-#{parts[1]}-T#{row[2]}"
-    "S#{series}-#{parts[2]}-#{parts[1]}-T#{row[2]}"
+    "S#{series}-CIM-#{parts[2]}-#{parts[1]}-T#{row[2]}"
+    #"S#{series}-#{parts[2]}-#{parts[1]}-T#{row[2]}"
   end
 
   def lid
