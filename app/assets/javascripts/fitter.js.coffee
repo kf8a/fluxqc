@@ -5,7 +5,7 @@ class Flux.Fitter
     x = y = 0
 
     if (attributes.data.length < 2)
-      return [ [], [] ]
+      return null
 
     for v in [0..attributes.data.length-1]
       unless @attributes.data[v].deleted
