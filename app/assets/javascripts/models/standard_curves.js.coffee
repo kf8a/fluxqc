@@ -13,7 +13,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
     point.deleted = !point.deleted
     @updateSamples()
     @trigger('change')
-    this
+    @
 
   to_ppm: (area, eq) ->
     area * eq.slope + eq.offset
