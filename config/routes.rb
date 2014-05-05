@@ -1,5 +1,6 @@
 Fluxqc::Application.routes.draw do
 
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   get "measurements/show"
   resources :templates
 
