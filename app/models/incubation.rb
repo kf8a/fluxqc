@@ -20,11 +20,12 @@ class Incubation < ActiveRecord::Base
   def headspace
     return Float::NAN unless lid
 
-    if 'Z' == lid.name
+    case lid.name
+    when 'Z'
       z_lid_headspace
-    elsif 'Y' == lid.name
+    when 'Y'
       y_lid_headspace
-    elsif 'X' == lid.name
+    when 'X'
       x_lid_headspace
     else
       lter_lid_headspace
