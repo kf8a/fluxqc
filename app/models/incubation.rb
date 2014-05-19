@@ -91,6 +91,13 @@ class Incubation < ActiveRecord::Base
   def company
     run.company
   end
+
+  def recompute_fluxes
+    fluxes.each do |f|
+      f.flux
+      f.save
+    end
+  end
 end
 
 # == Schema Information

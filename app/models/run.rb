@@ -59,10 +59,7 @@ class Run < ActiveRecord::Base
 
   def recompute_fluxes
     incubations.each do |i|
-      i.fluxes.each do |f|
-        f.flux
-        f.save
-      end
+      i.recompute_fluxes
     end
   end
 
