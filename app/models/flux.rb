@@ -1,3 +1,4 @@
+require 'csv'
 require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
 # This file represents a flux, that is a series of measuremnemnts of the
@@ -123,6 +124,33 @@ class Flux < ActiveRecord::Base
   def company
     incubation.company
   end
+
+  # CSV streaming support
+  def self.csv_header
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, 
+                 :replicate, :compund, :flux], 
+                 ['id','sampled_on', 'study', 'treatment', 
+                   'replicate', 'compound', 'flux'], true)
+  end
+
+  def to_csv_row
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, 
+                 :replicate, :compound, :flux],
+                 [incubation.id, run.sampled_on, 
+                   run.study,
+                   incubation.treatment, incubation.replicate, 
+                   compound.name,
+                   value])
+  end
+
+  def self.find_in_batches(study, &block)
+    #find_each will batch the results instead of getting all in one go
+    joins(incubation: :run).where('study = ?', study).
+      find_each(batch_size: 1000) do |flux|
+      yield flux 
+    end
+  end
+
 end
 
 # == Schema Information
