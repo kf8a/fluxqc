@@ -145,7 +145,7 @@ class Flux < ActiveRecord::Base
 
   def self.find_in_batches(study, &block)
     #find_each will batch the results instead of getting all in one go
-    joins(incubation: :run).where('study = ?', study).
+    joins(incubation: :run).where('study = ?', study).order('sampled_at').
       find_each(batch_size: 1000) do |flux|
       yield flux 
     end
