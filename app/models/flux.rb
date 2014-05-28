@@ -127,16 +127,16 @@ class Flux < ActiveRecord::Base
 
   # CSV streaming support
   def self.csv_header
-    CSV::Row.new([:id, :sampled_on, :study, :treatment, 
+    CSV::Row.new([:id, :run_id, :run_name, :sampled_on, :study, :treatment, 
                  :replicate, :compund, :flux], 
-                 ['id','sampled_on', 'study', 'treatment', 
+                 ['id','run id', 'series', 'sampled_on', 'study', 'treatment', 
                    'replicate', 'compound', 'flux'], true)
   end
 
   def to_csv_row
-    CSV::Row.new([:id, :sampled_on, :study, :treatment, 
+    CSV::Row.new([:id, :run_id, :run_name, :sampled_on, :study, :treatment, 
                  :replicate, :compound, :flux],
-                 [incubation.id, run.sampled_on, 
+                 [incubation.id, run.id, run.name, run.sampled_on, 
                    run.study,
                    incubation.treatment, incubation.replicate, 
                    compound.name,
