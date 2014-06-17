@@ -7,9 +7,11 @@ set :repository, "git@github.com:kf8a/fluxqc.git"
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "kalkaska.kbs.msu.edu"                          # Your HTTP server, Apache/etc
-role :app, "kalkaska.kbs.msu.edu"                          # This may be the same as your `Web` server
-role :db,  "kalkaska.kbs.msu.edu", :primary => true # This is where Rails migrations will run
+set :host, "oshtemo"
+
+role :web, "#{host}.kbs.msu.edu"                          # Your HTTP server, Apache/etc
+role :app, "#{host}.kbs.msu.edu"                          # This may be the same as your `Web` server
+role :db,  "#{host}.kbs.msu.edu", :primary => true # This is where Rails migrations will run
 
 set :deploy_to, "/var/u/apps/#{application}"
 
@@ -22,7 +24,7 @@ set :deploy_via, :remote_cache
 
 ssh_options[:forward_agent] = true
 
-set :unicorn_binary, "/usr/local/bin/unicorn"
+set :unicorn_binary, "unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/var/u/apps/fluxqc/shared/pids/unicorn.pid"
 
