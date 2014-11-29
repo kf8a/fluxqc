@@ -4,4 +4,12 @@ module ApplicationHelper
     options[:url_options] ||= url_options
     target.active_model_serializer.new(target, options).to_json
   end
+
+  def recent(model)
+    if model.updated_at
+      "recent_" + (model.updated_at > 3.weeks.ago).to_s
+    else
+      "unkown"
+    end
+  end
 end
