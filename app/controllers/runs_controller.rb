@@ -42,7 +42,11 @@ class RunsController < ApplicationController
         DataFileLoader.perform(@run.id)
         # end
       end
-      redirect_to edit_run_path(@run)
+      if params[:run][:setup_file] && params[:run][:data_file]
+        redirect_to run_path(@run)
+      else
+        redirect_to edit_run_path(@run)
+      end
     else
       redirect_to new_run_path
     end
