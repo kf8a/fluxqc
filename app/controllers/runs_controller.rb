@@ -107,37 +107,37 @@ class RunsController < ApplicationController
   def accept
     run = Run.find(params[:id])
     run.accept!
-    redirect_to runs_path(:state=>'accepted')
+    redirect_to runs_path(:state=>'uploaded')
   end
 
   def approve
     run = Run.find(params[:id])
     run.approve!
-    redirect_to runs_path(:state=>'approved')
+    redirect_to runs_path(:state=>'accepted')
   end
 
   def publish
     run = Run.find(params[:id])
     run.publish!
-    redirect_to runs_path(:state=>'published')
+    redirect_to runs_path(:state=>'approved')
   end
 
   def unapprove
     run = Run.find(params[:id])
     run.unapprove!
-    redirect_to runs_path(:state =>'accepted')
+    redirect_to runs_path(:state =>'approved')
   end
 
   def unpublish
     run = Run.find(params[:id])
     run.unpublish!
-    redirect_to runs_path(:state => 'approved')
+    redirect_to runs_path(:state => 'published')
   end
 
   def unreject
     run = Run.find(params[:id])
     run.unreject!
-    redirect_to runs_path(:state=>'uploaded')
+    redirect_to runs_path(:state=>'rejected')
   end
 
   def destroy
