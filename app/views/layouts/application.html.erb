@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Fluxqc</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">FluxQC</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li <%="class= 'active'" if @state == 'uploaded'%> ><%= link_to 'Uploaded', runs_url({:state => :uploaded}) %></li>
-            <li <%="class= 'active'" if @state == 'accepted'%> ><%= link_to 'Accepted', runs_url({:state => :accepted}) %></li>
-            <li <%= "class='active'" if @state == 'approved'%> ><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
-            <li <%= "class= 'active'" if @state == 'published'%> ><%= link_to 'Published', runs_url({:state => :published}) %></li>
-            <li <%= "class= 'active'" if @state == 'rejected'%> ><%= link_to 'Rejected', runs_url({:state=>:rejected}) %></li>
+  <head>
+    <title>Fluxqc</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="navbar navbar-default" role="navigator">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="#">FluxQC</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li <%="class=active" if @state == 'uploaded'%> ><%= link_to 'Uploaded', runs_url({:state => :uploaded}) %></li>
+            <li <%="class=active" if @state == 'accepted'%> ><%= link_to 'Accepted', runs_url({:state => :accepted}) %></li>
+            <li <%= "class=active" if @state == 'approved'%> ><%= link_to 'Approved', runs_url({:state => :approved}) %></li>
+            <li <%= "class= active" if @state == 'published'%> ><%= link_to 'Published', runs_url({:state => :published}) %></li>
+            <li <%= "class= active" if @state == 'rejected'%> ><%= link_to 'Rejected', runs_url({:state=>:rejected}) %></li>
             <% if user_signed_in? %>
               <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
             <% else %>
@@ -32,7 +34,6 @@
           </ul>
         </div>
       </div>
-    </div>
   </div>
 
   <!--[if lt IE 9]>
