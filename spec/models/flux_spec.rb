@@ -7,9 +7,9 @@ describe Flux do
   let(:flux) {FactoryGirl.create :flux}
 
   it 'has methods to make the flux calculation easier' do
-    flux.respond_to?(:headspace).should be_true
-    flux.respond_to?(:surface_area).should be_true
-    flux.respond_to?(:mol_weight).should be_true
+    flux.respond_to?(:headspace).should eq true
+    flux.respond_to?(:surface_area).should eq true
+    flux.respond_to?(:mol_weight).should eq true
   end
 
 
@@ -54,7 +54,7 @@ describe Flux do
     end
 
     it 'updates the excluded setting' do
-      flux.measurements.first.excluded.should be_true
+      flux.measurements.first.excluded.should eq true
     end
 
     it 'updates the flux' do

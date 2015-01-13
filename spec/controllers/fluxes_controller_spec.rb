@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FluxesController do
+describe FluxesController, :type => :controller do
 
   before(:each) do
     @user = FactoryGirl.create(:user)

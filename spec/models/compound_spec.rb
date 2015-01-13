@@ -9,7 +9,7 @@ describe Compound do
   end
 
   it 'returns the mol_weight' do
-    compound.respond_to?(:mol_weight).should be_true
+    compound.respond_to?(:mol_weight).should eq true 
   end
 end
 

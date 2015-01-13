@@ -13,23 +13,23 @@ describe Run do
   end
 
   it 'recomputes the fluxes' do
-    run.respond_to?('recompute_fluxes').should be_true
+    run.respond_to?('recompute_fluxes').should eq true
     run.recompute_fluxes # just to run through it
     # TODO figure out what the assertion is here
   end
 
   it 'attaches the standards' do
-    run.respond_to?("attach_standards_to_samples").should be_true
+    run.respond_to?("attach_standards_to_samples").should eq true
   end
 
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
-        run.uploaded?.should be_true
+        run.uploaded?.should eq true
       end
 
       it 'can be accepted' do
-        run.can_accept?.should be_true
+        run.can_accept?.should eq true
       end
 
       it 'reports possible events' do
@@ -42,11 +42,11 @@ describe Run do
         run.accept!
       end
       it 'can be approved' do
-        run.can_approve?.should be_true
+        run.can_approve?.should eq true
       end
 
       it 'can be rejected' do
-        run.can_reject?.should be_true
+        run.can_reject?.should eq true
       end
     end
 
@@ -57,13 +57,13 @@ describe Run do
       end
 
       it 'can be published' do
-        run.can_publish?.should  be_true
+        run.can_publish?.should  eq true
       end
       it 'can be rejected' do
-        run.can_reject?.should be_true
+        run.can_reject?.should eq true
       end
       it 'can be unapproved' do
-        run.can_unapprove?.should be_true
+        run.can_unapprove?.should eq true
       end
     end
 
@@ -75,14 +75,14 @@ describe Run do
       end
 
       it 'can be unpublished' do
-        run.can_unpublish?.should be_true
+        run.can_unpublish?.should eq true
       end
       it 'has released set to true' do
-        run.released.should be_true
+        run.released.should eq true
       end
       it 'sets released to false when recalled' do
         run.unpublish!
-        run.released.should be_false
+        run.released.should eq false
       end
     end
   end

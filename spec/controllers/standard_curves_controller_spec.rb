@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StandardCurvesController do
+describe StandardCurvesController, type: :controller do
 
   describe 'an authenticated user' do
     before do 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RunsController do
+describe RunsController, :type => :controller do
 
   before(:each) do
     @user = FactoryGirl.create(:user)

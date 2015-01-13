@@ -5,7 +5,7 @@ describe DataParser do
   describe 'parsing a results file' do
     before do
       file = File.expand_path("../../fixtures/result.txt", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -65,7 +65,7 @@ describe DataParser do
 
     before do
       file = File.expand_path("../../fixtures/results_2.txt", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -78,7 +78,7 @@ describe DataParser do
   describe 'parsing another chemstation result file' do
     before do
       file = File.expand_path("../../fixtures/2012_result.txt", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
     describe 'row 17' do
@@ -106,7 +106,7 @@ describe DataParser do
   describe 'parsing a 2010 file with standards' do
     before do
       file = File.expand_path("../../fixtures//glbrc-2010.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -131,7 +131,7 @@ describe DataParser do
   describe 'parsing a second chemstation file' do
     before do
       file = File.expand_path("../../fixtures//LTER20130520S4.CSV", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -158,7 +158,7 @@ describe DataParser do
   describe 'parsing another chemstation result file' do
     before do
       file = File.expand_path("../../fixtures/LTER20130702S7.CSV", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -190,7 +190,7 @@ describe DataParser do
   describe 'parsing an old results file' do
     before do
       file = File.expand_path("../../fixtures/lter2007-forestfert1.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = DataParser.new.parse(file)
     end
 
@@ -261,7 +261,7 @@ describe DataParser do
   # describe 'parsing a macro generated file' do
   #   before do
   #     file = File.expand_path("../../fixtures/2011_results.csv", __FILE__)
-  #     File.exists?(file).should be_true
+  #     File.exists?(file).should eq true
   #     @result = DataParser.parse(file)
   #   end
 

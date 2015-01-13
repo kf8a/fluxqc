@@ -9,7 +9,7 @@ describe Lid do
   let(:lid) {Lid.new}
 
   it 'should have a surface area' do
-    lid.respond_to?(:surface_area).should be_true
+    lid.respond_to?(:surface_area).should eq true
   end
 end
 

@@ -7,7 +7,7 @@ describe Incubation do
 
   let(:incubation) {Incubation.new}
   it 'has some headspace' do
-    incubation.respond_to?(:headspace).should be_true
+    incubation.respond_to?(:headspace).should eq true
   end
 
   describe 'an incubation with fluxes' do
@@ -32,7 +32,7 @@ describe Incubation do
     end
 
     it 'has vials' do
-      incubation.vials.respond_to?('[]').should be_true
+      incubation.vials.respond_to?('[]').should eq true
     end
 
     describe 'selecting a specific flux' do

@@ -98,10 +98,10 @@ describe IncubationFactory do
       @existing.should == @incubation
     end
     it 'has the right vials' do
-      @incubation.vials.include?('2').should be_true
+      @incubation.vials.include?('2').should eq true
     end
     it 'has the right seconds' do
-      @incubation.seconds.include?(20).should be_true
+      @incubation.seconds.include?(20).should eq true
     end
 
   end

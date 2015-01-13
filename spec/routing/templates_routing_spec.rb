@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe TemplatesController do
-  describe "routing" do
+  describe "routing", type: :controller  do
 
     it "routes to #index" do
       get("/templates").should route_to("templates#index")

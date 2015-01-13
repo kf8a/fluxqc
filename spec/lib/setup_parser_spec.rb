@@ -6,7 +6,7 @@ describe SetupParser do
   describe 'parsing an lter forest fert setup file' do
     before do
       file = File.expand_path("../../fixtures/fert4.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = SetupParser.parse(file)
     end
 
@@ -55,7 +55,7 @@ describe SetupParser do
   describe 'parsing an lter csv setup file' do
     before do
       file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = SetupParser.parse(file)
     end
 
@@ -136,7 +136,7 @@ describe SetupParser do
 
     before do
       file = File.expand_path("../../fixtures/glbrc_setup.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = SetupParser.parse(file)
     end
 
@@ -207,7 +207,7 @@ describe SetupParser do
 
     before do
       file = File.expand_path("../../fixtures/lux_setup.csv", __FILE__)
-      File.exists?(file).should be_true
+      File.exists?(file).should eq true
       @result = SetupParser.parse(file)
     end
 

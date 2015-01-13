@@ -19,16 +19,16 @@ describe SetupFileLoader do
     run = FactoryGirl.create :run,
       :setup_file => fixture_file_upload('/setup_test.csv')
 
-    SetupFileLoader.perform(run.id).should_not be_false
+    expect(SetupFileLoader.perform(run.id)).to_not eq false
     @run = Run.find(run.id)
   end
 
   it 'creates incubations' do
-    @run.incubations.size.should == 36
+    expect(@run.incubations.size).to eq 36
   end
 
   it 'creates samples' do
-    @run.samples.size.should == 143
+    expect(@run.samples.size).to eq 143
   end
 
   it 'adds compounds to all of the measurements' do

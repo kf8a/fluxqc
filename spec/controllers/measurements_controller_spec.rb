@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MeasurementsController do
+describe MeasurementsController, type: :controller do
 
   describe "GET 'index' as an authenticated user" do
     before(:each) do

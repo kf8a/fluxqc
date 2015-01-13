@@ -16,8 +16,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                     :data_file => fixture_file_upload('/2011_results.csv'),
                     :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not be_false
-      DataFileLoader.perform(run.id).should_not be_false
+      SetupFileLoader.perform(run.id).should_not eq false
+      DataFileLoader.perform(run.id).should_not eq false
       @run = Run.find(run.id)
     end
 
@@ -45,14 +45,14 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/glbrc-2010.csv'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not be_false
-      DataFileLoader.perform(run.id).should_not be_false
+      SetupFileLoader.perform(run.id).should_not eq false
+      DataFileLoader.perform(run.id).should_not eq false
       @run = Run.find(run.id)
       @run.standard_curves.reload
     end
 
     it 'has no standard curve' do
-      @run.standard_curves.empty?.should be_true
+      @run.standard_curves.empty?.should eq true
     end
   end
 
@@ -61,8 +61,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/2012_result.txt'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not be_false
-      DataFileLoader.perform(run.id).should_not be_false
+      SetupFileLoader.perform(run.id).should_not eq false
+      DataFileLoader.perform(run.id).should_not eq false
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
       @run.standard_curves.reload
@@ -118,8 +118,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/LTER20130520S4.CSV'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not be_false
-      DataFileLoader.perform(run.id).should_not be_false
+      SetupFileLoader.perform(run.id).should_not eq false
+      DataFileLoader.perform(run.id).should_not eq false
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
       @run.standard_curves.reload
@@ -139,8 +139,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/glbrc-results.CSV'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not be_false
-      DataFileLoader.perform(run.id).should_not be_false
+      SetupFileLoader.perform(run.id).should_not eq false
+      DataFileLoader.perform(run.id).should_not eq false
       @run = Run.find(run.id)
       @run.standard_curves.reload
     end
