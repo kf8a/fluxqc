@@ -126,7 +126,7 @@ describe DataFileLoader do
     end
 
     it 'should have the right number of vials' do
-      @run.samples.size.should == 144
+      @run.samples.size.should == 143
     end
 
     it 'should have two sets of standard curves' do
@@ -146,7 +146,7 @@ describe DataFileLoader do
     end
 
     it 'should have the right area for vial 2' do
-      @run.incubations.last.flux('ch4').measurements.first.area.should == 42.389095
+      @run.incubations.where(treatment: "T6").first.flux('ch4').measurements.first.area.should == 44.905228
     end
 
   end
