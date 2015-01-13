@@ -98,7 +98,7 @@ describe SetupParser do
     end
 
     it 'returns the right data for a string treatment second row' do
-      @result[1][:treatment].should == 'TDF'
+      @result[1][:treatment].should == 'T6'
     end
 
     describe 'other row' do
@@ -115,7 +115,7 @@ describe SetupParser do
         @result[5][:chamber].should == '1'
       end
       it 'has the right vial' do
-        @result[5][:vial].should == '6'
+        @result[5][:vial].should == '7'
       end
       it 'has the right lid' do
         @result[5][:lid].should == 'D'
@@ -127,7 +127,7 @@ describe SetupParser do
         @result[5][:soil_temperature].should == 19
       end
       it 'has the right seconds' do
-        @result[5][:seconds].should == 20
+        @result[5][:seconds].should == 40
       end
     end
   end

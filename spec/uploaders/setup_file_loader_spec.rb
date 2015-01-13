@@ -24,11 +24,11 @@ describe SetupFileLoader do
   end
 
   it 'creates incubations' do
-    @run.incubations.size.should == 37
+    @run.incubations.size.should == 36
   end
 
   it 'creates samples' do
-    @run.samples.size.should == 144
+    @run.samples.size.should == 143
   end
 
   it 'adds compounds to all of the measurements' do

@@ -70,10 +70,11 @@ describe Fitter do
   end
 
   describe 'a flux with no datapoints' do
-    it 'returns nil' do
+    it 'raises an error' do
       fit = Fitter.new
       fit.data = []
-      fit.linear_fit.should == {} #{:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+      expect{fit.linear_fit}.to raise_error
+      # fit.linear_fit.should == {} #{:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
     end
   end
 
@@ -85,7 +86,7 @@ describe Fitter do
         {key: 1, value: 2, deleted: false},
         {key: 1, value: 4, deleted: false}
       ]
-      fit.linear_fit.should == {}
+      expect{fit.linear_fit}.to raise_error
     end
   end
 
@@ -97,15 +98,16 @@ describe Fitter do
         {key: 2, value: 1, deleted: false},
         {key: 3, value: 1, deleted: false}
       ]
-      fit.linear_fit.should == {}
+      expect(fit.linear_fit).to include(:slope => 0.0, :offset => 1.0) #, :r2 => Float::NAN)
     end
   end
 
   describe 'a flux with only one datapoint' do
-    it 'returns an empty array' do
+    it 'raises an error' do
       fit = Fitter.new
       fit.data = [ {:key => 1, :value=>1, :deleted => false} ]
-      fit.linear_fit == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
+      expect{fit.liner_fit}.to raise_error
+      # fit.linear_fit == {:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
     end
   end
 

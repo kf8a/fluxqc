@@ -1,6 +1,10 @@
 # The Fitter class does a linear regression on the flux object
 # it gets used by fluxes to compute the flux value.
 # Fluxes pass themselvs to the Fitter
+
+class FitterError < StandardError
+end
+
 class Fitter
   attr_accessor :data
 
@@ -33,10 +37,11 @@ class Fitter
   def linear_fit
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
 
-    raise 'no data to compute linear fit' unless data
+    raise FitterError, 'no data to compute linear fit' unless data
     # return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if data.length < 2
-    return {} if data.length < 2
-
+    raise FitterError, 'can not compute slope with less than 2 data points' if data.length < 2
+    # return {} if data.length < 2
+    raise FitterError, 'can not compute slope with less than 2 x values' if only_one_x_value?(data)
     data.each do |datum|
       next if bad_datum(datum)
       x = datum[:key].to_f
@@ -61,8 +66,6 @@ class Fitter
     correlation = (count * sum_xy - sum_x * sum_y)/Math.sqrt((count * sum_xx - sum_x * sum_x)*(count * sum_yy - sum_y * sum_y))
     r2 = correlation * correlation
 
-    return {} if r2.nan? || r2.infinite?
-
     {:slope=>m, :offset=>b, :r2=>r2}
   end
 
@@ -73,4 +76,10 @@ class Fitter
   def no_key_value(datum)
     (!datum[:key] || !datum[:value])
   end
+
+  def only_one_x_value?(data) 
+   x = data.collect {|datum| datum[:key]} 
+   x.reverse == x
+  end
+
 end
