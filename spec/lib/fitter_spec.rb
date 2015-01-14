@@ -48,7 +48,7 @@ describe Fitter do
       ]
     end
     it 'does not fail' do
-      @fit.linear_fit.should be_true
+      @fit.linear_fit.should eq  {}
     end
   end
 

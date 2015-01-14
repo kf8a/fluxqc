@@ -62,7 +62,10 @@ class Flux < ActiveRecord::Base
 
   def compute_flux
     f = Fitter.new(self)
-    f.fit
+    begin
+      f.fit
+    rescue 
+    end
   end
 
   # reduced flux based on 3 points instead of 4

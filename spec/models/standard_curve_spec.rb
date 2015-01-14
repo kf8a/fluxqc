@@ -72,9 +72,7 @@ describe StandardCurve do
   end
 
   describe 'json output' do
-    it 'should include a list of fluxes that are affected by the standard curve' do
-      pending
-    end
+    it 'should include a list of fluxes that are affected by the standard curve'
   end
 
 end
