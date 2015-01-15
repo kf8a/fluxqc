@@ -15,9 +15,10 @@ describe StandardCurveOrganizer do
   it {should belong_to :run}
 
   it 'should return the standard curves of the run' do
-    run = FactoryGirl.build :run
+    pending "Need to rethink if I need the organizer"
+    run = FactoryGirl.create :run
     run.standard_curves << StandardCurve.new
-    run.standard_curve_organizer << StandardCurveOrganizer.new
+    run.standard_curve_organizer = StandardCurveOrganizer.new
     expect(run.standard_curve_organizer.standard_curves).to eq []
   end
 end

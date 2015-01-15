@@ -11,4 +11,6 @@
 
 class StandardCurveOrganizer < ActiveRecord::Base
   belongs_to :run
+  has_many :standard_curves, dependent: :destroy
+
 end
