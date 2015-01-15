@@ -22,7 +22,10 @@ class StandardCurve < ActiveRecord::Base
   def fit_line
     f = Fitter.new
     f.data = data
-    f.linear_fit
+    begin
+      f.linear_fit
+    rescue
+    end
   end
 
   def get_dependent_fluxes
