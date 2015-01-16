@@ -37,11 +37,11 @@ class Fitter
   def linear_fit
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
 
-    raise FitterError, 'no data to compute linear fit' unless data
+    raise FitterError, "no data to compute linear fit" unless data
     # return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if data.length < 2
-    raise FitterError, 'can not compute slope with less than 2 data points' if data.length < 2
+    raise FitterError, "can not compute slope with less than 2 data points" if data.length < 2
     # return {} if data.length < 2
-    raise FitterError, 'can not compute slope with less than 2 x values' if only_one_x_value?(data)
+    raise FitterError, "can not compute slope with only 1 x value" if only_one_x_value?(data)
     data.each do |datum|
       next if bad_datum(datum)
       x = datum[:key].to_f

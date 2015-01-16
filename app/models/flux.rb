@@ -87,7 +87,11 @@ class Flux < ActiveRecord::Base
   def fit_line
     f = Fitter.new
     f.data = data
+    begin
     f.linear_fit
+    rescue
+      nil
+    end
   end
 
   def as_json(options= {})
@@ -97,9 +101,24 @@ class Flux < ActiveRecord::Base
     h[:expected_slope] = compound.name == 'ch4' ? 'negative' : 'positive'
     h[:ymax] = ymax
     h[:ymin] = ymin
-    h[:fit_line] = fit_line
-    h[:multiplier] = multiplier
-    h[:flux] = flux
+    f = fit_line
+    if f.try(:nan?)
+      h[:fit_line] = nil
+    else
+      h[:fit_line] = f
+    end
+    m = multiplier
+    if m.try(:nan?)
+      h[:multiplier] = nil
+    else
+      h[:multiplier] = m
+    end
+    f = flux
+    if f.try(:nan?)
+      h[:flux] = nil
+    else
+      h[:flux] = f
+    end
     h
   end
 
