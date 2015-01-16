@@ -10,7 +10,7 @@ class Flux.Models.Flux extends Backbone.Model
   togglePoint: (point) ->
     point.deleted = !point.deleted
     @.fitLineByLeastSquares()
-    @.change()
+    @.save()
     @
 
   fitLineByLeastSquares: =>
@@ -45,7 +45,6 @@ class Flux.Models.Flux extends Backbone.Model
     @.set({flux: new_flux})
     @.set({fit_line: {slope: m, r2: r2, offset: b}})
 
-    @.save()
     [m,b,r2, @attributes.flux]
 
 class Flux.Collections.FluxesCollection extends Backbone.Collection
