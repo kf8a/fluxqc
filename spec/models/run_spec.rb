@@ -9,11 +9,11 @@ describe Run do
   it {should have_many :standard_curves}
 
   it 'reports the total number of fluxes' do
-    run.total_fluxes.should == 0
+    expect(run.total_fluxes).to eq 0
   end
 
   it 'recomputes the fluxes' do
-    run.respond_to?('recompute_fluxes').should eq true
+    expect(run.respond_to?('recompute_fluxes')).to eq true
     run.recompute_fluxes # just to run through it
     # TODO figure out what the assertion is here
   end
@@ -25,15 +25,15 @@ describe Run do
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
-        run.uploaded?.should eq true
+        expect(run.uploaded?).eq true
       end
 
       it 'can be accepted' do
-        run.can_accept?.should eq true
+        expect(run.can_accept?).to eq true
       end
 
       it 'reports possible events' do
-        run.current_state.events.keys.should include(:accept)
+        expect(run.current_state.events.keys).to include(:accept)
       end
     end
 
@@ -42,11 +42,11 @@ describe Run do
         run.accept!
       end
       it 'can be approved' do
-        run.can_approve?.should eq true
+        expect(run.can_approve?).to eq true
       end
 
       it 'can be rejected' do
-        run.can_reject?.should eq true
+        expect(run.can_reject?).to eq true
       end
     end
 
@@ -57,13 +57,13 @@ describe Run do
       end
 
       it 'can be published' do
-        run.can_publish?.should  eq true
+        expect(run.can_publish?).to eq true
       end
       it 'can be rejected' do
-        run.can_reject?.should eq true
+        expect(run.can_reject?).to eq true
       end
       it 'can be unapproved' do
-        run.can_unapprove?.should eq true
+        exepct(run.can_unapprove?).to eq true
       end
     end
 
@@ -75,14 +75,14 @@ describe Run do
       end
 
       it 'can be unpublished' do
-        run.can_unpublish?.should eq true
+        expect(run.can_unpublish?).to eq true
       end
       it 'has released set to true' do
-        run.released.should eq true
+        expect(run.released).to eq true
       end
       it 'sets released to false when recalled' do
         run.unpublish!
-        run.released.should eq false
+        expect(run.released).to eq false
       end
     end
   end
