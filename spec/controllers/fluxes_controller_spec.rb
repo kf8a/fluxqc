@@ -25,7 +25,7 @@ describe FluxesController, :type => :controller do
       Flux.any_instance.stub(:surface_area).and_return(4.5)
       Flux.any_instance.stub(:mol_weight).and_return(12.3)
       post :update, id: @flux.id , data: [{id: @measurement.id, key: 40, value: 1.69, area: 33.34, deleted: true}]
-      response.code.should == "200"
+      expect(response.code).to eq "200"
     end
   end
 
