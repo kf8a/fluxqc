@@ -70,19 +70,20 @@ describe DataFileLoader do
 
     it 'updateds the acquired time' do
 			Time.zone = 'Eastern Time (US & Canada)' 
-      @incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,3,35)
+      #@incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,3,35)
+      expect(@incubation.flux('n2o').measurements.first.acquired_at).to eq Time.zone.local(2012,04,12,21,3,35)
     end
     it 'updates the measurement with the column id' do
-      @incubation.flux('n2o').measurements.first.column.should == 1
+      expect(@incubation.flux('n2o').measurements.first.column).to eq 1
     end
     it 'updates the measurement with the co2 area' do
-      @incubation.flux('co2').measurements.first.area.should == 70570.75
+      expect(@incubation.flux('co2').measurements.first.area).to eq 70570.75
     end
     it 'updates the measurement with the n2o area' do
-      @incubation.flux('n2o').measurements.first.area.should == 306.040741
+      expect(@incubation.flux('n2o').measurements.first.area).to eq 306.040741
     end
     it 'updates the measurement with the ch4 area' do
-      @incubation.flux('ch4').measurements.first.area.should == 20.403509
+      expect(@incubation.flux('ch4').measurements.first.area).to eq 20.403509
     end
 
     it 'keeps standards and check standards' do
