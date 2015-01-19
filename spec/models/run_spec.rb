@@ -25,7 +25,7 @@ describe Run do
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do
-        expect(run.uploaded?).eq true
+        expect(run.uploaded?).to eq true
       end
 
       it 'can be accepted' do
@@ -63,7 +63,7 @@ describe Run do
         expect(run.can_reject?).to eq true
       end
       it 'can be unapproved' do
-        exepct(run.can_unapprove?).to eq true
+        expect(run.can_unapprove?).to eq true
       end
     end
 
