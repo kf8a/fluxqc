@@ -6,7 +6,10 @@ class FitterError < StandardError
 end
 
 class Fitter
+  # include Adamantium
+
   attr_accessor :data
+  attr_reader :slope, :offset, :r2, :correlation
 
   def initialize(flux=nil)
     if flux
@@ -22,6 +25,7 @@ class Fitter
       result[:slope] * multiplier
     end
   end
+  # memoize :fit
 
   def multiplier
     headspace     = @flux.headspace.to_f
@@ -33,6 +37,8 @@ class Fitter
     # 100 = 10000 cm^2/m^2 * 10000 m^2/ha * 1 mg/1000 ug * 1g /1000 ug
     headspace/surface_area * 100 * 1440 /22.4 * mol_weight
   end
+  # memoize :multiplier
+
 
   def linear_fit
     sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
@@ -55,18 +61,17 @@ class Fitter
     end
 
     # return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if count == 0
-    return {} if count == 0
+    return  if count == 0
 
-    m = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
-    b = (sum_y/count) - (m * sum_x)/count
+    @slope = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
+    @offset = (sum_y/count) - (slope * sum_x)/count
 
     mean_y = sum_y/count
     sst = sse = 0
 
-    correlation = (count * sum_xy - sum_x * sum_y)/Math.sqrt((count * sum_xx - sum_x * sum_x)*(count * sum_yy - sum_y * sum_y))
-    r2 = correlation * correlation
-
-    {:slope=>m, :offset=>b, :r2=>r2}
+    @correlation = (count * sum_xy - sum_x * sum_y)/Math.sqrt((count * sum_xx - sum_x * sum_x)*(count * sum_yy - sum_y * sum_y))
+    @r2 = correlation * correlation
+    {slope: slope, offset: offset, r2: r2}
   end
 
   def bad_datum(datum)

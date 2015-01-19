@@ -12,14 +12,14 @@ describe Fitter do
       @slope, @offset, @r2 = fit.linear_fit
     end
     it 'computes the slope' do
-      @result[:slope].should == 1
+      expect(@result[:slope]).to eq 1
     end
     it 'computes r2' do
-      @result[:r2].should == 1
+      expect(@result[:r2]).to eq 1
     end
 
     it 'computes the offset' do
-      @result[:offset].should == 0
+      expect(@result[:offset]).to eq 0
     end
   end
 
@@ -34,7 +34,7 @@ describe Fitter do
       @result = fit.linear_fit
     end
     it 'computes the slope' do
-      @result[:slope].should == 1
+      expect(@result[:slope]).to eq 1
     end
   end
 
@@ -48,7 +48,7 @@ describe Fitter do
       ]
     end
     it 'does not fail' do
-      @fit.linear_fit.should eq  {}
+      expect(@fit.linear_fit).to be_nil
     end
   end
 
@@ -64,7 +64,7 @@ describe Fitter do
     end
 
     it 'computes the slope' do
-      @result[:slope].should == 3
+      expect(@result[:slope]).to eq 3
     end
 
   end
@@ -74,7 +74,6 @@ describe Fitter do
       fit = Fitter.new
       fit.data = []
       expect{fit.linear_fit}.to raise_error
-      # fit.linear_fit.should == {} #{:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}
     end
   end
 
@@ -114,11 +113,11 @@ describe Fitter do
   describe 'using a flux object' do
     before(:each) do
       @flux = double()
-      @flux.stub(:try).and_return nil
-      @flux.stub(:headspace).and_return(1)
-      @flux.stub(:surface_area).and_return(2)
-      @flux.stub(:mol_weight).and_return(12)
-      @flux.stub(:data).and_return([
+      allow(@flux).to receive(:try).and_return nil
+      allow(@flux).to receive(:headspace).and_return(1)
+      allow(@flux).to receive(:surface_area).and_return(2)
+      allow(@flux).to receive(:mol_weight).and_return(12)
+      allow(@flux).to receive(:data).and_return([
                                    {:key => 1, :value=>1, :deleted => false},
                                    {:key =>2, :value => 2, :deleted => false}
                                    ])
@@ -127,7 +126,7 @@ describe Fitter do
     it 'computes the flux' do
       fitter = Fitter.new(@flux)
       slope, r2 = fitter.fit
-      slope.should be_within(0.1).of(38571.43)
+      expect(slope).to be_within(0.1).of(38571.43)
     end
   end
 end
