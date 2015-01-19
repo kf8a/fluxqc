@@ -24,7 +24,7 @@ gem 'foreigner'
 gem 'bcrypt-ruby'
 
 # Use unicorn as the web server
-gem 'unicorn'
+gem 'unicorn', group: :production
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
