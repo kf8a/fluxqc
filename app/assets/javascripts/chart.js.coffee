@@ -50,6 +50,12 @@ class Flux.ScatterPlot
     a1 = 0 * @m + @b
     a2 = d3.max(@data, (d) -> d.key) * @m + @b
 
+    g.append('svg:text')
+      .attr('transform', 'scale(1,-1)')
+      .attr('x', 80)
+      .attr('y',-@height + @margin+10) 
+      .text(@model.get('compound').name)
+
     if @r2?
       g.append('svg:text')
         .attr('transform', 'scale(1,-1)')
