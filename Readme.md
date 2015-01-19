@@ -1,5 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/kf8a/fluxqc.png)](https://codeclimate.com/github/kf8a/fluxqc)
 
+[![Build Status](https://travis-ci.org/kf8a/fluxqc.svg?branch=master)](https://travis-ci.org/kf8a/fluxqc)
+
 Flux QC app.
 ===========
 
