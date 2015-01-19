@@ -16,8 +16,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                     :data_file => fixture_file_upload('/2011_results.csv'),
                     :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not eq false
-      DataFileLoader.perform(run.id).should_not eq false
+      expect(SetupFileLoader.perform(run.id)).to be_truthy
+      expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
     end
 
@@ -26,16 +26,16 @@ describe DataFileLoader do
         @incubation = @run.incubations.first
       end
       it 'updates the measurement with the co2 ppm' do
-        @incubation.flux('co2').measurements.first.ppm.should == 431.5
+        expect(@incubation.flux('co2').measurements.first.ppm).to eq 431.5
       end
       it 'updates the measurement with the n2o ppm' do
-        @incubation.flux('n2o').measurements.first.ppm.should == 0.361
+        expect(@incubation.flux('n2o').measurements.first.ppm).to eq 0.361
       end
       it 'updates the measurement with the ch4 ppm' do
-        @incubation.flux('ch4').measurements.first.ppm.should == 1.854
+        expect(@incubation.flux('ch4').measurements.first.ppm).to eq 1.854
       end
       it 'has a flux' do
-        @incubation.flux('ch4').should_not be_nil
+        expect(@incubation.flux('ch4')).to_not be_nil
       end
     end
   end
@@ -45,14 +45,15 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/glbrc-2010.csv'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not eq false
-      DataFileLoader.perform(run.id).should_not eq false
+
+      expect(SetupFileLoader.perform(run.id)).to be_truthy
+      expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
       @run.standard_curves.reload
     end
 
     it 'has no standard curve' do
-      @run.standard_curves.empty?.should eq true
+      expect(@run.standard_curves.empty?).to eq true
     end
   end
 
@@ -61,8 +62,8 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/2012_result.txt'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not eq false
-      DataFileLoader.perform(run.id).should_not eq false
+      expect(SetupFileLoader.perform(run.id)).to be_truthy
+      expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
       @run.standard_curves.reload
@@ -71,7 +72,7 @@ describe DataFileLoader do
     it 'updateds the acquired time' do
 			Time.zone = 'Eastern Time (US & Canada)' 
       #@incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,3,35)
-      expect(@incubation.flux('n2o').measurements.first.acquired_at).to eq Time.zone.local(2012,04,12,21,3,35)
+      expect(@incubation.flux('n2o').measurements.first.acquired_at).to eq Time.new(2012,04,12,21,3,35)
     end
     it 'updates the measurement with the column id' do
       expect(@incubation.flux('n2o').measurements.first.column).to eq 1
@@ -87,29 +88,29 @@ describe DataFileLoader do
     end
 
     it 'keeps standards and check standards' do
-      @run.standard_curves.size.should == 4
+      expect(@run.standard_curves.size).to eq 4
     end
 
     it 'has an n2o standard curve' do
       compound = Compound.find_by(name: 'n2o')
-      @run.standard_curves.where(compound_id: compound.id, column: 1).first.should_not be_nil
+      expect(@run.standard_curves.where(compound_id: compound.id, column: 1).first).to_not be_nil
     end
 
     it 'loads an area for the n2o standard' do
       compound = Compound.find_by(name: 'n2o')
       curve = @run.standard_curves.find_by(compound_id: compound.id, column: 0)
-      curve.standards.first.area.should == 0
-      curve.standards.last.area.should == 1542.303589
+      expect(curve.standards.first.area).to eq 0
+      expect(curve.standards.last.area).to eq 1542.303589
       curve = @run.standard_curves.find_by(compound_id: compound.id, column: 1)
-      curve.standards.first.area.should == 0
-      curve.standards.last.area.should == 1557.262695
+      expect(curve.standards.first.area).to eq 0
+      expect(curve.standards.last.area).to eq 1557.262695
     end
 
     it 'loads ppm into the standard' do
       compound = Compound.find_by(name: 'n2o')
       curve = @run.standard_curves.find_by(compound_id: compound.id, column: 1)
-      curve.standards.first.ppm.should == 0
-      curve.standards.last.ppm.should == 1.678
+      expect(curve.standards.first.ppm).to eq 0
+      expect(curve.standards.last.ppm).to eq 1.678
     end
   end
 
@@ -119,19 +120,19 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/LTER20130520S4.CSV'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not eq false
-      DataFileLoader.perform(run.id).should_not eq false
+      expect(SetupFileLoader.perform(run.id)).to be_truthy 
+      expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
       @incubation = @run.incubations.first
       @run.standard_curves.reload
     end
 
-    it 'should have the right number of vials' do
-      @run.samples.size.should == 143
+    it 'has the right number of vials' do
+      expect(@run.samples.size).to eq 143
     end
 
-    it 'should have two sets of standard curves' do
-      @run.standard_curves.size.should == 8
+    it 'has two sets of standard curves' do
+      expect(@run.standard_curves.size).to eq 8
     end
   end
 
@@ -140,14 +141,14 @@ describe DataFileLoader do
       run = FactoryGirl.create :run,
                          :data_file => fixture_file_upload('/glbrc-results.CSV'),
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      SetupFileLoader.perform(run.id).should_not eq false
-      DataFileLoader.perform(run.id).should_not eq false
+      expect(SetupFileLoader.perform(run.id)).to be_truthy 
+      expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
       @run.standard_curves.reload
     end
 
-    it 'should have the right area for vial 2' do
-      @run.incubations.where(treatment: "T6").first.flux('ch4').measurements.first.area.should == 44.905228
+    it 'has the right area for vial 2' do
+      expect(@run.incubations.where(treatment: "T6").first.flux('ch4').measurements.first.area).to eq 44.905228
     end
 
   end
