@@ -25,6 +25,7 @@ gem 'bcrypt-ruby'
 
 # Use unicorn as the web server
 gem 'unicorn', group: :production
+gem 'dalli', group: :production
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
