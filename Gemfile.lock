@@ -103,6 +103,7 @@ GEM
       mime-types (>= 1.16, < 3)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
+    dalli (2.7.2)
     database_cleaner (1.4.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -293,6 +294,7 @@ DEPENDENCIES
   chronic
   coffee-rails
   cucumber-rails
+  dalli
   database_cleaner
   devise
   factory_girl_rails
