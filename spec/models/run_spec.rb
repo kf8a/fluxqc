@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Run do
 
@@ -98,10 +98,10 @@ end
 #  sampled_on     :date
 #  name           :string(50)
 #  comment        :text
-#  approved       :boolean          default(FALSE)
+#  approved       :boolean          default("false")
 #  group_id       :integer
 #  study          :string(25)
-#  released       :boolean          default(FALSE)
+#  released       :boolean          default("false")
 #  workflow_state :string(255)
 #  setup_file     :string(255)
 #  data_file      :string(255)

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Measurement do
   it {should belong_to :flux}
@@ -72,7 +72,7 @@ end
 #
 #  id               :integer          not null, primary key
 #  response         :float
-#  excluded         :boolean          default(FALSE)
+#  excluded         :boolean          default("false")
 #  flux_id          :integer
 #  seconds          :integer
 #  ppm              :float

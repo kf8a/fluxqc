@@ -9,7 +9,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe StandardCurveOrganizer do
   it {should belong_to :run}

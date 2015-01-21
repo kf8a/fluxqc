@@ -1,5 +1,5 @@
 #require File.expand_path("../../../app/uploaders/data_file_loader.rb",__FILE__)
-require 'spec_helper'
+require 'rails_helper'
 
 describe DataFileLoader do
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe StandardCurve do
   it {should have_many :standards}
@@ -91,4 +91,8 @@ end
 #  column      :integer
 #  coeff       :string(255)
 #  acquired_at :datetime
+#
+# Indexes
+#
+#  standard_curves_acquired_at_idx  (acquired_at)
 #
