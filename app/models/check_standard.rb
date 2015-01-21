@@ -12,7 +12,7 @@ end
 #  vial              :string(255)
 #  ppm               :float
 #  area              :float
-#  excluded          :boolean          default(TRUE)
+#  excluded          :boolean          default("true")
 #  starting_time     :datetime
 #  ending_time       :datetime
 #  created_at        :datetime

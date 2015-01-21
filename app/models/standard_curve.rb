@@ -80,3 +80,7 @@ end
 #  coeff       :string(255)
 #  acquired_at :datetime
 #
+# Indexes
+#
+#  standard_curves_acquired_at_idx  (acquired_at)
+#
