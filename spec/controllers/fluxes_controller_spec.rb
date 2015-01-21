@@ -4,7 +4,7 @@ describe FluxesController, :type => :controller do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @user.stub(:company).and_return("lter")
+    allow(@user).to receive(:company).and_return("lter")
     sign_in @user
   end
 
@@ -17,13 +17,13 @@ describe FluxesController, :type => :controller do
     end
 
     it 'is successful' do
-      @flux.stub(:save).and_return(true)
-      Measurement.any_instance.stub(:standard_curves).and_return(1)
-      Flux.any_instance.stub(:run).and_return(@run)
-      Flux.any_instance.stub(:company).and_return("lter")
-      Flux.any_instance.stub(:headspace).and_return(1.2)
-      Flux.any_instance.stub(:surface_area).and_return(4.5)
-      Flux.any_instance.stub(:mol_weight).and_return(12.3)
+      allow(@flux).to receive(:save).and_return(true)
+      allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
+      allow_any_instance_of(Flux).to receive(:run).and_return(@run)
+      allow_any_instance_of(Flux).to receive(:company).and_return("lter")
+      allow_any_instance_of(Flux).to receive(:headspace).and_return(1.2)
+      allow_any_instance_of(Flux).to receive(:surface_area).and_return(4.5)
+      allow_any_instance_of(Flux).to receive(:mol_weight).and_return(12.3)
       post :update, id: @flux.id , data: [{id: @measurement.id, key: 40, value: 1.69, area: 33.34, deleted: true}]
       expect(response.code).to eq "200"
     end
