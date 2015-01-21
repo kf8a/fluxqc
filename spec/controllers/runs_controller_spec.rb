@@ -10,11 +10,11 @@ describe RunsController, :type => :controller do
   describe "GET 'index'" do
     it "returns http success" do
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
     it 'renders the index template' do
       get :index
-      response.should render_template(:index)
+      expect(response).to render_template(:index)
     end
   end
 
@@ -24,39 +24,39 @@ describe RunsController, :type => :controller do
     end
     it "returns http success" do
       get :show, id: @run
-      response.should be_success
+      expect(response).to be_success
     end
     it 'renders the show template' do
       get :show, id: @run
-      response.should render_template(:show)
+      expect(response).to render_template(:show)
     end
   end
 
   describe 'GET :new' do
     it 'returns http success' do
       get :new
-      response.should be_success
+      expect(response).to be_success
     end
 
     it' renders the new template' do
       get :new
-      response.should render_template(:new)
+      expect(response).to render_template(:new)
     end
   end
 
   describe ':POST create' do
     describe 'with a valid object' do
      it 'redirects to show' do
-       Run.any_instance.stub(:id).and_return(1)
+       allow_any_instance_of(Run).to receive(:id).and_return(1)
        post :create , run: {name: 'test'}
-       response.should redirect_to(edit_run_path(1))
+       expect(response).to redirect_to(edit_run_path(1))
      end
     end
     describe 'with an invalid object' do
       it 'redirects back to new' do
-        Run.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Run).to receive(:save).and_return(false)
         post :create, run: {name: 'test'}
-        response.should redirect_to(new_run_path)
+        expect(response).to redirect_to(new_run_path)
       end
     end
   end
@@ -65,25 +65,25 @@ describe RunsController, :type => :controller do
     it 'is succesfull' do
       run = FactoryGirl.create :run
       get :edit, id: run
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe 'PUT update' do
     describe 'with a valid object' do
       it 'redirects to show' do
-       Run.any_instance.stub(:save).and_return(true)
-       Run.any_instance.stub(:id).and_return(1)
+       allow_any_instance_of(Run).to receive(:save).and_return(true)
+       allow_any_instance_of(Run).to receive(:id).and_return(1)
        post :update, id: 1, run: {name: 'test'}
-       response.should redirect_to(run_path(assigns(:run)))
+       expect(response).to redirect_to(run_path(assigns(:run)))
       end
     end
     describe 'with an invalid object' do
       it 'redirects back to new' do
-        Run.any_instance.stub(:save).and_return(false)
-        Run.any_instance.stub(:id).and_return(1)
+        allow_any_instance_of(Run).to receive(:save).and_return(false)
+        allow_any_instance_of(Run).to receive(:id).and_return(1)
         post :update, id: 1, run: {name: 'test'}
-        response.should redirect_to(edit_run_path(assigns(:run)))
+        expect(response).to redirect_to(edit_run_path(assigns(:run)))
       end
     end
   end
@@ -99,62 +99,62 @@ describe RunsController, :type => :controller do
     it 'delivers a sample table' do
       run = FactoryGirl.create :run
       get :gcinput, id: run, format: :csv
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe 'a run workflow' do
     before(:each) do
       @run = FactoryGirl.create :run
-      Run.stub(:find).and_return(@run)
+      allow(Run).to receive(:find).and_return(@run)
     end
 
     describe 'POST reject' do
       it 'rejects a run' do
-        @run.stub('reject!').and_return(true)
+        allow(@run).to receive('reject!').and_return(true)
         post :reject, id: @run
-        response.should redirect_to(runs_path(:state=>'rejected'))
+        expect(response).to redirect_to(runs_path(:state=>'rejected'))
       end
 
     end
 
     describe 'POST accept' do
       it 'accepts a run' do
-        @run.stub('accept!')
+        allow(@run).to receive('accept!')
         post :accept, id: @run
-        response.should redirect_to(runs_path(:state=>'uploaded'))
+        expect(response).to redirect_to(runs_path(:state=>'uploaded'))
       end
     end
 
     describe 'POST approve' do
       it 'approves a run' do
-        @run.stub('approve!')
+        allow(@run).to receive('approve!')
         post :approve, id: @run
-        response.should redirect_to(runs_path(:state=>'accepted'))
+        expect(response).to redirect_to(runs_path(:state=>'accepted'))
       end
     end
 
     describe 'POST publish' do
       it 'publishes a run' do
-        @run.stub('publish!')
+        allow(@run).to receive('publish!')
         post :publish, id: @run
-        response.should redirect_to(runs_path(:state => 'approved'))
+        expect(response).to redirect_to(runs_path(:state => 'approved'))
       end
     end
 
     describe 'POST unapprove' do
       it 'unapproves a run' do
-        @run.stub('unapprove!')
+        allow(@run).to receive('unapprove!')
         post :unapprove, id: @run
-        response.should redirect_to(runs_path(:state => 'approved'))
+        expect(response).to redirect_to(runs_path(:state => 'approved'))
       end
     end
 
     describe 'POST unpublish' do
       it 'unpublishes a run' do
-        @run.stub('unpublish!').and_return(true)
+        allow(@run).to receive('unpublish!').and_return(true)
         post :unpublish, id: @run
-        response.should redirect_to(runs_path(:state => 'published'))
+        expect(response).to redirect_to(runs_path(:state => 'published'))
       end
     end
   end
