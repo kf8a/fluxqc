@@ -12,7 +12,7 @@ describe StandardCurvesController, type: :controller do
     describe "GET 'show'" do
       it "returns http success" do
         get 'show', :id => @curve
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
@@ -20,7 +20,7 @@ describe StandardCurvesController, type: :controller do
       it "returns http success" do
         StandardCurve.any_instance.stub(:run).and_return(Run.new)
         get 'update', :id => @curve, :data =>[]
-        response.should be_success
+        expect(response).to be_success
       end
     end
 
