@@ -34,7 +34,6 @@
   <tbody>
     <%= f.simple_fields_for :incubations, :defaults => {:label => false, :input_html => {:class=>'incubation-input'}}  do |incubation_field| %>
       <% rows = 5 %> 
-      <% cache(incubation_field) do %>
       <tr>
         <td rowspan=<%=rows%>><%= incubation_field.input :treatment %></td>
         <td rowspan=<%=rows%>><%= incubation_field.input :replicate %></td>
@@ -44,7 +43,6 @@
         <td rowspan=<%=rows%><<%= incubation_field.input :avg_height_cm%></td>
         <td rowspan=<%=rows%>><%= incubation_field.input :soil_temperature %></td>
         <%= incubation_field.simple_fields_for :samples, :defaults=>{:label => false, :input_html => {:class => 'incubation-input'}} do |sample_field| %>
-          <% cache(sample_field) do %>
           <tr>
             <td><%= sample_field.object.vial %></td>
             <td><%= sample_field.input :seconds %> </td>
@@ -52,10 +50,8 @@
             <td><%= sample_field.object.data('co2').try(:ppm) %></td>
             <td><%= sample_field.object.data('ch4').try(:ppm) %></td>
           </tr>
-          <% end %>
         <% end %>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
