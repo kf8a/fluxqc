@@ -11,30 +11,36 @@ describe StandardCurve do
   describe 'getting data and computing parameters' do
     before(:each) do
       standard1 = Standard.new
-      standard1.stub(:area).and_return(10.0)
-      standard1.stub(:ppm).and_return(2.0)
-      standard1.stub(:excluded).and_return(false)
+      allow(standard1).to receive(:area).and_return(10.0)
+      allow(standard1).to receive(:ppm).and_return(2.0)
+      allow(standard1).to receive(:excluded).and_return(false)
 
       standard2 = Standard.new
-      standard2.stub(:area).and_return(100.0)
-      standard2.stub(:ppm).and_return(20.0)
-      standard2.stub(:excluded).and_return(false)
+      allow(standard2).to receive(:area).and_return(100.0)
+      allow(standard2).to receive(:ppm).and_return(20.0)
+      allow(standard2).to receive(:excluded).and_return(false)
 
       standard_curve.standards = [standard1, standard2]
     end
 
     it 'returns a list of areas and ppms' do
-      standard_curve.data[0].should == {id:1, key:10, value:2, :name => nil, deleted: false}
+      expect(standard_curve.data[0]).to include(id:1,
+                                                key:10,
+                                                value:2,
+                                                name: nil,
+                                                deleted: false)
     end
 
     it 'returns a fit_line' do
-      standard_curve.fit_line.should == {:slope=>0.2, :offset=>0, :r2=>1}
+      expect(standard_curve.fit_line).to include(slope: 0.2,
+                                                 offset: 0,
+                                                 r2: 1)
     end
 
     it 'sets the slope and intercept' do
       standard_curve.compute!
-      standard_curve.slope.should     == 0.2
-      standard_curve.intercept.should == 0
+      expect(standard_curve.slope).to eq 0.2
+      expect(standard_curve.intercept).to eq 0
     end
   end
 
@@ -53,8 +59,8 @@ describe StandardCurve do
       standard_curve = StandardCurve.new
       standards = data.map do |area, ppm| 
         standard = Standard.new
-        standard.stub(:area).and_return(area)
-        standard.stub(:ppm).and_return(ppm)
+        allow(standard).to receive(:area).and_return(area)
+        allow(standard).to receive(:ppm).and_return(ppm)
         standard
       end
       @standard_curve = StandardCurve.new
@@ -63,11 +69,11 @@ describe StandardCurve do
     end
 
     it 'returns the right slope' do
-      @standard_curve.slope.should be_within(0.001).of(0.0778)
+      expect(@standard_curve.slope).to be_within(0.001).of(0.0778)
     end
 
     it 'returns the right intercept' do
-      @standard_curve.intercept.should be_within(0.01).of(-1.18)
+      expect(@standard_curve.intercept).to be_within(0.01).of(-1.18)
     end
   end
 
