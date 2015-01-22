@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Campaign do
-  # it {should have_many :plots}
+  # it {is_expected.to have_many :plots}
 end
 
 # == Schema Information

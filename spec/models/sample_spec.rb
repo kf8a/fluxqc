@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Sample do
-  it {should have_many :measurements}
-  it {should belong_to :run}
-  it {should have_many :standard_curves}
+  it {is_expected.to have_many :measurements}
+  it {is_expected.to belong_to :run}
+  it {is_expected.to have_many :standard_curves}
 
   let(:sample) {Sample.create}
   it 'reports its data for a compound' do
@@ -14,15 +14,15 @@ describe Sample do
   end
 
   it 'has a uuid' do
-    sample.uuid.should_not be_nil
+    expect(sample.uuid).to_not be_nil
   end
 
   it 'keeps the sampe uuid' do
     uuid = sample.uuid
     sample.save
-    sample.uuid.should == uuid
+    expect(sample.uuid).to eq uuid
     sample.save
-    sample.uuid.should == uuid
+    expect(sample.uuid).to eq uuid
   end
 
 end

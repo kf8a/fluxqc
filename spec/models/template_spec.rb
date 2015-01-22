@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Template do
-  it {should have_many :setups}
+  it {is_expected.to have_many :setups}
 end
 
 # == Schema Information

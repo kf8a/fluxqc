@@ -12,9 +12,9 @@
 require 'rails_helper'
 
 describe StandardCurveOrganizer do
-  it {should belong_to :run}
+  it {is_expected.to belong_to :run}
 
-  it 'should return the standard curves of the run' do
+  it 'returns the standard curves of the run' do
     pending "Need to rethink if I need the organizer"
     run = FactoryGirl.create :run
     run.standard_curves << StandardCurve.new

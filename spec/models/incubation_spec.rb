@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe Incubation do
-  it {should have_many :fluxes}
-  it {should belong_to :run}
-  it {should belong_to :lid}
+  it {is_expected.to have_many :fluxes}
+  it {is_expected.to belong_to :run}
+  it {is_expected.to belong_to :lid}
 
   let(:incubation) {Incubation.new}
   it 'has some headspace' do
-    incubation.respond_to?(:headspace).should eq true
+    expect(incubation.respond_to?(:headspace)).to eq true
   end
 
   describe 'an incubation with fluxes' do
@@ -32,16 +32,16 @@ describe Incubation do
     end
 
     it 'has vials' do
-      incubation.vials.respond_to?('[]').should eq true
+      expect(incubation.vials.respond_to?('[]')).to eq true
     end
 
     describe 'selecting a specific flux' do
 
       it 'returns the right flux for the co2 flux' do
-        incubation.flux('co2').should == @co2_flux
+        expect(incubation.flux('co2')).to eq @co2_flux
       end
       it 'returns the right flux for the n2o flux' do
-        incubation.flux('n2o').should == @n2o_flux
+        expect(incubation.flux('n2o')).to eq @n2o_flux
       end
 
     end
@@ -54,27 +54,27 @@ describe Incubation do
     context 'glbrc lids' do
       before(:each) do
         lid = Lid.new
-        lid.stub(:name).and_return('Y')
+        allow(lid).to receive(:name).and_return('Y')
         @incubation.lid = lid
       end
       it 'returns the right headspace for lid Y' do
         @incubation.avg_height_cm = 19
-        @incubation.headspace.should be_within(0.1).of(11.74)
+        expect(@incubation.headspace).to be_within(0.1).of(11.74)
       end
       it 'returns the right headspace for lid Y' do
         @incubation.avg_height_cm = 123
-        @incubation.headspace.should be_within(0.1).of(76.69)
+        expect(@incubation.headspace).to be_within(0.1).of(76.69)
       end
     end
     context 'cimmyt lids' do
       before(:each) do
         lid = Lid.new
-        lid.stub(:name).and_return('X')
+        allow(lid).to receive(:name).and_return('X')
         @incubation.lid = lid
       end
       it 'returns the right headspace for lid X' do
         @incubation.avg_height_cm = 20
-        @incubation.headspace.should be_within(0.1).of(9.8)
+        expect(@incubation.headspace).to be_within(0.1).of(9.8)
       end
     end
   end

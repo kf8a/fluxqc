@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 describe Measurement do
-  it {should belong_to :flux}
-  it {should belong_to :sample}
+  it { is_expected.to belong_to :flux}
+  it { is_expected.to belong_to :sample}
 
   let(:measurement) {FactoryGirl.create :measurement}
-  it "should have millivolts" do
-    measurement.respond_to?(:mv).should eq true
+  it "has millivolts" do
+    expect(measurement.respond_to?(:mv)).to eq true
   end
 
   it "is selectable by compound" do
     compound    = FactoryGirl.create :compound, name: "co2"
     measurement = FactoryGirl.create :measurement, compound: compound
     flux        = FactoryGirl.create :flux, measurements: [measurement]
-    Measurement.by_compound('co2').include?(measurement).should eq true
+    expect(Measurement.by_compound('co2')).to include(measurement)
   end
 
   describe "locating standard curves" do
@@ -28,40 +28,40 @@ describe Measurement do
 
     it "ignores later standard curves" do
       FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+4.hours, run: @run
-      @measurement.standard_curves().should == [@curve1, @curve2]
+      expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores earlier standard curves" do
       FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: @run
-      @measurement.standard_curves().should == [@curve1, @curve2]
+      expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end 
 
     it "ignores other runs curves" do
       run = FactoryGirl.create :run
       FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: run
-      @measurement.standard_curves().should == [@curve1, @curve2]
+      expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores other compounds standard curves" do
       compound    = FactoryGirl.create :compound, name: "H"
       FactoryGirl.create :standard_curve, compound: compound, acquired_at: Time.now()+4.hours, run: @run
-      @measurement.standard_curves().should == [@curve1, @curve2]
+      expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores other columns standard curves" do
       FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-1.hours, run: @run, column: 1
-      @measurement.standard_curves().should == [@curve1, @curve2]
+      expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "returns what is there" do
       @curve2.delete
-      @measurement.standard_curves().should == [@curve1]
+      expect(@measurement.standard_curves()).to eq [@curve1]
     end
 
     it "returns nothing if there is nothing" do
       @curve1.delete
       @curve2.delete
-      @measurement.standard_curves().should == []
+      expect(@measurement.standard_curves()).to eq []
     end
   end
 end

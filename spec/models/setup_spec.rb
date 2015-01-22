@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Setup do
-  it {should belong_to :template}
+  it {is_expected.to belong_to :template}
 end
 
 # == Schema Information

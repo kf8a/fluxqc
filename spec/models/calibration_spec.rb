@@ -12,6 +12,6 @@
 require 'rails_helper'
 
 describe Calibration do
-  it {should belong_to :standard_curve}
-  it {should belong_to :sample}
+  it { is_expected.to belong_to :standard_curve}
+  it { is_expected.to belong_to :sample}
 end

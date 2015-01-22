@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Compound do
-  it {should have_many :measurements}
-  it {should have_many :standards}
+  it {is_expected.to have_many :measurements}
+  it {is_expected.to have_many :standards}
 
   let(:compound) {Compound.new(:name=>'co2', :ymax=>8000) }
   it 'returns the default max values' do

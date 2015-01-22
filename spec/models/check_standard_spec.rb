@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe CheckStandard do
-  it {should belong_to :standard_curve}
+  it {is_expected.to belong_to :standard_curve}
 end
 
 # == Schema Information

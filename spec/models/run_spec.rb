@@ -4,22 +4,21 @@ describe Run do
 
   let(:run) {Run.create}
 
-  it {should have_many :incubations}
-  it {should have_many :samples}
-  it {should have_many :standard_curves}
+  it { is_expected.to have_many :incubations}
+  it { is_expected.to have_many :samples}
+  it { is_expected.to have_many :standard_curves}
 
   it 'reports the total number of fluxes' do
     expect(run.total_fluxes).to eq 0
   end
 
   it 'recomputes the fluxes' do
-    expect(run.respond_to?('recompute_fluxes')).to eq true
     run.recompute_fluxes # just to run through it
     # TODO figure out what the assertion is here
   end
 
   it 'attaches the standards' do
-    run.respond_to?("attach_standards_to_samples").should eq true
+    expect(run.respond_to?("attach_standards_to_samples")).to be_truthy
   end
 
   describe 'handling the workflow' do

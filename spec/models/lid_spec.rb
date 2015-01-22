@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 describe Lid do
-  it { should have_many :incubations }
+  it { is_expected.to have_many :incubations }
   #TODO: does this only fail on sqlite?
-  #it { should validate_uniqueness_of(:name) }
+  #it { is_expected.to validate_uniqueness_of(:name) }
 
 
   let(:lid) {Lid.new}
 
-  it 'should have a surface area' do
-    lid.respond_to?(:surface_area).should eq true
+  it 'has a surface area' do
+    expect(lid.respond_to?(:surface_area)).to be_truthy
   end
 end
 

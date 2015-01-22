@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Flux do
-  # it {should belong_to :incubation}
-  # it {should have_many :measurements}
+  it {is_expected.to belong_to :incubation}
+  it {is_expected.to have_many :measurements}
 
   let(:flux) {FactoryGirl.create :flux}
 
@@ -15,33 +15,33 @@ describe Flux do
 
   describe 'data retrieval' do
     before(:each) do
-      Measurement.any_instance.stub(:standard_curves).and_return(1)
+      allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
       measurement =  Measurement.new
-      measurement.stub(:seconds).and_return(1)
-      measurement.stub(:ppm).and_return(10)
-      measurement.stub(:excluded).and_return(false)
+      allow(measurement).to receive(:seconds).and_return(1)
+      allow(measurement).to receive(:ppm).and_return(10)
+      allow(measurement).to receive(:excluded).and_return(false)
       flux.measurements << measurement
     end
 
-    it 'should return a list of seconds and ppm' do
+    it 'returns a list of seconds and ppm' do
       expect(flux.data).to eq [{id:1, key:1,value:10, area:nil, deleted:false, std_curve: 1}]
     end
   end
 
   describe 'data writing' do
     before(:each) do
-      Measurement.any_instance.stub(:standard_curves).and_return(1)
+      allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
       @m1 = FactoryGirl.create :measurement
       @m2 = FactoryGirl.create :measurement
       flux.measurements << @m1
       flux.measurements << @m2
-      flux.stub(:headspace).and_return(1)
-      flux.stub(:mol_weight).and_return(1)
-      flux.stub(:surface_area).and_return(1)
+      allow(flux).to receive(:headspace).and_return(1)
+      allow(flux).to receive(:mol_weight).and_return(1)
+      allow(flux).to receive(:surface_area).and_return(1)
       flux.data = [{id:@m1.id,key:4, value:10, deleted:true}]
     end
 
-    it 'should have one measurement' do
+    it 'has two measurements' do
       expect(flux.measurements.size).to eq 2
     end
 

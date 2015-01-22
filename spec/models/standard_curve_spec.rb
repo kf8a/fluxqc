@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe StandardCurve do
-  it {should have_many :standards}
-  it {should belong_to :run}
-  it {should belong_to :compound}
-  it {should have_many :samples}
+  it {is_expected.to have_many :standards}
+  it {is_expected.to belong_to :run}
+  it {is_expected.to belong_to :compound}
+  it {is_expected.to have_many :samples}
 
   let (:standard_curve) {FactoryGirl.create :standard_curve}
 
@@ -78,7 +78,7 @@ describe StandardCurve do
   end
 
   describe 'json output' do
-    it 'should include a list of fluxes that are affected by the standard curve'
+    it 'includes a list of fluxes that are affected by the standard curve'
   end
 
 end
