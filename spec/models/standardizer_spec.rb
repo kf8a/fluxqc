@@ -4,9 +4,16 @@ describe Standardizer do
   let(:st) { Standardizer.new }
 
   it 'should take standard curves' do
-    st = Standardizer.new
     st.standard_curves = []
     expect(st.standard_curves).to eq []
+  end
+
+  describe 'standarize' do
+    it 'standarizes the run' do
+      pending
+      run = double(Run)
+      expect(st.standardize(run)).to be_truthy
+    end
   end
 
   describe 'to_ppm' do

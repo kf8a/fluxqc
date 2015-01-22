@@ -21,6 +21,30 @@ describe Run do
     expect(run.respond_to?("attach_standards_to_samples")).to be_truthy
   end
 
+  it 'returns the standard curves for a compound' do
+    compound = Compound.new
+    curve = FactoryGirl.build :standard_curve, compound: compound, column: 0
+    run.standard_curves << curve
+    expect(run.standard_curves_for(compound)).to eq [curve]
+  end
+
+  it 'returns the right column standard curve for a compound' do
+    compound = Compound.new
+    curve0 = FactoryGirl.build :standard_curve, compound: compound, column: 0
+    curve1 = FactoryGirl.build :standard_curve, compound: compound, column: 1
+    run.standard_curves = [curve0, curve1]
+    expect(run.standard_curves_for(compound, 1)).to eq [curve1]
+  end
+
+  it 'returns the right standard curves for a compound when there are multiple curves' do
+    compound = Compound.new
+    curve0 = FactoryGirl.build :standard_curve, compound: compound, column: 0
+    curve1 = FactoryGirl.build :standard_curve, compound: compound, column: 0
+    FactoryGirl.build :standard_curve, compound: compound, column: 1
+    run.standard_curves = [curve0, curve1]
+    expect(run.standard_curves_for(compound, 0)).to eq [curve0, curve1]
+  end
+
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do

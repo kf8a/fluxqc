@@ -64,6 +64,10 @@ class Run < ActiveRecord::Base
     end
   end
 
+  def standard_curves_for(compound, column=0)
+    standard_curves.select {|x| x.compound == compound && x.column == column}
+  end
+
   def attach_standards_to_samples
     #TODO remove this once references have been removed
   end

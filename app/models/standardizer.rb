@@ -6,6 +6,10 @@
 class Standardizer
   attr_accessor :standard_curves
 
+  def standardize(run)
+
+  end
+
   def to_ppm(measurement)
     return unless standard_curves
     if standard_curves.size == 1
