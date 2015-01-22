@@ -98,6 +98,10 @@ class Incubation < ActiveRecord::Base
       f.save
     end
   end
+
+  def measurements_for(compound)
+    fluxes.select {|x| x.compound == compound}.collect {|x| x.measurements }.flatten
+  end
 end
 
 # == Schema Information

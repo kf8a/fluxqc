@@ -64,6 +64,10 @@ class Run < ActiveRecord::Base
     end
   end
 
+  def measurements_for(compound)
+    incubations.collect {|incubation| incubation.measurements_for(compound) }.flatten
+  end
+
   def standard_curves_for(compound, column=0)
     standard_curves.select {|x| x.compound == compound && x.column == column}
   end

@@ -45,6 +45,18 @@ describe Run do
     expect(run.standard_curves_for(compound, 0)).to eq [curve0, curve1]
   end
 
+  it 'returns the measurements for a compound' do
+    compound = Compound.new
+    lid = Lid.new
+    measurement = FactoryGirl.build :measurement, compound: compound, area: 100
+    incubation  = FactoryGirl.build :incubation, lid: lid
+    flux        = FactoryGirl.build :flux, compound: compound
+    flux.measurements = [measurement]
+    incubation.fluxes = [flux]
+    run.incubations = [incubation]
+    expect(run.measurements_for(compound)).to eq [measurement]
+  end
+
   describe 'handling the workflow' do
     describe 'a new run' do
       it 'starts as uploaded' do

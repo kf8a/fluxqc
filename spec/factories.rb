@@ -9,7 +9,6 @@ FactoryGirl.define do
     ymax  5000
   end
   factory :incubation do
-    headspace 1
   end
   factory :lid do
   end

@@ -78,6 +78,17 @@ describe Incubation do
       end
     end
   end
+
+  it 'returns the right measurements' do
+    compound = Compound.new
+    lid = Lid.new
+    measurement = FactoryGirl.build :measurement, compound: compound, area: 100
+    incubation  = FactoryGirl.build :incubation, lid: lid
+    flux        = FactoryGirl.build :flux, compound: compound
+    flux.measurements = [measurement]
+    incubation.fluxes = [flux]
+    expect(incubation.measurements_for(compound).first).to eq measurement
+  end
 end
 
 # == Schema Information
