@@ -8,35 +8,35 @@ describe CIMMITSetupParser do
   end
 
   it 'produces the right vial id' do
-    @data[4].should == "S7-CIM-F-101-T1"
+    expect(@data[4]).to eq "S7-CIM-F-101-T1"
   end
 
   it 'gets the right lid' do
-    @data[5].should == "X"
+    expect(@data[5]).to eq "X"
   end
 
   it 'gets the right treatment' do
-    @data[0].should == "101F"
+    expect(@data[0]).to eq "101F"
   end
 
   it "gets the right replicate" do
-    @data[1].should == "R1"
+    expect(@data[1]).to eq "R1"
   end
 
   it "gets the right soil tempearture" do
-    @data[7].should == 19
+    expect(@data[7]).to eq 19
   end
 
   it "gets the right height" do
-    @data[6].should == [18.0, 15.0, 14.0]
+    expect(@data[6]).to eq [18.0, 15.0, 14.0]
   end
 
   it 'gets the right time' do
-    @data[8].should == 10.2
+    expect(@data[8]).to eq 10.2
   end
 
   it 'gets the right comment' do
-    @data[9].should == "comment"
+    expect(@data[9]).to eq "comment"
   end
 
 end

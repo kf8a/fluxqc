@@ -39,27 +39,27 @@ describe SetupFileLoader do
     samples = @run.samples.collect do |s|
       s.measurements.collect {|m| m.compound.present? }
     end
-    samples.flatten.should_not include(false)
+    expect(samples.flatten).to_not include(false)
   end
 
   it 'has 4 vials for the first incubation' do
-    @run.incubations.first.flux('n2o').measurements.count.should == 4
+    expect(@run.incubations.first.flux('n2o').measurements.count).to eq 4
   end
 
   it 'has the vial 1 for the first sample' do
-    @run.incubations.first.samples.first.vial.should == "45"
+    expect(@run.incubations.first.samples.first.vial).to eq "45"
   end
 
   it 'sets the sampled_on field' do
-    @run.sampled_on.should == Date.new(2011,8,19)
+    expect(@run.sampled_on).to eq Date.new(2011,8,19)
   end
 
   it 'sets the run name' do
-    @run.name.should =='LTER 2011 Series 10'
+    expect(@run.name).to eq 'LTER 2011 Series 10'
   end
 
   it 'sets the run study' do
-    @run.study.should == 'lter'
+    expect(@run.study).to eq 'lter'
   end
 
 end

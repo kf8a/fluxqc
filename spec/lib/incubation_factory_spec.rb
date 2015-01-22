@@ -1,4 +1,4 @@
-require 'spec_helper.rb'
+require 'rails_helper.rb'
 require File.expand_path("../../../lib/incubation_factory.rb",__FILE__)
 
 describe IncubationFactory do
@@ -24,40 +24,41 @@ describe IncubationFactory do
   describe 'if there is no existing incubation in the run' do
 
     it 'has the right treatment' do
-      @incubation.treatment.should == "T6"
+      expect(@incubation.treatment).to eq "T6"
     end
     it 'has the right replicate' do
-      @incubation.replicate.should == 'R1'
+      expect(@incubation.replicate).to eq 'R1'
     end
     it 'has the right lid' do
-      @incubation.lid.should  == @lid
+      expect(@incubation.lid).to eq @lid
     end
     it 'has the right chamber' do
-      @incubation.chamber.should  == '1'
+      expect(@incubation.chamber).to eq '1'
     end
     it 'has the right height' do
-      @incubation.avg_height_cm.should == 19.25
+      expect(@incubation.avg_height_cm).to eq 19.25
     end
     it 'has the right sample date' do
-      @incubation.sampled_at = '2011-10-13'
+      pending "figure out why it does not set the sample date"
+      expect(@incubation.sampled_at).to eq  Date.new(2011,10,13)
     end
     it 'has 1 sample' do
-      @incubation.samples.size.should == 1
+      expect(@incubation.samples.size).to eq 1
     end
     it 'has a uuid on the sample' do
-      @incubation.samples.first.uuid.should_not be_nil
+      expect(@incubation.samples.first.uuid).to_not be_nil
     end
     it 'has 3 fluxes' do
-      @incubation.fluxes.size.should == 3
+      expect(@incubation.fluxes.size).to eq 3
     end
     it 'has a co2 flux' do
-      @incubation.fluxes('co2').should_not be_nil
+      expect(@incubation.fluxes('co2')).to_not be_nil
     end
     it 'has the right vial in the measurements' do
-      @incubation.vials.first.should == '1'
+      expect(@incubation.vials.first).to eq '1'
     end
     it 'has the right seconds in the measurement' do
-      @incubation.seconds.first.should == 0
+      expect(@incubation.seconds.first).to eq 0
     end
 
   end
@@ -76,7 +77,7 @@ describe IncubationFactory do
     end
 
     it 'creates a new incubation' do
-      @incubation2.should_not == @incubation
+      expect(@incubation2).to_not eq @incubation
     end
 
   end
@@ -95,13 +96,13 @@ describe IncubationFactory do
           :seconds => 20, :comments => nil})
     end
     it 'returns the old incubation' do
-      @existing.should == @incubation
+      expect(@existing).to eq @incubation
     end
     it 'has the right vials' do
-      @incubation.vials.include?('2').should eq true
+      expect(@incubation.vials).to include('2')
     end
     it 'has the right seconds' do
-      @incubation.seconds.include?(20).should eq true
+      expect(@incubation.seconds).to include(20)
     end
 
   end
@@ -121,7 +122,7 @@ describe IncubationFactory do
     end
 
     it 'creates a new incubation' do
-      @existing.should_not == @incubation
+      expect(@existing).to_not eq @incubation
     end
 
   end
