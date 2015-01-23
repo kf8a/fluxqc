@@ -11,9 +11,10 @@ class StandardCurvesController < ApplicationController
     unless standard_curve.run.published?
       standard_curve.data = params[:data]
       standard_curve.save
+      head :ok
+    else
+      head :forbidden
     end
-
     #TODO: update the measurements of the run and recompute fluxes
-    render :nothing => true
   end
 end

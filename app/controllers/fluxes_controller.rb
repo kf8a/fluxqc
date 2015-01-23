@@ -22,9 +22,12 @@ class FluxesController < ApplicationController
     unless flux.run.published?
       flux.data = params[:data]
       flux.save
+      head :ok
+    else
+      head  :forbidden
+      response.status :prohibited
     end
 
-    render :nothing => true
   end
 
   def render_csv(study)
