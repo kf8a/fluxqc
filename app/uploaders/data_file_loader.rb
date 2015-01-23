@@ -29,8 +29,11 @@ class DataFileLoader
 
     dataloader.process_vials(vials)
 
+    #calibrate and compute fluxes
+    c = Calibrate.new(run)
+    c.calibrate!
     #compute fluxes
-    run.recompute_fluxes
+    # run.recompute_fluxes
   end
 
   def process_vials(vials)

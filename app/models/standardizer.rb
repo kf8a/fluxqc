@@ -12,6 +12,7 @@ class Standardizer
 
   def to_ppm(measurement)
     return unless standard_curves
+    return unless measurement.area
     if standard_curves.size == 1
       measurement.ppm = single_standard_ppm(measurement)
     else
@@ -19,8 +20,10 @@ class Standardizer
     end
   end
 
-  def to_ppm_with_drift_correction(measuremnt)
-    measuremnt.ppm = drift_corrected_ppm(measuremnt)
+  def to_ppm_with_drift_correction(measurement)
+    return unless standard_curves
+    return unless measurement.area
+    measurement.ppm = drift_corrected_ppm(measurement)
   end
 
   private
@@ -29,6 +32,7 @@ class Standardizer
   end
 
   def average_standard_ppm(measurement)
+    return unless standard_curves.size > 0
     intercept = standard_curves.inject(0) {|sum, n| sum + n.intercept } / standard_curves.size
     slope     = standard_curves.inject(0) {|sum, n| sum + n.slope } / standard_curves.size
     measurement.ppm = intercept + slope * measurement.area

@@ -85,8 +85,7 @@ class Flux < ActiveRecord::Base
   end
 
   def fit_line
-    f = Fitter.new
-    f.data = data
+    f = Fitter.new(self)
     begin
     f.linear_fit
     rescue

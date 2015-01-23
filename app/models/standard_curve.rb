@@ -8,7 +8,7 @@ class StandardCurve < ActiveRecord::Base
   has_many :samples, through: :calibrations
 
   def data
-    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => s.excluded}}
+    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => false } } #s.excluded}}
   end
 
   def data=(standard_hash=[])
@@ -57,6 +57,7 @@ class StandardCurve < ActiveRecord::Base
     result = fit_line
     self.slope      = result[:slope]
     self.intercept  = result[:offset]
+    [slope, intercept]
   end
 
   #This is used to compute the distance for the drift correction
