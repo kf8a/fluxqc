@@ -144,7 +144,7 @@ describe DataParser do
         @row = @result[17]
       end
 
-      it 'should not be null' do
+      it 'is not null' do
         expect(@row).to_not be_nil
       end
 

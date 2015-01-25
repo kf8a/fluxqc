@@ -6,48 +6,48 @@ describe SetupParser do
   describe 'parsing an lter forest fert setup file' do
     before do
       file = File.expand_path("../../fixtures/fert4.csv", __FILE__)
-      File.exists?(file).should eq true
+      expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
 
     it 'returns an array of sample hashes' do
-      @result.class.should == Array
+      expect(@result.class).to eq Array
     end
 
     it 'has the right run title' do
-      @result[0][:run_name].should == 'LTER 2007 Fert 4'
+      expect(@result[0][:run_name]).to eq 'LTER 2007 Fert 4'
     end
 
     describe 'first row' do
       it 'has the right sample date' do
-        @result[0][:sample_date].should == Time.parse('2007-6-13 12:00:00')
+        expect(@result[0][:sample_date]).to eq Time.parse('2007-6-13 12:00:00')
       end
       it 'has the right treatment' do
-        @result[0][:treatment].should == 'TDF'
+        expect(@result[0][:treatment]).to eq 'TDF'
       end
       it 'has the right replicate' do
-        @result[0][:replicate].should == 'R1'
+        expect(@result[0][:replicate]).to eq 'R1'
       end
       it 'has the right sub plot' do
-        @result[0][:sub_plot].should == 'F0'
+        expect(@result[0][:sub_plot]).to eq 'F0'
       end
       it 'has the right chamber' do
-        @result[0][:chamber].should == nil
+        expect(@result[0][:chamber]).to eq nil
       end
       it 'has the right vial' do
-        @result[0][:vial].should == '137'
+        expect(@result[0][:vial]).to eq '137'
       end
       it 'has the right lid' do
-        @result[0][:lid].should == 'A'
+        expect(@result[0][:lid]).to eq 'A'
       end
       it 'has the right height' do
-        @result[0][:height].should == [17.5, 17.5, 17.5, 18.5]
+        expect(@result[0][:height]).to eq [17.5, 17.5, 17.5, 18.5]
       end
       it 'has the right soil_temperature' do
-        @result[0][:soil_temperature].should == 16.5
+        expect(@result[0][:soil_temperature]).to eq 16.5
       end
       it 'has the right seconds' do
-        @result[0][:seconds].should == 0
+        expect(@result[0][:seconds]).to eq 0
       end
     end
   end
@@ -55,79 +55,79 @@ describe SetupParser do
   describe 'parsing an lter csv setup file' do
     before do
       file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
-      File.exists?(file).should eq true
+      expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
 
     it 'returns an array of sample hashes' do
-      @result.class.should == Array
+      expect(@result.class).to eq Array
     end
 
     it 'has the right run title' do
-      @result[0][:run_name].should == 'LTER 2011 Series 10'
+      expect(@result[0][:run_name]).to eq 'LTER 2011 Series 10'
     end
 
     describe 'first row' do
       it 'has the right sample date' do
-        @result[0][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+        expect(@result[0][:sample_date]).to eq Time.parse('2011-8-19 12:00:00')
       end
       it 'has the right treatment' do
-        @result[0][:treatment].should == 'T6'
+        expect(@result[0][:treatment]).to eq 'T6'
       end
       it 'has the right replicate' do
-        @result[0][:replicate].should == 'R1'
+        expect(@result[0][:replicate]).to eq 'R1'
       end
       it 'has the right chamber' do
-        @result[0][:chamber].should == '1'
+        expect(@result[0][:chamber]).to eq '1'
       end
       it 'has the right vial' do
-        @result[0][:vial].should == '1'
+        expect(@result[0][:vial]).to eq '1'
       end
       it 'has the right lid' do
-        @result[0][:lid].should == 'C'
+        expect(@result[0][:lid]).to eq 'C'
       end
       it 'has the right height' do
-        @result[0][:height].should == [18, 19.5, 19, 20.5]
+        expect(@result[0][:height]).to eq [18, 19.5, 19, 20.5]
       end
       it 'has the right soil_temperature' do
-        @result[0][:soil_temperature].should == 18.5
+        expect(@result[0][:soil_temperature]).to eq 18.5
       end
       it 'has the right seconds' do
-        @result[0][:seconds].should == 0
+        expect(@result[0][:seconds]).to eq 0
       end
     end
 
     it 'returns the right data for a string treatment second row' do
-      @result[1][:treatment].should == 'T6'
+      expect(@result[1][:treatment]).to eq 'T6'
     end
 
     describe 'other row' do
       it 'has the right sample date' do
-        @result[5][:sample_date].should == Time.parse('2011-8-19 12:00:00')
+        expect(@result[5][:sample_date]).to eq Time.parse('2011-8-19 12:00:00')
       end
       it 'has the right treatment' do
-        @result[5][:treatment].should == 'T2'
+        expect(@result[5][:treatment]).to eq 'T2'
       end
       it 'has the right replicate' do
-        @result[5][:replicate].should == 'R1'
+        expect(@result[5][:replicate]).to eq 'R1'
       end
       it 'has the right chamber' do
-        @result[5][:chamber].should == '1'
+        expect(@result[5][:chamber]).to eq '1'
       end
       it 'has the right vial' do
-        @result[5][:vial].should == '7'
+        expect(@result[5][:vial]).to eq '7'
       end
       it 'has the right lid' do
-        @result[5][:lid].should == 'D'
+        expect(@result[5][:lid]).to eq 'D'
       end
       it 'has the right height' do
-        @result[5][:height].should == [19.5, 19.0, 19.0, 19.0]
+        expect(@result[5][:height]).to eq [19.5, 19.0, 19.0, 19.0]
       end
       it 'has the right soil_temperature' do
-        @result[5][:soil_temperature].should == 19
+        expect(@result[5][:soil_temperature]).to eq 19
       end
       it 'has the right seconds' do
-        @result[5][:seconds].should == 40
+        expect(@result[5][:seconds]).to eq 40
       end
     end
   end
@@ -136,69 +136,69 @@ describe SetupParser do
 
     before do
       file = File.expand_path("../../fixtures/glbrc_setup.csv", __FILE__)
-      File.exists?(file).should eq true
+      expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
 
     it 'has the right title' do
-        @result[0][:run_name].should == 'GLBRC 2011 Series 1'
+        expect(@result[0][:run_name]).to eq 'GLBRC 2011 Series 1'
     end
 
     it 'has the right sample date' do
-      @result[0][:sample_date].should == Time.parse('2011-4-7 12:00:00')
+      expect(@result[0][:sample_date]).to eq Time.parse('2011-4-7 12:00:00')
     end
 
     describe 'the first row' do
       it 'is G1' do
-        @result[0][:treatment].should == 'G1'
+        expect(@result[0][:treatment]).to eq 'G1'
       end
       it 'is lid Y' do
-        @result[0][:lid].should == 'Y'
+        expect(@result[0][:lid]).to eq 'Y'
       end
       it 'is rep 1' do
-        @result[0][:replicate].should == 'R1'
+        expect(@result[0][:replicate]).to eq 'R1'
       end
       it 'is the right height' do
-        @result[0][:height].should == [18,17.5,18,17]
+        expect(@result[0][:height]).to eq [18,17.5,18,17]
       end
       it 'is the right soil temperature' do
-        @result[0][:soil_temperature].should == 8
+        expect(@result[0][:soil_temperature]).to eq 8
       end
       it 'is the right time' do
-        @result[0][:seconds].should == 0
+        expect(@result[0][:seconds]).to eq 0
       end
       it 'is the right chamber' do
-        @result[0][:chamber].should == "1"
+        expect(@result[0][:chamber]).to eq "1"
       end
       it 'is the right vial' do
-        @result[0][:vial].should == '1'
+        expect(@result[0][:vial]).to eq '1'
       end
     end
 
     describe 'the second row' do
       it 'is G1' do
-        @result[1][:treatment].should == 'G1'
+        expect(@result[1][:treatment]).to eq 'G1'
       end
       it 'is lid Y' do
-        @result[1][:lid].should == 'Y'
+        expect(@result[1][:lid]).to eq 'Y'
       end
       it 'is rep 1' do
-        @result[1][:replicate].should == 'R1'
+        expect(@result[1][:replicate]).to eq 'R1'
       end
       it 'is the right height' do
-        @result[1][:height].should == [18,17.5,18,17]
+        expect(@result[1][:height]).to eq [18,17.5,18,17]
       end
       it 'is the right soil temperature' do
-        @result[1][:soil_temperature].should == 8
+        expect(@result[1][:soil_temperature]).to eq 8
       end
       it 'is the right time' do
-        @result[1][:seconds].should == 18
+        expect(@result[1][:seconds]).to eq 18
       end
       it 'is the right chamber' do
-        @result[1][:chamber].should == "1"
+        expect(@result[1][:chamber]).to eq "1"
       end
       it 'is the right vial' do
-        @result[1][:vial].should == '2'
+        expect(@result[1][:vial]).to eq '2'
       end
     end
   end
@@ -207,69 +207,69 @@ describe SetupParser do
 
     before do
       file = File.expand_path("../../fixtures/lux_setup.csv", __FILE__)
-      File.exists?(file).should eq true
+      expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
 
     it 'has the right title' do
-        @result[0][:run_name].should == 'GLBRC 2011 Series 1 Lux Arbor'
+        expect(@result[0][:run_name]).to eq 'GLBRC 2011 Series 1 Lux Arbor'
     end
 
     it 'has the right sample date' do
-      @result[0][:sample_date].should == Time.parse('2011-4-7 12:00:00')
+      expect(@result[0][:sample_date]).to eq Time.parse('2011-4-7 12:00:00')
     end
 
     describe 'the first row' do
       it 'is G1' do
-        @result[0][:treatment].should == 'T1'
+        expect(@result[0][:treatment]).to eq 'T1'
       end
       it 'is lid Y' do
-        @result[0][:lid].should == 'Y'
+        expect(@result[0][:lid]).to eq 'Y'
       end
       it 'is rep 1' do
-        @result[0][:replicate].should == 'R1'
+        expect(@result[0][:replicate]).to eq 'R1'
       end
       it 'is the right height' do
-        @result[0][:height].should == [19,19,18,18]
+        expect(@result[0][:height]).to eq [19,19,18,18]
       end
       it 'is the right soil temperature' do
-        @result[0][:soil_temperature].should == 9.5
+        expect(@result[0][:soil_temperature]).to eq 9.5
       end
       it 'is the right time' do
-        @result[0][:seconds].should == 0
+        expect(@result[0][:seconds]).to eq 0
       end
       it 'is the right chamber' do
-        @result[0][:chamber].should == "1"
+        expect(@result[0][:chamber]).to eq "1"
       end
       it 'is the right vial' do
-        @result[0][:vial].should == '385'
+        expect(@result[0][:vial]).to eq '385'
       end
     end
 
     describe 'the second row' do
       it 'is G1' do
-        @result[1][:treatment].should == 'T1'
+        expect(@result[1][:treatment]).to eq 'T1'
       end
       it 'is lid Y' do
-        @result[1][:lid].should == 'Y'
+        expect(@result[1][:lid]).to eq 'Y'
       end
       it 'is rep 1' do
-        @result[1][:replicate].should == 'R1'
+        expect(@result[1][:replicate]).to eq 'R1'
       end
       it 'is the right height' do
-        @result[1][:height].should == [19,19,18,18]
+        expect(@result[1][:height]).to eq [19,19,18,18]
       end
       it 'is the right soil temperature' do
-        @result[1][:soil_temperature].should == 9.5
+        expect(@result[1][:soil_temperature]).to eq 9.5
       end
       it 'is the right time' do
-        @result[1][:seconds].should == 15.0
+        expect(@result[1][:seconds]).to eq 15.0
       end
       it 'is the right chamber' do
-        @result[1][:chamber].should == "1"
+        expect(@result[1][:chamber]).to eq "1"
       end
       it 'is the right vial' do
-        @result[1][:vial].should == '386'
+        expect(@result[1][:vial]).to eq '386'
       end
     end
   end

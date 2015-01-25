@@ -19,7 +19,7 @@ describe CimmitVial do
   it "parses a vial with a series and no dash between the B and the number" do
     expect(CimmitVial.process_cimmit_vial("S38 B-108-T1")).to eq "S38-B-108-T1"
   end
-  it "should parse a vial with a space between the series and the rest" do
+  it "parses a vial with a space between the series and the rest" do
     expect(CimmitVial.process_cimmit_vial("S3 B-102-T0")).to eq "S3-B-102-T0"
   end
 end
