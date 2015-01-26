@@ -18,9 +18,7 @@ class Incubation < ActiveRecord::Base
   end
 
   def flux(compound)
-    f = fluxes.send(compound)[0]
-    f.ppm = nil if f.ppm.nan?
-    f
+    fluxes.send(compound)[0]
   end
 
   def headspace
