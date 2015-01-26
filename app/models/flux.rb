@@ -63,14 +63,19 @@ class Flux < ActiveRecord::Base
 
   def flux
     self.value = compute_flux
-    value.nan? ? nil : value
   end
 
   def compute_flux
     f = Fitter.new(self)
     begin
-      f.fit
+      value = f.fit
+      if value.try(:nan?) 
+        nil
+      else
+        value
+      end
     rescue 
+      nil
     end
   end
 
@@ -93,7 +98,19 @@ class Flux < ActiveRecord::Base
   def fit_line
     f = Fitter.new(self)
     begin
-    f.linear_fit
+      line = f.linear_fit
+
+      if line[:slope].nan? 
+        line[:slope] = nil
+      end
+
+      if line[:offset].nan? 
+        line[:offset] = nil
+      end
+      if line[:r2].nan? 
+        line[:r2] = nil
+      end
+      line
     rescue
       nil
     end

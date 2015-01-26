@@ -7,8 +7,12 @@ class StandardCurve < ActiveRecord::Base
   has_many :calibrations
   has_many :samples, through: :calibrations
 
+  before_save do 
+    run.try(:touch) unless run.try(:new_record?)
+  end
+
   def data
-    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => false } } #s.excluded}}
+    standards.collect {|s| {:id=>s.id, :key=> s.area, :value=> s.ppm, :name => s.vial, :deleted => s.excluded}}
   end
 
   def data=(standard_hash=[])
