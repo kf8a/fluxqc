@@ -63,6 +63,7 @@ class Flux < ActiveRecord::Base
 
   def flux
     self.value = compute_flux
+    value.nan? ? nil : value
   end
 
   def compute_flux
