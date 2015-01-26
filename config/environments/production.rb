@@ -52,7 +52,7 @@ Fluxqc::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, 'localhost:11211'
+  config.cache_store = :dalli_store, '127.0.0.1:11211'
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
