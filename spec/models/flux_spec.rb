@@ -24,7 +24,7 @@ describe Flux do
     end
 
     it 'returns a list of seconds and ppm' do
-      expect(flux.data).to eq [{id:1, key:1,value:10, area:nil, deleted:false, std_curve: 1}]
+      expect(flux.data).to eq [{id:1, key:1,value:10, area:nil, deleted:false}]
     end
   end
 
