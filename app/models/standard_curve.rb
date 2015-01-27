@@ -59,6 +59,7 @@ class StandardCurve < ActiveRecord::Base
 
   def compute!
     result = fit_line
+    return unless result
     self.slope      = result[:slope]
     self.intercept  = result[:offset]
     [slope, intercept]
