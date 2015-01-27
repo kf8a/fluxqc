@@ -111,7 +111,7 @@ class Flux < ActiveRecord::Base
       end
       line
     rescue
-      nil
+      {slope: nil, offset: nil, r2: nil}
     end
   end
 
