@@ -94,14 +94,15 @@ class RunsController < ApplicationController
   end
 
   def standard_curves
-    run = Run.find(params[:id])
+    render nothing: true
+    # run = Run.find(params[:id])
 
-    respond_with do |format| 
-      format.json {render :json => 
-        run.standard_curves.to_json(:methods => 
-                                    ['data','ymax','ymin','multiplier',
-                                      'fit_line','slope'])}
-    end
+    # respond_with do |format| 
+    #   format.json {render :json => 
+    #     run.standard_curves.to_json(:methods => 
+    #                                 ['data','ymax','ymin','multiplier',
+    #                                   'fit_line','slope'])}
+    # end
   end
 
   def accept

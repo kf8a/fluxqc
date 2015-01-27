@@ -7,7 +7,7 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
 
     standardCurves.reset(INITIAL_STANDARD_DATA)
     window.incubationsView = new Flux.Views.IncubationsListView({ 'collection' : incubations})
-    window.standardCurvesView = new Flux.Views.StandardCurvesListView( {'collection' : standardCurves })
+    window.standardCurvesListView = new Flux.Views.StandardCurvesListView( {'collection' : standardCurves })
 
   routes: {
     ''           : 'home',
@@ -32,4 +32,4 @@ class Flux.Routers.FluxesRouter extends Backbone.Router
     container.empty()
     standardCurves.url = '/runs/' + window.run_id + '/standard_curves'
     standardCurves.fetch()
-    container.append(standardCurvesView.render().el)
+    container.append(standardCurvesListView.render().el)

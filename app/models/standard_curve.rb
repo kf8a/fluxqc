@@ -44,7 +44,7 @@ class StandardCurve < ActiveRecord::Base
     h[:ymax] = ymax
     h[:ymin] = ymin
     h[:fit_line] = fit_line
-    h[:fluxes] = get_dependent_fluxes
+    # h[:fluxes] = get_dependent_fluxes
     h
   end
 

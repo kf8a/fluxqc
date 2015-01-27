@@ -9,7 +9,6 @@ class Flux.Views.FluxView extends Backbone.View
     $(@el).empty()
     json_data = @model.toJSON()
     plot = new Flux.ScatterPlot()
-    plot.data(json_data.data)
     plot.fitLine(json_data.fit_line)
     plot.setFlux(json_data.flux)
     plot.model(@model)

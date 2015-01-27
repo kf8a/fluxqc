@@ -4,19 +4,20 @@ class Flux.ScatterPlot
     @height = 300
     @margin = 50
 
-  data: (@data) ->
   expected_slope: (@expected_slope) ->
   setFlux: (@flux) ->
   model: (@model) ->
 
   fitLine: (fit_line) ->
-    @m = fit_line.slope
-    @b = fit_line.offset
-    @r2 = fit_line.r2
+    if fit_line
+      @m = fit_line.slope
+      @b = fit_line.offset
+      @r2 = fit_line.r2
 
   render: (el) ->
-    return unless @data
-    model = @model
+    return unless model = @model
+    @data = model.get('data')
+
 
     chart = d3.select(el)
      .append('svg:svg')
@@ -53,7 +54,7 @@ class Flux.ScatterPlot
     g.append('svg:text')
       .attr('transform', 'scale(1,-1)')
       .attr('x', 80)
-      .attr('y',-@height + @margin+10) 
+      .attr('y',-@height + @margin+20) 
       .text(@model.get('compound').name)
 
     if @r2?

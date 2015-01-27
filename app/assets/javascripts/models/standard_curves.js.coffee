@@ -8,15 +8,15 @@ class Flux.Models.StandardCurve extends Backbone.Model
 
   togglePoint: (point) ->
     point.deleted = !point.deleted
-    @updateSamples()
-    @save()
+    @.fitLineByLeastSquares()
+    @.save()
     @
 
   to_ppm: (area, eq) ->
     area * eq.slope + eq.offset
 
   updateSamples: ->
-    @fitLineByLeastSquares()
+    # @fitLineByLeastSquares()
     eq = @.get('fit_line')
     for incubation in incubations.models
       compound = @get('compound')
@@ -59,9 +59,9 @@ class Flux.Models.StandardCurve extends Backbone.Model
     correlation = correlation * correlation
 
     r2 = correlation
-    @set({fit_line: {slope: m, r2: r2, offset: b}})
+    @.set({fit_line: {slope: m, r2: r2, offset: b}})
 
-    [m,b,r2, @attributes.flux]
+    [m,b,r2]
 
 class Flux.Collections.StandardCurvesCollection extends Backbone.Collection
   model: Flux.Models.StandardCurve
