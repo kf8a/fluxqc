@@ -33,7 +33,7 @@
         <td rowspan=<%=rows%>><%= incubation.replicate %></td>
         <td rowspan=<%=rows%>><%= incubation.chamber %></td>
         <td rowspan=<%=rows%>><%= incubation.sub_plot %></td>
-        <td rowspan=<%=rows%>><%= incubation.lid.name %></td>
+        <td rowspan=<%=rows%>><%= incubation.lid.try(:name) %></td>
         <td rowspan=<%=rows%><<%= incubation.avg_height_cm%></td>
         <td rowspan=<%=rows%>><%= incubation.soil_temperature %></td>
         <% incubation.samples.each do |sample| %>
