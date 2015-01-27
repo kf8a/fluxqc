@@ -8,6 +8,7 @@ class Calibrate
   def calibrate!
     Compound.all.each do |compound|
       curves = run.standard_curves_for(compound)
+      next if curves.empty?
       curves.each do |curve|
         curve.compute!
         curve.save
