@@ -43,8 +43,7 @@ class Flux < ActiveRecord::Base
     measurements.collect do |measurement|
       {
         id:measurement.id, key:measurement.seconds,
-        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded, 
-        std_curve: measurement.standard_curves
+        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded
       }
     end
   end
