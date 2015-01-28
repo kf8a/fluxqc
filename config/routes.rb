@@ -17,6 +17,7 @@ Fluxqc::Application.routes.draw do
       post 'unapprove'
       post 'unpublish'
       post 'unreject'
+      post 'park'
     end
   end
 
