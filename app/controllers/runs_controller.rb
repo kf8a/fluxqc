@@ -9,7 +9,7 @@ class RunsController < ApplicationController
   end
 
   def show
-    @run = Run.find(params[:id])
+    @run = run
     @state = @run.current_state.name.to_s
 
     @incubations = @run.incubations
@@ -61,7 +61,7 @@ class RunsController < ApplicationController
   end
 
   def update
-    @run = Run.find(params[:id])
+    @run = run
     if @run.update_attributes(run_params)
       if params[:run][:setup_file]
         # if Rails.env == 'production'
@@ -84,11 +84,14 @@ class RunsController < ApplicationController
   end
 
   def gcinput
-    @run = Run.find(params[:id])
+    @run = run
+  end
+
+  def updated_at
+    run.updated_at
   end
 
   def reject
-    run = Run.find(params[:id])
     run.reject!
     redirect_to runs_path(:state=>'rejected')
   end
@@ -106,37 +109,31 @@ class RunsController < ApplicationController
   end
 
   def accept
-    run = Run.find(params[:id])
     run.accept!
     redirect_to runs_path(:state=>'uploaded')
   end
 
   def approve
-    run = Run.find(params[:id])
     run.approve!
     redirect_to runs_path(:state=>'accepted')
   end
 
   def publish
-    run = Run.find(params[:id])
     run.publish!
     redirect_to runs_path(:state=>'approved')
   end
 
   def unapprove
-    run = Run.find(params[:id])
     run.unapprove!
     redirect_to runs_path(:state =>'approved')
   end
 
   def unpublish
-    run = Run.find(params[:id])
     run.unpublish!
     redirect_to runs_path(:state => 'published')
   end
 
   def unreject
-    run = Run.find(params[:id])
     run.unreject!
     redirect_to runs_path(:state=>'rejected')
   end
@@ -146,7 +143,16 @@ class RunsController < ApplicationController
     redirect_to runs_path(:state => 'uploaded')
   end
 
+  def park
+    run.park!
+    redirect_to runs_path(:state => 'uploaded')
+  end
+
   private 
+
+  def run
+    Run.find(params[:id])
+  end
 
   def run_params
     params.require(:run).permit!

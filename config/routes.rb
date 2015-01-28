@@ -10,6 +10,7 @@ Fluxqc::Application.routes.draw do
     member do
       get  'gcinput'
       get  'standard_curves'
+      get  'updated_at'
       post 'reject'
       post 'accept'
       post 'approve'
