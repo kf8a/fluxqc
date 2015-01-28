@@ -13,7 +13,7 @@ class RunsController < ApplicationController
     @state = @run.current_state.name.to_s
 
     @incubations = @run.incubations
-    @standard_curves = @run.standard_curves
+    @standard_curves = @run.standard_curves.order('created_at')
     respond_with do |format|
       format.html { render  :layout=> 'qc'}
       format.json {render :json  => @incubations}
