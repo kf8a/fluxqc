@@ -12,9 +12,9 @@
       <% end %>
     </td>
     <td><%= link_to 'qc', run ,:class =>'btn btn-success'%></td>
-    <td><%= link_to 'edit', edit_run_path(run), :class=>'btn' %></td>
-    <td><%= link_to 'download', run_url(run, :format => :csv), :class=>'btn' %></td>
-    <td><%= link_to 'gc input', gcinput_run_url(run, :format=>:csv), :class=>'btn' %></td>
-    <td><%= link_to 'destroy',  run, method: :delete, data: {confirm: "Are you sure you want to delete the #{run.name}?" } ,class: 'btn'%></td>
+    <td><%= link_to '', edit_run_path(run), :class=>'btn btn-default fa fa-pencil-square-o' %></td>
+    <td><%= link_to '', run_url(run, :format => :csv), :class=>'btn btn-default fa fa-download' %></td>
+    <td><%= link_to 'gc input', gcinput_run_url(run, :format=>:csv), :class=>'btn btn-default' %></td>
+    <td><%= link_to 'destroy',  run, method: :delete, data: {confirm: "Are you sure you want to delete the #{run.name}?" } ,class: 'btn btn-default'%></td>
   </tr>
 <% end %>
