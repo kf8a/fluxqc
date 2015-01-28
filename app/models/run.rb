@@ -23,6 +23,7 @@ class Run < ActiveRecord::Base
   workflow do
     state :uploaded do
       event :accept,  :transitions_to => :accepted
+      event :park,    :transitions_to => :parked
     end
     state :accepted do
       event :approve, :transitions_to => :approved
@@ -39,6 +40,10 @@ class Run < ActiveRecord::Base
 
     state :rejected do
       event :unreject, :transitions_to => :uploaded
+    end
+
+    state :parked do
+      event :unpark, :transitions_to => :uploaded
     end
   end
 
