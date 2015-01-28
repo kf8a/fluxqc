@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121165213) do
+ActiveRecord::Schema.define(version: 20150128184548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 20150121165213) do
     t.integer "compound_id"
     t.float   "slope"
     t.float   "intercept"
+  end
+
+  create_table "data_attachments", force: :cascade do |t|
+    t.integer  "run_id"
+    t.string   "data_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "data_files", force: :cascade do |t|
@@ -173,16 +180,17 @@ ActiveRecord::Schema.define(version: 20150121165213) do
     t.date     "sampled_on"
     t.string   "name",           limit: 50
     t.text     "comment"
-    t.boolean  "approved",                   default: false
+    t.boolean  "approved",       default: false
     t.integer  "group_id"
     t.string   "study",          limit: 25
-    t.boolean  "released",                   default: false
+    t.boolean  "released",       default: false
     t.string   "workflow_state", limit: 255
     t.string   "setup_file",     limit: 255
     t.string   "data_file",      limit: 255
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "data_files",     array: true
   end
 
   create_table "samples", force: :cascade do |t|
@@ -283,8 +291,8 @@ ActiveRecord::Schema.define(version: 20150121165213) do
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "remember_created_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
     t.integer  "sign_in_count"
     t.datetime "reset_password_sent_at"
     t.integer  "company_id"
