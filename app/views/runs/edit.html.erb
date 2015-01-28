@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     <% @run.incubations.each do |incubation| %>
-      <% rows = 5 %> 
+      <% rows = 9 %> 
       <tr>
         <td rowspan=<%=rows%>><%= incubation.treatment %></td>
         <td rowspan=<%=rows%>><%= incubation.replicate %></td>
@@ -40,6 +40,13 @@
             <td><%= sample.data('n2o').try(:ppm) %></td>
             <td><%= sample.data('co2').try(:ppm) %></td>
             <td><%= sample.data('ch4').try(:ppm) %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= sample.data('n2o').try(:area) %></td>
+            <td><%= sample.data('co2').try(:area) %></td>
+            <td><%= sample.data('ch4').try(:area) %></td>
           </tr>
         <% end %>
       </tr>
