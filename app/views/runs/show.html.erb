@@ -3,12 +3,9 @@
   <li id='standard-tab'><%= link_to 'Standards', run_path(@run) + '/standards' %></li>
   <li id='sample-tab' class='active'><%= link_to 'Samples', run_path(@run) %></li>
 </ul>
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<% if flash[:error] %>
-  <p class="error"><%= flash[:error] %></p>
-<% end %>
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
 <div id='container'>Loading...</div>
 
 <script>

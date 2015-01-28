@@ -1,9 +1,6 @@
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<% if flash[:error] %>
-  <p class="error"><%= flash[:error] %></p>
-<% end %>
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
 <%= simple_form_for @run do |f| %>
   <%= render 'form', :f => f %>
 <% end %> 
