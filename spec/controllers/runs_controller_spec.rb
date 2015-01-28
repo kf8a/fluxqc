@@ -32,6 +32,22 @@ describe RunsController, :type => :controller do
     end
   end
 
+  describe 'GET updated_at' do
+    render_views
+
+    before(:all) do 
+      @run = FactoryGirl.create :run
+    end
+    it "returns http success" do
+      get :updated_at, id: @run
+      expect(response).to be_success
+    end
+    it 'returns the updated_at timestamp' do
+      get :updated_at, id: @run
+      expect(Time.parse(response.body)).to be_within(1).of(@run.updated_at)
+    end
+  end
+
   describe 'GET :new' do
     it 'returns http success' do
       get :new

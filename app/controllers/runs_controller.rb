@@ -88,7 +88,7 @@ class RunsController < ApplicationController
   end
 
   def updated_at
-    run.updated_at
+    render text: run.updated_at
   end
 
   def reject
