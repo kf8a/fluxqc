@@ -7,9 +7,15 @@
     <td><%= run.study %></td>
     <td><%= "#{run.total_fluxes}" %></td>
     <td>
-      <% if run.data_file.current_path %>
-        <i class="fa fa-check"></i>
+      <% if run.setup_file.current_path && !run.data_file.current_path %>
+        <i class="fa fa-square-o"></i>
       <% end %>
+      <% if run.data_file.current_path && !run.setup_file.current_path%>
+          <i class="fa fa-check"></i>
+        <% end %>
+      <% if run.data_file.current_path && run.setup_file.current_path%>
+        <i class="fa fa-check-square-o"></i>
+        <% end %>
     </td>
     <td><%= link_to 'qc', run ,:class =>'btn btn-success'%></td>
     <td><%= link_to '', edit_run_path(run), :class=>'btn btn-default fa fa-pencil-square-o' %></td>
