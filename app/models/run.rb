@@ -11,7 +11,8 @@ class Run < ActiveRecord::Base
   # has_many :data_files, dependent: :destroy
 
   mount_uploader :setup_file, SetupUploader
-  mount_uploader :data_file, DataUploader
+  # mount_uploader :data_file, DataUploader
+  mount_uploaders :data_files, DataUploader
 
   accepts_nested_attributes_for :incubations, :samples
 
