@@ -6,18 +6,19 @@ class Flux.Views.StandardCurveView extends Backbone.View
       interpolate : /\{\{(.+?)\}\}/g
     }
     @template = _.template($('#standard-template').html())
+    @equation = _.template($('#equation-template').html())
     @.model.on('change', @render)
 
   render: =>
     # need to remove the plot i think
     $(@el).empty()
     json_data = @model.toJSON()
-    $(@el).append(@template(json_data.fit_line))
 
     plot = new Flux.ScatterPlot()
     # plot.data(json_data.data)
     plot.fitLine(json_data.fit_line)
     plot.model(@model)
+    plot.note(@equation(json_data.fit_line))
     plot.render(@el)
 
     @

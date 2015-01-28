@@ -7,6 +7,7 @@ class Flux.ScatterPlot
   expected_slope: (@expected_slope) ->
   setFlux: (@flux) ->
   model: (@model) ->
+  note: (@note) ->
 
   fitLine: (fit_line) ->
     if fit_line
@@ -50,6 +51,12 @@ class Flux.ScatterPlot
     # find first and last point
     a1 = 0 * @m + @b
     a2 = d3.max(@data, (d) -> d.key) * @m + @b
+
+    g.append('svg:text')
+      .attr('transform', 'scale(1,-1)')
+      .attr('x', 80)
+      .attr('y',-@height + @margin-20) 
+      .text(@note)
 
     g.append('svg:text')
       .attr('transform', 'scale(1,-1)')
