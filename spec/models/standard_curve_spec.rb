@@ -10,21 +10,21 @@ describe StandardCurve do
 
   describe 'getting data and computing parameters' do
     before(:each) do
-      standard1 = Standard.new
-      allow(standard1).to receive(:area).and_return(10.0)
-      allow(standard1).to receive(:ppm).and_return(2.0)
-      allow(standard1).to receive(:excluded).and_return(false)
+      @standard1 = Standard.new
+      allow(@standard1).to receive(:area).and_return(10.0)
+      allow(@standard1).to receive(:ppm).and_return(2.0)
+      allow(@standard1).to receive(:excluded).and_return(false)
 
       standard2 = Standard.new
       allow(standard2).to receive(:area).and_return(100.0)
       allow(standard2).to receive(:ppm).and_return(20.0)
       allow(standard2).to receive(:excluded).and_return(false)
 
-      standard_curve.standards = [standard1, standard2]
+      standard_curve.standards = [@standard1, standard2]
     end
 
     it 'returns a list of areas and ppms' do
-      expect(standard_curve.data[0]).to include(id:1,
+      expect(standard_curve.data[0]).to include(id: @standard1.id,
                                                 key:10,
                                                 value:2,
                                                 name: nil,

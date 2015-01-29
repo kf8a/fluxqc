@@ -16,29 +16,29 @@ describe Flux do
   describe 'data retrieval' do
     before(:each) do
       allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
-      measurement =  Measurement.new
-      allow(measurement).to receive(:seconds).and_return(1)
-      allow(measurement).to receive(:ppm).and_return(10)
-      allow(measurement).to receive(:excluded).and_return(false)
-      flux.measurements << measurement
+      @measurement =  Measurement.new
+      allow(@measurement).to receive(:seconds).and_return(1)
+      allow(@measurement).to receive(:ppm).and_return(10)
+      allow(@measurement).to receive(:excluded).and_return(false)
+      flux.measurements << @measurement
     end
 
     it 'returns a list of seconds and ppm' do
-      expect(flux.data).to eq [{id:1, key:1,value:10, area:nil, deleted:false}]
+      expect(flux.data).to eq [{id:@measurement.id, key:1,value:10, area:nil, deleted:false}]
     end
   end
 
   describe 'data writing' do
     before(:each) do
       allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
-      @m1 = FactoryGirl.create :measurement
-      @m2 = FactoryGirl.create :measurement
+      @m1 = FactoryGirl.create :measurement, seconds: 4, ppm: 10
+      @m2 = FactoryGirl.create :measurement, seconds: 10, ppm: 20
       flux.measurements << @m1
       flux.measurements << @m2
       allow(flux).to receive(:headspace).and_return(1)
       allow(flux).to receive(:mol_weight).and_return(1)
       allow(flux).to receive(:surface_area).and_return(1)
-      flux.data = [{id:@m1.id,key:4, value:10, deleted:true}]
+      flux.data = [{id:@m1.id,key:4, value:10, excluded:true}]
     end
 
     it 'has two measurements' do
@@ -46,15 +46,15 @@ describe Flux do
     end
 
     it 'updates the seconds' do
-      expect(flux.measurements.first.seconds).to eq 4
+      expect(flux.measurements.first.seconds).to eq 10
     end
 
     it 'updates the ppms' do
-      expect(flux.measurements.first.ppm).to eq 10
+      expect(flux.measurements.first.ppm).to eq 20
     end
 
     it 'updates the excluded setting' do
-      expect(flux.measurements.first.excluded).to eq true
+      expect(flux.measurements.first.excluded).to eq false
     end
 
     it 'updates the flux' do

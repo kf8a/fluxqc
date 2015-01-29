@@ -88,16 +88,17 @@ describe RunsController, :type => :controller do
   describe 'PUT update' do
     describe 'with a valid object' do
       it 'redirects to show' do
-       allow_any_instance_of(Run).to receive(:save).and_return(true)
-       allow_any_instance_of(Run).to receive(:id).and_return(1)
-       post :update, id: 1, run: {name: 'test'}
-       expect(response).to redirect_to(run_path(assigns(:run)))
+        run = Run.create
+        allow(Run).to receive(:find).with('1').and_return(run)
+        post :update, id: 1, run: {name: 'test'}
+        expect(response).to redirect_to(run_path(assigns(:run)))
       end
     end
     describe 'with an invalid object' do
       it 'redirects back to new' do
-        allow_any_instance_of(Run).to receive(:save).and_return(false)
-        allow_any_instance_of(Run).to receive(:id).and_return(1)
+        run = Run.create
+        allow(Run).to receive(:find).with('1').and_return(run)
+        allow(run).to receive(:valid?).and_return(false)
         post :update, id: 1, run: {name: 'test'}
         expect(response).to redirect_to(edit_run_path(assigns(:run)))
       end
