@@ -13,9 +13,10 @@ describe DataFileLoader do
 
   describe '2011 style data file' do
     before do
-      run = FactoryGirl.create :run,
-                    :data_file => fixture_file_upload('/2011_results.csv'),
-                    :setup_file => fixture_file_upload('/setup_test.csv')
+      run = FactoryGirl.create :run
+      run.setup_file = fixture_file_upload('/setup_test.csv')
+      run.data_files = [fixture_file_upload('2011_results.csv')]
+      run.save!
       expect(SetupFileLoader.perform(run.id)).to be_truthy
       expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
@@ -43,7 +44,7 @@ describe DataFileLoader do
   describe 'a 2010 data file with standards' do
     before do
       run = FactoryGirl.create :run,
-                         :data_file => fixture_file_upload('/glbrc-2010.csv'),
+                         :data_files => [fixture_file_upload('/glbrc-2010.csv')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
 
       expect(SetupFileLoader.perform(run.id)).to be_truthy
@@ -60,7 +61,7 @@ describe DataFileLoader do
   describe 'a GC data file' do
     before do
       run = FactoryGirl.create :run,
-                         :data_file => fixture_file_upload('/2012_result.txt'),
+                         :data_files => [fixture_file_upload('/2012_result.txt')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       expect(SetupFileLoader.perform(run.id)).to be_truthy
       expect(DataFileLoader.perform(run.id)).to be_truthy
@@ -118,7 +119,7 @@ describe DataFileLoader do
   describe 'a chemstation file with two standard sets' do
     before do
       run = FactoryGirl.create :run,
-                         :data_file => fixture_file_upload('/LTER20130520S4.CSV'),
+                         :data_files => [fixture_file_upload('/LTER20130520S4.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       expect(SetupFileLoader.perform(run.id)).to be_truthy 
       expect(DataFileLoader.perform(run.id)).to be_truthy
@@ -139,7 +140,7 @@ describe DataFileLoader do
   describe 'a glbrc chemstation file' do
     before do
       run = FactoryGirl.create :run,
-                         :data_file => fixture_file_upload('/glbrc-results.CSV'),
+                         :data_files => [fixture_file_upload('/glbrc-results.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       expect(SetupFileLoader.perform(run.id)).to be_truthy 
       expect(DataFileLoader.perform(run.id)).to be_truthy

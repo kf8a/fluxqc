@@ -143,5 +143,5 @@ end
 #  company_id     :integer
 #  created_at     :datetime
 #  updated_at     :datetime
-#  data_files     :string           is an Array
+#  data_files     :json
 #

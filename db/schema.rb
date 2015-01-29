@@ -180,17 +180,17 @@ ActiveRecord::Schema.define(version: 20150128184548) do
     t.date     "sampled_on"
     t.string   "name",           limit: 50
     t.text     "comment"
-    t.boolean  "approved",       default: false
+    t.boolean  "approved",                   default: false
     t.integer  "group_id"
     t.string   "study",          limit: 25
-    t.boolean  "released",       default: false
+    t.boolean  "released",                   default: false
     t.string   "workflow_state", limit: 255
     t.string   "setup_file",     limit: 255
     t.string   "data_file",      limit: 255
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "data_files",     array: true
+    t.json     "data_files"
   end
 
   create_table "samples", force: :cascade do |t|

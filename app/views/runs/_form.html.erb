@@ -6,9 +6,11 @@
 <%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
 <%= f.input :setup_file, input_html: {class: 'btn btn-default btn-file'} %> 
 <%= f.hidden_field :setup_file_cache %>
-<%= link_to @run.data_file, @run.data_file_url, :class=>'uploaded_file'  if @run.data_file? %>
-<%= f.input :data_file, input_html: {class: 'btn btn-default btn-file'} %>
-<%= f.hidden_field :data_file_cache %>
+<% @run.data_files.each do |data_file| %>
+  <%= link_to data_file, data_file.url, :class=>'uploaded_file' %><br/>
+<% end %>
+<%= f.file_field :data_files, multiple: true, input_html: {class: 'btn btn-default btn-file'} %>
+<%= f.hidden_field :data_files_cache %>
 
 <div>
 <%= link_to 'back to index', runs_path, :class=>'btn' %>
