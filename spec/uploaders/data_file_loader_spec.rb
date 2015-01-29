@@ -23,16 +23,16 @@ describe DataFileLoader do
 
     describe 'when there are measurements available' do
       before do
-        @incubation = @run.incubations.first
+        @incubation = @run.incubations.order(:sampled_at).first
       end
       it 'updates the measurement with the co2 ppm' do
-        expect(@incubation.flux('co2').measurements.first.ppm).to eq 431.5
+        expect(@incubation.flux('co2').measurements.order(:vial).first.ppm).to eq 431.5
       end
       it 'updates the measurement with the n2o ppm' do
-        expect(@incubation.flux('n2o').measurements.first.ppm).to eq 0.361
+        expect(@incubation.flux('n2o').measurements.order(:vial).first.ppm).to eq 0.361
       end
       it 'updates the measurement with the ch4 ppm' do
-        expect(@incubation.flux('ch4').measurements.first.ppm).to eq 1.854
+        expect(@incubation.flux('ch4').measurements.order(:vial).first.ppm).to eq 1.854
       end
       it 'has a flux' do
         expect(@incubation.flux('ch4')).to_not be_nil
@@ -65,26 +65,26 @@ describe DataFileLoader do
       expect(SetupFileLoader.perform(run.id)).to be_truthy
       expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
-      @incubation = @run.incubations.first
+      @incubation = @run.incubations.order(:sampled_at).first
       @run.standard_curves.reload
+      @measurement = @incubation.flux('n2o').measurements.order(:vial).first
     end
 
     it 'updateds the acquired time' do
 			Time.zone = 'Eastern Time (US & Canada)' 
-      #@incubation.flux('n2o').measurements.first.acquired_at.should == Time.zone.local(2012,04,12,21,3,35)
-      expect(@incubation.flux('n2o').measurements.first.acquired_at).to eq Time.new(2012,04,12,21,3,35)
+      expect(@measurement.acquired_at).to eq Time.new(2012,04,12,21,3,35)
     end
     it 'updates the measurement with the column id' do
-      expect(@incubation.flux('n2o').measurements.first.column).to eq 1
+      expect(@measurement.column).to eq 1
     end
     it 'updates the measurement with the co2 area' do
-      expect(@incubation.flux('co2').measurements.first.area).to eq 70570.75
+      expect(@incubation.flux('co2').measurements.order(:vial).first.area).to eq 70570.75
     end
     it 'updates the measurement with the n2o area' do
-      expect(@incubation.flux('n2o').measurements.first.area).to eq 306.040741
+      expect(@incubation.flux('n2o').measurements.order(:vial).first.area).to eq 306.040741
     end
     it 'updates the measurement with the ch4 area' do
-      expect(@incubation.flux('ch4').measurements.first.area).to eq 20.403509
+      expect(@incubation.flux('ch4').measurements.order(:vial).first.area).to eq 20.403509
     end
 
     it 'keeps standards and check standards' do
@@ -123,7 +123,7 @@ describe DataFileLoader do
       expect(SetupFileLoader.perform(run.id)).to be_truthy 
       expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
-      @incubation = @run.incubations.first
+      @incubation = @run.incubations.order(:sampled_at).first
       @run.standard_curves.reload
     end
 
@@ -148,7 +148,7 @@ describe DataFileLoader do
     end
 
     it 'has the right area for vial 2' do
-      expect(@run.incubations.where(treatment: "T6").first.flux('ch4').measurements.first.area).to eq 44.905228
+      expect(@run.incubations.where(treatment: "T6").order(:sampled_at).first.flux('ch4').measurements.first.area).to eq 44.905228
     end
 
   end

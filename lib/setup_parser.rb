@@ -27,20 +27,21 @@ class SetupParser
     sample_date = Chronic.parse(row[0].gsub /sample date:(\s+)?/,'')
     lines.shift
     lines.shift if title.strip =~ /^GLBRC/
+
+    parser = case title.strip
+             when /^GLBRC.*\d$/
+               GLBRCSetupParser.new
+             when /Fert/
+               FertSetupParser.new
+             when /^CIMMYT/
+               series = title.split(/ +/).last
+               CIMMITSetupParser.new(series)
+             else
+               LTERSetupParser.new
+             end
+
     result = lines.collect do |row|
       next unless row[0]
-
-      parser = case title.strip
-               when /^GLBRC.*\d$/
-                 GLBRCSetupParser.new
-               when /Fert/
-                 FertSetupParser.new
-               when /^CIMMYT/
-                 series = title.split(/ +/).last
-                 CIMMITSetupParser.new(series)
-               else
-                 LTERSetupParser.new
-               end
 
       treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
 
