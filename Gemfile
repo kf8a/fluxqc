@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2.0'
 gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
 gem 'pg'
 gem 'simple_form'
 gem 'workflow'
-gem 'carrierwave' #, :git=>'git://github.com/jnicklas/carrierwave.git'
+gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
@@ -51,7 +51,6 @@ group :test, :development do
 end
 
 group :test do
-  gem 'sqlite3'
   gem 'shoulda-matchers'
   gem "database_cleaner"
   gem "factory_girl_rails"
