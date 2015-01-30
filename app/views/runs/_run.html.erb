@@ -7,13 +7,13 @@
     <td><%= run.study %></td>
     <td><%= "#{run.total_fluxes}" %></td>
     <td>
-      <% if run.setup_file.current_path && !run.data_file.current_path %>
+      <% if run.setup_file.current_path && !run.data_files.size > 0%>
         <i class="fa fa-square-o"></i>
       <% end %>
-      <% if run.data_file.current_path && !run.setup_file.current_path%>
+      <% if run.data_files.size > 0 && !run.setup_file.current_path%>
           <i class="fa fa-check"></i>
         <% end %>
-      <% if run.data_file.current_path && run.setup_file.current_path%>
+        <% if run.data_files.size > 0&& run.setup_file.current_path%>
         <i class="fa fa-check-square-o"></i>
         <% end %>
     </td>
