@@ -13,7 +13,7 @@ class SetupUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(csv)
+    %w(csv xls xlsx)
   end
 
 
