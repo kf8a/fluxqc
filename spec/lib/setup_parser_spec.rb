@@ -321,7 +321,7 @@ describe SetupParser do
     end
   end
 
-  describe 'loading an excel file with format info' do
+  describe 'loading an excel file with format 4' do
     before do
       file = File.expand_path("../../fixtures/glbrc-setup-format.xls", __FILE__)
       expect(File.exists?(file)).to be_truthy
@@ -349,6 +349,69 @@ describe SetupParser do
       end
       it 'has the right vial' do
         expect(@row[:vial]).to eq "1"
+      end
+    end
+  end
+
+  describe 'loading an excel file with format 3' do
+    before do
+      file = File.expand_path("../../fixtures/format-3.xls", __FILE__)
+      expect(File.exists?(file)).to be_truthy
+      @result = SetupParser.parse(file)
+    end
+
+    describe 'the first row' do
+      before do
+        @row = @result[0]
+      end
+      it 'is the right treatment' do
+        expect(@row[:treatment]).to eq 'T6'
+      end
+      it 'is the right rep' do
+        expect(@row[:replicate]).to eq 'R1'
+      end
+      it 'has the right seconds' do
+        expect(@row[:seconds]).to eq 0
+      end
+      it 'has the right chamber' do
+        expect(@row[:chamber]).to eq '1'
+      end
+      it 'has the rigth lid' do
+        expect(@row[:lid]).to eq 'D'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "1"
+      end
+    end
+    describe 'the second row' do
+      before do
+        @row = @result[1]
+      end
+      it 'is the right treatment' do
+        expect(@row[:treatment]).to eq 'T7-12.3F'
+      end
+      it 'is the right rep' do
+        expect(@row[:replicate]).to eq 'R3'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "119"
+      end
+      it 'has the right comment' do
+        expect(@row[:comments]).to eq "AMB"
+      end
+    end
+    describe 'the third row' do
+      before do
+        @row = @result[2]
+      end
+      it 'is the right treatment' do
+        expect(@row[:treatment]).to eq 'TSF-3F'
+      end
+      it 'is the right rep' do
+        expect(@row[:replicate]).to eq 'R1'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "150"
       end
     end
   end

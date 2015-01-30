@@ -5,6 +5,7 @@ require_relative 'glbrc_setup_parser'
 require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
 require_relative 'glbrc_format4_setup_parser'
+require_relative 'format3_parser'
 
 # The SetupParser parses the run setup file and returns the
 # results as a hash. It is called by the setup parser loader
@@ -97,6 +98,8 @@ class SetupParser
       CIMMITSetupParser.new(series)
     when /^format=4/
       GLBRCFormat4SetupParser.new
+    when /^format=3/
+      Format3Parser.new
     else
       LTERSetupParser.new
     end
