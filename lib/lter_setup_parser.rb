@@ -12,7 +12,11 @@ class LTERSetupParser
   end
 
   def replicate
-    "R#{row[1].to_i}"
+    if row[1].is_a?(Float)
+      "R#{row[1].to_i}"
+    else
+      "R#{row[1]}"
+    end
   end
 
   def sub_plot; end
