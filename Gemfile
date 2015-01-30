@@ -17,6 +17,8 @@ gem 'uuid'
 
 gem 'foreigner'
 
+gem 'roo', require: false
+
 #gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
 

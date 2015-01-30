@@ -18,11 +18,11 @@ class GLBRCSetupParser
   def sub_plot; end
 
   def chamber
-    row[4]
+    "#{row[4].to_i}"
   end
 
   def vial
-    row[5]
+    "#{row[5].to_i}"
   end
 
   def lid

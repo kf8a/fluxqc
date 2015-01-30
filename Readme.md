@@ -18,4 +18,6 @@ Workflow:
 
 How to create a sample campaign template? 
 
-TODO: add groups
+TODO: 
+- add excel file load
+- add groups

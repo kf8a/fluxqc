@@ -8,11 +8,11 @@ class LTERSetupParser
   end
 
   def treatment
-    "T#{row[0]}"
+    "T#{row[0].to_i}"
   end
 
   def replicate
-    "R#{row[1]}"
+    "R#{row[1].to_i}"
   end
 
   def sub_plot; end

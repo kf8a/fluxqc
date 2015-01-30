@@ -273,4 +273,36 @@ describe SetupParser do
       end
     end
   end
+
+  describe 'loading and excel file' do
+    before do
+      file = File.expand_path("../../fixtures/winter-gas-setup.xls", __FILE__)
+      expect(File.exists?(file)).to be_truthy
+      @result = SetupParser.parse(file)
+    end
+
+    describe 'the second row' do
+      before do
+        @row = @result[81]
+      end
+      it 'is T6' do
+        expect(@row[:treatment]).to eq 'T3'
+      end
+      it 'is R1' do
+        expect(@row[:replicate]).to eq 'R3'
+      end
+      it 'has 20 seconds' do
+        expect(@row[:seconds]).to eq 20
+      end
+      it 'has the right chamber' do
+        expect(@row[:chamber]).to eq '1'
+      end
+      it 'has the rigth lid' do
+        expect(@row[:lid]).to eq 'Y'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "82"
+      end
+    end
+  end
 end
