@@ -6,17 +6,17 @@
     <td><%= run.comment %></td>
     <td><%= run.study %></td>
     <td><%= "#{run.total_fluxes}" %></td>
-    <td>
-      <% if run.setup_file.current_path && !run.data_files.size > 0%>
-        <i class="fa fa-square-o"></i>
-      <% end %>
-      <% if run.data_files.size > 0 && !run.setup_file.current_path%>
-          <i class="fa fa-check"></i>
-        <% end %>
-        <% if run.data_files.size > 0&& run.setup_file.current_path%>
-        <i class="fa fa-check-square-o"></i>
-        <% end %>
-    </td>
+    <%# <td> %>
+    <%#   <% if run.setup_file.current_path && !run.data_files.size > 0%> %>
+    <%#     <i class="fa fa-square-o"></i> %>
+    <%#   <% end %1> %>
+    <%#   <% if run.data_files.size > 0 && !run.setup_file.current_path%> %>
+    <%#       <i class="fa fa-check"></i> %>
+    <%#     <% end %1> %>
+    <%#     <% if run.data_files.size > 0&& run.setup_file.current_path%> %>
+    <%#     <i class="fa fa-check-square-o"></i> %>
+    <%#     <% end %1> %>
+    <%# </td> %>
     <td><%= link_to 'qc', run ,:class =>'btn btn-success'%></td>
     <td><%= link_to '', edit_run_path(run), :class=>'btn btn-default fa fa-pencil-square-o' %></td>
     <td><%= link_to '', run_url(run, :format => :csv), :class=>'btn btn-default fa fa-download' %></td>
