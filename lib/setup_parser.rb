@@ -4,6 +4,7 @@ require 'roo'
 require_relative 'glbrc_setup_parser'
 require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
+require_relative 'glbrc_format4_setup_parser'
 
 # The SetupParser parses the run setup file and returns the
 # results as a hash. It is called by the setup parser loader
@@ -27,13 +28,20 @@ class SetupParser
   def self.parse_xls(file)
     xls = Roo::Spreadsheet.open(file)
     xls.default_sheet = xls.sheets.first
-    title = xls.cell('A',1)
-    sample_date = Chronic.parse(xls.cell('A',3).gsub /sample date:(\s+)?/,'')
+    format_test = xls.cell('A',1)
+    date_row = 3
+    title = format_test
+    if format_test =~ /format=/
+      title = xls.cell('A',2)
+      date_row = 4
+    end
 
+    sample_date = Chronic.parse(xls.cell('A',date_row).gsub /sample date:(\s+)?/,'')
     first_row = 6
-    first_row = 7 if title.strip =~ /~GLBRC/
+    first_row += 1 if title.strip =~ /^GLBRC/
+    first_row += 1 if date_row == 4
 
-    parser = locate_parser(title)
+    parser = locate_parser(format_test)
 
     (first_row..xls.last_row).collect do |i|
       row = xls.row(i)
@@ -52,14 +60,16 @@ class SetupParser
   def self.parse_csv(file)
     lines = CSV::readlines(file)
     row = lines.shift
+    format_test = row[0]
     title = row[0]
     2.times { lines.shift } # remove the header limes
     row = lines.shift
     sample_date = Chronic.parse(row[0].gsub /sample date:(\s+)?/,'')
     lines.shift
-    lines.shift if title.strip =~ /^GLBRC/
+    lines.shift if format_test =~ /^GLBRC/
+    lines.shift if format_test =~/^format=/
 
-    parser = locate_parser(title)
+    parser = locate_parser(format_test)
 
     lines.collect do |row|
       next unless row[0]
@@ -85,6 +95,8 @@ class SetupParser
     when /^CIMMYT/
       series = title.split(/ +/).last
       CIMMITSetupParser.new(series)
+    when /^format=4/
+      GLBRCFormat4SetupParser.new
     else
       LTERSetupParser.new
     end

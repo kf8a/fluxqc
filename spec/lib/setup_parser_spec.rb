@@ -281,7 +281,22 @@ describe SetupParser do
       @result = SetupParser.parse(file)
     end
 
-    describe 'the second row' do
+    describe 'the first row' do
+      before do
+        @row = @result[0]
+      end
+      it 'is T6' do
+        expect(@row[:treatment]).to eq 'T6'
+      end
+      it 'is R1' do
+        expect(@row[:replicate]).to eq 'R1'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq '1'
+      end
+
+    end
+    describe 'the 81s row' do
       before do
         @row = @result[81]
       end
@@ -302,6 +317,38 @@ describe SetupParser do
       end
       it 'has the right vial' do
         expect(@row[:vial]).to eq "82"
+      end
+    end
+  end
+
+  describe 'loading an excel file with format info' do
+    before do
+      file = File.expand_path("../../fixtures/glbrc-setup-format.xls", __FILE__)
+      expect(File.exists?(file)).to be_truthy
+      @result = SetupParser.parse(file)
+    end
+
+    describe 'the first row' do
+      before do
+        @row = @result[0]
+      end
+      it 'is the right treatment' do
+        expect(@row[:treatment]).to eq 'G1'
+      end
+      it 'is the right rep' do
+        expect(@row[:replicate]).to eq 'R1'
+      end
+      it 'has the right seconds' do
+        expect(@row[:seconds]).to eq 0
+      end
+      it 'has the right chamber' do
+        expect(@row[:chamber]).to eq '1'
+      end
+      it 'has the rigth lid' do
+        expect(@row[:lid]).to eq 'Y'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "1"
       end
     end
   end
