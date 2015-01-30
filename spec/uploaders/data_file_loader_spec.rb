@@ -149,7 +149,7 @@ describe DataFileLoader do
     end
 
     it 'has the right area for vial 2' do
-      expect(@run.incubations.where(treatment: "T6").order(:sampled_at).first.flux('ch4').measurements.first.area).to eq 44.905228
+      expect(@run.incubations.where(treatment: "T6").order(:sampled_at).first.flux('ch4').measurements.order(:vial).first.area).to eq 44.905228
     end
 
   end

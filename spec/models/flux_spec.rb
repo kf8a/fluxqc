@@ -38,7 +38,7 @@ describe Flux do
       allow(flux).to receive(:headspace).and_return(1)
       allow(flux).to receive(:mol_weight).and_return(1)
       allow(flux).to receive(:surface_area).and_return(1)
-      flux.data = [{id:@m1.id,key:4, value:10, excluded:true}]
+      flux.data = [{id:@m1.id,key:4, value:10, deleted:true}]
     end
 
     it 'has two measurements' do
@@ -46,15 +46,15 @@ describe Flux do
     end
 
     it 'updates the seconds' do
-      expect(flux.measurements.first.seconds).to eq 10
+      expect(flux.measurements.order(:seconds).first.seconds).to eq 4
     end
 
     it 'updates the ppms' do
-      expect(flux.measurements.first.ppm).to eq 20
+      expect(flux.measurements.order(:seconds).first.ppm).to eq 10
     end
 
     it 'updates the excluded setting' do
-      expect(flux.measurements.first.excluded).to eq false
+      expect(flux.measurements.order(:seconds).first.excluded).to eq true
     end
 
     it 'updates the flux' do
