@@ -18,11 +18,11 @@ class LTERSetupParser
   def sub_plot; end
 
   def chamber
-    row[3]
+    "#{row[3].to_i}"
   end
 
   def vial
-    row[4]
+    "#{row[4].to_i}"
   end
 
   def lid
