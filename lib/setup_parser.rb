@@ -4,7 +4,7 @@ require 'roo'
 require_relative 'glbrc_setup_parser'
 require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
-require_relative 'glbrc_format4_setup_parser'
+require_relative 'format4_parser'
 require_relative 'format3_parser'
 
 # The SetupParser parses the run setup file and returns the
@@ -97,7 +97,7 @@ class SetupParser
       series = title.split(/ +/).last
       CIMMITSetupParser.new(series)
     when /^format=4/
-      GLBRCFormat4SetupParser.new
+      Format4Parser.new
     when /^format=3/
       Format3Parser.new
     else

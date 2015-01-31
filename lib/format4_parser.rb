@@ -1,4 +1,4 @@
-class GLBRCFormat4SetupParser
+class Format4Parser
   attr_reader :row
 
   def parse(row)
