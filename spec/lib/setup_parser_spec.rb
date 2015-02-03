@@ -364,6 +364,9 @@ describe SetupParser do
       before do
         @row = @result[0]
       end
+      it 'has the right sample date' do
+        expect(@row[:sample_date].to_date).to eq Date.parse('2014-8-19')
+      end
       it 'is the right treatment' do
         expect(@row[:treatment]).to eq 'T6'
       end

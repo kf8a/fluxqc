@@ -34,13 +34,13 @@ class SetupParser
     title = format_test
     if format_test =~ /format=/
       title = xls.cell('A',2)
-      date_row = 4
+      date_row = 5
     end
 
     sample_date = Chronic.parse(xls.cell('A',date_row).gsub /sample date:(\s+)?/,'')
     first_row = 6
     first_row += 1 if title.strip =~ /^GLBRC/
-    first_row += 1 if date_row == 4
+    first_row += 1 if date_row == 5
 
     parser = locate_parser(format_test)
 
