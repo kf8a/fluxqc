@@ -68,7 +68,7 @@ class Flux < ActiveRecord::Base
     f = Fitter.new(self)
     begin
       value = f.fit
-      if value.try(:nan?) 
+      if value.try(:nan?) || value.try(:infinite?)
         nil
       else
         value
@@ -99,14 +99,14 @@ class Flux < ActiveRecord::Base
     begin
       line = f.linear_fit
 
-      if line[:slope].nan? 
+      if line[:slope].nan? || line[:slope].infinite?
         line[:slope] = nil
       end
 
-      if line[:offset].nan? 
+      if line[:offset].nan? || line[:offset].infinite?
         line[:offset] = nil
       end
-      if line[:r2].nan? 
+      if line[:r2].nan? || line[:r2].infinite?
         line[:r2] = nil
       end
       line
