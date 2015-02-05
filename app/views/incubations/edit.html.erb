@@ -1,9 +1,30 @@
-<%= simple_form_for @incubation  do |f| %>
+<%= simple_form_for @incubation do |f| %>
+  <div class='form-group'>
   <%= f.input :treatment %>
   <%= f.input :replicate %>
   <%= f.input :chamber %>
   <%= f.input :sampled_at %>
   <%= f.input :avg_height_cm %>
   <%= f.input :soil_temperature %>
+</div>
+  <table class='form-group'>
+    <tr>
+      <th>Vials</th>
+      <th>Minutes</th>
+      <th>N2O ppm</th>
+      <th>CO2 ppm</th>
+      <th>CH4 ppm</th>
+    </tr>
+    <%= f.simple_fields_for :samples, :defaults=>{:label => false, input_html: {class: 'incubation-input'}} do |sample_field| %>
+      <tr>
+        <td><%= sample_field.object.vial %></td>
+        <td><%= sample_field.input :seconds %> </td>
+        <td><%= sample_field.object.data('n2o').try(:ppm) %></td>
+        <td><%= sample_field.object.data('co2').try(:ppm) %></td>
+        <td><%= sample_field.object.data('ch4').try(:ppm) %></td>
+      </tr>
+    <% end %>
+  </table>
   <%= f.button :submit %>
 <% end %> 
+

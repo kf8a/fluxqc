@@ -9,7 +9,7 @@ class Sample < ActiveRecord::Base
   has_many :calibrations
   has_many :standard_curves, through: :calibrations
 
-  attr_reader :seconds
+  # attr_accessor :seconds 
 
   scope :with_compound, lambda {|compound| where(:compound => compound) }
 
@@ -29,7 +29,7 @@ class Sample < ActiveRecord::Base
   end
 
   def seconds
-    measurements.first.seconds
+    measurements.first.try(:seconds)
   end
 
   def get_dependent_fluxes_for(compound)

@@ -20,15 +20,20 @@ class IncubationsController < ApplicationController
     incubation = Incubation.find(params[:id])
 
     unless incubation.run.published?
-      if incubation.update_attributes(params[:incubation])
+      if incubation.update_attributes(incubation_params)
         flash[:notice] = 'Incubation was successfully updated'
       end
     end
 
-    redirect_to run_path(incubation.run)
+    redirect_to edit_run_path(incubation.run)
   end
 
   private
+
+  def incubation_params
+    params.require(:incubation).permit(:id, :treatment, :replicate, :chamber, {sampled_at: []}, 
+                                       :avg_height_cm, :soil_temperature, {samples_attributes: [:id, :seconds]})
+  end
 
   def check_company
     if params[:id]
