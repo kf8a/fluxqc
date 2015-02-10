@@ -11,3 +11,4 @@ doc/*.pdf
 redis.txt
 data/*
 config/local_env.yml
+sandi_meter/
