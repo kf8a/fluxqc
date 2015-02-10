@@ -1,4 +1,9 @@
-sampled on, study, treatment, replicate, chamber, n2o, co2, ch4
+sampled on, study, treatment, replicate, chamber, height, headspace, compound, minutes,ppm, temperature
 <% @run.incubations.each do |incubation | %>
-  <%= "#{@run.sampled_on}, #{@run.study}, #{incubation.treatment}, #{incubation.replicate}, #{incubation.chamber}, #{incubation.n2o.flux}, #{incubation.co2.flux}, #{incubation.ch4.flux}" %>
+  <% ['n2o','co2','ch4'].each do |compound| %>
+    <% incubation.flux(compound).measurements.each do |c| %>
+      <% next if c.excluded? %>
+      <%= "#{@run.sampled_on}, #{@run.study}, #{incubation.treatment}, #{incubation.replicate}, #{incubation.chamber}, #{incubation.avg_height_cm}, #{incubation.headspace}, #{compound}, #{c.seconds}, #{c.ppm}, 0" %>
+    <% end %>
+  <% end %>
 <% end %> 
