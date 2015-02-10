@@ -19,7 +19,6 @@ class Flux.ScatterPlot
     return unless model = @model
     @data = model.get('data')
 
-
     chart = d3.select(el)
      .append('svg:svg')
      .attr('class', 'chart')
@@ -72,9 +71,11 @@ class Flux.ScatterPlot
         .text("r2 = " + @r2.toPrecision(3))
 
     if @flux?
+      expected_slope = @model.get('expected_slope')
+      slope = @model.get('fit_line').slope
       g.append('svg:text')
         .attr('transform', 'scale(1,-1)')
-        .attr('fill', (d) -> if (@m > 0 && @expected_slope == 'positive') || (@m < 0 && @expected_slope == 'negative') then 'black' else 'red')
+        .attr('fill', (d) -> if (slope > 0 && expected_slope == 'positive') || (slope < 0 && expected_slope == 'negative') then 'black' else 'red')
         .attr('x', 80)
         .attr('y', -@height + @margin-20)
         .text(label_format(@flux) + ' g ha\u207B\u00B2 day\u207B\u00B9')
