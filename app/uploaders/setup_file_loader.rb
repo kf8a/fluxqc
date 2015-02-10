@@ -12,17 +12,30 @@ class SetupFileLoader
     samples = SetupParser.parse(file_path).compact
     run.sampled_on = samples[0][:sample_date].try(:to_date)
     run.name = samples[0][:run_name]
-    if run.name.start_with?('LTER')
-      run.study = 'lter'
-    elsif run.name.start_with?('GLBRC')
-      run.study = 'glbrc'
-    elsif run.name.start_with?('CIMMYT')
-      run.study = 'cimmyt'
+    run.study = get_study_name(run.name)
+    reload_results = false
+    if run.samples.size > 0
+      #run.samples.delete
+      if run.result_files.size > 0
+        reload_results = true
+      end
     end
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
     end
+    if reload_results
+      #TODO reload results here
+    end
     run.save
   end
 
+  def self.get_study_name(name)
+    if name.start_with?('LTER')
+      'lter'
+    elsif name.start_with?('GLBRC')
+      'glbrc'
+    elsif name.start_with?('CIMMYT')
+      'cimmyt'
+    end
+  end
 end
