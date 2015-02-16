@@ -1,3 +1,4 @@
+sampled_on, study, treatment, replicate, lid, minutes, ppm, avg_height_cm, compound
 <% @run.incubations.each do |incubation | %>
   <% ['n2o','co2','ch4'].each do |compound| %>
     <% incubation.flux(compound).measurements.each do |c| %>
