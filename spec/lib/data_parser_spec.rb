@@ -86,7 +86,7 @@ describe DataParser do
         @row = @result[17]
       end
       it 'finds the right sample time' do
-        expect(@row[:acquired_at]).to eq DateTime.new(2012, 04, 12, 15, 54, 47)
+        expect(@row[:acquired_at]).to eq DateTime.new(2012, 4, 12, 16, 0, 34)
       end
       it 'finds the right vial' do
         expect(@row[:vial]).to eq '4'
@@ -259,11 +259,20 @@ describe DataParser do
 
 
   describe "time parsing in a cimmit file" do
+    before do 
+      @parser = DataParser.new
+    end
     it "parses time correctly" do
-      parser = DataParser.new
-      expect(parser.parse_time("10-Jan-14 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
-      expect(parser.parse_time("1/10/2014 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
-      expect(parser.parse_time("1/10/2014 4:42:47 PM")).to eq DateTime.new(2014,1,10,16,42,47)
+      expect(@parser.parse_time("10-Jan-14 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+    end
+    it 'parses other format' do
+      expect(@parser.parse_time("1/10/2014 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+    end
+    it 'parses other format' do
+      expect(@parser.parse_time("01/10/2014 4:42:47 PM")).to eq DateTime.new(2014,1,10,16,42,47)
+    end
+    it 'parses other format' do
+      expect(@parser.parse_time('04/12/12 3:46:15 PM')).to eq DateTime.new(2012,4,12,15,46,15)
     end
   end
   # TODO do I need to deal with encoding issues..

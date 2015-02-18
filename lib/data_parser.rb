@@ -73,7 +73,7 @@ class DataParser
     results = {}
 
     results[:vial] = parse_vial(row)
-    results[:acquired_at] = parse_time(row[1])
+    results[:acquired_at] = parse_time(row[0])
 
     columns = [4,8,12] # the location of the compound names
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted

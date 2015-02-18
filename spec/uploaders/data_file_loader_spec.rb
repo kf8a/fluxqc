@@ -20,24 +20,20 @@ describe DataFileLoader do
       expect(SetupFileLoader.perform(run.id)).to be_truthy
       expect(DataFileLoader.perform(run.id)).to be_truthy
       @run = Run.find(run.id)
+      @incubation = @run.incubations.order(:sampled_at).first
     end
 
-    describe 'when there are measurements available' do
-      before do
-        @incubation = @run.incubations.order(:sampled_at).first
-      end
-      it 'updates the measurement with the co2 ppm' do
-        expect(@incubation.flux('co2').measurements.order(:vial).first.ppm).to eq 431.5
-      end
-      it 'updates the measurement with the n2o ppm' do
-        expect(@incubation.flux('n2o').measurements.order(:vial).first.ppm).to eq 0.361
-      end
-      it 'updates the measurement with the ch4 ppm' do
-        expect(@incubation.flux('ch4').measurements.order(:vial).first.ppm).to eq 1.854
-      end
-      it 'has a flux' do
-        expect(@incubation.flux('ch4')).to_not be_nil
-      end
+    it 'updates the measurement with the co2 ppm' do
+      expect(@incubation.flux('co2').measurements.order(:vial).first.ppm).to eq 431.5
+    end
+    it 'updates the measurement with the n2o ppm' do
+      expect(@incubation.flux('n2o').measurements.order(:vial).first.ppm).to eq 0.361
+    end
+    it 'updates the measurement with the ch4 ppm' do
+      expect(@incubation.flux('ch4').measurements.order(:vial).first.ppm).to eq 1.854
+    end
+    it 'has a flux' do
+      expect(@incubation.flux('ch4')).to_not be_nil
     end
   end
 
