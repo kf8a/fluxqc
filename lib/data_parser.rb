@@ -60,15 +60,20 @@ class DataParser
   end
 
   def parse_time(cell)
-    format = "%d-%b-%y, %H:%M:%S"
-    DateTime.strptime(cell, format)
+    # format = "%m/%d/%Y %H:%M:%S"
+    # DateTime.strptime(cell, format)
+    # swap month and day for the americans
+    if cell =~ /(\d+)\/(\d+)\/(.+)/
+      cell = "#{$2}/#{$1}/#{$3}"
+    end
+    DateTime.parse(cell)
   end
 
   def chemstation_parse(row)
     results = {}
 
     results[:vial] = parse_vial(row)
-    results[:acquired_at] = parse_time(row[2])
+    results[:acquired_at] = parse_time(row[1])
 
     columns = [4,8,12] # the location of the compound names
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
@@ -121,6 +126,8 @@ class DataParser
       :chemstation
     elsif lines[2][0] =~ /standard/
       :forth
+    else
+      :old
     end
   end
 end

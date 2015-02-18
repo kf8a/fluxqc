@@ -261,7 +261,9 @@ describe DataParser do
   describe "time parsing in a cimmit file" do
     it "parses time correctly" do
       parser = DataParser.new
-      expect(parser.parse_time("10-Jan-14'%d-%b-%y, %H:%M:%S'), 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+      expect(parser.parse_time("10-Jan-14 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+      expect(parser.parse_time("1/10/2014 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+      expect(parser.parse_time("1/10/2014 4:42:47 PM")).to eq DateTime.new(2014,1,10,16,42,47)
     end
   end
   # TODO do I need to deal with encoding issues..
