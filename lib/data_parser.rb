@@ -60,7 +60,8 @@ class DataParser
   end
 
   def parse_time(cell)
-    DateTime.parse(cell)
+    format = "%d-%b-%y, %H:%M:%S"
+    DateTime.strptime(cell, format)
   end
 
   def chemstation_parse(row)
