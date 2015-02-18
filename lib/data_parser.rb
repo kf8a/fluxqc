@@ -59,11 +59,15 @@ class DataParser
     end
   end
 
+  def parse_time(cell)
+    DateTime.parse(cell)
+  end
+
   def chemstation_parse(row)
     results = {}
 
     results[:vial] = parse_vial(row)
-    results[:acquired_at] = Time.strptime(row[2], "%e-%b-%y, %H:%M:%S")
+    results[:acquired_at] = parse_time(row[2])
 
     columns = [4,8,12] # the location of the compound names
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted

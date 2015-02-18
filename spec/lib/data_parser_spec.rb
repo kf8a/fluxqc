@@ -86,7 +86,7 @@ describe DataParser do
         @row = @result[17]
       end
       it 'finds the right sample time' do
-        expect(@row[:acquired_at]).to eq Time.new(2012, 04, 12, 15, 54, 47)
+        expect(@row[:acquired_at]).to eq DateTime.new(2012, 04, 12, 15, 54, 47)
       end
       it 'finds the right vial' do
         expect(@row[:vial]).to eq '4'
@@ -257,6 +257,13 @@ describe DataParser do
 
   end
 
+
+  describe "time parsing in a cimmit file" do
+    it "parses time correctly" do
+      parser = DataParser.new
+      expect(parser.parse_time("10-Jan-14 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+    end
+  end
   # TODO do I need to deal with encoding issues..
   # describe 'parsing a macro generated file' do
   #   before do

@@ -13,6 +13,12 @@ describe CimmitVial do
   it "deals with a space after CIM" do
     expect(CimmitVial.process_cimmit_vial("S3-CIM B-101-T0")).to eq "S3-CIM-B-101-T0"
   end
+  it "deals with a space after CIM-" do
+    expect(CimmitVial.process_cimmit_vial("S3-CIM- B-101-T0")).to eq "S3-CIM-B-101-T0"
+  end
+  it 'recognizes a space after CIM- as a cimmyt vial' do
+    expect(CimmitVial.cimmit_vial?("S3-CIM- B-101-T0")).to be_truthy
+  end
   it "deals with a dash between the series and the rest" do
     expect(CimmitVial.process_cimmit_vial("S3-F-101-T0")).to eq "S3-F-101-T0"
   end
