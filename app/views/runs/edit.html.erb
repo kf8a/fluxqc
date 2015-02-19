@@ -31,7 +31,7 @@
         <td rowspan=<%=rows%>><%= incubation.chamber %></td>
         <td rowspan=<%=rows%>><%= incubation.sub_plot %></td>
         <td rowspan=<%=rows%>><%= incubation.lid.try(:name) %></td>
-        <td rowspan=<%=rows%> class=<%= (incubation.avg_height_cm.nil? || incubation.avg_height_cm == 0) ? 'danger' : ''%>><%= incubation.avg_height_cm%></td>
+        <td rowspan=<%=rows%> class=<%= (incubation.avg_height_cm.nil? || incubation.avg_height_cm == 0) ? 'danger' : ''%>><%= number_with_precision(incubation.avg_height_cm, 1)%></td>
         <td rowspan=<%=rows%>><%= incubation.soil_temperature %></td>
         <% incubation.samples.each do |sample| %>
           <tr>
