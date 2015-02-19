@@ -268,7 +268,7 @@ describe DataParser do
     end
 
     describe 'parsing a 2015 cemstation line correctly' do
-        let(:row) {@parser.chemstation_parse(['1/10/2014 19:10', 23, '10-Jan-14', '19:05:37','S1-CIM- B-108-T0','CH4', '0.642806','76.270676','76.270676', 'co2', '0.711619','151973.625','151973.625', 'N2O', '2.993448', '428.179932','428.179932', 'AutoInt', 'Z:\CIMMYT20131218AND1222S1S2BENGC\CIMMYT20131218AND1222S1S2BENGC 2014-01-10 16-39-36\S1-CIM- B-108-T0.D', ]) }
+        let(:row) {@parser.chemstation_parse(["1/10/2014 16:47", "1", "10-Jan-14", " 16:42:47", "STD00A", nil, "CH4", "0", "76.270676", "0", "co2", "0", "151973.625", "0", "N2O", "0", "428.179932", "0", "AutoInt", "Z:\\CIMMYT20131218AND1222S1S2BENGC\\CIMMYT20131218AND1222S1S2BENGC 2014-01-10 16-39-36\\STD00A.D", nil]) }
  
       it 'has the right ch4 area' do
         expect(row[:ch4][:area]).to eq 76.270676

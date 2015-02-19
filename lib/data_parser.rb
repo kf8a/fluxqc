@@ -79,7 +79,7 @@ class DataParser
 
     columns = [4,8,12] # the location of the compound names
     # if the column 3 is not a vial
-    columns = [5,9,13]  unless is_vial?(row[3])
+    columns = [6,10,14]  unless is_vial?(row[3])
     # column 4 can be empty or col 3 is not a vial
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
     columns.each do |column|

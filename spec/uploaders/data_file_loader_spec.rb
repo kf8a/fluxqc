@@ -151,13 +151,18 @@ describe DataFileLoader do
 
   end
 
-  # describe  'a 2015 cimmity chemstation file' do
-  #     run = FactoryGirl.create :run,
-  #                        :data_files => [fixture_file_upload('/glbrc-results.CSV')],
-  #                        :setup_file => fixture_file_upload('/setup_test.csv')
-  #     expect(SetupFileLoader.perform(run.id)).to be_truthy 
-  #     expect(DataFileLoader.perform(run.id)).to be_truthy
-  #     @run = Run.find(run.id)
-  #     @run.standard_curves.reload
-  # end
+  describe  'a 2015 cimmity chemstation file' do
+    before do
+      @run = FactoryGirl.create :run,
+                         :data_files => [fixture_file_upload('/2015-chemstation-results.csv')],
+                         :setup_file => fixture_file_upload('/cimmit_setup.csv')
+      SetupFileLoader.perform(@run.id)
+      DataFileLoader.perform(@run.id)
+      @run.standard_curves.reload
+    end
+
+    it 'has the right number of samples' do
+      expect(@run.samples.size).to eq 44
+    end
+  end
 end
