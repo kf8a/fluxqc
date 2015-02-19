@@ -5,22 +5,26 @@ describe DataFileLoader do
 
   include ActionDispatch::TestProcess
 
-  before do
+  before(:all) do
     FactoryGirl.create(:compound, :name=>'co2')
     FactoryGirl.create(:compound, :name=>'n2o')
     FactoryGirl.create(:compound, :name=>'ch4')
   end
 
+  after(:all) do
+    Compound.destroy_all
+  end
+
+
   describe '2011 style data file' do
-    before do
+    before(:all) do
       run = FactoryGirl.create :run
       run.setup_file = fixture_file_upload('/setup_test.csv')
       run.data_files = [fixture_file_upload('2011_results.csv')]
-      run.save!
-      expect(SetupFileLoader.perform(run.id)).to be_truthy
-      expect(DataFileLoader.perform(run.id)).to be_truthy
-      @run = Run.find(run.id)
-      @incubation = @run.incubations.order(:sampled_at).first
+      run.save
+      SetupFileLoader.perform(run.id)
+      DataFileLoader.perform(run.id)
+      @incubation = run.incubations.order(:sampled_at).first
     end
 
     it 'updates the measurement with the co2 ppm' do
@@ -55,21 +59,20 @@ describe DataFileLoader do
   end
 
   describe 'a GC data file' do
-    before do
-      run = FactoryGirl.create :run,
+    before(:all) do
+      @run = FactoryGirl.create :run,
                          :data_files => [fixture_file_upload('/2012_result.txt')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      expect(SetupFileLoader.perform(run.id)).to be_truthy
-      expect(DataFileLoader.perform(run.id)).to be_truthy
-      @run = Run.find(run.id)
+      SetupFileLoader.perform(@run.id)
+      DataFileLoader.perform(@run.id)
       @incubation = @run.incubations.order(:sampled_at).first
       @run.standard_curves.reload
       @measurement = @incubation.flux('n2o').measurements.order(:vial).first
     end
 
     it 'updateds the acquired time' do
-			Time.zone = 'Eastern Time (US & Canada)' 
-      expect(@measurement.acquired_at).to eq Time.new(2012,04,12,21,3,35)
+      # Time.zone = 'Eastern Time (US & Canada)'
+      expect(@measurement.acquired_at).to eq Time.utc(2012,04,12,21,9,26)
     end
     it 'updates the measurement with the column id' do
       expect(@measurement.column).to eq 1
@@ -113,13 +116,12 @@ describe DataFileLoader do
 
 
   describe 'a chemstation file with two standard sets' do
-    before do
-      run = FactoryGirl.create :run,
+    before(:all) do
+      @run = FactoryGirl.create :run,
                          :data_files => [fixture_file_upload('/LTER20130520S4.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      expect(SetupFileLoader.perform(run.id)).to be_truthy 
-      expect(DataFileLoader.perform(run.id)).to be_truthy
-      @run = Run.find(run.id)
+      SetupFileLoader.perform(@run.id)
+      DataFileLoader.perform(@run.id)
       @incubation = @run.incubations.order(:sampled_at).first
       @run.standard_curves.reload
     end
@@ -135,12 +137,11 @@ describe DataFileLoader do
 
   describe 'a glbrc chemstation file' do
     before do
-      run = FactoryGirl.create :run,
+      @run = FactoryGirl.create :run,
                          :data_files => [fixture_file_upload('/glbrc-results.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
-      expect(SetupFileLoader.perform(run.id)).to be_truthy 
-      expect(DataFileLoader.perform(run.id)).to be_truthy
-      @run = Run.find(run.id)
+      SetupFileLoader.perform(@run.id)
+      DataFileLoader.perform(@run.id)
       @run.standard_curves.reload
     end
 
@@ -149,4 +150,14 @@ describe DataFileLoader do
     end
 
   end
+
+  # describe  'a 2015 cimmity chemstation file' do
+  #     run = FactoryGirl.create :run,
+  #                        :data_files => [fixture_file_upload('/glbrc-results.CSV')],
+  #                        :setup_file => fixture_file_upload('/setup_test.csv')
+  #     expect(SetupFileLoader.perform(run.id)).to be_truthy 
+  #     expect(DataFileLoader.perform(run.id)).to be_truthy
+  #     @run = Run.find(run.id)
+  #     @run.standard_curves.reload
+  # end
 end

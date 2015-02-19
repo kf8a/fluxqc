@@ -3,7 +3,7 @@ require File.expand_path("../../../lib/data_parser.rb",__FILE__)
 describe DataParser do
 
   describe 'parsing a results file' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures/result.txt", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
@@ -14,7 +14,7 @@ describe DataParser do
     end
 
     describe 'row 18' do
-      before do
+      before(:all) do
         @row = @result[18]
       end
       it 'sets the right column' do
@@ -43,7 +43,7 @@ describe DataParser do
     end
 
     describe 'row 7' do
-      before do
+      before(:all) do
         @row = @result[7]
       end
       it 'finds the right vial' do
@@ -63,7 +63,7 @@ describe DataParser do
 
   describe 'parsing a reprocessed results file' do
 
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures/results_2.txt", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
@@ -76,13 +76,13 @@ describe DataParser do
   end
 
   describe 'parsing another chemstation result file' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures/2012_result.txt", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
     end
     describe 'row 17' do
-      before do
+      before(:all) do
         @row = @result[17]
       end
       it 'finds the right sample time' do
@@ -104,7 +104,7 @@ describe DataParser do
   end
 
   describe 'parsing a 2010 file with standards' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures//glbrc-2010.csv", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
@@ -129,14 +129,14 @@ describe DataParser do
   end
 
   describe 'parsing a second chemstation file' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures//LTER20130520S4.CSV", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
     end
 
     it 'finds the correct number of samples' do
-      expect(@result.size).to eq 295
+      expect(@result.size).to eq 115
     end
 
     describe 'row 17' do
@@ -156,7 +156,7 @@ describe DataParser do
   end
 
   describe 'parsing another chemstation result file' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures/LTER20130702S7.CSV", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
@@ -187,8 +187,14 @@ describe DataParser do
     end
   end
 
+  it 'can tell if we have a vial' do
+    parser = DataParser.new()
+    expect(parser.is_vial?("13-S7-LTER-243")).to be_truthy
+    expect(parser.is_vial?("13:37:30")).to be_falsy
+  end
+
   describe 'parsing an old results file' do
-    before do
+    before(:all) do
       file = File.expand_path("../../fixtures/lter2007-forestfert1.csv", __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = DataParser.new.parse(file)
@@ -248,15 +254,33 @@ describe DataParser do
       expect(vial).to eq "S13-CIM-B-107-T0"
     end
 
-    it 'parses the area correctly' do
-      row = @parser.chemstation_parse(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","S13-CIM-B-107-T0","CH4",0.500317,22.6583, 22.6, "co2",100, 200, 200, "n2o", 4, 40, 40])
-      expect(row[:ch4][:area]).to eq 22.6583
-      expect(row[:n2o][:area]).to eq 40
-      expect(row[:co2][:area]).to eq 200
+    describe 'parsing the areas correctly' do
+      let(:row) {@parser.chemstation_parse(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","S13-CIM-B-107-T0","CH4",0.500317,22.6583, 22.6, "co2",100, 200, 200, "n2o", 4, 40, 40]) }
+      it 'has the right ch4 area' do
+        expect(row[:ch4][:area]).to eq 22.6583
+      end
+      it 'has the right n2o area' do
+        expect(row[:n2o][:area]).to eq 40
+      end
+      it 'has the right co2 area' do
+        expect(row[:co2][:area]).to eq 200
+      end
     end
 
+    describe 'parsing a 2015 cemstation line correctly' do
+        let(:row) {@parser.chemstation_parse(['1/10/2014 19:10', 23, '10-Jan-14', '19:05:37','S1-CIM- B-108-T0','CH4', '0.642806','76.270676','76.270676', 'co2', '0.711619','151973.625','151973.625', 'N2O', '2.993448', '428.179932','428.179932', 'AutoInt', 'Z:\CIMMYT20131218AND1222S1S2BENGC\CIMMYT20131218AND1222S1S2BENGC 2014-01-10 16-39-36\S1-CIM- B-108-T0.D', ]) }
+ 
+      it 'has the right ch4 area' do
+        expect(row[:ch4][:area]).to eq 76.270676
+      end
+      it 'hss the right n2o area' do 
+        expect(row[:n2o][:area]).to eq 428.179932
+      end
+      it 'has the right co2 area' do
+        expect(row[:co2][:area]).to eq 151973.625
+      end
+    end
   end
-
 
   describe "time parsing in a cimmit file" do
     before do 
@@ -275,6 +299,7 @@ describe DataParser do
       expect(@parser.parse_time('04/12/12 3:46:15 PM')).to eq DateTime.new(2012,4,12,15,46,15)
     end
   end
+
   # TODO do I need to deal with encoding issues..
   # describe 'parsing a macro generated file' do
   #   before do

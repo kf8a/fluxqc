@@ -50,6 +50,9 @@ class DataParser
 
   def parse_vial(row)
     vial = row[3] # the vial number is in columns 3 normally
+    if !is_vial?(row[3])
+      vial = row[4]
+    end
     if CimmitVial.cimmit_vial?(vial)
       vial = CimmitVial.process_cimmit_vial(vial)
     elsif vial =~ /-/
@@ -71,11 +74,13 @@ class DataParser
 
   def chemstation_parse(row)
     results = {}
-
     results[:vial] = parse_vial(row)
     results[:acquired_at] = parse_time(row[0])
 
     columns = [4,8,12] # the location of the compound names
+    # if the column 3 is not a vial
+    columns = [5,9,13]  unless is_vial?(row[3])
+    # column 4 can be empty or col 3 is not a vial
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
     columns.each do |column|
       key = row[column].downcase.to_sym
@@ -130,4 +135,10 @@ class DataParser
       :old
     end
   end
+
+  def is_vial?(vial)
+    # check if the field looks like a time
+    !(vial =~ /\d{2}:\d{2}:\d{2}/)
+  end
+
 end
