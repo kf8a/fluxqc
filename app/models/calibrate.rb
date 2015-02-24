@@ -35,7 +35,7 @@ class Calibrate
 
   def delete!(curves)
     curves.each do |curve|
-      curve.delete
+      curve.destroy
     end
   end
 end
