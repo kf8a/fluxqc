@@ -17,6 +17,8 @@ class Calibrate
     end
   end
 
+  private
+
   def standardize!(curves, compound)
     st = Standardizer.new
     st.standard_curves = curves
@@ -35,6 +37,7 @@ class Calibrate
 
   def delete!(curves)
     curves.each do |curve|
+      p curve
       curve.destroy
     end
   end
