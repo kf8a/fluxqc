@@ -75,6 +75,39 @@ describe StandardCurve do
     it 'returns the right intercept' do
       expect(@standard_curve.intercept).to be_within(0.01).of(-1.18)
     end
+
+    it 'returns false for all_zero?' do
+      expect(@standard_curve.all_zero?).to eq false
+    end
+  end
+
+  describe 'a curve with all zero areas when the detector failed' do
+    before do
+      data = [
+      [0,0],
+      [0,0.565],
+      [0,0.806],
+      [0,1.21],
+      [0,1.613],
+      [0,2.419],
+      [0,3.226]
+      ]
+
+      standard_curve = StandardCurve.new
+      standards = data.map do |area, ppm| 
+        standard = Standard.new
+        allow(standard).to receive(:area).and_return(area)
+        allow(standard).to receive(:ppm).and_return(ppm)
+        standard
+      end
+      @standard_curve = StandardCurve.new
+      @standard_curve.standards << standards
+    end
+
+    it 'returns true for all_zero?' do
+      expect(@standard_curve.all_zero?).to eq true 
+    end
+
   end
 
   describe 'json output' do

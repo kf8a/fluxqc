@@ -57,6 +57,10 @@ class StandardCurve < ActiveRecord::Base
     0
   end
 
+  def all_zero?
+    data.collect {|x| x[:key]}.compact.uniq.size == 1
+  end
+
   def compute!
     result = fit_line
     return unless result
