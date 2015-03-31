@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128184548) do
+ActiveRecord::Schema.define(version: 20150331143121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+  enable_extension "postgis_topology"
+  enable_extension "fuzzystrmatch"
 
   create_table "calibrations", force: :cascade do |t|
     t.integer  "standard_curve_id"
@@ -76,19 +79,6 @@ ActiveRecord::Schema.define(version: 20150128184548) do
     t.float   "intercept"
   end
 
-  create_table "data_attachments", force: :cascade do |t|
-    t.integer  "run_id"
-    t.string   "data_file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "data_files", force: :cascade do |t|
-    t.integer  "run_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "fluxes", force: :cascade do |t|
     t.integer  "incubation_id"
     t.float    "value"
@@ -127,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150128184548) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "sub_plot",         limit: 255
+    t.text     "comments"
   end
 
   add_index "incubations", ["run_id"], name: "incubation_run_id", using: :btree

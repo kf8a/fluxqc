@@ -108,6 +108,7 @@ end
 #  created_at       :datetime
 #  updated_at       :datetime
 #  sub_plot         :string(255)
+#  comments         :text
 #
 # Indexes
 #
