@@ -11,13 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331143121) do
+ActiveRecord::Schema.define(version: 20150401200906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
-  enable_extension "postgis_topology"
-  enable_extension "fuzzystrmatch"
 
   create_table "calibrations", force: :cascade do |t|
     t.integer  "standard_curve_id"
@@ -77,6 +74,19 @@ ActiveRecord::Schema.define(version: 20150331143121) do
     t.integer "compound_id"
     t.float   "slope"
     t.float   "intercept"
+  end
+
+  create_table "data_attachments", force: :cascade do |t|
+    t.integer  "run_id"
+    t.string   "data_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "data_files", force: :cascade do |t|
+    t.integer  "run_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fluxes", force: :cascade do |t|
@@ -235,6 +245,18 @@ ActiveRecord::Schema.define(version: 20150331143121) do
   end
 
   add_index "standard_curves", ["acquired_at"], name: "standard_curves_acquired_at_idx", using: :btree
+
+  create_table "standard_values", force: :cascade do |t|
+    t.text     "name"
+    t.integer  "set"
+    t.float    "n2o"
+    t.float    "co2"
+    t.float    "ch4"
+    t.datetime "valid_from"
+    t.datetime "valid_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "standards", force: :cascade do |t|
     t.integer  "standard_curve_id"
