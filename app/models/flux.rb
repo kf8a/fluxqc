@@ -143,6 +143,13 @@ class Flux < ActiveRecord::Base
     h
   end
 
+  # Method to attach compounds to fluxes that did not have them
+  # The sql query uses the compound to dsiplay the data
+  # while the program goes through the measurements
+  def update_compound
+    self.compound_id = measurements.first.compound.id
+  end
+
   # convenience methods to make the calculations easier
   def ymax
     compound.ymax
