@@ -2,3 +2,5 @@ add standard_curve_organizer facade
 figure out which standard curve to use where
 
 check standardizer function
+
+check that column assigments are done from the method names and not just by counting.
