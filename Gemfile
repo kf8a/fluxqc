@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '4.2.1'
 gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
