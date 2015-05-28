@@ -315,6 +315,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   roo
   rspec-rails
+  sass
   sass-rails
   shoulda-matchers
   simple_form

@@ -39,6 +39,7 @@ gem 'spring', group: :development
 group :assets do
   gem 'therubyracer', :require => 'v8'
 
+  gem 'sass'
   gem 'sass-rails'
   gem 'less-rails'
   gem 'coffee-rails'
