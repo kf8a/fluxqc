@@ -17,7 +17,8 @@ gem 'uuid'
 
 gem 'foreigner'
 
-gem 'roo', require: false
+gem 'roo'
+gem 'roo-xls'
 
 #gem 'resque', :require => "resque/server"
 #gem 'qu-redis'
