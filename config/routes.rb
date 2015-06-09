@@ -7,6 +7,9 @@ Fluxqc::Application.routes.draw do
   devise_for :users
 
   resources :runs do
+    collection do
+      get 'all'
+    end
     member do
       get  'gcinput'
       get  'standard_curves'

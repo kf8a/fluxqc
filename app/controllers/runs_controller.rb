@@ -8,6 +8,11 @@ class RunsController < ApplicationController
     @runs = Run.by_state(@state).order('sampled_on desc')
   end
 
+  def all
+    @runs = Run.where('company_id != 2').order('study').order('sampled_on desc')
+    render :index
+  end
+
   def show
     @run = run
     @state = @run.current_state.name.to_s
