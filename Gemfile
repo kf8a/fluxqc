@@ -34,7 +34,10 @@ gem 'dalli', group: :production
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
 
-gem 'spring', group: :development
+group :development do
+  gem 'spring'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -50,7 +53,6 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'rspec-rails' 
   gem 'jasmine-rails'
 end
