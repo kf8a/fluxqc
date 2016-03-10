@@ -36,7 +36,6 @@ gem 'capistrano', '~> 2.15'
 
 group :development do
   gem 'spring'
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 end
 
 # Gems used only for assets and not required
