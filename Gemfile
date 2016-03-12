@@ -8,7 +8,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'simple_form'
 gem 'workflow'
-gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
+gem 'carrierwave' , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
@@ -42,7 +42,6 @@ end
 # in production environments by default.
 group :assets do
   gem 'therubyracer', :require => 'v8'
-
   gem 'sass'
   gem 'sass-rails'
   gem 'less-rails'
