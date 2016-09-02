@@ -175,6 +175,9 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.4)
     phantomjs (2.1.1.0)
+    prometheus-client (0.6.0)
+      quantile (~> 0.2.0)
+    quantile (0.2.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -306,6 +309,7 @@ DEPENDENCIES
   launchy
   less-rails
   pg
+  prometheus-client (~> 0.6.0)
   rails (~> 4.2.6)
   roo
   roo-xls
@@ -323,4 +327,4 @@ DEPENDENCIES
   workflow
 
 BUNDLED WITH
-   1.11.2
+   1.12.4

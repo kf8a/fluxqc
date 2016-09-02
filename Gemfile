@@ -26,6 +26,8 @@ gem 'roo-xls'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'
 
+gem 'prometheus-client', '~> 0.6.0'
+
 # Use unicorn as the web server
 gem 'unicorn', group: :production
 gem 'dalli', group: :production
