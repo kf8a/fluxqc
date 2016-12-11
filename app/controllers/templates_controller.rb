@@ -49,7 +49,7 @@ class TemplatesController < ApplicationController
         format.html { redirect_to @template, notice: 'Template was successfully created.' }
         format.json { render json: @template, status: :created, location: @template }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class TemplatesController < ApplicationController
         format.html { redirect_to @template, notice: 'Template was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
     end
