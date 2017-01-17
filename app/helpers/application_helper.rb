@@ -2,7 +2,8 @@ module ApplicationHelper
   def json_for(target, options = {})
     options[:scope] ||= self
     options[:url_options] ||= url_options
-    ActiveModel::ArraySerializer.new(target).to_json
+    # ActiveModel::ArraySerializer.new(target).to_json
+    ActiveModel::Serializer::CollectionSerializer.new(target).to_json
     # target.active_model_serializer.new(target, options).to_json
   end
 
