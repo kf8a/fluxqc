@@ -17,7 +17,7 @@ class CIMMITSetupParser
 
   def replicate 
     if row[1].is_a?(Float)
-      "R#{row[1].to_f}"
+      "R#{row[1].to_i}"
     else
       "R#{row[1]}"
     end
