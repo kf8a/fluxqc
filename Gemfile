@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'simple_form'
 gem 'workflow'
-gem 'carrierwave' , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
+gem 'carrierwave'# , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
 
 gem 'devise'
