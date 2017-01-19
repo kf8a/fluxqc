@@ -48,7 +48,8 @@ describe Fitter do
       ]
     end
     it 'does not fail' do
-      expect(@fit.linear_fit).to be_nil
+      result = {slope: Float::NAN, offset: Float::NAN, r2: Float::NAN}
+      expect(@fit.linear_fit).to eq result
     end
   end
 

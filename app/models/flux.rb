@@ -12,10 +12,10 @@ class Flux < ActiveRecord::Base
 
   attr_reader :flux, :muliplier, :data
 
-  before_save do
-    incubation.try(:touch)
-    incubation.try(:run).try(:touch)
-  end
+  # before_save do
+  #   incubation.try(:touch)
+  #   incubation.try(:run).try(:touch)
+  # end
 
   def self.co2
     includes(:measurements => :compound).where('compounds.name' => 'co2')

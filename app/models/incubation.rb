@@ -13,9 +13,9 @@ class Incubation < ActiveRecord::Base
 
   accepts_nested_attributes_for :samples
 
-  before_save do 
-    run.try(:touch)
-  end
+  # before_save do 
+  #   run.try(:touch)
+  # end
 
   def flux(compound)
     fluxes.send(compound)[0]
@@ -101,7 +101,7 @@ class Incubation < ActiveRecord::Base
       f.flux
       f.save
     end
-    run.touch
+    # run.touch
   end
 
   def measurements_for(compound)
