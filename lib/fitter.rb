@@ -60,8 +60,8 @@ class Fitter
       count  += 1
     end
 
-    # return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if count == 0
-    return  if count == 0
+    return ({:slope=>Float::NAN, :offset=>Float::NAN, :r2=>Float::NAN}) if count == 0
+    # return  if count == 0
 
     @slope = (count * sum_xy - sum_x * sum_y)/(count * sum_xx - sum_x * sum_x)
     @offset = (sum_y/count) - (slope * sum_x)/count
