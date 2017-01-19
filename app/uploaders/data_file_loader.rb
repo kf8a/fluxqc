@@ -138,11 +138,6 @@ class DataFileLoader
 			standard_curve.standards << standard
 
 			if standard.area == standard.ppm  || standard.ppm.nil? # we don't have ppm's in the file. Try to deduce it from the name
-        # check to see if the standard starts with the string STD
-        # TODO remove after we are done with the current runs
-        if !(standard.vial =~ /STD/)
-          standard.vial = "STD" + standard.vial
-        end
 				standard_values = STANDARDS[standard.vial.chop]
 
 				if standard_values
