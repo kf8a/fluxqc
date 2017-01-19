@@ -61,11 +61,19 @@ class StandardCurve < ActiveRecord::Base
     data.collect {|x| x[:key]}.compact.uniq.size == 1
   end
 
+  def empty?
+    data.empty?
+  end
+
   def compute!
+    slope = Float::NAN
+    offset = Float::NAN
     result = fit_line
-    return unless result
-    self.slope      = result[:slope] #|| Float::NAN
-    self.intercept  = result[:offset]# || Float::NAN
+    if result
+      self.slope      = result[:slope] 
+      self.intercept  = result[:offset]
+    end
+    p [slope, intercept]
     [slope, intercept]
   end
 
