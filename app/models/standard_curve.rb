@@ -73,7 +73,6 @@ class StandardCurve < ActiveRecord::Base
       self.slope      = result.fetch(:slope, Float::NAN)
       self.intercept  = result.fetch(:offset, Float::NAN)
     end
-    p [slope, intercept]
     [slope, intercept]
   end
 

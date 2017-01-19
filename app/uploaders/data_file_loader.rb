@@ -51,6 +51,8 @@ class DataFileLoader
     standard_curves = {}
 
     vials.each do |vial|
+      # Filter out samples with the name BLANK since they are used ot just adjust the number of vials to fit a standard try
+      next if vial[:vial] =~ /BLANK/i
       if vial[:vial] =~ /(CKH|STD|check|)?.*[a-z]$/i
         if get_new_standard_curves
           get_new_standard_curves = false
