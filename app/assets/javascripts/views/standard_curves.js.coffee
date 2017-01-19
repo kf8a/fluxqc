@@ -18,7 +18,6 @@ class Flux.Views.StandardCurveView extends Backbone.View
     # plot.data(json_data.data)
     plot.fitLine(json_data.fit_line)
     plot.model(@model)
-    plot.note(@equation(json_data.fit_line))
     plot.render(@el)
 
     @

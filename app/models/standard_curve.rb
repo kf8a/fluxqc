@@ -70,8 +70,8 @@ class StandardCurve < ActiveRecord::Base
     offset = Float::NAN
     result = fit_line
     if result
-      self.slope      = result[:slope] 
-      self.intercept  = result[:offset]
+      self.slope      = result.fetch(:slope, Float::NAN)
+      self.intercept  = result.fetch(:offset, Float::NAN)
     end
     p [slope, intercept]
     [slope, intercept]
