@@ -78,12 +78,18 @@ class DataParser
     results[:acquired_at] = parse_time(row[0])
 
     columns = [4,8,12] # the location of the compound names
-    # if the column 3 is not a vial
-    columns = [6,10,14]  unless is_vial?(row[3])
+
+    # if the column 3 is not a vial but looks like a date
+    columns = [6,10,14] if looks_like_time?(row[3])
+
     # column 4 can be empty or col 3 is not a vial
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
     columns.each do |column|
       key = row[column].downcase.to_sym
+
+      # TODO: remove next line after we are through the N20 data stage
+      key.tr!('0','o')
+
       value = row[column + 2]
       results[key] = {column: row[1].to_i % 2, area: value.to_f}
     end
@@ -141,4 +147,8 @@ class DataParser
     !(vial =~ /\d{2}:\d{2}:\d{2}/)
   end
 
+  def looks_like_time?(vial)
+    # check if the field looks like a time
+    vial =~ /\d{2}:\d{2}:\d{2}/
+  end
 end
