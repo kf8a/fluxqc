@@ -85,10 +85,8 @@ class DataParser
     # column 4 can be empty or col 3 is not a vial
     columns = [5,9,13] unless row[4] # if column 4 is empty then they are shifted
     columns.each do |column|
-      key = row[column].downcase.to_sym
-
-      # TODO: remove next line after we are through the N20 data stage
-      key.tr!('0','o')
+      # Rename 0 to o because sometimes n2o get's written as n20
+      key = row[column].downcase.tr('0','o').to_sym
 
       value = row[column + 2]
       results[key] = {column: row[1].to_i % 2, area: value.to_f}
