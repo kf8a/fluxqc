@@ -47,6 +47,8 @@ class SetupParser
     (first_row..xls.last_row).collect do |i|
       row = xls.row(i)
       treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
+      next if treatment.empty?
+      next if treatment == 'T' # for LTER samples
 
       {:run_name => title, :sample_date => sample_date,
         :treatment => treatment, :replicate => replicate,
