@@ -3,6 +3,7 @@
 class DataFileLoader
   @queue = :data_queue
 
+  # TODO: this needs to be in the tank table
   STANDARDS = {
     'STD0'  => {'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000},
     'STD00' => {'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000},

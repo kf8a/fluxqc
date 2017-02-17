@@ -1,6 +1,7 @@
 require 'chronic'
 require 'csv'
 require 'roo'
+require 'roo-xls'
 require_relative 'glbrc_setup_parser'
 require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
@@ -26,6 +27,8 @@ class SetupParser
     end
   end
 
+  # sample dates get pull from date_row which needs to be set for the different 
+  # format types
   def self.parse_xls(file)
     xls = Roo::Spreadsheet.open(file)
     xls.default_sheet = xls.sheets.first
@@ -36,8 +39,12 @@ class SetupParser
       title = xls.cell('A',2)
       date_row = 5
     end
+    if file =~ /CIMMYT/
+      date_row = 4
+    end
 
     sample_date = Chronic.parse(xls.cell('A',date_row).gsub /sample date:(\s+)?/,'')
+
     first_row = 6
     first_row += 1 if title.strip =~ /^GLBRC/
     first_row += 1 if date_row == 5
