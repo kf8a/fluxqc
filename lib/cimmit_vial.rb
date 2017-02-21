@@ -28,8 +28,32 @@ class CimmitVial
       /([a-z|A-Z])(\d{3}-T\d)$/
     end
 
+    def cimmit_vial_order_1
+      /(S\d+-CIM)-(\d+)-([a-z|A-Z])-(T\d)$/
+    end
+
+    def cimmit_vial_order_2
+      /(CIM)-(S\d+)-(\d+)-([F|B])-(T\d)$/
+    end
+
+    def cimmit_vial_order_3
+      /(S\d+-CIM)-(\d+)-([F|B])-(T\d)$/
+    end
+
+    def cimmit_vial_order_4
+      /(CIM)-(S\d+)-([F|B])-(\d+)-(T\d)$/
+    end
+
     def process_cimmit_vial(vial)
       vial = case vial
+             when cimmit_vial_order_1
+               "#{$1}-#{$3}-#{$2}-#{$4}"
+             when cimmit_vial_order_2
+               "#{$2}-#{$1}-#{$4}-#{$3}-#{$5}"
+             when cimmit_vial_order_3
+               "#{$1}-#{$3}-#{$2}-#{$4}"
+             when cimmit_vial_order_4
+               "#{$2}-#{$1}-#{$3}-#{$4}-#{$5}"
              when cimmit_vial_with_series
                "#{$1}#{$2}-#{$3}-#{$4}"
              when cimmit_vial_with_spaces

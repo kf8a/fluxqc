@@ -28,4 +28,17 @@ describe CimmitVial do
   it "parses a vial with a space between the series and the rest" do
     expect(CimmitVial.process_cimmit_vial("S3 B-102-T0")).to eq "S3-B-102-T0"
   end
+  # TODO: check when it make  a difference
+  it 'parses vials with S#-CIM-120-F-T order1' do
+    expect(CimmitVial.process_cimmit_vial("S3-CIM-102-F-T0")).to eq "S3-CIM-F-102-T0"
+  end
+  it 'parses vials with CIM-S3-120-F-T0 order2' do
+    expect(CimmitVial.process_cimmit_vial("CIM-S3-102-F-T0")).to eq "S3-CIM-F-102-T0"
+  end
+  it 'parses vials with S1-CIM-B-120-T0 order3' do
+    expect(CimmitVial.process_cimmit_vial("S1-CIM-B-102-T0")).to eq "S1-CIM-B-102-T0"
+  end
+  it 'parses vials with CIM-S1-F-120-T0 order4' do
+    expect(CimmitVial.process_cimmit_vial("CIM-S1-F-102-T0")).to eq "S1-CIM-F-102-T0"
+  end
 end
