@@ -15,9 +15,6 @@ gem 'active_model_serializers'
 
 gem 'uuid'
 
-#gem 'resque'
-#gem 'delayed_job_active_record'
-
 gem 'foreigner'
 
 gem 'roo'
