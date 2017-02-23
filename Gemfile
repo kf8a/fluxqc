@@ -43,12 +43,12 @@ end
 # in production environments by default.
 group :assets do
   gem 'therubyracer', :require => 'v8'
-  gem 'sass'
-  gem 'sass-rails'
-  gem 'less-rails'
+  #gem 'sass'
+  gem 'bootstrap-sass', '~> 3.3.6'
+  gem 'sass-rails', '>= 3.2'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'twitter-bootstrap-rails'
+  #gem 'twitter-bootstrap-rails'
 end
 
 group :test, :development do
