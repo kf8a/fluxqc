@@ -38,13 +38,14 @@ class Run < ActiveRecord::Base
     state :published do
       event :unpublish, :transitions_to => :approved
     end
-
     state :rejected do
       event :unreject, :transitions_to => :uploaded
     end
-
     state :parked do
       event :unpark, :transitions_to => :uploaded
+    end
+    on_transition do | from, to, triggering_event, *event_args|
+      touch
     end
   end
 
@@ -71,15 +72,15 @@ class Run < ActiveRecord::Base
   end
 
   def measurements_for(compound)
-    incubations.collect {|incubation| incubation.measurements_for(compound) }.flatten
+    incubations.collect { |incubation| incubation.measurements_for(compound) }.flatten
   end
 
-  def standard_curves_for(compound, column=0)
-    standard_curves.select {|x| x.compound == compound && x.column == column}
+  def standard_curves_for(compound, column = 0)
+    standard_curves.select { |x| x.compound == compound && x.column == column }
   end
 
   def attach_standards_to_samples
-    #TODO remove this once references have been removed
+    # TODO: remove this once references have been removed
   end
 end
 
