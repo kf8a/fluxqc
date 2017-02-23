@@ -12,8 +12,7 @@ class StandardCurvesController < ApplicationController
       standard_curve.data = params[:data]
       standard_curve.save
       run = standard_curve.run
-      c = Calibrate.new(run)
-      c.calibrate!
+      CalibrateJob.perform_later run
       head :ok
     else
       head :forbidden

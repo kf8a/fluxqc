@@ -6,7 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap-sprockets
 //= require d3
 //= require underscore
 //= require backbone

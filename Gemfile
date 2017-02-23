@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 5.0.1'
 gem 'backbone-on-rails'
 gem 'jquery-rails' 
 
@@ -14,6 +14,9 @@ gem 'devise'
 gem 'active_model_serializers'
 
 gem 'uuid'
+
+#gem 'resque'
+#gem 'delayed_job_active_record'
 
 gem 'foreigner'
 
