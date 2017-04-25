@@ -20,11 +20,13 @@ gem 'foreigner'
 gem 'roo'
 gem 'roo-xls'
 
+gem 'redis-rails'
+
 #gem 'resque', :require => "resque/server"
-#gem 'qu-redis'
+gem 'qu-redis'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 
 gem 'prometheus-client', '~> 0.6.0'
 
