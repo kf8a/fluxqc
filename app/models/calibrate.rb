@@ -14,7 +14,7 @@ class Calibrate
       delete!(bad_curves)
       compute!(good_curves)
       standardize!(good_curves, compound)
-      run.recompute_fluxes
+      # run.recompute_fluxes
     end
   end
 

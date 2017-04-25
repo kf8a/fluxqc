@@ -97,10 +97,10 @@ class Incubation < ActiveRecord::Base
   end
 
   def recompute_fluxes
-    fluxes.each do |f|
-      f.flux
-      f.save
-    end
+    # fluxes.each do |f|
+    #   f.flux
+    #   f.save
+    # end
     # run.touch
   end
 

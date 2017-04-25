@@ -66,9 +66,9 @@ class Run < ActiveRecord::Base
   end
 
   def recompute_fluxes
-    incubations.each do |i|
-      i.recompute_fluxes
-    end
+    # incubations.each do |i|
+    #   i.recompute_fluxes
+    # end
   end
 
   def measurements_for(compound)
