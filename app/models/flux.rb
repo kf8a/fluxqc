@@ -1,5 +1,4 @@
 require 'csv'
-require File.expand_path("../../../lib/fitter.rb",__FILE__)
 
 # This file represents a flux, that is a series of measuremnemnts of the
 # same gas over time. The linear regression slope of the

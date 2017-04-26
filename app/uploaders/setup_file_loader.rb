@@ -1,6 +1,3 @@
-require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
-require File.expand_path("../../../lib/incubation_factory.rb",__FILE__)
-
 # Class the handle the uploading of a setup file under resque
 # Resque requires that it have a perform method
 class SetupFileLoader
