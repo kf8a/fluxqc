@@ -56,6 +56,7 @@ end
 group :test, :development do
   gem 'rspec-rails' 
   gem 'jasmine-rails'
+  gem 'rails-controller-testing'
 end
 
 group :test do

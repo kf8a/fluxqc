@@ -16,6 +16,9 @@ class StandardCurve < ActiveRecord::Base
   end
 
   def data=(standard_hash=[])
+    unless standard_hash
+      standard_hash = []
+    end
     standard_hash.each do |d|
       standard = standards.find(d[:id])
       standard.excluded = d[:deleted]
@@ -67,7 +70,7 @@ class StandardCurve < ActiveRecord::Base
 
   def compute!
     slope = Float::NAN
-    offset = Float::NAN
+    intercept = Float::NAN
     result = fit_line
     if result
       self.slope      = result.fetch(:slope, Float::NAN)

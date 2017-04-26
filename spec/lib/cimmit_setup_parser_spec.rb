@@ -1,5 +1,3 @@
-require File.expand_path("../../../lib/cimmit_setup_parser.rb",__FILE__)
-
 describe CIMMITSetupParser do
 
   before(:each) do

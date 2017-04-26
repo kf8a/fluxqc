@@ -1,5 +1,3 @@
-require './lib/cimmit_vial.rb'
-
 describe CimmitVial do
   it "deals with a dash and CIM name" do
     expect(CimmitVial.process_cimmit_vial("S3-CIM-B-101-T0")).to eq "S3-CIM-B-101-T0"

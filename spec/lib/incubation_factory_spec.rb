@@ -1,8 +1,6 @@
 require 'rails_helper.rb'
-require File.expand_path("../../../lib/incubation_factory.rb",__FILE__)
 
 describe IncubationFactory do
-
   before do
     FactoryGirl.create(:compound, :name=>'co2')
     FactoryGirl.create(:compound, :name=>'n2o')

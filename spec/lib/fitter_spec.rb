@@ -1,5 +1,3 @@
-require File.expand_path("../../../lib/fitter.rb",__FILE__)
-
 describe Fitter do
   describe 'with valid points' do
     before(:each) do

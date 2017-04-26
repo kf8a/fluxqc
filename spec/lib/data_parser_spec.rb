@@ -1,5 +1,3 @@
-require File.expand_path("../../../lib/data_parser.rb",__FILE__)
-
 describe DataParser do
 
   describe 'parsing a results file' do

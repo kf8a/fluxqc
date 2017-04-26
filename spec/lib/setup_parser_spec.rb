@@ -1,6 +1,3 @@
-require File.expand_path("../../../lib/setup_parser.rb",__FILE__)
-
-
 describe SetupParser do
 
   describe 'parsing an lter forest fert setup file' do

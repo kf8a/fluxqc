@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 describe StandardCurveOrganizer do
-  it {is_expected.to belong_to :run}
+  it {should belong_to :run}
 
   it 'returns the standard curves of the run' do
     pending "Need to rethink if I need the organizer"
