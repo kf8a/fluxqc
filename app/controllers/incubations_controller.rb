@@ -21,6 +21,7 @@ class IncubationsController < ApplicationController
     unless incubation.run.published?
       if incubation.update_attributes(incubation_params)
         incubation.recompute_fluxes
+        incubation.run.touch
         flash[:notice] = 'Incubation was successfully updated'
       end
     end
