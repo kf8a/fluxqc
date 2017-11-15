@@ -20,8 +20,8 @@ class RunsController < ApplicationController
     @incubations = @run.incubations
     @standard_curves = @run.standard_curves.order('created_at')
     respond_with do |format|
-      format.html { render  :layout=> 'qc'}
-      format.json {render :json  => @incubations}
+      format.html { render  layout: 'qc' }
+      format.json { render json: @incubations }
     end
   end
 
@@ -61,7 +61,7 @@ class RunsController < ApplicationController
     @run = Run.includes(samples: [{incubation: :lid}, {measurements: :compound}]).find(params[:id])
     @state = @run.current_state.name.to_s
     respond_with do |format|
-      format.html { render  :layout=> 'qc'}
+      format.html { render  layout:  'qc' }
     end
   end
 
@@ -105,9 +105,9 @@ class RunsController < ApplicationController
     render nothing: true
     # run = Run.find(params[:id])
 
-    # respond_with do |format| 
-    #   format.json {render :json => 
-    #     run.standard_curves.to_json(:methods => 
+    # respond_with do |format|
+    #   format.json {render :json =>
+    #     run.standard_curves.to_json(:methods =>
     #                                 ['data','ymax','ymin','multiplier',
     #                                   'fit_line','slope'])}
     # end
@@ -115,45 +115,45 @@ class RunsController < ApplicationController
 
   def accept
     run.accept!
-    redirect_to runs_path(:state=>'uploaded')
+    redirect_to runs_path(state: 'uploaded')
   end
 
   def approve
     run.approve!
-    redirect_to runs_path(:state=>'accepted')
+    redirect_to runs_path(state: 'accepted')
   end
 
   def publish
     run.publish!
-    redirect_to runs_path(:state=>'approved')
+    redirect_to runs_path(state: 'approved')
   end
 
   def unapprove
     run.unapprove!
-    redirect_to runs_path(:state =>'approved')
+    redirect_to runs_path(state: 'approved')
   end
 
   def unpublish
     run.unpublish!
-    redirect_to runs_path(:state => 'published')
+    redirect_to runs_path(state: 'published')
   end
 
   def unreject
     run.unreject!
-    redirect_to runs_path(:state=>'rejected')
+    redirect_to runs_path(state: 'rejected')
   end
 
   def destroy
     Run.destroy(params[:id])
-    redirect_to runs_path(:state => 'uploaded')
+    redirect_to runs_path(state: 'uploaded')
   end
 
   def park
     run.park!
-    redirect_to runs_path(:state => 'uploaded')
+    redirect_to runs_path(state: 'uploaded')
   end
 
-  private 
+  private
 
   def run
     Run.find(params[:id])
@@ -163,5 +163,4 @@ class RunsController < ApplicationController
     params.require(:run).permit!
     # (:name, :sampled_on, :run_on, :comment, :study, :setup_file, :data_file, incubations_attributes: [{:samples_attributes}], :setup_file_cache, :data_file_cache)
   end
-
 end

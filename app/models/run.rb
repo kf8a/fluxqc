@@ -4,27 +4,27 @@
 # taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
   belongs_to :company
-  has_many :incubations, -> {order 'treatment, replicate' },  :dependent => :destroy
+  has_many :incubations, -> { order 'treatment, replicate' }, dependent: :destroy
   has_many :samples, dependent: :destroy
   has_many :standard_curves, dependent: :destroy
   has_one :standard_curve_organizer, dependent: :destroy
   # has_many :data_files, dependent: :destroy
 
   mount_uploader :setup_file, SetupUploader
-  #mount_uploader :data_file, DataUploader
+  # mount_uploader :data_file, DataUploader
   mount_uploaders :data_files, DataUploader
 
   accepts_nested_attributes_for :incubations, :samples
 
-  scope :by_state, ->(state){where(:workflow_state => state) }
+  scope :by_state, ->(state) { where(workflow_state: state) }
 
-#  after_save :recompute_fluxes
+  # after_save :recompute_fluxes
 
   include Workflow
   workflow do
     state :uploaded do
-      event :accept,  :transitions_to => :accepted
-      event :park,    :transitions_to => :parked
+      event :accept,  transitions_to: :accepted
+      event :park,    transitions_to: :parked
     end
     state :accepted do
       event :approve, :transitions_to => :approved

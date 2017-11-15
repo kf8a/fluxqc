@@ -11,17 +11,15 @@ class SetupFileLoader
     run.name = samples[0][:run_name]
     run.study = get_study_name(run.name)
     reload_results = false
-    if run.samples.size > 0
-      #run.samples.delete
-      if run.result_files.size > 0
-        reload_results = true
-      end
+    if run.samples.size.positive?
+      # run.samples.delete
+      reload_results = true if run.data_files.empty?
     end
     samples.each do |sample|
       run.incubations << IncubationFactory.create(run.id, sample)
     end
     if reload_results
-      #TODO reload results here
+      # TODO reload results here
     end
     run.save
   end
