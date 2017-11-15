@@ -1,5 +1,4 @@
 class IncubationsController < ApplicationController
-
   before_filter :check_company, except: [:show]
 
   respond_to :html, :json
@@ -8,7 +7,7 @@ class IncubationsController < ApplicationController
     @incubation = Incubation.find(params[:id])
     respond_with do |format|
       format.html
-      format.json {render :json  => @incubation}
+      format.json { render json: @incubation }
     end
   end
 
@@ -32,16 +31,16 @@ class IncubationsController < ApplicationController
   private
 
   def incubation_params
-    params.require(:incubation).permit(:id, :treatment, :replicate, :chamber, {sampled_at: []}, 
-                                       :avg_height_cm, :soil_temperature, {samples_attributes: [:id, :seconds]})
+    params.require(:incubation).permit(:id, :treatment, :replicate, :chamber,
+                                       :lid_id, { sampled_at: [] },
+                                       :avg_height_cm,
+                                       :soil_temperature,
+                                       samples_attributes: %i[id seconds])
   end
 
   def check_company
-    if params[:id]
-      incubation = Incubation.find(params[:id])
-      if current_user.company != incubation.run.company
-        render status: :forbidden
-      end
-    end
+    return unless params[:id]
+    incubation = Incubation.find(params[:id])
+    render status: :forbidden if current_user.company != incubation.run.company
   end
 end
