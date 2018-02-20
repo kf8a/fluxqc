@@ -5,11 +5,11 @@ class FertSetupParser
     @row = row
     [treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments]
   end
-  
+
   def treatment_and_rep
     "T#{row[0]}"
   end
-  
+
   def replicate
     "R#{treatment_and_rep[3]}"
   end
