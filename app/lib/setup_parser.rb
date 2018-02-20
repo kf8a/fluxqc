@@ -22,12 +22,12 @@ class SetupParser
       parse_xls(file_path)
     when '.xlsx'
       parse_xls(file_path)
-    else 
+    else
       raise 'only comma delimited files are supported'
     end
   end
 
-  # sample dates get pull from date_row which needs to be set for the different 
+  # sample dates get pull from date_row which needs to be set for the different
   # format types
   def self.parse_xls(file)
     xls = Roo::Spreadsheet.open(file)
@@ -43,7 +43,7 @@ class SetupParser
       date_row = 4
     end
 
-    sample_date = Chronic.parse(xls.cell('A',date_row).gsub /sample date:(\s+)?/,'')
+    sample_date = Chronic.parse(xls.cell('A',date_row).gsub(/sample date:(\s+)?/,''))
 
     first_row = 6
     first_row += 1 if title.strip =~ /^GLBRC/
@@ -69,12 +69,12 @@ class SetupParser
 
   def self.parse_csv(file)
     lines = CSV::readlines(file)
-    row = lines.shift
-    format_test = row[0]
-    title = row[0]
+    first_row = lines.shift
+    format_test = first_row[0]
+    title = first_row[0]
     2.times { lines.shift } # remove the header limes
-    row = lines.shift
-    sample_date = Chronic.parse(row[0].gsub /sample date:(\s+)?/,'')
+    next_row = lines.shift
+    sample_date = Chronic.parse(next_row[0].gsub(/sample date:(\s+)?/,''))
     lines.shift
     lines.shift if format_test =~ /^GLBRC/
     lines.shift if format_test =~/^format=/

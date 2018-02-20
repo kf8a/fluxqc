@@ -1,17 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 5.0.1'
 gem 'backbone-on-rails'
-gem 'jquery-rails' 
+gem 'jquery-rails'
+gem 'rails', '~> 5.0.1'
 
-gem 'pg'
+gem 'carrierwave' # , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
+gem 'chronic'
+gem 'pg', '~> 0.20'
+# gem 'pg'
 gem 'simple_form'
 gem 'workflow'
-gem 'carrierwave'# , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
-gem 'chronic'
 
-gem 'devise'
 gem 'active_model_serializers'
+gem 'devise'
 
 gem 'uuid'
 
@@ -22,48 +23,50 @@ gem 'roo-xls'
 
 gem 'redis-rails'
 
-#gem 'resque', :require => "resque/server"
+# gem 'resque', :require => "resque/server"
 gem 'qu-redis'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt'
 
+gem 'dalli', group: :production
 gem 'prometheus-client', '~> 0.6.0'
 
 # Use unicorn as the web server
 gem 'unicorn', group: :production
-gem 'dalli', group: :production
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
 
 group :development do
-  gem 'spring'
+  gem 'bcrypt_pbkdf'
+  gem 'net-ssh'
+  gem 'rbnacl', '< 5.0'
+  gem 'rbnacl-libsodium'
+#  gem 'spring'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'therubyracer', :require => 'v8'
-  #gem 'sass'
   gem 'bootstrap-sass', '~> 3.3.6'
-  gem 'sass-rails', '>= 3.2'
   gem 'coffee-rails'
+  gem 'sass-rails', '>= 3.2'
+  gem 'therubyracer', require: 'v8'
   gem 'uglifier'
-  #gem 'twitter-bootstrap-rails'
 end
 
 group :test, :development do
-  gem 'rspec-rails' 
   gem 'jasmine-rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'launchy'
   gem 'shoulda-matchers'
-  gem "database_cleaner"
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "launchy"
-  gem "cucumber-rails", require: false
 end
