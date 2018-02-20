@@ -9,9 +9,17 @@ class Format4Parser
 
   def treatment
     if row[2].is_a?(Float)
-      "#{row[0]}"
+      normalize_treatment_name(row[0])
     else
       "#{row[0]}-#{row[2]}"
+    end
+  end
+
+  def normalize_treatment_name(name)
+    if name.is_a?(Float)
+      "T#{name.to_i}"
+    else
+      "#{name}"
     end
   end
 
