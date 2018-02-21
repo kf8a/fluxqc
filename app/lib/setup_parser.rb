@@ -109,7 +109,7 @@ class SetupParser
       Format4Parser.new
     when /^format=3/
       Format3Parser.new
-    when /~format=5/
+    when /^format=5/
       Format5Parser.new
     else
       LTERSetupParser.new
