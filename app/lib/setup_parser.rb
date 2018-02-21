@@ -23,7 +23,7 @@ class SetupParser
     when '.xlsx'
       parse_xls(file_path)
     else
-      raise 'only comma delimited files are supported'
+      raise 'only comma delimited and xls(x) files are supported'
     end
   end
 
@@ -109,6 +109,8 @@ class SetupParser
       Format4Parser.new
     when /^format=3/
       Format3Parser.new
+    when /~format=5/
+      Format5Parser.new
     else
       LTERSetupParser.new
     end
