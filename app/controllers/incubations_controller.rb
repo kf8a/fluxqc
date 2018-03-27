@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class IncubationsController < ApplicationController
-  before_filter :check_company, except: [:show]
+  before_action :check_company, except: [:show]
 
   respond_to :html, :json
 
