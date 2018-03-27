@@ -8,7 +8,11 @@ class LTERSetupParser
   end
 
   def treatment
-    "T#{row[0].to_i}"
+    if row[0].to_i.to_s == row[0]
+      "T#{row[0].to_i}"
+    else
+      row[0]
+    end
   end
 
   def replicate
@@ -22,11 +26,11 @@ class LTERSetupParser
   def sub_plot; end
 
   def chamber
-    "#{row[3].to_i}"
+    row[3].to_i.to_s
   end
 
   def vial
-    "#{row[4].to_i}"
+    row[4].to_i.to_s
   end
 
   def lid
@@ -34,7 +38,7 @@ class LTERSetupParser
   end
 
   def height
-    [row[6].to_f,row[7].to_f, row[8].to_f, row[9].to_f]
+    [row[6].to_f, row[7].to_f, row[8].to_f, row[9].to_f]
   end
 
   def soil_temp
