@@ -12,7 +12,6 @@ require_relative 'format3_parser'
 # results as a hash. It is called by the setup parser loader
 # when a setup file is uplaoded.
 class SetupParser
-
   # convenience method to call the parsers depending on file type
   def self.parse(file_path)
     case File.extname(file_path)
@@ -32,18 +31,18 @@ class SetupParser
   def self.parse_xls(file)
     xls = Roo::Spreadsheet.open(file)
     xls.default_sheet = xls.sheets.first
-    format_test = xls.cell('A',1)
+    format_test = xls.cell('A', 1)
     date_row = 3
     title = format_test
     if format_test =~ /format=/
-      title = xls.cell('A',2)
+      title = xls.cell('A', 2)
       date_row = 5
     end
     if file =~ /CIMMYT/
       date_row = 4
     end
 
-    sample_date = Chronic.parse(xls.cell('A',date_row).gsub(/sample date:(\s+)?/,''))
+    sample_date = Chronic.parse(xls.cell('A', date_row).gsub(/sample date:(\s+)?/, ''))
 
     first_row = 6
     first_row += 1 if title.strip =~ /^GLBRC/
@@ -57,27 +56,27 @@ class SetupParser
       next if treatment.empty?
       next if treatment == 'T' # for LTER samples
 
-      {:run_name => title, :sample_date => sample_date,
-        :treatment => treatment, :replicate => replicate,
-        :sub_plot => sub_plot,
-        :chamber => chamber, :vial => vial,
-        :lid => lid, :height => height,
-        :soil_temperature => soil_temp,
-        :seconds => seconds, :comments => comments }
+      { run_name: title, sample_date: sample_date,
+        treatment: treatment, replicate: replicate,
+        sub_plot: sub_plot,
+        chamber: chamber, vial: vial,
+        lid: lid, height: height,
+        soil_temperature: soil_temp,
+        seconds: seconds, comments: comments }
     end.compact
   end
 
   def self.parse_csv(file)
-    lines = CSV::readlines(file)
+    lines = CSV.readlines(file)
     first_row = lines.shift
     format_test = first_row[0]
     title = first_row[0]
     2.times { lines.shift } # remove the header limes
     next_row = lines.shift
-    sample_date = Chronic.parse(next_row[0].gsub(/sample date:(\s+)?/,''))
+    sample_date = Chronic.parse(next_row[0].gsub(/sample date:(\s+)?/, ''))
     lines.shift
     lines.shift if format_test =~ /^GLBRC/
-    lines.shift if format_test =~/^format=/
+    lines.shift if format_test =~ /^format=/
 
     parser = locate_parser(format_test)
 
@@ -86,13 +85,13 @@ class SetupParser
 
       treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
 
-      {:run_name => title, :sample_date => sample_date,
-        :treatment => treatment, :replicate => replicate,
-        :sub_plot => sub_plot,
-        :chamber => chamber, :vial => vial,
-        :lid => lid, :height => height,
-        :soil_temperature => soil_temp,
-        :seconds => seconds, :comments => comments }
+      { run_name: title, sample_date: sample_date,
+        treatment: treatment, replicate: replicate,
+        sub_plot: sub_plot,
+        chamber: chamber, vial: vial,
+        lid: lid, height: height,
+        soil_temperature: soil_temp,
+        seconds: seconds, comments: comments }
     end.compact
   end
 
