@@ -1,7 +1,8 @@
 language: ruby
 sudo: false
 rvm:
-- 2.3.0
+- 2.4.3
+- 2.5.0
 bundler_args: "--without production"
 env: SECRET_KEY_BASE="39bcedf487fe83bd4637dbaf5d738db0ce2a004e4ece7a5896b265e49101cce2fd0b73c8c95629c5d05e6c1f3869597d113bd11ce7f2bc372789235274061845"
 addons:
