@@ -43,7 +43,7 @@ group :development do
   gem 'net-ssh'
   gem 'rbnacl', '< 5.0'
   gem 'rbnacl-libsodium'
-#  gem 'spring'
+  # gem 'spring'
 end
 
 # Gems used only for assets and not required
@@ -66,7 +66,7 @@ group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem "factory_bot_rails"
   gem 'launchy'
   gem 'shoulda-matchers'
 end
