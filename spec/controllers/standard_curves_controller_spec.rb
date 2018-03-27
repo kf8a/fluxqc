@@ -4,8 +4,8 @@ describe StandardCurvesController, type: :controller do
 
   describe 'an authenticated user' do
     before do 
-      @user = FactoryGirl.create(:user)
-      @curve = FactoryGirl.create(:standard_curve)
+      @user = FactoryBot.create(:user)
+      @curve = FactoryBot.create(:standard_curve)
       sign_in @user
     end
 

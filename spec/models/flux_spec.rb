@@ -4,7 +4,7 @@ describe Flux do
   it {is_expected.to belong_to :incubation}
   it {is_expected.to have_many :measurements}
 
-  let(:flux) {FactoryGirl.create :flux}
+  let(:flux) {FactoryBot.create :flux}
 
   it 'has methods to make the flux calculation easier' do
     expect(flux.respond_to?(:headspace)).to eq true
@@ -31,8 +31,8 @@ describe Flux do
   describe 'data writing' do
     before(:each) do
       allow_any_instance_of(Measurement).to receive(:standard_curves).and_return(1)
-      @m1 = FactoryGirl.create :measurement, seconds: 4, ppm: 10
-      @m2 = FactoryGirl.create :measurement, seconds: 10, ppm: 20
+      @m1 = FactoryBot.create :measurement, seconds: 4, ppm: 10
+      @m2 = FactoryBot.create :measurement, seconds: 10, ppm: 20
       flux.measurements << @m1
       flux.measurements << @m2
       allow(flux).to receive(:headspace).and_return(1)

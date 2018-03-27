@@ -2,13 +2,13 @@ require 'rails_helper.rb'
 
 describe IncubationFactory do
   before do
-    FactoryGirl.create(:compound, :name=>'co2')
-    FactoryGirl.create(:compound, :name=>'n2o')
-    FactoryGirl.create(:compound, :name=>'ch4')
+    FactoryBot.create(:compound, :name=>'co2')
+    FactoryBot.create(:compound, :name=>'n2o')
+    FactoryBot.create(:compound, :name=>'ch4')
 
-    @lid = FactoryGirl.create :lid, :name => 'C'
+    @lid = FactoryBot.create :lid, :name => 'C'
 
-    @run = FactoryGirl.create :run
+    @run = FactoryBot.create :run
 
     @incubation = IncubationFactory.create(@run.id,
       {:sample_date => '2011-10-18',
@@ -109,7 +109,7 @@ describe IncubationFactory do
     before do
       @incubation.save
       @existing = @incubation
-      run = FactoryGirl.create :run
+      run = FactoryBot.create :run
       @incubation = IncubationFactory.create(run.id,
         {:sample_date => '2011-10-18',
           :treatment => 'T6', :replicate=> 'R1', :chamber=>'1', 

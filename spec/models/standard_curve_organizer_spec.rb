@@ -16,7 +16,7 @@ describe StandardCurveOrganizer do
 
   it 'returns the standard curves of the run' do
     pending "Need to rethink if I need the organizer"
-    run = FactoryGirl.create :run
+    run = FactoryBot.create :run
     run.standard_curves << StandardCurve.new
     run.standard_curve_organizer = StandardCurveOrganizer.new
     expect(run.standard_curve_organizer.standard_curves).to eq []

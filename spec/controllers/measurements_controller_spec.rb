@@ -4,7 +4,7 @@ describe MeasurementsController, type: :controller do
 
   describe "GET 'index' as an authenticated user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
     it "returns http success" do

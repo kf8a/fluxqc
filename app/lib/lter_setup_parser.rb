@@ -8,7 +8,7 @@ class LTERSetupParser
   end
 
   def treatment
-    if row[0].is_a?(Float)
+    if row[0].to_i.to_s == row[0] || row[0].is_a?(Float)
       "T#{row[0].to_i}"
     else
       row[0]

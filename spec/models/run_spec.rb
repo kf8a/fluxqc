@@ -23,24 +23,24 @@ describe Run do
 
   it 'returns the standard curves for a compound' do
     compound = Compound.new
-    curve = FactoryGirl.build :standard_curve, compound: compound, column: 0
+    curve = FactoryBot.build :standard_curve, compound: compound, column: 0
     run.standard_curves << curve
     expect(run.standard_curves_for(compound)).to eq [curve]
   end
 
   it 'returns the right column standard curve for a compound' do
     compound = Compound.new
-    curve0 = FactoryGirl.build :standard_curve, compound: compound, column: 0
-    curve1 = FactoryGirl.build :standard_curve, compound: compound, column: 1
+    curve0 = FactoryBot.build :standard_curve, compound: compound, column: 0
+    curve1 = FactoryBot.build :standard_curve, compound: compound, column: 1
     run.standard_curves = [curve0, curve1]
     expect(run.standard_curves_for(compound, 1)).to eq [curve1]
   end
 
   it 'returns the right standard curves for a compound when there are multiple curves' do
     compound = Compound.new
-    curve0 = FactoryGirl.build :standard_curve, compound: compound, column: 0
-    curve1 = FactoryGirl.build :standard_curve, compound: compound, column: 0
-    FactoryGirl.build :standard_curve, compound: compound, column: 1
+    curve0 = FactoryBot.build :standard_curve, compound: compound, column: 0
+    curve1 = FactoryBot.build :standard_curve, compound: compound, column: 0
+    FactoryBot.build :standard_curve, compound: compound, column: 1
     run.standard_curves = [curve0, curve1]
     expect(run.standard_curves_for(compound, 0)).to eq [curve0, curve1]
   end
@@ -48,9 +48,9 @@ describe Run do
   it 'returns the measurements for a compound' do
     compound = Compound.new
     lid = Lid.new
-    measurement = FactoryGirl.build :measurement, compound: compound, area: 100
-    incubation  = FactoryGirl.build :incubation, lid: lid
-    flux        = FactoryGirl.build :flux, compound: compound
+    measurement = FactoryBot.build :measurement, compound: compound, area: 100
+    incubation  = FactoryBot.build :incubation, lid: lid
+    flux        = FactoryBot.build :flux, compound: compound
     flux.measurements = [measurement]
     incubation.fluxes = [flux]
     run.incubations = [incubation]

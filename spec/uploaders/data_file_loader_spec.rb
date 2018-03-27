@@ -6,9 +6,9 @@ describe DataFileLoader do
   include ActionDispatch::TestProcess
 
   before(:all) do
-    FactoryGirl.create(:compound, :name=>'co2')
-    FactoryGirl.create(:compound, :name=>'n2o')
-    FactoryGirl.create(:compound, :name=>'ch4')
+    FactoryBot.create(:compound, :name=>'co2')
+    FactoryBot.create(:compound, :name=>'n2o')
+    FactoryBot.create(:compound, :name=>'ch4')
   end
 
   after(:all) do
@@ -18,7 +18,7 @@ describe DataFileLoader do
 
   describe '2011 style data file' do
     before(:all) do
-      run = FactoryGirl.create :run
+      run = FactoryBot.create :run
       run.setup_file = fixture_file_upload('/setup_test.csv')
       run.data_files = [fixture_file_upload('2011_results.csv')]
       run.save
@@ -43,7 +43,7 @@ describe DataFileLoader do
 
   describe 'a 2010 data file with standards' do
     before do
-      run = FactoryGirl.create :run,
+      run = FactoryBot.create :run,
                          :data_files => [fixture_file_upload('/glbrc-2010.csv')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
 
@@ -60,7 +60,7 @@ describe DataFileLoader do
 
   describe 'a GC data file' do
     before(:all) do
-      @run = FactoryGirl.create :run,
+      @run = FactoryBot.create :run,
                          :data_files => [fixture_file_upload('/2012_result.txt')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
@@ -117,7 +117,7 @@ describe DataFileLoader do
 
   describe 'a chemstation file with two standard sets' do
     before(:all) do
-      @run = FactoryGirl.create :run,
+      @run = FactoryBot.create :run,
                          :data_files => [fixture_file_upload('/LTER20130520S4.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
@@ -137,7 +137,7 @@ describe DataFileLoader do
 
   describe 'a glbrc chemstation file' do
     before do
-      @run = FactoryGirl.create :run,
+      @run = FactoryBot.create :run,
                          :data_files => [fixture_file_upload('/glbrc-results.CSV')],
                          :setup_file => fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
@@ -153,7 +153,7 @@ describe DataFileLoader do
 
   describe  'a 2015 cimmity chemstation file' do
     before do
-      @run = FactoryGirl.create :run,
+      @run = FactoryBot.create :run,
                          :data_files => [fixture_file_upload('/2015-chemstation-results.csv')],
                          :setup_file => fixture_file_upload('/cimmit_setup.csv')
       SetupFileLoader.perform(@run.id)

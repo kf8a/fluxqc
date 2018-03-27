@@ -6,7 +6,7 @@ describe StandardCurve do
   it {is_expected.to belong_to :compound}
   it {is_expected.to have_many :samples}
 
-  let (:standard_curve) {FactoryGirl.create :standard_curve}
+  let (:standard_curve) {FactoryBot.create :standard_curve}
 
   describe 'getting data and computing parameters' do
     before(:each) do

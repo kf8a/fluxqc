@@ -1,6 +1,6 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
+# Read about factories at http://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :campaign_plot do
     plot_id 1
     campaign_id 1

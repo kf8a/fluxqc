@@ -13,7 +13,7 @@ describe SetupFileLoader do
 
   before do
     ['co2','n2o','ch4'].collect do |name|
-      FactoryGirl.create(:compound, :name=>name)
+      FactoryBot.create(:compound, :name=>name)
     end
 
   end
@@ -22,7 +22,7 @@ describe SetupFileLoader do
 
     before do
 
-      run = FactoryGirl.create :run,
+      run = FactoryBot.create :run,
         :setup_file => fixture_file_upload('/setup_test.csv')
 
       expect(SetupFileLoader.perform(run.id)).to_not eq false
@@ -73,7 +73,7 @@ describe SetupFileLoader do
   context 'cimmit file' do
     before do
 
-      run = FactoryGirl.create :run,
+      run = FactoryBot.create :run,
         # :setup_file => fixture_file_upload('/cimmit_setup.csv')
         :setup_file => fixture_file_upload('/cimmyt-2015.csv')
 

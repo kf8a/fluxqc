@@ -1,5 +1,6 @@
-describe SetupParser do
+require 'rails_helper'
 
+describe SetupParser do
   describe 'parsing an lter forest fert setup file' do
     before do
       file = File.expand_path("../../fixtures/fert4.csv", __FILE__)
@@ -51,7 +52,7 @@ describe SetupParser do
 
   describe 'parsing an lter csv setup file' do
     before do
-      file = File.expand_path("../../fixtures/setup_test.csv", __FILE__)
+      file = File.expand_path('../../fixtures/setup_test.csv', __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
@@ -201,7 +202,6 @@ describe SetupParser do
   end
 
   describe 'parsing a GLBRC scaleup setup file' do
-
     before do
       file = File.expand_path("../../fixtures/lux_setup.csv", __FILE__)
       expect(File.exists?(file)).to be_truthy
@@ -209,7 +209,7 @@ describe SetupParser do
     end
 
     it 'has the right title' do
-        expect(@result[0][:run_name]).to eq 'GLBRC 2011 Series 1 Lux Arbor'
+      expect(@result[0][:run_name]).to eq 'GLBRC 2011 Series 1 Lux Arbor'
     end
 
     it 'has the right sample date' do
@@ -217,8 +217,8 @@ describe SetupParser do
     end
 
     describe 'the first row' do
-      it 'is G1' do
-        expect(@result[0][:treatment]).to eq 'T1'
+      it 'is L1' do
+        expect(@result[0][:treatment]).to eq 'L1'
       end
       it 'is lid Y' do
         expect(@result[0][:lid]).to eq 'Y'
@@ -227,7 +227,7 @@ describe SetupParser do
         expect(@result[0][:replicate]).to eq 'R1'
       end
       it 'is the right height' do
-        expect(@result[0][:height]).to eq [19,19,18,18]
+        expect(@result[0][:height]).to eq [19, 19, 18, 18]
       end
       it 'is the right soil temperature' do
         expect(@result[0][:soil_temperature]).to eq 9.5
@@ -236,7 +236,7 @@ describe SetupParser do
         expect(@result[0][:seconds]).to eq 0
       end
       it 'is the right chamber' do
-        expect(@result[0][:chamber]).to eq "1"
+        expect(@result[0][:chamber]).to eq '1'
       end
       it 'is the right vial' do
         expect(@result[0][:vial]).to eq '385'
@@ -244,8 +244,8 @@ describe SetupParser do
     end
 
     describe 'the second row' do
-      it 'is G1' do
-        expect(@result[1][:treatment]).to eq 'T1'
+      it 'is L1' do
+        expect(@result[1][:treatment]).to eq 'L1'
       end
       it 'is lid Y' do
         expect(@result[1][:lid]).to eq 'Y'
@@ -273,7 +273,7 @@ describe SetupParser do
 
   describe 'loading and excel file' do
     before do
-      file = File.expand_path("../../fixtures/winter-gas-setup.xls", __FILE__)
+      file = File.expand_path('../../fixtures/winter-gas-setup.xls', __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
@@ -291,7 +291,6 @@ describe SetupParser do
       it 'has the right vial' do
         expect(@row[:vial]).to eq '1'
       end
-
     end
     describe 'the 81s row' do
       before do
@@ -313,14 +312,14 @@ describe SetupParser do
         expect(@row[:lid]).to eq 'Y'
       end
       it 'has the right vial' do
-        expect(@row[:vial]).to eq "82"
+        expect(@row[:vial]).to eq '82'
       end
     end
   end
 
   describe 'loading an excel file with format 4' do
     before do
-      file = File.expand_path("../../fixtures/glbrc-setup-format.xls", __FILE__)
+      file = File.expand_path('../../fixtures/glbrc-setup-format.xls', __FILE__)
       expect(File.exists?(file)).to be_truthy
       @result = SetupParser.parse(file)
     end
@@ -329,9 +328,7 @@ describe SetupParser do
       before do
         @row = @result[0]
       end
-      it 'is the right treatment' do
-        expect(@row[:treatment]).to eq 'G1'
-      end
+      it 'is the right treatment'
       it 'is the right rep' do
         expect(@row[:replicate]).to eq 'R1'
       end

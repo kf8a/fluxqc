@@ -4,52 +4,52 @@ describe Measurement do
   it { is_expected.to belong_to :flux}
   it { is_expected.to belong_to :sample}
 
-  let(:measurement) {FactoryGirl.create :measurement}
+  let(:measurement) {FactoryBot.create :measurement}
   it "has millivolts" do
     expect(measurement.respond_to?(:mv)).to eq true
   end
 
   it "is selectable by compound" do
-    compound    = FactoryGirl.create :compound, name: "co2"
-    measurement = FactoryGirl.create :measurement, compound: compound
-    flux        = FactoryGirl.create :flux, measurements: [measurement]
+    compound    = FactoryBot.create :compound, name: "co2"
+    measurement = FactoryBot.create :measurement, compound: compound
+    flux        = FactoryBot.create :flux, measurements: [measurement]
     expect(Measurement.by_compound('co2')).to include(measurement)
   end
 
   describe "locating standard curves" do
     before(:each) do
-      @compound    = FactoryGirl.create :compound, name: "co2"
-      @run         = FactoryGirl.create :run
-      sample       = FactoryGirl.create :sample, run: @run
-      @curve1      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-2.hours, run: @run, column: 0
-      @curve2      = FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+2.hours, run: @run, column: 0
-      @measurement = FactoryGirl.create :measurement, compound: @compound, acquired_at: Time.now(), sample: sample, column: 0
+      @compound    = FactoryBot.create :compound, name: "co2"
+      @run         = FactoryBot.create :run
+      sample       = FactoryBot.create :sample, run: @run
+      @curve1      = FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()-2.hours, run: @run, column: 0
+      @curve2      = FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()+2.hours, run: @run, column: 0
+      @measurement = FactoryBot.create :measurement, compound: @compound, acquired_at: Time.now(), sample: sample, column: 0
     end
 
     it "ignores later standard curves" do
-      FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()+4.hours, run: @run
+      FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()+4.hours, run: @run
       expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores earlier standard curves" do
-      FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: @run
+      FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: @run
       expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end 
 
     it "ignores other runs curves" do
-      run = FactoryGirl.create :run
-      FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: run
+      run = FactoryBot.create :run
+      FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()-4.hours, run: run
       expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores other compounds standard curves" do
-      compound    = FactoryGirl.create :compound, name: "H"
-      FactoryGirl.create :standard_curve, compound: compound, acquired_at: Time.now()+4.hours, run: @run
+      compound    = FactoryBot.create :compound, name: "H"
+      FactoryBot.create :standard_curve, compound: compound, acquired_at: Time.now()+4.hours, run: @run
       expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 
     it "ignores other columns standard curves" do
-      FactoryGirl.create :standard_curve, compound: @compound, acquired_at: Time.now()-1.hours, run: @run, column: 1
+      FactoryBot.create :standard_curve, compound: @compound, acquired_at: Time.now()-1.hours, run: @run, column: 1
       expect(@measurement.standard_curves()).to eq [@curve1, @curve2]
     end
 

@@ -12,14 +12,14 @@ describe Incubation do
 
   describe 'an incubation with fluxes' do
     before(:each) do
-      co2 = FactoryGirl.create(:compound, :name=>'co2')
-      n2o = FactoryGirl.create(:compound, :name=>'n2o')
+      co2 = FactoryBot.create(:compound, :name=>'co2')
+      n2o = FactoryBot.create(:compound, :name=>'n2o')
 
-      sample          = FactoryGirl.create(:sample)
-      co2_measurement = FactoryGirl.create :measurement,
+      sample          = FactoryBot.create(:sample)
+      co2_measurement = FactoryBot.create :measurement,
                                            :compound => co2,
                                            :sample => sample
-      n2o_measurement = FactoryGirl.create :measurement,
+      n2o_measurement = FactoryBot.create :measurement,
                                            :compound => n2o,
                                            :sample => sample
 
@@ -82,9 +82,9 @@ describe Incubation do
   it 'returns the right measurements' do
     compound = Compound.new
     lid = Lid.new
-    measurement = FactoryGirl.build :measurement, compound: compound, area: 100
-    incubation  = FactoryGirl.build :incubation, lid: lid
-    flux        = FactoryGirl.build :flux, compound: compound
+    measurement = FactoryBot.build :measurement, compound: compound, area: 100
+    incubation  = FactoryBot.build :incubation, lid: lid
+    flux        = FactoryBot.build :flux, compound: compound
     flux.measurements = [measurement]
     incubation.fluxes = [flux]
     expect(incubation.measurements_for(compound).first).to eq measurement

@@ -19,7 +19,7 @@ class Format4Parser
     if name.is_a?(Float)
       "T#{name.to_i}"
     else
-      "#{name}"
+      name.to_s
     end
   end
 
@@ -34,11 +34,11 @@ class Format4Parser
   def sub_plot; end
 
   def chamber
-    "#{row[4].to_i}"
+    row[4].to_i.to_s
   end
 
   def vial
-    "#{row[5].to_i}"
+    row[5].to_i.to_s
   end
 
   def lid
@@ -46,7 +46,7 @@ class Format4Parser
   end
 
   def height
-    [row[7].to_f,row[8].to_f, row[9].to_f, row[10].to_f]
+    [row[7].to_f, row[8].to_f, row[9].to_f, row[10].to_f]
   end
 
   def soil_temp
@@ -61,5 +61,4 @@ class Format4Parser
     comment  = row[17]
     comment == '-' ? nil : comment
   end
-
 end

@@ -3,16 +3,16 @@ require 'rails_helper'
 describe FluxesController, :type => :controller do
 
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     allow(@user).to receive(:company).and_return("lter")
     sign_in @user
   end
 
   describe 'PUT update point' do
     before do
-      @run          = FactoryGirl.create :run
-      @flux         = FactoryGirl.create :flux
-      @measurement  = FactoryGirl.create :measurement, flux_id: @flux.id
+      @run          = FactoryBot.create :run
+      @flux         = FactoryBot.create :flux
+      @measurement  = FactoryBot.create :measurement, flux_id: @flux.id
 
     end
 

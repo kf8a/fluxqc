@@ -7,8 +7,8 @@ describe Sample do
 
   let(:sample) {Sample.create}
   it 'reports its data for a compound' do
-    compound    = FactoryGirl.create(:compound, :name=>'co2')
-    measurement = FactoryGirl.create(:measurement, :compound=> compound)
+    compound    = FactoryBot.create(:compound, :name=>'co2')
+    measurement = FactoryBot.create(:measurement, :compound=> compound)
     sample.measurements << measurement
     sample.data('co2')== measurement
   end
