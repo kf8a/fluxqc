@@ -11,7 +11,7 @@ class GLBRCSetupParser
     "#{row[0]}#{row[3]}"
   end
 
-  def replicate 
+  def replicate
     if row[1].is_a?(Float)
       "R#{row[1].to_i}"
     else
@@ -22,11 +22,11 @@ class GLBRCSetupParser
   def sub_plot; end
 
   def chamber
-    "#{row[4].to_i}"
+    row[4].to_i.to_s
   end
 
   def vial
-    "#{row[5].to_i}"
+    row[5].to_i.to_s
   end
 
   def lid
@@ -34,7 +34,7 @@ class GLBRCSetupParser
   end
 
   def height
-    [row[7].to_f,row[8].to_f, row[9].to_f, row[10].to_f]
+    [row[7].to_f, row[8].to_f, row[9].to_f, row[10].to_f]
   end
 
   def soil_temp
@@ -49,5 +49,4 @@ class GLBRCSetupParser
     comment  = row[17]
     comment == '-' ? nil : comment
   end
-
 end
