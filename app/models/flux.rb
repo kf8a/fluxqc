@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 # This file represents a flux, that is a series of measuremnemnts of the
@@ -7,9 +9,9 @@ require 'csv'
 class Flux < ActiveRecord::Base
   belongs_to :incubation
   belongs_to :compound
-  has_many   :measurements,  :dependent => :destroy
+  has_many   :measurements, dependent: :destroy
 
-  attr_reader :flux, :muliplier, :data
+  attr_reader :muliplier
 
   # before_save do
   #   incubation.try(:touch)
@@ -17,15 +19,15 @@ class Flux < ActiveRecord::Base
   # end
 
   def self.co2
-    includes(:measurements => :compound).where('compounds.name' => 'co2')
+    includes(measurements: :compound).where('compounds.name' => 'co2')
   end
 
   def self.n2o
-    includes(:measurements => :compound).where('compounds.name' => 'n2o')
+    includes(measurements: :compound).where('compounds.name' => 'n2o')
   end
 
   def self.ch4
-    includes(:measurements => :compound).where('compounds.name' => 'ch4')
+    includes(measurements: :compound).where('compounds.name' => 'ch4')
   end
 
   def compound
@@ -41,13 +43,14 @@ class Flux < ActiveRecord::Base
   def data
     measurements.collect do |measurement|
       {
-        id:measurement.id, key:measurement.seconds,
-        value:measurement.ppm, area:measurement.area, deleted:measurement.excluded
+        id: measurement.id, key: measurement.seconds,
+        value: measurement.ppm, area: measurement.area,
+        deleted: measurement.excluded
       }
     end
   end
 
-  def data=(measurement_hash=[])
+  def data=(measurement_hash = [])
     measurement_hash.each do |d|
       measurement = measurements.find(d[:id])
       measurement.seconds = d[:key]
@@ -55,7 +58,7 @@ class Flux < ActiveRecord::Base
       measurement.excluded = d[:deleted]
       measurement.save
     end
-    measurements.reload   #TODO I'm missing something here
+    measurements.reload # TODO: I'm missing something here
     flux
   end
 
@@ -72,7 +75,7 @@ class Flux < ActiveRecord::Base
       else
         value
       end
-    rescue 
+    rescue
       nil
     end
   end
@@ -176,44 +179,24 @@ class Flux < ActiveRecord::Base
 
   # CSV streaming support
   def self.csv_header
-    CSV::Row.new([:id, :run_id, :run_name, :sampled_on, :study, :treatment, 
-                 :replicate, :compund, :flux], 
-                 ['id','run id', 'series', 'sampled_on', 'study', 'treatment', 
-                   'replicate', 'compound', 'flux'], true)
+    CSV::Row.new(%i[id run_id run_name sampled_on study treatment replicate compund flux],
+                 ['id', 'run id', 'series', 'sampled_on', 'study', 'treatment', 'replicate',
+                  'compound', 'flux'], true)
   end
 
   def to_csv_row
-    CSV::Row.new([:id, :run_id, :run_name, :sampled_on, :study, :treatment, 
-                 :replicate, :compound, :flux],
-                 [incubation.id, run.id, run.name, run.sampled_on, 
-                   run.study,
-                   incubation.treatment, incubation.replicate, 
-                   compound.name,
-                   value])
+    CSV::Row.new(%i[id run_id run_name sampled_on study treatment replicate compound flux],
+                 [incubation.id, run.id, run.name, run.sampled_on,
+                  run.study, incubation.treatment, incubation.replicate,
+                  compound.name, value])
   end
 
-  def self.find_in_batches(study, &block)
-    #find_each will batch the results instead of getting all in one go
-    joins(incubation: :run).where('study = ?', study).order('sampled_at').
-      find_each(batch_size: 1000) do |flux|
-      yield flux 
+  def self.find_in_batches(study, _block)
+    # find_each will batch the results instead of getting all in one go
+    joins(incubation: :run).where('study = ?', study)
+                           .order('sampled_at')
+                           .find_each(batch_size: 1000) do |flux|
+      yield flux
     end
   end
-
 end
-
-# == Schema Information
-#
-# Table name: fluxes
-#
-#  id            :integer          not null, primary key
-#  incubation_id :integer
-#  value         :float
-#  compound_id   :integer
-#  created_at    :datetime
-#  updated_at    :datetime
-#
-# Indexes
-#
-#  fluxes_incubation_id  (incubation_id)
-#

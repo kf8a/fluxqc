@@ -9,21 +9,21 @@ class Sample < ActiveRecord::Base
   has_many :calibrations
   has_many :standard_curves, through: :calibrations
 
-  # attr_accessor :seconds 
+  # attr_accessor :seconds
 
-  scope :with_compound, lambda {|compound| where(:compound => compound) }
+  scope :with_compound, lambda {|compound| where(compound: compound) }
 
-  # TODO need to do this before save
+  # TODO: need to do this before save
   before_save :make_uuid, :if => Proc.new {|object| object.uuid.nil? }
 
   def data(compound_name)
     # measurements.by_compound(compound_name)
-    measurements.find {|x| x.compound.name == compound_name }
+    measurements.find { |x| x.compound.name == compound_name }
   end
 
-  def seconds=(s)
+  def seconds=(sec)
     measurements.each do |m|
-      m.seconds = s
+      m.seconds = sec
       m.save
     end
   end
@@ -33,15 +33,15 @@ class Sample < ActiveRecord::Base
   end
 
   def get_dependent_fluxes_for(compound)
-    fluxes = measurements.by_compound(compound).collect {|measurement| measurement.flux }
+    fluxes = measurements.by_compound(compound).collect(&:flux)
     fluxes.uniq
   end
 
   private
+
   def make_uuid
-    if self.uuid.nil?
-      self.uuid = UUID.new.generate
-    end
+    return unless uuid.nil?
+    self.uuid = UUID.new.generate
   end
 end
 
