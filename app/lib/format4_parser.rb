@@ -9,7 +9,7 @@ class Format4Parser
 
   def treatment
     if row[0].is_a?(Numeric)
-      "T#{name.to_i}"
+      "T#{row[0].to_i}"
     else
       "#{row[0]}-#{row[2]}"
     end
