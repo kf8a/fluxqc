@@ -8,23 +8,15 @@ class Format4Parser
   end
 
   def treatment
-    if row[2].is_a?(Float)
-      normalize_treatment_name(row[0])
+    if row[0].is_a?(Numeric)
+      "T#{name.to_i}"
     else
       "#{row[0]}-#{row[2]}"
     end
   end
 
-  def normalize_treatment_name(name)
-    if name.is_a?(Float)
-      "T#{name.to_i}"
-    else
-      name.to_s
-    end
-  end
-
   def replicate
-    if row[1].is_a?(Float)
+    if row[1].is_a?(Numeric)
       "R#{row[1].to_i}"
     else
       "R#{row[1]}"
