@@ -8,11 +8,16 @@ class Format4Parser
   end
 
   def treatment
-    if row[0].is_a?(Numeric)
-      "T#{row[0].to_i}"
+    if row[2]
+      "#{normalize_name(row[0])}-#{row[2]}"
     else
-      "#{row[0]}-#{row[2]}"
+      normalize_name(row[0])
     end
+  end
+
+  def normalize_name(name)
+    return name unless name.is_a?(Numeric)
+    "T#{name.to_i}"
   end
 
   def replicate
