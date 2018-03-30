@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 source 'http://rubygems.org'
 
 gem 'backbone-on-rails'
 gem 'jquery-rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.1'
 
 gem 'carrierwave' # , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
@@ -15,8 +17,6 @@ gem 'active_model_serializers'
 gem 'devise'
 
 gem 'uuid'
-
-gem 'foreigner'
 
 gem 'roo'
 gem 'roo-xls'
@@ -66,7 +66,7 @@ group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
   gem 'launchy'
   gem 'shoulda-matchers'
 end
