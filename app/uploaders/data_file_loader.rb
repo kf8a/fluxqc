@@ -80,17 +80,23 @@ class DataFileLoader
   def new_standard_curves
     result = {}
     compound = Compound.find_by(name: 'n2o')
-    result['n2o'] = {
-      0 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 0),
-      1 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 1)
-    }
+    result['n2o'] = new_n2o_standard_curves(compound)
     %w[co2 ch4].each do |name|
       compound = Compound.find_by(name: name)
-      result[name] = {
-        0 => StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: 0)
-      }
+      result[name] = { 0 => new_standard_curve_record(compound) }
     end
     result
+  end
+
+  def new_n2o_standard_curves(compound)
+    {
+      0 => new_standard_curve_record(compound, 0),
+      1 => new_standard_curve_record(compount, 1)
+    }
+  end
+
+  def new_standard_curve_record(compound, column = 0)
+    StandardCurve.create(run_id: @run.id, compound_id: compound.id, column: column)
   end
 
   def process_sample(vial)
