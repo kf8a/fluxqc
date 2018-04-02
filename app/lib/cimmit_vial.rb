@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Provide patterns for seeing if the name is a cimit name
 class CimmitVial
   class << self
     def cimmit_vial?(vial)

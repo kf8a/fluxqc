@@ -2,19 +2,17 @@
 require 'rails_helper'
 
 describe DataFileLoader do
-
   include ActionDispatch::TestProcess
 
   before(:all) do
-    FactoryBot.create(:compound, :name=>'co2')
-    FactoryBot.create(:compound, :name=>'n2o')
-    FactoryBot.create(:compound, :name=>'ch4')
+    FactoryBot.create(:compound, name: 'co2')
+    FactoryBot.create(:compound, name: 'n2o')
+    FactoryBot.create(:compound, name: 'ch4')
   end
 
   after(:all) do
     Compound.destroy_all
   end
-
 
   describe '2011 style data file' do
     before(:all) do
@@ -43,9 +41,8 @@ describe DataFileLoader do
 
   describe 'a 2010 data file with standards' do
     before do
-      run = FactoryBot.create :run,
-                         :data_files => [fixture_file_upload('/glbrc-2010.csv')],
-                         :setup_file => fixture_file_upload('/setup_test.csv')
+      run = FactoryBot.create :run, data_files: [fixture_file_upload('/glbrc-2010.csv')],
+                                    setup_file: fixture_file_upload('/setup_test.csv')
 
       expect(SetupFileLoader.perform(run.id)).to be_truthy
       expect(DataFileLoader.perform(run.id)).to be_truthy
@@ -60,9 +57,8 @@ describe DataFileLoader do
 
   describe 'a GC data file' do
     before(:all) do
-      @run = FactoryBot.create :run,
-                         :data_files => [fixture_file_upload('/2012_result.txt')],
-                         :setup_file => fixture_file_upload('/setup_test.csv')
+      @run = FactoryBot.create :run, data_files: [fixture_file_upload('/2012_result.txt')],
+                                     setup_file: fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
       DataFileLoader.perform(@run.id)
       @incubation = @run.incubations.order(:sampled_at).first
@@ -72,13 +68,13 @@ describe DataFileLoader do
 
     it 'updateds the acquired time' do
       # Time.zone = 'Eastern Time (US & Canada)'
-      expect(@measurement.acquired_at).to eq Time.utc(2012,04,12,21,9,26)
+      expect(@measurement.acquired_at).to eq Time.utc(2012, 4, 12, 21, 9, 26)
     end
     it 'updates the measurement with the column id' do
       expect(@measurement.column).to eq 1
     end
     it 'updates the measurement with the co2 area' do
-      expect(@incubation.flux('co2').measurements.order(:vial).first.area).to eq 70570.75
+      expect(@incubation.flux('co2').measurements.order(:vial).first.area).to eq 70_570.75
     end
     it 'updates the measurement with the n2o area' do
       expect(@incubation.flux('n2o').measurements.order(:vial).first.area).to eq 306.040741
@@ -114,12 +110,10 @@ describe DataFileLoader do
     end
   end
 
-
   describe 'a chemstation file with two standard sets' do
     before(:all) do
-      @run = FactoryBot.create :run,
-                         :data_files => [fixture_file_upload('/LTER20130520S4.CSV')],
-                         :setup_file => fixture_file_upload('/setup_test.csv')
+      @run = FactoryBot.create :run, data_files: [fixture_file_upload('/LTER20130520S4.CSV')],
+                                     setup_file: fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
       DataFileLoader.perform(@run.id)
       @incubation = @run.incubations.order(:sampled_at).first
@@ -137,25 +131,22 @@ describe DataFileLoader do
 
   describe 'a glbrc chemstation file' do
     before do
-      @run = FactoryBot.create :run,
-                         :data_files => [fixture_file_upload('/glbrc-results.CSV')],
-                         :setup_file => fixture_file_upload('/setup_test.csv')
+      @run = FactoryBot.create :run, data_files: [fixture_file_upload('/glbrc-results.CSV')],
+                                     setup_file: fixture_file_upload('/setup_test.csv')
       SetupFileLoader.perform(@run.id)
       DataFileLoader.perform(@run.id)
       @run.standard_curves.reload
     end
 
     it 'has the right area for vial 2' do
-      expect(@run.incubations.where(treatment: "T6").order(:sampled_at).first.flux('ch4').measurements.order(:vial).first.area).to eq 44.905228
+      expect(@run.incubations.where(treatment: 'T6').order(:sampled_at).first.flux('ch4').measurements.order(:vial).first.area).to eq 44.905228
     end
-
   end
 
-  describe  'a 2015 cimmity chemstation file' do
+  describe 'a 2015 cimmity chemstation file' do
     before do
-      @run = FactoryBot.create :run,
-                         :data_files => [fixture_file_upload('/2015-chemstation-results.csv')],
-                         :setup_file => fixture_file_upload('/cimmit_setup.csv')
+      @run = FactoryBot.create :run, data_files: [fixture_file_upload('/2015-chemstation-results.csv')],
+                                     setup_file: fixture_file_upload('/cimmit_setup.csv')
       SetupFileLoader.perform(@run.id)
       DataFileLoader.perform(@run.id)
       @run.standard_curves.reload

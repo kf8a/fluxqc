@@ -91,7 +91,7 @@ class DataFileLoader
   def new_n2o_standard_curves(compound)
     {
       0 => new_standard_curve_record(compound, 0),
-      1 => new_standard_curve_record(compount, 1)
+      1 => new_standard_curve_record(compound, 1)
     }
   end
 
@@ -101,7 +101,7 @@ class DataFileLoader
 
   def process_sample(vial)
     sample = @run.samples.where(vial: vial[:vial]).first
-    next unless sample
+    return unless sample
     COMPOUNDS.each do |c|
       measurement = sample.measurements.by_compound(c).first
 

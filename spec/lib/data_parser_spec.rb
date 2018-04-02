@@ -1,9 +1,10 @@
-describe DataParser do
+require 'rails_helper'
 
+describe DataParser do
   describe 'parsing a results file' do
     before(:all) do
       file = File.expand_path("../../fixtures/result.txt", __FILE__)
-      expect(File.exists?(file)).to be_truthy
+      expect(File.exist?(file)).to be_truthy
       @result = DataParser.new.parse(file)
     end
 
@@ -33,7 +34,7 @@ describe DataParser do
         expect(@row[:ch4][:area]).to eq 27.806454
       end
       it 'finds the right co2 value' do
-        expect(@row[:co2][:area]).to eq 117673.960937
+        expect(@row[:co2][:area]).to eq 117_673.960937
       end
       it 'finds the right n2o value' do
         expect(@row[:n2o][:area]).to eq 392.561584
@@ -89,7 +90,7 @@ describe DataParser do
       it 'finds the right vial' do
         expect(@row[:vial]).to eq '4'
       end
-      it 'finds the right ch4 area' do 
+      it 'finds the right ch4 area' do
         expect(@row[:ch4][:area]).to eq 21.521156
       end
       it 'finds the right co2 area' do
@@ -112,7 +113,7 @@ describe DataParser do
       expect(@result.size).to eq 4
     end
     describe 'row 3' do
-      before do 
+      before do
         @row = @result[2]
       end
 
@@ -172,7 +173,7 @@ describe DataParser do
       it 'finds the right vial' do
         expect(@row[:vial]).to eq "11"
       end
-      it 'finds the right ch4 area' do 
+      it 'finds the right ch4 area' do
         expect(@row[:ch4][:area]).to eq 17.119198
       end
       it 'finds the right co2 area' do
@@ -185,10 +186,10 @@ describe DataParser do
     end
   end
 
-  it 'can tell if we have a vial' do
-    parser = DataParser.new()
-    expect(parser.is_vial?("13-S7-LTER-243")).to be_truthy
-    expect(parser.is_vial?("13:37:30")).to be_falsy
+  it 'can tell if we have a chemstation vial' do
+    parser = ChemstationDataParser.new
+    expect(parser.vial?('13-S7-LTER-243')).to be_truthy
+    expect(parser.vial?('13:37:30')).to be_falsy
   end
 
   describe 'parsing an old results file' do
@@ -212,7 +213,7 @@ describe DataParser do
       it 'finds the right ch4 value' do
         expect(@row[:ch4][:ppm]).to eq 3.1506
       end
-      it 'finds the right ch4 area' do 
+      it 'finds the right ch4 area' do
         expect(@row[:ch4][:area]).to eq 25384.0
       end
       it 'finds the right co2 value' do
@@ -234,12 +235,12 @@ describe DataParser do
   describe 'parsing a CIMMYT result file' do
 
     before do
-      @parser = DataParser.new
+      @parser = ChemstationDataParser.new
     end
 
     it 'parses the vial correctly' do
-      vial = @parser.parse_vial(["12/07/12 6:49:12 PM",29,"07-Dec-12, 18:44:16","F-107-T0","CH4",0.500317,22.6583])
-      expect(vial).to eq "F-107-T0"
+      vial = @parser.parse_vial(['12/07/12 6:49:12 PM', 29, '07-Dec-12, 18:44:16', 'F-107-T0','CH4',0.500317,22.6583])
+      expect(vial).to eq 'F-107-T0'
     end
 
     it 'parses a shorted vial correctly' do
@@ -266,32 +267,32 @@ describe DataParser do
     end
 
     describe 'parsing a 2015 cemstation line correctly' do
-        let(:row) {@parser.chemstation_parse(["1/10/2014 16:47", "1", "10-Jan-14", " 16:42:47", "STD00A", nil, "CH4", "0", "76.270676", "0", "co2", "0", "151973.625", "0", "N2O", "0", "428.179932", "0", "AutoInt", "Z:\\CIMMYT20131218AND1222S1S2BENGC\\CIMMYT20131218AND1222S1S2BENGC 2014-01-10 16-39-36\\STD00A.D", nil]) }
- 
+      let(:row) {@parser.chemstation_parse(['1/10/2014 16:47', '1', '10-Jan-14', ' 16:42:47', 'STD00A', nil, 'CH4', '0', '76.270676', '0', 'co2', '0', '151973.625', '0', 'N2O', '0', '428.179932', '0', 'AutoInt', 'Z:\\CIMMYT20131218AND1222S1S2BENGC\\CIMMYT20131218AND1222S1S2BENGC 2014-01-10 16-39-36\\STD00A.D', nil]) }
+
       it 'has the right ch4 area' do
         expect(row[:ch4][:area]).to eq 76.270676
       end
-      it 'hss the right n2o area' do 
+      it 'hss the right n2o area' do
         expect(row[:n2o][:area]).to eq 428.179932
       end
       it 'has the right co2 area' do
-        expect(row[:co2][:area]).to eq 151973.625
+        expect(row[:co2][:area]).to eq 151_973.625
       end
     end
   end
 
   describe "time parsing in a cimmit file" do
-    before do 
-      @parser = DataParser.new
+    before do
+      @parser = ChemstationDataParser.new
     end
-    it "parses time correctly" do
-      expect(@parser.parse_time("10-Jan-14 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
-    end
-    it 'parses other format' do
-      expect(@parser.parse_time("1/10/2014 16:42:47")).to eq DateTime.new(2014,1,10,16,42,47)
+    it 'parses time correctly' do
+      expect(@parser.parse_time('10-Jan-14 16:42:47')).to eq DateTime.new(2014,1,10,16,42,47)
     end
     it 'parses other format' do
-      expect(@parser.parse_time("01/10/2014 4:42:47 PM")).to eq DateTime.new(2014,1,10,16,42,47)
+      expect(@parser.parse_time('1/10/2014 16:42:47')).to eq DateTime.new(2014,1,10,16,42,47)
+    end
+    it 'parses other format' do
+      expect(@parser.parse_time('01/10/2014 4:42:47 PM')).to eq DateTime.new(2014,1,10,16,42,47)
     end
     it 'parses other format' do
       expect(@parser.parse_time('04/12/12 3:46:15 PM')).to eq DateTime.new(2012,4,12,15,46,15)
