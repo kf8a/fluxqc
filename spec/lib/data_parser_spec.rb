@@ -221,6 +221,11 @@ describe DataParser do
     end
   end
 
+
+  describe 'file parser selection' do
+
+  end
+
   # TODO: do I need to deal with encoding issues..
   # describe 'parsing a macro generated file' do
   #   before do

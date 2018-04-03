@@ -135,8 +135,8 @@ class DataFileLoader
     COMPOUNDS.each do |c|
       value = vial[c.to_sym]
       compound = Compound.find_by_name(c)
-      column = 0
-      column = value[:column] if c == 'n2o'
+
+      column = value[:column]
       standard_curve = standard_curves[c][column]
       standard_curve.acquired_at = vial[:acquired_at]
       standard_curve.save
@@ -144,7 +144,7 @@ class DataFileLoader
       standard = Standard.create(vial:         vial[:vial],
                                  compound_id:  compound.id,
                                  acquired_at:  vial[:acquired_at],
-                                 column:       value[:column],
+                                 column:       column,
                                  area:         value[:area],
                                  ppm:          value[:ppm])
       standard_curve.standards << standard

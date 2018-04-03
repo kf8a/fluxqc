@@ -23,6 +23,8 @@ class DataParser
     case filetype(lines)
     when :chemstation
       ChemstationDataParser.new.parse(lines)
+    when :double_loop_chemstation
+      DoubleLoopChemstationDataParser.new.parse(lines)
     when :forth
       ForthDataParser.new.parse(lines)
     else
@@ -47,11 +49,24 @@ class DataParser
     if lines[0][0].nil?
       :old
     elsif lines[0][0].match?(/Analysis Date/)
-      :chemstation
+      if double_loop?(lines)
+        :double_loop_chemstation
+      else
+        :chemstation
+      end
     elsif lines[2][0].match?(/standard/)
       :forth
     else
       :old
     end
+  end
+
+  def double_loop?(lines)
+    lines.each do |row|
+      vial = ChemstationUtils.find_vial(row)
+      p vial
+      return true if vial =~ /^B-/ || vial =~ /B\d+/
+    end
+    false
   end
 end
