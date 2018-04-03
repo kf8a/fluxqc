@@ -54,7 +54,7 @@ class ChemstationDataParser
     if cell =~ /(\d+)\/(\d+)\/(.+)/
       cell = "#{$2}/#{$1}/#{$3}"
     end
-    DateTime.parse(cell)
+    Time.parse(cell)
   end
 
   def looks_like_time?(vial)
