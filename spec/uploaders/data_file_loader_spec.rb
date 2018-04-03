@@ -14,46 +14,46 @@ describe DataFileLoader do
     Compound.destroy_all
   end
 
-  describe '2011 style data file' do
-    before(:all) do
-      run = FactoryBot.create :run
-      run.setup_file = fixture_file_upload('/setup_test.csv')
-      run.data_files = [fixture_file_upload('2011_results.csv')]
-      run.save
-      SetupFileLoader.perform(run.id)
-      DataFileLoader.perform(run.id)
-      @incubation = run.incubations.order(:sampled_at).first
-    end
+  # describe '2011 style data file' do
+  #   before(:all) do
+  #     run = FactoryBot.create :run
+  #     run.setup_file = fixture_file_upload('/setup_test.csv')
+  #     run.data_files = [fixture_file_upload('2011_results.csv')]
+  #     run.save
+  #     SetupFileLoader.perform(run.id)
+  #     DataFileLoader.perform(run.id)
+  #     @incubation = run.incubations.order(:sampled_at).first
+  #   end
+  #
+  #   it 'updates the measurement with the co2 ppm' do
+  #     expect(@incubation.flux('co2').measurements.order(:vial).first.ppm).to eq 431.5
+  #   end
+  #   it 'updates the measurement with the n2o ppm' do
+  #     expect(@incubation.flux('n2o').measurements.order(:vial).first.ppm).to eq 0.361
+  #   end
+  #   it 'updates the measurement with the ch4 ppm' do
+  #     expect(@incubation.flux('ch4').measurements.order(:vial).first.ppm).to eq 1.854
+  #   end
+  #   it 'has a flux' do
+  #     expect(@incubation.flux('ch4')).to_not be_nil
+  #   end
+  # end
 
-    it 'updates the measurement with the co2 ppm' do
-      expect(@incubation.flux('co2').measurements.order(:vial).first.ppm).to eq 431.5
-    end
-    it 'updates the measurement with the n2o ppm' do
-      expect(@incubation.flux('n2o').measurements.order(:vial).first.ppm).to eq 0.361
-    end
-    it 'updates the measurement with the ch4 ppm' do
-      expect(@incubation.flux('ch4').measurements.order(:vial).first.ppm).to eq 1.854
-    end
-    it 'has a flux' do
-      expect(@incubation.flux('ch4')).to_not be_nil
-    end
-  end
-
-  describe 'a 2010 data file with standards' do
-    before do
-      run = FactoryBot.create :run, data_files: [fixture_file_upload('/glbrc-2010.csv')],
-                                    setup_file: fixture_file_upload('/setup_test.csv')
-
-      expect(SetupFileLoader.perform(run.id)).to be_truthy
-      expect(DataFileLoader.perform(run.id)).to be_truthy
-      @run = Run.find(run.id)
-      @run.standard_curves.reload
-    end
-
-    it 'has no standard curve' do
-      expect(@run.standard_curves.empty?).to eq true
-    end
-  end
+  # describe 'a 2010 data file with standards' do
+  #   before do
+  #     run = FactoryBot.create :run, data_files: [fixture_file_upload('/glbrc-2010.csv')],
+  #                                   setup_file: fixture_file_upload('/setup_test.csv')
+  #
+  #     expect(SetupFileLoader.perform(run.id)).to be_truthy
+  #     expect(DataFileLoader.perform(run.id)).to be_truthy
+  #     @run = Run.find(run.id)
+  #     @run.standard_curves.reload
+  #   end
+  #
+  #   it 'has no standard curve' do
+  #     expect(@run.standard_curves.empty?).to eq true
+  #   end
+  # end
 
   describe 'a GC data file' do
     before(:all) do
@@ -66,7 +66,7 @@ describe DataFileLoader do
       @measurement = @incubation.flux('n2o').measurements.order(:vial).first
     end
 
-    it 'updateds the acquired time' do
+    it 'updates the acquired time' do
       # Time.zone = 'Eastern Time (US & Canada)'
       expect(@measurement.acquired_at).to eq Time.utc(2012, 4, 12, 21, 9, 26)
     end
