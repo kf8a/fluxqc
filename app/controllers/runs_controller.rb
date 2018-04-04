@@ -94,7 +94,7 @@ class RunsController < ApplicationController
   end
 
   def updated_at
-    render text: run.updated_at
+    render plain: run.updated_at
   end
 
   def reject
