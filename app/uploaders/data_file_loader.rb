@@ -150,8 +150,10 @@ class DataFileLoader
       standard_curve.standards << standard
 
       # we don't have ppm's in the file. Try to deduce it from the name
+      standard_names = STANDARDS.keys
       if standard.area == standard.ppm || standard.ppm.nil?
-        standard_values = STANDARDS[standard.vial.chop]
+        key = standard_names.select { |name| standard.vial.chop.match(name) }.first
+        standard_values = STANDARDS[key]
 
         if standard_values
           standard.ppm = standard_values.fetch(c)

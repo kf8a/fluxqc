@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StandardCurvesController < ApplicationController
   def show
     standard_curve = StandardCurve.find(params[:id])
@@ -8,14 +10,14 @@ class StandardCurvesController < ApplicationController
 
   def update
     standard_curve = StandardCurve.find(params[:id])
-    unless standard_curve.run.published?
+    if standard_curve.run.published?
+      head :forbidden
+    else
       standard_curve.data = params[:data]
       standard_curve.save
       # run = standard_curve.run
       # CalibrateJob.perform_later run
       head :ok
-    else
-      head :forbidden
     end
   end
 end

@@ -20,7 +20,7 @@ class RunsController < ApplicationController
     @incubations = @run.incubations
     @standard_curves = @run.standard_curves.order('created_at')
     respond_with do |format|
-      format.html { render  layout: 'qc' }
+      format.html { render layout: 'qc' }
       format.json { render json: @incubations }
     end
   end
@@ -58,10 +58,11 @@ class RunsController < ApplicationController
   end
 
   def edit
-    @run = Run.includes(samples: [{incubation: :lid}, {measurements: :compound}]).find(params[:id])
+    @run = Run.includes(samples: [{ incubation: :lid }, { measurements: :compound }])
+              .find(params[:id])
     @state = @run.current_state.name.to_s
     respond_with do |format|
-      format.html { render  layout:  'qc' }
+      format.html { render layout: 'qc' }
     end
   end
 
@@ -98,11 +99,12 @@ class RunsController < ApplicationController
 
   def reject
     run.reject!
-    redirect_to runs_path(:state=>'rejected')
+    redirect_to runs_path(state: 'rejected')
   end
 
   def standard_curves
-    render nothing: true
+    head :ok
+    # render nothing: true
     # run = Run.find(params[:id])
 
     # respond_with do |format|
