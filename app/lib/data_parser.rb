@@ -49,11 +49,7 @@ class DataParser
     if lines[0][0].nil?
       :old
     elsif lines[0][0].match?(/Analysis Date/)
-      if double_loop?(lines)
-        :double_loop_chemstation
-      else
-        :chemstation
-      end
+      double_loop?(lines)
     elsif lines[2][0].match?(/standard/)
       :forth
     else
@@ -64,9 +60,8 @@ class DataParser
   def double_loop?(lines)
     lines.each do |row|
       vial = ChemstationUtils.find_vial(row)
-      p vial
-      return true if vial =~ /^B-/ || vial =~ /B\d+/
+      return :double_loop_chemstation if vial =~ /^B-/ || vial =~ /B\d+/
     end
-    false
+    :chemstation
   end
 end
