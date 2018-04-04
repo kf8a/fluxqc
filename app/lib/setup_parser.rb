@@ -34,13 +34,11 @@ class SetupParser
     format_test = xls.cell('A', 1)
     date_row = 3
     title = format_test
-    if format_test =~ /format=/
+    if format_test.match?(/format=/)
       title = xls.cell('A', 2)
       date_row = 5
     end
-    if file =~ /CIMMYT/
-      date_row = 4
-    end
+    date_row = 4 if file.match?(/CIMMYT/)
 
     sample_date = Chronic.parse(xls.cell('A', date_row).gsub(/sample date:(\s+)?/, ''))
 
@@ -52,17 +50,12 @@ class SetupParser
 
     (first_row..xls.last_row).collect do |i|
       row = xls.row(i)
-      treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
+      data = parser.parse(row)
+      treatment = data.first
       next if empty_treatment?(treatment)
       next if treatment == 'T' # for LTER samples
 
-      { run_name: title, sample_date: sample_date,
-        treatment: treatment, replicate: replicate,
-        sub_plot: sub_plot,
-        chamber: chamber, vial: vial,
-        lid: lid, height: height,
-        soil_temperature: soil_temp,
-        seconds: seconds, comments: comments }
+      new_record(data, sample_date, title)
     end.compact
   end
 
@@ -87,16 +80,21 @@ class SetupParser
     lines.collect do |row|
       next unless row[0]
 
-      treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments = parser.parse(row)
-
-      { run_name: title, sample_date: sample_date,
-        treatment: treatment, replicate: replicate,
-        sub_plot: sub_plot,
-        chamber: chamber, vial: vial,
-        lid: lid, height: height,
-        soil_temperature: soil_temp,
-        seconds: seconds, comments: comments }
+      data = parser.parse(row)
+      new_record(data, sample_date, title)
     end.compact
+  end
+
+  def self.new_record(data, sample_date, title)
+    treatment, replicate, sub_plot, chamber, vial, lid, height,
+      soil_temp, seconds, comments = data
+    { run_name: title, sample_date: sample_date,
+      treatment: treatment, replicate: replicate,
+      sub_plot: sub_plot,
+      chamber: chamber, vial: vial,
+      lid: lid, height: height,
+      soil_temperature: soil_temp,
+      seconds: seconds, comments: comments }
   end
 
   def self.locate_parser(title)
