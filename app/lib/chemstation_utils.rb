@@ -19,13 +19,12 @@ class ChemstationUtils
       CimmitVial.process_cimmit_vial(vial)
     elsif vial.match?(/-/)
       normalize_vial_name(vial)
-      vial.split(/-/).last
     else
       vial
     end
   end
 
-  def normalize_vial_name(vial)
+  def self.normalize_vial_name(vial)
     vial.split(/-/).last.sub(/B/, '')
   end
 
