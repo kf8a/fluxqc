@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# parser for style 4 setup files
 class Format4Parser
   attr_reader :row
 
@@ -8,11 +11,7 @@ class Format4Parser
   end
 
   def treatment
-    if row[2]
-      "#{normalize_name(row[0])}-#{row[2]}"
-    else
-      normalize_name(row[0])
-    end
+    normalize_name(row[0])
   end
 
   def normalize_name(name)
@@ -28,7 +27,9 @@ class Format4Parser
     end
   end
 
-  def sub_plot; end
+  def sub_plot
+    row[2]
+  end
 
   def chamber
     row[4].to_i.to_s
