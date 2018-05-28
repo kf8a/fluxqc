@@ -70,14 +70,15 @@ class Flux < ActiveRecord::Base
     f = Fitter.new(self)
     begin
       value = f.fit
-      if value.try(:nan?) || value.try(:infinite?)
-        nil
-      else
-        value
-      end
-    rescue
-      nil
+      return nil if valid_fit?(value)
+      return value
+    rescue Fitter::FitterError
+      return nil
     end
+  end
+
+  def valid_fit?(value)
+    value.try(:nan?) || value.try(:infinite?)
   end
 
   # reduced flux based on 3 points instead of 4

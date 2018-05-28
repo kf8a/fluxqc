@@ -5,6 +5,7 @@
 class FitterError < StandardError
 end
 
+# Fitting lines to points
 class Fitter
   # include Adamantium
 
