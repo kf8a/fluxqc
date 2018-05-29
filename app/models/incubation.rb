@@ -5,7 +5,7 @@
 #
 # Incubations are part of run and are specific to a particular plot
 class Incubation < ActiveRecord::Base
-  has_many :fluxes,  :dependent => :destroy
+  has_many :fluxes, dependent: :destroy
   # has_many :measurements, -> { order :vial }
   has_many :samples
   belongs_to :run
@@ -13,7 +13,7 @@ class Incubation < ActiveRecord::Base
 
   accepts_nested_attributes_for :samples
 
-  # before_save do 
+  # before_save do
   #   run.try(:touch)
   # end
 
@@ -38,7 +38,7 @@ class Incubation < ActiveRecord::Base
 
   def lter_lid_headspace
     begin
-      ((avg_height_cm-(lid.height-1)) * lid.surface_area)/1000 + lid.volume
+      ((avg_height_cm - (lid.height - 1)) * lid.surface_area) / 1000 + lid.volume
     rescue NoMethodError
       Float::NAN
     end
@@ -50,22 +50,22 @@ class Incubation < ActiveRecord::Base
   #
   # There is one cm from the top of the bucket to the mark
   def z_lid_headspace
-    (Math::PI * (((26 + 0.094697)/2)**2) * (avg_height_cm - 1))/1000
+    (Math::PI * (((26 + 0.094697) / 2)**2) * (avg_height_cm - 1)) / 1000
   end
 
   # metal buckets
-  # Pi*14.1^2*(H-0.2cm)   H is typically around 17-19cm  
-  # It should be around 10.8L if they install the chambers correctly.  
-  # This accounts for the clamped lid after they measure H.  
+  # Pi*14.1^2*(H-0.2cm) H is typically around 17-19cm
+  # It should be around 10.8L if they install the chambers correctly.
+  # This accounts for the clamped lid after they measure H.
   # The 0.2 accounts for the decrease in ht due to the lid groove.
   def y_lid_headspace
-    (Math::PI * 14.1**2 * (avg_height_cm - 0.2)/1000)
+    (Math::PI * 14.1**2 * (avg_height_cm - 0.2) / 1000)
   end
 
   # cimmyt buckets
   # Pi * 25/2 * H
   def x_lid_headspace
-    (Math::PI * (25/2.0)**2 * avg_height_cm)/1000
+    (Math::PI * (25 / 2.0)**2 * avg_height_cm) / 1000
   end
 
   def co2
@@ -81,7 +81,7 @@ class Incubation < ActiveRecord::Base
   end
 
   def vials
-    fluxes.first.measurements.collect {|measurement| measurement.sample.vial }
+    fluxes.first.measurements.collect { |measurement| measurement.sample.vial }
   end
 
   def update_samples
@@ -97,38 +97,14 @@ class Incubation < ActiveRecord::Base
   end
 
   def recompute_fluxes
-    # fluxes.each do |f|
-    #   f.flux
-    #   f.save
-    # end
-    # run.touch
+    fluxes.each do |f|
+      f.flux
+      f.save
+    end
+    run.touch
   end
 
   def measurements_for(compound)
-    fluxes.select {|x| x.compound == compound}.collect {|x| x.measurements }.flatten
+    fluxes.select { |x| x.compound == compound }.collect(&:measurements).flatten
   end
 end
-
-# == Schema Information
-#
-# Table name: incubations
-#
-#  id               :integer          not null, primary key
-#  name             :string(25)
-#  run_id           :integer
-#  soil_temperature :float
-#  treatment        :string(255)
-#  replicate        :string(255)
-#  lid_id           :integer
-#  chamber          :string(255)
-#  avg_height_cm    :float
-#  sampled_at       :datetime
-#  created_at       :datetime
-#  updated_at       :datetime
-#  sub_plot         :string(255)
-#  comments         :text
-#
-# Indexes
-#
-#  incubation_run_id  (run_id)
-#
