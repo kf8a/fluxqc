@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 gem 'backbone-on-rails'
 gem 'jquery-rails'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2'
 
 gem 'carrierwave' # , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
@@ -58,7 +58,6 @@ end
 
 group :test, :development do
   gem 'jasmine-rails'
-  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
 

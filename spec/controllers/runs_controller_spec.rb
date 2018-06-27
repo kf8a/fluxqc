@@ -13,10 +13,6 @@ describe RunsController, type: :controller do
       get :index
       expect(response).to be_success
     end
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template(:index)
-    end
   end
 
   describe "GET 'show'" do
@@ -26,10 +22,6 @@ describe RunsController, type: :controller do
     it 'returns http success' do
       get :show, params: { id: @run }
       expect(response).to be_success
-    end
-    it 'renders the show template' do
-      get :show, params: { id: @run }
-      expect(response).to render_template(:show)
     end
   end
 
@@ -53,11 +45,6 @@ describe RunsController, type: :controller do
     it 'returns http success' do
       get :new
       expect(response).to be_success
-    end
-
-    it' renders the new template' do
-      get :new
-      expect(response).to render_template(:new)
     end
   end
 
@@ -92,7 +79,7 @@ describe RunsController, type: :controller do
         run = Run.create
         allow(Run).to receive(:find).with('1').and_return(run)
         post :update, params: { id: 1, run: { name: 'test' } }
-        expect(response).to redirect_to(run_path(assigns(:run)))
+        expect(response).to redirect_to(run_path(run))
       end
     end
     describe 'with an invalid object' do
@@ -101,7 +88,7 @@ describe RunsController, type: :controller do
         allow(Run).to receive(:find).with('1').and_return(run)
         allow(run).to receive(:valid?).and_return(false)
         post :update, params: { id: 1, run: { name: 'test' } }
-        expect(response).to redirect_to(edit_run_path(assigns(:run)))
+        expect(response).to redirect_to(edit_run_path(run))
       end
     end
   end
