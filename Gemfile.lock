@@ -129,6 +129,7 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
+    ed25519 (1.2.4)
     ejs (1.1.1)
     erubi (1.7.1)
     execjs (2.7.0)
@@ -355,6 +356,7 @@ DEPENDENCIES
   dalli
   database_cleaner
   devise
+  ed25519
   factory_bot_rails
   jasmine-rails
   jquery-rails

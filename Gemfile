@@ -40,10 +40,10 @@ gem 'capistrano', '~> 2.15'
 
 group :development do
   gem 'bcrypt_pbkdf'
+  gem 'ed25519'
   gem 'net-ssh'
   gem 'rbnacl', '< 5.0'
   gem 'rbnacl-libsodium'
-  # gem 'spring'
 end
 
 # Gems used only for assets and not required

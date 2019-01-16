@@ -15,7 +15,7 @@ class CIMMITSetupParser
     "#{row[0]}#{row[3]}"
   end
 
-  def replicate 
+  def replicate
     if row[1].is_a?(Float)
       "R#{row[1].to_i}"
     else
@@ -26,7 +26,7 @@ class CIMMITSetupParser
   def sub_plot; end
 
   def chamber
-    row[4]
+    row[4].strip
   end
 
   def vial
