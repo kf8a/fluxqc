@@ -11,7 +11,9 @@ gem 'chronic'
 gem 'pg', '~> 0.20'
 # gem 'pg'
 gem 'simple_form'
-gem 'workflow'
+gem 'workflow-activerecord', '>= 4.1', '< 6.0'
+
+#gem 'workflow'
 
 gem 'active_model_serializers'
 gem 'devise'

@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
+require 'workflow'
+require 'workflow_activerecord'
+
 # The Run class is the root class of the system.
 # It holds references to incubations and standards.
 # A run represents one sampling time. It consists of all of the samples
 # taken during a sampling event on a particular study
 class Run < ActiveRecord::Base
+  include WorkflowActiverecord
+
   belongs_to :company
   has_many :incubations, -> { order 'treatment, replicate' }, dependent: :destroy
   has_many :samples, dependent: :destroy
@@ -21,7 +26,6 @@ class Run < ActiveRecord::Base
 
   # after_save :recompute_fluxes
 
-  include Workflow
   workflow do
     state :uploaded do
       event :accept,  transitions_to: :accepted
