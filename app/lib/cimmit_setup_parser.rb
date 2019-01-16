@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# CIMIT: Parsing the setup file
 class CIMMITSetupParser
   attr_reader :row, :series
 
@@ -26,13 +29,17 @@ class CIMMITSetupParser
   def sub_plot; end
 
   def chamber
-    row[4].strip
+    if row[4].nil?
+      row[4]
+    else
+      row[4].strip
+    end
   end
 
   def vial
     parts = /(\d{3})(.)/.match(row[0])
     "S#{series}-CIM-#{parts[2]}-#{parts[1]}-T#{row[2].to_i}"
-    #"S#{series}-#{parts[2]}-#{parts[1]}-T#{row[2]}"
+    # "S#{series}-#{parts[2]}-#{parts[1]}-T#{row[2]}"
   end
 
   def lid
@@ -40,7 +47,7 @@ class CIMMITSetupParser
   end
 
   def height
-    [row[6].to_f,row[7].to_f, row[8].to_f]
+    [row[6].to_f, row[7].to_f, row[8].to_f]
   end
 
   def soil_temp
@@ -55,5 +62,4 @@ class CIMMITSetupParser
     comment  = row[16]
     comment == '-' ? nil : comment
   end
-
 end
