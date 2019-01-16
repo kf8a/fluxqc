@@ -34,8 +34,10 @@
           </ul>
           <ul class='nav pull-right'>
             <% @run.current_state.events.keys.each do |event| %>
-              <li class='workflow'><%=button_to "#{event.to_s}", :action=>event %></li>
+              <li class='workflow'><%=button_to "#{event.to_s}", action: event %></li>
             <% end %>
+            <li class='workflow'><%=button_to "delete", method: :delete, action: runs, id: @run.id,
+              data: { confirm: "Are you sure you want to delete #{run.name}" }%></li>
           </ul>
           <ul class='nav pull-right'>
             <li><%= link_to 'edit', edit_run_path(@run) if params[:action]=='show' %></li>

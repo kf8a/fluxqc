@@ -38,6 +38,8 @@ gem 'unicorn', group: :production
 # Deploy with Capistrano
 gem 'capistrano', '~> 2.15'
 
+gem 'rb-readline'
+
 group :development do
   gem 'bcrypt_pbkdf'
   gem 'ed25519'

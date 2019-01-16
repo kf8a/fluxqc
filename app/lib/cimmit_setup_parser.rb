@@ -29,11 +29,10 @@ class CIMMITSetupParser
   def sub_plot; end
 
   def chamber
-    case row[4]
-    when nil then nil
-    when empty then nil
+    if row[4].blank?
+      nil
     else
-      row[4].strip
+      row[4]
     end
   end
 
