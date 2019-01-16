@@ -15,7 +15,7 @@ class CIMMITSetupParser
   end
 
   def treatment
-    "#{row[0]}#{row[3]}"
+    "#{row[0]}#{row[3]}".strip
   end
 
   def replicate
