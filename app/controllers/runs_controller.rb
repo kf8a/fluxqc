@@ -33,7 +33,6 @@ class RunsController < ApplicationController
     @run = Run.new(run_params)
     @run.company = current_user.company
     if @run.save
-      @run.uploaded
       if params[:run][:setup_file]
         # if Rails.env == 'production'
         #   Resque.enqueue(SetupFileLoader, @run.id)
