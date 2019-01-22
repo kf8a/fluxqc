@@ -4,7 +4,7 @@
 class CimmitVial
   class << self
     def cimmit_vial?(vial)
-      vial =~ /([a-z|A-Z]-?\d{3}-T\d)$/
+      vial =~ /CIM-/
     end
 
     def cimmit_vial_with_series
@@ -48,28 +48,28 @@ class CimmitVial
     end
 
     def process_cimmit_vial(vial)
-      vial = case vial
-             when cimmit_vial_order_1
-               "#{$1}-#{$3}-#{$2}-#{$4}"
-             when cimmit_vial_order_2
-               "#{$2}-#{$1}-#{$4}-#{$3}-#{$5}"
-             when cimmit_vial_order_3
-               "#{$1}-#{$3}-#{$2}-#{$4}"
-             when cimmit_vial_order_4
-               "#{$2}-#{$1}-#{$3}-#{$4}-#{$5}"
-             when cimmit_vial_with_series
-               "#{$1}#{$2}-#{$3}-#{$4}"
-             when cimmit_vial_with_spaces
-               "#{$1}-#{$2}"
-             when cimmit_vial_with_series_and_dash_plus_space
-               "#{$1}#{$2}-#{$3}-#{$4}"
-             when vial_with_series_and_no_dash
-               "#{$1}-#{$2}-#{$3}"
-             when cimmit_vial_with_dashes
-               vial = $1
-             else vial =~ cimmit_vial_without_dashes
-               vial = "#{$1}-#{$2}"
-             end
+      case vial
+      when cimmit_vial_order_1
+        "#{$1}-#{$3}-#{$2}-#{$4}"
+      when cimmit_vial_order_2
+        "#{$2}-#{$1}-#{$4}-#{$3}-#{$5}"
+      when cimmit_vial_order_3
+        "#{$1}-#{$3}-#{$2}-#{$4}"
+      when cimmit_vial_order_4
+        "#{$2}-#{$1}-#{$3}-#{$4}-#{$5}"
+      when cimmit_vial_with_series
+        "#{$1}#{$2}-#{$3}-#{$4}"
+      when cimmit_vial_with_spaces
+        "#{$1}-#{$2}"
+      when cimmit_vial_with_series_and_dash_plus_space
+        "#{$1}#{$2}-#{$3}-#{$4}"
+      when vial_with_series_and_no_dash
+        "#{$1}-#{$2}-#{$3}"
+      when cimmit_vial_with_dashes
+        $1
+      else vial =~ cimmit_vial_without_dashes
+        "#{$1}-#{$2}"
+      end
     end
   end
 end
