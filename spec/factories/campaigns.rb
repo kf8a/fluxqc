@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :campaign do
-    name "MyString"
+    name { "MyString" }
   end
 end
 

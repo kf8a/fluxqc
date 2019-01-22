@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :plot do
-    name "MyString"
+    name { "MyString" }
   end
 end
 

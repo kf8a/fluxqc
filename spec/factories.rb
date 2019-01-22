@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :measurement do
-    excluded  false
+    excluded  { false }
   end
   factory :flux do
   end
   factory :compound do
-    name 'co2'
-    ymax  5000
+    name { 'co2' }
+    ymax  { 5000 }
   end
   factory :incubation do
   end
@@ -15,8 +15,8 @@ FactoryBot.define do
   factory :run do
   end
   factory :user do
-    email     'bob@test.com'
-    password  '123testing'
+    email     { 'bob@test.com' }
+    password  { '123testing' }
   end
   factory :standard_curve do
   end

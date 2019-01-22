@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :sample do
-    vial 1
-    sampled_at "2012-01-09 13:37:35"
+    vial { 1 }
+    sampled_at { "2012-01-09 13:37:35" }
   end
 end
 
