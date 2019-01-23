@@ -1,9 +1,16 @@
-sampled_on, study, treatment, replicate, lid, minutes, ppm, avg_height_cm, compound
+sampled_on, study, treatment, replicate, lid, minutes, ppm, area, avg_height_cm, compound
 <% @run.incubations.each do |incubation | %>
   <% ['n2o','co2','ch4'].each do |compound| %>
     <% incubation.flux(compound).measurements.each do |c| %>
       <% next if c.excluded? %>
-      <%= "#{@run.sampled_on}, #{@run.study}, #{incubation.treatment}, #{incubation.replicate}, #{incubation.lid.name},#{c.seconds}, #{c.ppm}, #{incubation.avg_height_cm}, #{compound}" %>
+      <%= "#{@run.sampled_on}, #{@run.study}, #{incubation.treatment}, #{incubation.replicate}, #{incubation.lid.name},#{c.seconds}, #{c.ppm}, #{c.area}, #{incubation.avg_height_cm}, #{compound}" %>
     <% end %>
   <% end %>
-<% end %> 
+<% end %>
+<% Compound.all.each do |compound| %>
+  <% @run.standard_curves.where(compound: compound).each do |curve| %>
+    <% curve.standards.where(compound: compound).each do | standard| %>
+      <%= "#{@run.sampled_on}, #{@run.study}, standard, , ,, #{standard.ppm}, #{standard.area}, , #{compound.name}" %>
+    <% end %>
+  <% end %>
+<% end %>
