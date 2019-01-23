@@ -10,6 +10,7 @@ sampled_on, study, treatment, replicate, lid, minutes, ppm, area, avg_height_cm,
 <% Compound.all.each do |compound| %>
   <% @run.standard_curves.where(compound: compound).each do |curve| %>
     <% curve.standards.where(compound: compound).each do | standard| %>
+      <% next if standard.excluded? %>
       <%= "#{@run.sampled_on},#{@run.study},standard,#{curve.id},#{standard.id},, #{standard.ppm},#{standard.area}, ,#{compound.name}" %>
     <% end %>
   <% end %>
