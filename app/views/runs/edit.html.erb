@@ -1,9 +1,10 @@
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, msg, class: name %>
 <% end -%>
+<%= link_to "download raw data", run_path(@run.id, :csv) %>
 <%= simple_form_for @run do |f| %>
   <%= render 'form', :f => f %>
-<% end %> 
+<% end %>
 <% cache(@run) do %>
 <table class='table table-condensed'>
   <thead>
@@ -24,7 +25,7 @@
   </thead>
   <tbody>
     <% @run.incubations.each do |incubation| %>
-      <% rows = 9 %> 
+      <% rows = 9 %>
       <tr data-incubation-id=<%=incubation.id %>>
         <td rowspan=<%=rows%>><%= link_to incubation.treatment, edit_incubation_path(incubation) %></td>
         <td rowspan=<%=rows%>><%= incubation.replicate %></td>
