@@ -1,4 +1,6 @@
-require "csv"
+# frozen_string_literal: true
+
+require 'csv'
 # Measurement represents a measurement that is made on a sample
 # For example in a particular sample vial a measurement might
 # be made for CO2 and another measurement for N2O.
@@ -8,16 +10,15 @@ class Measurement < ActiveRecord::Base
   belongs_to :compound
 
   def self.by_compound(name)
-    joins(:compound).where(:compounds => {:name => name}).readonly(false)
+    joins(:compound).where(compounds: { name: name }).readonly(false)
   end
   # return the millivolts readings that are associatated with this measurement
   # i don't know if they should be stored with the object or somewhere else and
   # just keep the start stop times in this object.
   def mv
-
   end
 
-  #This is used to compute the distance for the drift correction
+  # This is used to compute the distance for the drift correction
   def position
     acquired_at.to_s
   end
@@ -32,12 +33,12 @@ class Measurement < ActiveRecord::Base
 
   # CSV streaming support
   def self.csv_header
-    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name], 
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name],
                  ['id','sampled_on', 'study', 'treatment', 'replicate', 'lid', 'minutes','ppm', 'avg_height_cm', 'name'], true)
   end
 
   def to_csv_row
-    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name], 
+    CSV::Row.new([:id, :sampled_on, :study, :treatment, :replicate, :lid, :minutes, :ppm, :avg_height, :name],
                  [flux.incubation.id, sample.run.sampled_on, sample.run.study,
                    flux.incubation.treatment, flux.incubation.replicate, flux.incubation.lid.try(:name),
                    seconds, ppm, flux.incubation.avg_height_cm, compound.name])
@@ -47,13 +48,17 @@ class Measurement < ActiveRecord::Base
   def self.find_in_batches(&block)
     #find_each will batch the results instead of getting all in one go
     joins(flux: {incubation: :run}).where('company_id =2 and excluded is false').find_each(batch_size: 1000) do |measurement|
-      yield measurement 
+      yield measurement
     end
   end
 
   private
+
   def previous_standard_curve
-    run.standard_curves.where(column: column).where('acquired_at < ?', acquired_at).order('acquired_at desc').first
+    run.standard_curves
+       .where(column: column)
+       .where('acquired_at < ?', acquired_at)
+       .order('acquired_at desc').first
   end
 
   def next_standard_curve
