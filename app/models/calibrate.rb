@@ -9,8 +9,9 @@ class Calibrate
     Compound.all.each do |compound|
       curves = run.standard_curves_for(compound)
       next if curves.empty?
+
       # TODO: need ot figure out why you get curves with no data.
-      bad_curves, good_curves = curves.partition {|x| x.all_zero? || x.data.empty? }
+      bad_curves, good_curves = curves.partition { |x| x.all_zero? || x.data.empty? }
       delete!(bad_curves)
       compute!(good_curves)
       standardize!(good_curves, compound)
@@ -20,7 +21,7 @@ class Calibrate
 
   private
 
- def standardize!(curves, compound)
+  def standardize!(curves, compound)
     st = Standardizer.new
     st.standard_curves = curves
     run.measurements_for(compound).each do |measurement|
@@ -37,8 +38,6 @@ class Calibrate
   end
 
   def delete!(curves)
-    curves.each do |curve|
-      curve.destroy
-    end
+    curves.each(&:destroy)
   end
 end

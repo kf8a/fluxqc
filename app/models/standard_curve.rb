@@ -30,6 +30,7 @@ class StandardCurve < ActiveRecord::Base
     begin
       f.linear_fit
     rescue
+      {}
     end
   end
 
@@ -67,13 +68,9 @@ class StandardCurve < ActiveRecord::Base
   end
 
   def compute!
-    slope = Float::NAN
-    intercept = Float::NAN
     result = fit_line
-    if result
-      self.slope      = result.fetch(:slope, Float::NAN)
-      self.intercept  = result.fetch(:offset, Float::NAN)
-    end
+    slope = result.fetch(:slope, Float::NAN)
+    intercept = result.fetch(:offset, Float::NAN)
     [slope, intercept]
   end
 

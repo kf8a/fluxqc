@@ -115,7 +115,7 @@ class Flux < ActiveRecord::Base
       end
       line
     rescue
-      {slope: nil, offset: nil, r2: nil}
+      { slope: nil, offset: nil, r2: nil }
     end
   end
 
@@ -127,23 +127,23 @@ class Flux < ActiveRecord::Base
     h[:ymax] = ymax
     h[:ymin] = ymin
     f = fit_line
-    if f.try(:nan?)
-      h[:fit_line] = nil
-    else
-      h[:fit_line] = f
-    end
+    h[:fit_line] = if f.try(:nan?)
+                     nil
+                   else
+                     f
+                   end
     m = multiplier
-    if m.try(:nan?)
-      h[:multiplier] = nil
-    else
-      h[:multiplier] = m
-    end
+    h[:multiplier] = if m.try(:nan?)
+                       nil
+                     else
+                       m
+                     end
     f = flux
-    if f.try(:nan?)
-      h[:flux] = nil
-    else
-      h[:flux] = f
-    end
+    h[:flux] = if f.try(:nan?)
+                 nil
+               else
+                 f
+               end
     h
   end
 
