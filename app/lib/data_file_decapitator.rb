@@ -13,6 +13,7 @@ class DataFileDecapitator
     result = 0
     lines.each do |row|
       break if row[1] =~ /\d+/
+
       result += 1
     end
     result
