@@ -102,6 +102,7 @@ class DataFileLoader
   def process_sample(vial)
     sample = @run.samples.where(vial: vial[:vial]).first
     return unless sample
+
     COMPOUNDS.each do |c|
       measurement = sample.measurements.by_compound(c).first
 
@@ -141,12 +142,13 @@ class DataFileLoader
       standard_curve.acquired_at = vial[:acquired_at]
       standard_curve.save
 
-      standard = Standard.create(vial:         vial[:vial],
-                                 compound_id:  compound.id,
-                                 acquired_at:  vial[:acquired_at],
-                                 column:       column,
-                                 area:         value[:area],
-                                 ppm:          value[:ppm])
+      standard = Standard.create(vial: vial[:vial],
+                                 compound_id: compound.id,
+                                 acquired_at: vial[:acquired_at],
+                                 column: column,
+                                 area: value[:area],
+                                 excluded: exclude_standard?(compound, value[:ppm]),
+                                 ppm: value[:ppm])
       standard_curve.standards << standard
 
       # we don't have ppm's in the file. Try to deduce it from the name
@@ -165,6 +167,10 @@ class DataFileLoader
       end
       standard.save
     end
+  end
+
+  def exclude_standard?(compound, ppm)
+    ppm == 0 && (compound.name == 'co2' || compound.name == 'ch4')
   end
 
   def find_or_create_standard_curve(compound)
