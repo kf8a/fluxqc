@@ -33,6 +33,7 @@ describe CimmitVial do
   end
   it 'parses vials with CIM-S3-120-F-T0 order2' do
     expect(CimmitVial.process_cimmit_vial('CIM-S3-102-F-T0')).to eq 'S3-CIM-F-102-T0'
+    expect(CimmitVial.process_cimmit_vial('CIM-S15-111-F-T0')).to eq 'S15-CIM-F-111-T0'
   end
   it 'parses vials with S1-CIM-B-120-T0 order3' do
     expect(CimmitVial.process_cimmit_vial('S1-CIM-B-102-T0')).to eq 'S1-CIM-B-102-T0'

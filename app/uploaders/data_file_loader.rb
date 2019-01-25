@@ -58,6 +58,7 @@ class DataFileLoader
       # Filter out samples with the name BLANK since they are used to
       # just adjust the number of vials to fit a standard try
       next if vial[:vial] =~ /BLANK/i
+
       if vial[:vial].match?(/(CKH|STD|check|)?.*[a-z]$/i)
         if get_new_standard_curves
           get_new_standard_curves = false
