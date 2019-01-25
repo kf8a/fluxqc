@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe StandardCurve do
-  it {is_expected.to have_many :standards}
-  it {is_expected.to belong_to :run}
-  it {is_expected.to belong_to :compound}
-  it {is_expected.to have_many :samples}
+  it { is_expected.to have_many :standards }
+  it { is_expected.to belong_to :run }
+  it { is_expected.to belong_to :compound }
+  it { is_expected.to have_many :samples }
 
-  let (:standard_curve) {FactoryBot.create :standard_curve}
+  let(:standard_curve) { FactoryBot.create :standard_curve }
 
   describe 'getting data and computing parameters' do
     before(:each) do
@@ -25,8 +27,8 @@ describe StandardCurve do
 
     it 'returns a list of areas and ppms' do
       expect(standard_curve.data[0]).to include(id: @standard1.id,
-                                                key:10,
-                                                value:2,
+                                                key: 10,
+                                                value: 2,
                                                 name: nil,
                                                 deleted: false)
     end
@@ -47,17 +49,16 @@ describe StandardCurve do
   describe 'another parameter set' do
     before do
       data = [
-      [8.940234,0],
-      [26.697727,0.565],
-      [30.303551,0.806],
-      [33.248451,1.21],
-      [38.959995,1.613],
-      [44.405891,2.419],
-      [50.428177,3.226]
+        [8.940234, 0],
+        [26.697727, 0.565],
+        [30.303551, 0.806],
+        [33.248451, 1.21],
+        [38.959995, 1.613],
+        [44.405891, 2.419],
+        [50.428177, 3.226]
       ]
 
-      standard_curve = StandardCurve.new
-      standards = data.map do |area, ppm| 
+      standards = data.map do |area, ppm|
         standard = Standard.new
         allow(standard).to receive(:area).and_return(area)
         allow(standard).to receive(:ppm).and_return(ppm)
@@ -79,22 +80,29 @@ describe StandardCurve do
     it 'returns false for all_zero?' do
       expect(@standard_curve.all_zero?).to eq false
     end
+
+    it 'returns something for fit_line' do
+      expect(@standard_curve.fit_line[:slope]).to eq 0.07783319452961618
+    end
+
+    it 'returns the right thing on compute!' do
+      expect(@standard_curve.compute!).to eq [0.07783319452961618, -1.1849844311358793]
+    end
   end
 
   describe 'a curve with all zero areas when the detector failed' do
     before do
       data = [
-      [0,0],
-      [0,0.565],
-      [0,0.806],
-      [0,1.21],
-      [0,1.613],
-      [0,2.419],
-      [0,3.226]
+        [0, 0],
+        [0, 0.565],
+        [0, 0.806],
+        [0, 1.21],
+        [0, 1.613],
+        [0, 2.419],
+        [0, 3.226]
       ]
 
-      standard_curve = StandardCurve.new
-      standards = data.map do |area, ppm| 
+      standards = data.map do |area, ppm|
         standard = Standard.new
         allow(standard).to receive(:area).and_return(area)
         allow(standard).to receive(:ppm).and_return(ppm)
@@ -105,33 +113,11 @@ describe StandardCurve do
     end
 
     it 'returns true for all_zero?' do
-      expect(@standard_curve.all_zero?).to eq true 
+      expect(@standard_curve.all_zero?).to eq true
     end
-
   end
 
   describe 'json output' do
     it 'includes a list of fluxes that are affected by the standard curve'
   end
-
 end
-
-# == Schema Information
-#
-# Table name: standard_curves
-#
-#  id          :integer          not null, primary key
-#  run_id      :integer
-#  compound_id :integer
-#  slope       :float
-#  intercept   :float
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  column      :integer
-#  coeff       :string(255)
-#  acquired_at :datetime
-#
-# Indexes
-#
-#  standard_curves_acquired_at_idx  (acquired_at)
-#
