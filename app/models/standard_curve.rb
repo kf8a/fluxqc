@@ -71,7 +71,7 @@ class StandardCurve < ActiveRecord::Base
     result = fit_line
     self.slope = result.fetch(:slope, Float::NAN)
     self.intercept = result.fetch(:offset, Float::NAN)
-    [self.slope, self.intercept]
+    [slope, intercept]
   end
 
   # This is used to compute the distance for the drift correction
