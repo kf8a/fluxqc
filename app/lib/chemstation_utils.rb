@@ -25,7 +25,10 @@ class ChemstationUtils
   end
 
   def self.normalize_vial_name(vial)
-    vial.split(/-/).last.sub(/B/, '')
+    my_vial = vial.split(/-/).last # .sub(/B/, '')
+
+    /B?-?(?<name>.+)/ =~ my_vial
+    name
   end
 
   def self.find_vial(row)

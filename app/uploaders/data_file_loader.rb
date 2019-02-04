@@ -6,16 +6,14 @@ class DataFileLoader
   @queue = :data_queue
 
   # TODO: this needs to be in the tank table
-  STANDARDS = {
-    'STD0'  => { 'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000 },
-    'STD00' => { 'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000 },
-    'STD07' => { 'n2o' => 0.294, 'co2' =>  350.423, 'ch4' => 0.565 },
-    'STD10' => { 'n2o' => 0.420, 'co2' =>  500.605, 'ch4' => 0.806 },
-    'STD15' => { 'n2o' => 0.629, 'co2' =>  750.907, 'ch4' => 1.210 },
-    'STD20' => { 'n2o' => 0.839, 'co2' => 1001.201, 'ch4' => 1.613 },
-    'STD30' => { 'n2o' => 1.259, 'co2' => 1501.815, 'ch4' => 2.419 },
-    'STD40' => { 'n2o' => 1.678, 'co2' => 2002.419, 'ch4' => 3.226 }
-  }.freeze
+  STANDARDS = { 'STD0'  => { 'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000 },
+                'STD00' => { 'n2o' => 0.000, 'co2' =>   0.000,  'ch4' => 0.000 },
+                'STD07' => { 'n2o' => 0.294, 'co2' =>  350.423, 'ch4' => 0.565 },
+                'STD10' => { 'n2o' => 0.420, 'co2' =>  500.605, 'ch4' => 0.806 },
+                'STD15' => { 'n2o' => 0.629, 'co2' =>  750.907, 'ch4' => 1.210 },
+                'STD20' => { 'n2o' => 0.839, 'co2' => 1001.201, 'ch4' => 1.613 },
+                'STD30' => { 'n2o' => 1.259, 'co2' => 1501.815, 'ch4' => 2.419 },
+                'STD40' => { 'n2o' => 1.678, 'co2' => 2002.419, 'ch4' => 3.226 } }.freeze
 
   # n2o    co2     ch4
   # 0.275  351.406 0.551 STD07
@@ -59,7 +57,7 @@ class DataFileLoader
       # just adjust the number of vials to fit a standard try
       next if vial[:vial] =~ /BLANK/i
 
-      if vial[:vial].match?(/(CKH|STD|check|)?.*[a-z]$/i)
+      if vial[:vial].match?(/(CHK|CKH|STD|check|)?.*[a-z]$/i)
         if get_new_standard_curves
           get_new_standard_curves = false
           standard_curves = new_standard_curves
