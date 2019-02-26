@@ -9,11 +9,9 @@ gem 'rails', '~> 5.2'
 gem 'carrierwave' # , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
 gem 'pg', '~> 0.20'
-# gem 'pg'
+
 gem 'simple_form'
 gem 'workflow-activerecord', '>= 4.1', '< 6.0'
-
-#gem 'workflow'
 
 gem 'active_model_serializers'
 gem 'devise'
@@ -67,7 +65,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'launchy'
