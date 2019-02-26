@@ -48,8 +48,10 @@ class Fitter
     raise FitterError, 'can not compute slope with less than 2 data points' if data.length < 2
     # return {} if data.length < 2
     raise FitterError, 'can not compute slope with only 1 x value' if only_one_x_value?(data)
+
     data.each do |datum|
       next if bad_datum(datum)
+
       x = datum[:key].to_f
       y = datum[:value].to_f
       sum_x  += x
@@ -61,13 +63,14 @@ class Fitter
     end
 
     return { slope: Float::NAN, offset: Float::NAN, r2: Float::NAN } if count.zero?
+
     # return  if count == 0
 
     @slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x)
     @offset = (sum_y / count) - (slope * sum_x) / count
 
-    mean_y = sum_y / count
-    sst = sse = 0
+    # mean_y = sum_y / count
+    # sst = sse = 0
 
     @correlation = (count * sum_xy - sum_x * sum_y) /
                    Math.sqrt((count * sum_xx - sum_x * sum_x) * (count * sum_yy - sum_y * sum_y))

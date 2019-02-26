@@ -35,12 +35,12 @@ class DataFileLoader
     run = Run.find(run_id)
     dataloader = DataFileLoader.new(run)
 
-    run.data_files.each do |data_file|
-      file_path = data_file.current_path
-      vials = DataParser.new.parse(file_path)
+    vials = run.data_files.collect do |data_file|
+      DataParser.new.parse(data_file.current_path)
+    end.flatten
 
-      dataloader.process_vials(vials)
-    end
+    dataloader.process_vials(vials)
+
     # calibrate and compute fluxes
     c = Calibrate.new(run)
     c.calibrate!
