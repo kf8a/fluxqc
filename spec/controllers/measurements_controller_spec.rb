@@ -10,7 +10,7 @@ describe MeasurementsController, type: :controller do
     end
     it 'returns http success' do
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

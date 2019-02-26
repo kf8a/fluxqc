@@ -11,7 +11,7 @@ describe RunsController, type: :controller do
   describe "GET 'index'" do
     it 'returns http success' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -21,7 +21,7 @@ describe RunsController, type: :controller do
     end
     it 'returns http success' do
       get :show, params: { id: @run }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -33,7 +33,7 @@ describe RunsController, type: :controller do
     end
     it 'returns http success' do
       get :updated_at, params: { id: @run }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it 'returns the updated_at timestamp' do
       get :updated_at, params: { id: @run }
@@ -44,7 +44,7 @@ describe RunsController, type: :controller do
   describe 'GET :new' do
     it 'returns http success' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -69,7 +69,7 @@ describe RunsController, type: :controller do
     it 'is succesfull' do
       run = FactoryBot.create :run
       get :edit, params: { id: run }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -104,7 +104,7 @@ describe RunsController, type: :controller do
     it 'delivers a sample table' do
       run = FactoryBot.create :run
       get :gcinput, params: { id: run, format: :csv }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -106,6 +106,7 @@ class DataFileLoader
       measurement = sample.measurements.by_compound(c).first
 
       value = vial[c.to_sym]
+      next unless value
 
       measurement.column = if c == 'n2o'
                              value[:column]
@@ -134,6 +135,8 @@ class DataFileLoader
 
     COMPOUNDS.each do |c|
       value = vial[c.to_sym]
+      next unless value
+
       compound = Compound.find_by_name(c)
 
       column = value[:column]

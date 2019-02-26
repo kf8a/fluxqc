@@ -37,11 +37,9 @@ class Incubation < ActiveRecord::Base
   end
 
   def lter_lid_headspace
-    begin
-      ((avg_height_cm - (lid.height - 1)) * lid.surface_area) / 1000 + lid.volume
-    rescue NoMethodError
-      Float::NAN
-    end
+    ((avg_height_cm - (lid.height - 1)) * lid.surface_area) / 1000 + lid.volume
+  rescue NoMethodError
+    Float::NAN
   end
 
   # plastic bucket
@@ -85,7 +83,7 @@ class Incubation < ActiveRecord::Base
   end
 
   def update_samples
-    self.samples << fluxes.first.measurements.collect(&:sample)
+    samples << fluxes.first.measurements.collect(&:sample)
   end
 
   def seconds
