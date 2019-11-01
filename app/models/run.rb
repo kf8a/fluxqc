@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'workflow'
-require 'workflow_activerecord'
 
 # The Run class is the root class of the system.
 # It holds references to incubations and standards.
