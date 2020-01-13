@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .treatment-label {
-  font-size:small;
+  font-size: small;
 }
 
 .incubation-input {
@@ -16,18 +16,17 @@ ul {
 
 .uploaded_file {
   display: block;
-  width: 50%;
   float: right;
+  width: 50%;
 }
 
 #title-block {
   position: fixed;
+  top: 0;
   width: 100%;
   background-color: silver;
+  filter: alpha(opacity = 60); // For IE8 and earlier
   opacity: .6;
-  filter:alpha(opacity = 60); // For IE8 and earlier
-  top: 0;
-
 }
 
 #spacer {
