@@ -26,16 +26,16 @@ class Flux.ScatterPlot
      .attr('height', @height)
 
     ymax = d3.max(@data, (d) -> d.value)
-    ymax = 1.5 unless ymax > 1.5 
+    ymax = 1.5 unless ymax > 1.5
     ymin = d3.min(@data, (d) -> d.value)
     ymin = 0 unless ymin < 0
 
     label_format = d3.format('3.4r')
 
     y = d3.scale.linear()
-     .domain([ymin, ymax])
-     .range([@margin, @height - @margin])
-     .nice()
+      .domain([ymin, ymax])
+      .range([@margin, @height - @margin])
+      .nice()
 
     x = d3.scale.linear()
       .domain([0, d3.max(@data, (d) -> d.key)])
@@ -54,20 +54,20 @@ class Flux.ScatterPlot
     g.append('svg:text')
       .attr('transform', 'scale(1,-1)')
       .attr('x', 80)
-      .attr('y',-@height + @margin-20) 
+      .attr('y',-@height + @margin-20)
       .text(@note)
 
     g.append('svg:text')
       .attr('transform', 'scale(1,-1)')
       .attr('x', 80)
-      .attr('y',-@height + @margin+20) 
+      .attr('y',-@height + @margin+20)
       .text(@model.get('compound').name)
 
     if @r2?
       g.append('svg:text')
         .attr('transform', 'scale(1,-1)')
         .attr('x', 80)
-        .attr('y',-@height + @margin) 
+        .attr('y',-@height + @margin)
         .text("r2 = " + @r2.toPrecision(3))
 
     if @flux?
@@ -118,7 +118,7 @@ class Flux.ScatterPlot
       .attr('x2', (d) -> x(d))
       .attr('y2',@margin - 5)
 
-    # #tick labels 
+    # #tick labels
     g.selectAll('.xLabel')
       .data(x.ticks(5))
       .enter().append('svg:text')
@@ -137,7 +137,7 @@ class Flux.ScatterPlot
       .attr('x2', x(0))
       .attr('y2', y(ymax))
 
-    # tick labels 
+    # tick labels
     g.selectAll('.yLabel')
       .data(y.ticks(5))
       .enter().append('svg:text')
