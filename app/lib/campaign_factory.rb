@@ -1,3 +1,2 @@
 class CampaignFactory
-
 end

@@ -9,9 +9,9 @@ module ApplicationHelper
 
   def recent(model)
     if model.updated_at
-      "recent_" + (model.updated_at > 3.weeks.ago).to_s
+      'recent_' + (model.updated_at > 3.weeks.ago).to_s
     else
-      "unkown"
+      'unkown'
     end
   end
 end

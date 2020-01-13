@@ -24,8 +24,8 @@ ul {
   position: fixed;
   width: 100%;
   background-color: silver;
-  opacity:0.6;
-  filter:alpha(opacity=60); /* For IE8 and earlier */
+  opacity: .6;
+  filter:alpha(opacity = 60); // For IE8 and earlier
   top: 0;
 
 }
