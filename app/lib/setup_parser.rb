@@ -67,7 +67,7 @@ class SetupParser
     lines = CSV.readlines(file)
     first_row = lines.shift
     format_test = first_row[0]
-    title = first_row[0]
+    title = first_row[1]
     2.times { lines.shift } # remove the header limes
     next_row = lines.shift
     sample_date = Chronic.parse(next_row[0].gsub(/sample date:(\s+)?/, ''))
