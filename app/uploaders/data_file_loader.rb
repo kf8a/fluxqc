@@ -148,9 +148,8 @@ class DataFileLoader
                                  compound_id: compound.id,
                                  acquired_at: vial[:acquired_at],
                                  column: column,
-                                 area: value[:area],
-                                 excluded: exclude_standard?(compound, value[:ppm]),
-                                 ppm: value[:ppm])
+                                 area: value[:area])
+
       standard_curve.standards << standard
 
       # we don't have ppm's in the file. Try to deduce it from the name
@@ -161,6 +160,7 @@ class DataFileLoader
 
         if standard_values
           standard.ppm = standard_values.fetch(c)
+          standard.excluded = true if standard.ppm.zero?
         else
           # we propably have a check standard or failed to look up a standard.
           standard.ppm = CHK[c]
@@ -169,10 +169,6 @@ class DataFileLoader
       end
       standard.save
     end
-  end
-
-  def exclude_standard?(compound, ppm)
-    ppm == 0 && (compound.name == 'co2' || compound.name == 'ch4')
   end
 
   def find_or_create_standard_curve(compound)

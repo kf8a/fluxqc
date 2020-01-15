@@ -158,30 +158,4 @@ describe DataFileLoader do
       expect(@run.samples.size).to eq 44
     end
   end
-
-  describe 'criteria for standard exclusion' do
-    before do
-      @loader = DataFileLoader.new
-    end
-    it 'rejects ch4 standards with 0 ppm' do
-      compound = OpenStruct.new(name: 'ch4')
-      expect(@loader.exclude_standard?(compound, 0)).to be true
-    end
-    it 'accepts ch4 standards with 1 ppm' do
-      compound = OpenStruct.new(name: 'ch4')
-      expect(@loader.exclude_standard?(compound, 1)).to be false
-    end
-    it 'rejects co2 standards with 0 ppm' do
-      compound = OpenStruct.new(name: 'co2')
-      expect(@loader.exclude_standard?(compound, 0)).to be true
-    end
-    it 'accepts co2 standards with 1 ppm' do
-      compound = OpenStruct.new(name: 'co2')
-      expect(@loader.exclude_standard?(compound, 1)).to be false
-    end
-    it 'accepts n2o standards with 0 ppm' do
-      compound = OpenStruct.new(name: 'n2o')
-      expect(@loader.exclude_standard?(compound, 0)).to be false
-    end
-  end
 end
