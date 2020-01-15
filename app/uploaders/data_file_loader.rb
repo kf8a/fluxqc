@@ -161,6 +161,7 @@ class DataFileLoader
         if standard_values
           standard.ppm = standard_values.fetch(c)
           standard.excluded = true if standard.ppm.zero?
+          standard.excluded = true if standard.area.zero?
         else
           # we propably have a check standard or failed to look up a standard.
           standard.ppm = CHK[c]
