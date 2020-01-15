@@ -41,6 +41,7 @@ class SetupParser
     date_row = 4 if file.match?(/CIMMYT/)
 
     sample_date = Chronic.parse(xls.cell('A', date_row).gsub(/sample date:(\s+)?/, ''))
+    sample_date = Chronic.parse(xls.cell('C', date_row)) if sample_date.nil?
 
     first_row = 6
     first_row += 1 if title.strip =~ /^GLBRC/
@@ -98,6 +99,7 @@ class SetupParser
   end
 
   def self.locate_parser(title)
+    p title
     case title.strip
     when /^GLBRC.*\d$/
       GLBRCSetupParser.new
