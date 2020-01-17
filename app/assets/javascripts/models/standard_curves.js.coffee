@@ -13,7 +13,11 @@ class Flux.Models.StandardCurve extends Backbone.Model
     @
 
   to_ppm: (area, eq) ->
-    area * eq.slope + eq.offset
+    # TODO: don't compute when we don't have a slope
+    if (eq.slope?)
+      0
+    else
+      area * eq.slope + eq.offset
 
   updateSamples: ->
     # @fitLineByLeastSquares()
@@ -32,7 +36,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
       model.save()
 
   fitLineByLeastSquares: ->
-    sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0 
+    sum_x = sum_y = sum_xy = sum_xx = sum_yy = count = 0
     x = y = 0
 
     if (@.attributes.data.length < 2)
