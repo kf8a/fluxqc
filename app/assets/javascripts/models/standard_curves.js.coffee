@@ -13,11 +13,7 @@ class Flux.Models.StandardCurve extends Backbone.Model
     @
 
   to_ppm: (area, eq) ->
-    # TODO: don't compute when we don't have a slope
-    if (eq.slope?)
-      0
-    else
-      area * eq.slope + eq.offset
+    area * eq.slope + eq.offset
 
   updateSamples: ->
     # @fitLineByLeastSquares()
