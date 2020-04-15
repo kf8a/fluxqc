@@ -7,6 +7,7 @@ require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
 require_relative 'format4_parser'
 require_relative 'format3_parser'
+require_relative 'format6_parser'
 
 # The SetupParser parses the run setup file and returns the
 # results as a hash. It is called by the setup parser loader
@@ -114,6 +115,8 @@ class SetupParser
       Format3Parser.new
     when /^format=5/
       Format5Parser.new
+    when /^format=6/
+      Format6Parser.new
     else
       LTERSetupParser.new
     end
