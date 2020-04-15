@@ -41,6 +41,8 @@ class DataFileLoader
 
     dataloader.process_vials(vials)
 
+    dataloader.remove_empty_standard_curves
+
     # calibrate and compute fluxes
     c = Calibrate.new(run)
     c.calibrate!
@@ -180,6 +182,13 @@ class DataFileLoader
       standard_curve.save
     end
     standard_curve
+  end
+
+
+  def remove_empty_standard_curves
+    @run.standard_curves.each do |curve|
+      curve.delete if curve.empty?
+    end
   end
 
   def process_checks(check_vials); end
