@@ -37,7 +37,7 @@ gem 'unicorn', group: :production
 
 gem 'rb-readline'
 
-gem 'rake'
+gem 'rake', '= 13.0.0'
 
 group :development do
   gem 'bcrypt_pbkdf'
