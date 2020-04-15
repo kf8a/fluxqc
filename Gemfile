@@ -40,7 +40,7 @@ gem 'rb-readline'
 gem 'rake', '= 13.0.0'
 gem 'listen'
 
-gem 'concurrent-ruby'
+gem 'concurrent-ruby', '=1.1.5'
 
 group :development do
   gem 'bcrypt_pbkdf'

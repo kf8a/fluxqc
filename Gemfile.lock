@@ -102,7 +102,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.5)
     crass (1.0.6)
     dalli (2.7.10)
     database_cleaner (1.8.4)
@@ -347,7 +347,7 @@ DEPENDENCIES
   carrierwave
   chronic
   coffee-rails
-  concurrent-ruby
+  concurrent-ruby (= 1.1.5)
   dalli
   database_cleaner
   devise
