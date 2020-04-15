@@ -6,6 +6,7 @@ describe ChemstationUtils do
   it 'can tell if we have a chemstation vial' do
     expect(ChemstationUtils.vial?('13-S7-LTER-243')).to be_truthy
     expect(ChemstationUtils.vial?('13:37:30')).to be_falsy
+    expect(ChemstationUtils.vial?('B-LTER-S15-8')).to be_truthy
   end
 
   it 'parses a vial with series correctly' do
