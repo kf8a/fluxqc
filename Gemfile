@@ -55,13 +55,13 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
+#group :assets do
   gem 'bootstrap-sass'
   gem 'coffee-rails'
   gem 'sass-rails', '>= 3.2'
   gem 'therubyracer', require: 'v8'
   gem 'uglifier'
-end
+#end
 
 group :test, :development do
   gem 'jasmine-rails'
