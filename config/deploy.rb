@@ -1,75 +1,39 @@
-require "bundler/capistrano"
-load 'deploy/assets'
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.13.0"
 
 set :application, "fluxqc"
-set :repository, "git@github.com:kf8a/fluxqc.git"
+set :repo_url, "git@github.com:kf8a/fluxqc.git"
 
-set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :host, "oshtemo"
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/var/u/apps/fluxqc"
 
-role :web, "#{host}.kbs.msu.edu"                          # Your HTTP server, Apache/etc
-role :app, "#{host}.kbs.msu.edu"                          # This may be the same as your `Web` server
-role :db,  "#{host}.kbs.msu.edu", :primary => true # This is where Rails migrations will run
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
 
-set :deploy_to, "/var/u/apps/#{application}"
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
-set :user, 'deploy'
-set :use_sudo, false
+# Default value for :pty is false
+# set :pty, true
 
-#set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
-set :branch, "master"
-set :deploy_via, :remote_cache
+# Default value for :linked_files is []
+append :linked_files, "config/database.yml", "config/local_env.yml"
 
-ssh_options[:forward_agent] = true
+# Default value for linked_dirs is []
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads"
 
-set :unicorn_binary, "unicorn"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "/var/u/apps/fluxqc/shared/pids/unicorn.pid"
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-namespace :deploy do
-  desc "start unicorn appserves remote_file_exists?('/dev/null')"
-  task :start, :roles => :app, :except => { :no_release => true } do 
-    run "cd #{current_path} && bundle exec  #{unicorn_binary}  -c #{unicorn_config} --env  #{rails_env} -D"
-  end
-  desc "stop unicorn appserver"
-  task :stop, :roles => :app, :except => { :no_release => true } do 
-    run "#{try_sudo} kill `cat #{unicorn_pid}`"
-  end
-  desc "gracefully stop unicorn appserver"
-  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
-    if remote_file_exists?(unicorn_pid) 
-      run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
-    end
-  end
-  desc "reload unicorn appserver"
-  task :reload, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
-  end
-  desc "restart unicorn appserver"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    stop
-    start
-  end
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
 
-  # before "deploy:finalize_update", :link_production_db
-  before "deploy:assets:precompile", :link_production_db
-  before "deploy:assets:precompile", :link_env
-  after 'deploy:finalize_update', :link_file_storage
-end
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
-desc "Link in the production database.yml"
-task :link_production_db do
-  run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
-end
-
-desc 'link local enviroment' 
-task :link_env do
-  run "ln -nfs #{deploy_to}/shared/config/local_env.yml #{release_path}/config/local_env.yml"
-end
-
-desc "link file storage"
-task :link_file_storage do
-  run "ln -nfs #{deploy_to}/shared/uploads #{release_path}/public/uploads"
-end
+# Uncomment the following to require manually verifying the host key before first deploy.
+# set :ssh_options, verify_host_key: :secure
