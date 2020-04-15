@@ -36,12 +36,14 @@ gem 'prometheus-client', '~> 0.6.0'
 gem 'unicorn', group: :production
 
 # Deploy with Capistrano
-gem 'capistrano', '~> 2.15'
 
 gem 'rb-readline'
 
 group :development do
   gem 'bcrypt_pbkdf'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-unicorn'
   gem 'ed25519'
   gem 'net-ssh'
   gem 'rbnacl', '< 5.0'
