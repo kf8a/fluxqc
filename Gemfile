@@ -35,9 +35,9 @@ gem 'prometheus-client', '~> 0.6.0'
 # Use unicorn as the web server
 gem 'unicorn', group: :production
 
-# Deploy with Capistrano
-
 gem 'rb-readline'
+
+gem 'rake'
 
 group :development do
   gem 'bcrypt_pbkdf'
