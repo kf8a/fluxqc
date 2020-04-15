@@ -30,7 +30,7 @@ gem 'qu-redis'
 gem 'bcrypt'
 
 gem 'dalli', group: :production
-gem 'prometheus-client', '~> 0.6.0'
+gem 'prometheus-client'
 
 # Use unicorn as the web server
 gem 'unicorn', group: :production
@@ -38,6 +38,9 @@ gem 'unicorn', group: :production
 gem 'rb-readline'
 
 gem 'rake', '= 13.0.0'
+gem 'listen'
+
+gem 'concurrent-ruby'
 
 group :development do
   gem 'bcrypt_pbkdf'
