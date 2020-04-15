@@ -59,6 +59,10 @@ class StandardCurve < ActiveRecord::Base
     0
   end
 
+  def empty?
+
+  end
+
   def all_zero?
     data.collect { |x| x[:key] }.compact.uniq.size == 1
   end
