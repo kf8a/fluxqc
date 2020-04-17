@@ -65,36 +65,3 @@ class Measurement < ActiveRecord::Base
     run.standard_curves.where(column: column).where('acquired_at > ?', acquired_at).order('acquired_at').first
   end
 end
-
-# == Schema Information
-#
-# Table name: measurements
-#
-#  id               :integer          not null, primary key
-#  response         :float
-#  excluded         :boolean          default("false")
-#  flux_id          :integer
-#  seconds          :integer
-#  ppm              :float
-#  comment          :string(255)
-#  vial             :integer
-#  run_id           :integer
-#  compound_id      :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  area             :float
-#  type             :string(255)
-#  starting_time    :datetime
-#  ending_time      :datetime
-#  sample_id        :integer
-#  column           :integer
-#  acquired_at      :datetime
-#  original_seconds :integer
-#
-# Indexes
-#
-#  index_measurements_on_compound_id  (compound_id)
-#  index_measurements_on_sample_id    (sample_id)
-#  sample_flux_id                     (flux_id)
-#  sample_run_id                      (run_id)
-#

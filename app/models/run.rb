@@ -49,7 +49,7 @@ class Run < ActiveRecord::Base
       event :unpark, transitions_to: :uploaded
     end
     on_transition do |_from, _to, _triggering_event, *_event_args|
-      touch
+      touch if persisted?
     end
   end
 

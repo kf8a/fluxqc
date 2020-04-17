@@ -100,7 +100,6 @@ class SetupParser
   end
 
   def self.locate_parser(title)
-    p title
     case title.strip
     when /^GLBRC.*\d$/
       GLBRCSetupParser.new

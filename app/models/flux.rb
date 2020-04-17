@@ -30,9 +30,9 @@ class Flux < ActiveRecord::Base
     includes(measurements: :compound).where('compounds.name' => 'ch4')
   end
 
-  def compound
-    measurements.first.compound
-  end
+  # def compound
+  #   measurements.first.compound
+  # end
 
   def run
     incubation.run
