@@ -38,7 +38,7 @@ class Format6Parser
   end
 
   def chamber
-    row[4].to_i.to_s
+    row[5].to_i.to_s
   end
 
   def vial
