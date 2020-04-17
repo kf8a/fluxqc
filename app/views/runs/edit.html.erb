@@ -25,7 +25,7 @@
   </thead>
   <tbody>
     <% @run.incubations.each do |incubation| %>
-      <% rows = 2 %>
+      <% rows = 9 %>
       <tr data-incubation-id=<%=incubation.id %>>
         <td rowspan=<%=rows%>><%= link_to incubation.treatment, edit_incubation_path(incubation) %></td>
         <td rowspan=<%=rows%>><%= incubation.replicate %></td>
