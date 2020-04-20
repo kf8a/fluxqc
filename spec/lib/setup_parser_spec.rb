@@ -487,4 +487,45 @@ describe SetupParser do
       end
     end
   end
+
+  describe 'loading another excel file with format 6' do
+    before do
+      file = File.expand_path("../../fixtures/lter-gas-2019-series-1.xlsx", __FILE__)
+      expect(File.exists?(file)).to be_truthy
+      @result = SetupParser.parse(file)
+    end
+
+    describe 'the first row' do
+      before do
+        @row = @result[0]
+      end
+      it 'has the right sample date' do
+        expect(@row[:sample_date].to_date).to eq Date.parse('2019-4-11')
+      end
+      it 'is the right treatment' do
+        expect(@row[:treatment]).to eq 'T6'
+      end
+      it 'is the right rep' do
+        expect(@row[:replicate]).to eq 'R1'
+      end
+      it 'has the right subplot' do
+        expect(@row[:sub_plot]).to eq nil
+      end
+      it 'has the right seconds' do
+        expect(@row[:seconds]).to eq 0
+      end
+      it 'has the right chamber' do
+        expect(@row[:chamber]).to eq '1'
+      end
+      it 'has the rigth lid' do
+        expect(@row[:lid]).to eq 'Y'
+      end
+      it 'has the right vial' do
+        expect(@row[:vial]).to eq "1"
+      end
+      it 'has the right comment' do
+        expect(@row[:comments]).to eq 'Start Time: 8:24'
+      end
+    end
+  end
 end

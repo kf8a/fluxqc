@@ -100,7 +100,7 @@ class SetupParser
   end
 
   def self.locate_parser(title)
-    case title.strip
+    case title.strip.downcase
     when /^GLBRC.*\d$/
       GLBRCSetupParser.new
     when /Fert/
