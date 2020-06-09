@@ -23,7 +23,7 @@ class Run < ActiveRecord::Base
 
   scope :by_state, ->(state) { where(workflow_state: state) }
 
-  # after_save :recompute_fluxes
+  after_save :recompute_fluxes
 
   workflow do
     state :uploaded do
