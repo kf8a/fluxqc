@@ -130,7 +130,7 @@ GEM
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.3)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     image_processing (1.11.0)
       mini_magick (>= 4.9.5, < 5)
@@ -353,6 +353,7 @@ DEPENDENCIES
   devise
   ed25519
   factory_bot_rails
+  i18n (= 1.8.2)
   jasmine-rails
   jquery-rails
   launchy

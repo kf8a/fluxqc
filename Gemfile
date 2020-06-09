@@ -21,6 +21,8 @@ gem 'uuid'
 gem 'roo'
 gem 'roo-xls'
 
+gem 'i18n', '=1.8.2'
+
 gem 'redis-rails'
 
 # gem 'resque', :require => "resque/server"
