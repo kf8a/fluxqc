@@ -35,7 +35,7 @@ class SetupParser
     format_test = xls.cell('A', 1)
     date_row = 3
     title = format_test
-    if format_test.match?(/format=/)
+    if format_test.match?(/format=/i)
       title = xls.cell('A', 2)
       date_row = 5
     end
