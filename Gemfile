@@ -39,16 +39,19 @@ gem 'unicorn', group: :production
 
 gem 'rb-readline'
 
-gem 'rake', '= 13.0.0'
+# gem 'rake', '= 13.0.0'
+
 gem 'listen'
 
 gem 'concurrent-ruby'
 
 group :development do
   gem 'bcrypt_pbkdf'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
+
   gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+
   gem 'ed25519'
   gem 'net-ssh'
   gem 'rbnacl', '< 5.0'
@@ -57,13 +60,13 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-#group :assets do
-  gem 'bootstrap-sass'
-  gem 'coffee-rails'
-  gem 'sass-rails', '>= 3.2'
-  gem 'therubyracer', require: 'v8'
-  gem 'uglifier'
-#end
+# group :assets do
+gem 'bootstrap-sass'
+gem 'coffee-rails'
+gem 'sass-rails', '>= 3.2'
+gem 'therubyracer', require: 'v8'
+gem 'uglifier'
+# end
 
 group :test, :development do
   gem 'jasmine-rails'

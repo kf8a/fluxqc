@@ -166,15 +166,16 @@ GEM
     mimemagic (0.3.5)
     mini_magick (4.10.1)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.0)
     minitest (5.14.1)
     multi_json (1.14.1)
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.2)
-    nokogiri (1.10.9)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (0.21.0)
     phantomjs (2.1.1.0)
@@ -186,6 +187,7 @@ GEM
       qu (= 0.2.0)
       redis-namespace
       simple_uuid
+    racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -363,7 +365,6 @@ DEPENDENCIES
   prometheus-client
   qu-redis
   rails (~> 5.2)
-  rake (= 13.0.0)
   rb-readline
   rbnacl (< 5.0)
   rbnacl-libsodium
