@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class the handle the uploading of a setup file under resque
 # Resque requires that it have a perform method
 class SetupFileLoader
@@ -11,17 +13,18 @@ class SetupFileLoader
     run.name = samples[0][:run_name]
     run.study = get_study_name(run.name)
     reload_results = false
-    if run.samples.size.positive?
+    run.save
+    if run.samples.size.positive? && run.data_files.empty?
       # run.samples.delete
-      reload_results = true if run.data_files.empty?
+      reload_results = true
     end
+    factory = IncubationFactory.new(run_id)
     samples.each do |sample|
-      run.incubations << IncubationFactory.create(run.id, sample)
+      run.incubations << factory.create(sample)
     end
     if reload_results
-      # TODO reload results here
+      # TODO: reload results here
     end
-    run.save
   end
 
   def self.get_study_name(name)

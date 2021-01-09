@@ -7,7 +7,6 @@ class Format6Parser
 
   def parse(row)
     @row = row
-
     [treatment, replicate, sub_plot, chamber, vial, lid, height, soil_temp, seconds, comments]
   end
 
@@ -17,6 +16,7 @@ class Format6Parser
 
   def normalize_name(name)
     return name unless name.is_a?(Numeric)
+
     "T#{name.to_i}"
   end
 
@@ -29,12 +29,7 @@ class Format6Parser
   end
 
   def sub_plot
-    case
-    when row[2] then
-      row[2]
-    else
-      row[3]
-    end
+    row[2] || row[3]
   end
 
   def chamber

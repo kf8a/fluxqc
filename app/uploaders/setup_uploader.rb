@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 class SetupUploader < CarrierWave::Uploader::Base
 
@@ -13,9 +13,8 @@ class SetupUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(csv xls xlsx)
+    %w[csv xls xlsx]
   end
-
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
