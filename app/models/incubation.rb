@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An incubation is the period during which the chamber is closed
 # The gas accumulating in the chamber during the incubation
 # is used to compute the flux of the gas escaping
@@ -96,6 +98,8 @@ class Incubation < ActiveRecord::Base
 
   def recompute_fluxes
     fluxes.each do |f|
+      next if f.value
+
       f.flux
       f.save
     end

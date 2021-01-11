@@ -8,7 +8,6 @@ require_relative 'glbrc_setup_parser'
 require_relative 'fert_setup_parser'
 require_relative 'lter_setup_parser'
 require_relative 'format4_parser'
-require_relative 'format3_parser'
 require_relative 'format6_parser'
 
 # The SetupParser parses the run setup file and returns the
@@ -112,8 +111,6 @@ class SetupParser
       CIMMITSetupParser.new(series)
     when /^format=4/
       Format4Parser.new
-    when /^format=3/
-      Format3Parser.new
     when /^format=5/
       Format5Parser.new
     when /^format=6/

@@ -72,9 +72,9 @@ class Flux < ActiveRecord::Base
       value = f.fit
       return nil if valid_fit?(value)
 
-      return value
+      value
     rescue FitterError
-      return nil
+      nil
     end
   end
 
