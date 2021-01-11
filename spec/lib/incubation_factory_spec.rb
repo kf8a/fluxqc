@@ -12,11 +12,11 @@ describe IncubationFactory do
 
     @run = FactoryBot.create :run
 
-    @incubation = IncubationFactory.create(@run.id,
-                                           sample_date: '2011-10-18', sub_plot: 'F1',
-                                           treatment: 'T6', replicate:  'R1', chamber: '1',
-                                           vial: '1', lid: 'C', height: [18, 19.5, 19, 20.5],
-                                           soil_temperature: 18.5, seconds: 0.0, comments: nil)
+    factory = IncubationFactory.new(@run.id)
+    @incubation = factory.create(sample_date: '2011-10-18', sub_plot: 'F1',
+                                 treatment: 'T6', replicate:  'R1', chamber: '1',
+                                 vial: '1', lid: 'C', height: [18, 19.5, 19, 20.5],
+                                 soil_temperature: 18.5, seconds: 0.0, comments: nil)
   end
 
   describe 'no existing incubation' do
@@ -62,14 +62,14 @@ describe IncubationFactory do
 
   describe 'if there is one with a different sub_plot level' do
     before do
-      @incubation2 = IncubationFactory.create(@run.id,
-                                              sample_date: '2011-10-18',
-                                              sub_plot: 'F2',
-                                              treatment: 'T6', replicate: 'R1',
-                                              chamber: '1', vial: '1',
-                                              lid: 'C', height: [18, 19.5, 19, 20.5],
-                                              soil_temperature: 18.5,
-                                              seconds: 0.0, comments: nil)
+      factory = IncubationFactory.new(@run.id)
+      @incubation2 = factory.create(sample_date: '2011-10-18',
+                                    sub_plot: 'F2',
+                                    treatment: 'T6', replicate: 'R1',
+                                    chamber: '1', vial: '1',
+                                    lid: 'C', height: [18, 19.5, 19, 20.5],
+                                    soil_temperature: 18.5,
+                                    seconds: 0.0, comments: nil)
     end
 
     it 'creates a new incubation' do
@@ -81,13 +81,13 @@ describe IncubationFactory do
     before do
       @incubation.save
       @existing = @incubation
-      @incubation = IncubationFactory.create(@run.id,
-                                             sample_date: '2011-10-18',
-                                             treatment: 'T6', replicate:  'R1', sub_plot:  'F1',
-                                             chamber: '1', vial: '2',
-                                             lid: 'C', height: [18, 19.5, 19, 20.5],
-                                             soil_temperature: 18.5,
-                                             seconds: 20, comments: nil)
+      factory = IncubationFactory.new(@run.id)
+      @incubation = factory.create(sample_date: '2011-10-18',
+                                   treatment: 'T6', replicate:  'R1', sub_plot:  'F1',
+                                   chamber: '1', vial: '2',
+                                   lid: 'C', height: [18, 19.5, 19, 20.5],
+                                   soil_temperature: 18.5,
+                                   seconds: 20, comments: nil)
     end
     it 'returns the old incubation' do
       expect(@existing).to eq @incubation
@@ -105,13 +105,13 @@ describe IncubationFactory do
       @incubation.save
       @existing = @incubation
       run = FactoryBot.create :run
-      @incubation = IncubationFactory.create(run.id,
-                                             sample_date: '2011-10-18',
-                                             treatment: 'T6', replicate: 'R1', chamber: '1',
-                                             sub_plot: '', vial: '2',
-                                             lid: 'C', height: [18, 19.5, 19, 20.5],
-                                             soil_temperature:  18.5,
-                                             seconds:  20, comments:  nil)
+      factory = IncubationFactory.new(run.id)
+      @incubation = factory.create(sample_date: '2011-10-18',
+                                   treatment: 'T6', replicate: 'R1', chamber: '1',
+                                   sub_plot: '', vial: '2',
+                                   lid: 'C', height: [18, 19.5, 19, 20.5],
+                                   soil_temperature: 18.5,
+                                   seconds: 20, comments:  nil)
     end
 
     it 'creates a new incubation' do
