@@ -1,54 +1,6 @@
 require 'rails_helper'
 
 describe SetupParser do
-  describe 'parsing an lter forest fert setup file' do
-    before do
-      file = File.expand_path("../../fixtures/fert4.csv", __FILE__)
-      expect(File.exists?(file)).to be_truthy
-      @result = SetupParser.parse(file)
-    end
-
-    it 'returns an array of sample hashes' do
-      expect(@result.class).to eq Array
-    end
-
-    it 'has the right run title' do
-      expect(@result[0][:run_name]).to eq 'LTER 2007 Fert 4'
-    end
-
-    describe 'first row' do
-      it 'has the right sample date' do
-        expect(@result[0][:sample_date]).to eq Time.parse('2007-6-13 12:00:00')
-      end
-      it 'has the right treatment' do
-        expect(@result[0][:treatment]).to eq 'TDF'
-      end
-      it 'has the right replicate' do
-        expect(@result[0][:replicate]).to eq 'R1'
-      end
-      it 'has the right sub plot' do
-        expect(@result[0][:sub_plot]).to eq 'F0'
-      end
-      it 'has the right chamber' do
-        expect(@result[0][:chamber]).to eq nil
-      end
-      it 'has the right vial' do
-        expect(@result[0][:vial]).to eq '137'
-      end
-      it 'has the right lid' do
-        expect(@result[0][:lid]).to eq 'A'
-      end
-      it 'has the right height' do
-        expect(@result[0][:height]).to eq [17.5, 17.5, 17.5, 18.5]
-      end
-      it 'has the right soil_temperature' do
-        expect(@result[0][:soil_temperature]).to eq 16.5
-      end
-      it 'has the right seconds' do
-        expect(@result[0][:seconds]).to eq 0
-      end
-    end
-  end
 
   describe 'parsing an lter csv setup file' do
     before do
@@ -343,72 +295,6 @@ describe SetupParser do
       end
       it 'has the right vial' do
         expect(@row[:vial]).to eq "1"
-      end
-    end
-  end
-
-  describe 'loading an excel file with format 3' do
-    before do
-      file = File.expand_path("../../fixtures/format-3.xls", __FILE__)
-      expect(File.exists?(file)).to be_truthy
-      @result = SetupParser.parse(file)
-    end
-
-    describe 'the first row' do
-      before do
-        @row = @result[0]
-      end
-      it 'has the right sample date' do
-        expect(@row[:sample_date].to_date).to eq Date.parse('2014-8-19')
-      end
-      it 'is the right treatment' do
-        expect(@row[:treatment]).to eq 'T6'
-      end
-      it 'is the right rep' do
-        expect(@row[:replicate]).to eq 'R1'
-      end
-      it 'has the right seconds' do
-        expect(@row[:seconds]).to eq 0
-      end
-      it 'has the right chamber' do
-        expect(@row[:chamber]).to eq '1'
-      end
-      it 'has the rigth lid' do
-        expect(@row[:lid]).to eq 'D'
-      end
-      it 'has the right vial' do
-        expect(@row[:vial]).to eq "1"
-      end
-    end
-    describe 'the second row' do
-      before do
-        @row = @result[1]
-      end
-      it 'is the right treatment' do
-        expect(@row[:treatment]).to eq 'T7-12.3F'
-      end
-      it 'is the right rep' do
-        expect(@row[:replicate]).to eq 'R3'
-      end
-      it 'has the right vial' do
-        expect(@row[:vial]).to eq "119"
-      end
-      it 'has the right comment' do
-        expect(@row[:comments]).to eq "AMB"
-      end
-    end
-    describe 'the third row' do
-      before do
-        @row = @result[2]
-      end
-      it 'is the right treatment' do
-        expect(@row[:treatment]).to eq 'TSF-3F'
-      end
-      it 'is the right rep' do
-        expect(@row[:replicate]).to eq 'R1'
-      end
-      it 'has the right vial' do
-        expect(@row[:vial]).to eq "150"
       end
     end
   end
