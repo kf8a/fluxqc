@@ -19,7 +19,9 @@ class IncubationFactory
                                         # sampled_at: input[:sampled_at]).first
     if incubation
       @compounds.each do |compound|
-        flux = Flux.where(incubation_id: incubation.id).first
+        flux = Flux.where(incubation_id: incubation.id)
+                   .where(compound_id: compound.id).first
+
         # flux = incubation.flux(compound)
         update_measurement(flux, input, compound, incubation)
       end
