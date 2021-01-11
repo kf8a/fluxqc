@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2'
 
 gem 'carrierwave' # , :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
 gem 'chronic'
-gem 'pg', '~> 0.20'
+gem 'pg' #, '~> 0.20'
 
 gem 'simple_form'
 gem 'workflow-activerecord', '>= 4.1', '< 6.0'
