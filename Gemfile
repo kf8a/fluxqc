@@ -5,7 +5,6 @@ source "http://rubygems.org"
 gem "backbone-rails"
 gem "jquery-rails"
 gem "rails", "~> 5.2"
-gem "rake", " >= 13.0"
 
 gem "carrierwave" # , :git => "git://github.com/carrierwaveuploader/carrierwave.git"
 gem "chronic"
@@ -44,8 +43,6 @@ gem "listen"
 
 gem "concurrent-ruby"
 
-gem "puma"
-
 group :development do
   gem "bcrypt_pbkdf"
 
@@ -72,6 +69,7 @@ gem "uglifier"
 group :test, :development do
   # gem "jasmine-rails"
   gem "rspec-rails"
+  gem "puma"
 end
 
 group :test do
