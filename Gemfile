@@ -41,7 +41,7 @@ gem "rb-readline"
 
 gem "listen"
 
-gem "concurrent-ruby"
+#gem "concurrent-ruby"
 
 group :development do
   gem "bcrypt_pbkdf"

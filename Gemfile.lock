@@ -337,7 +337,6 @@ DEPENDENCIES
   carrierwave
   chronic
   coffee-rails
-  concurrent-ruby
   dalli
   database_cleaner
   devise
