@@ -3,16 +3,22 @@
 <%= f.input :name %>
 <%= f.input :study %>
 <%= f.input :comment, :input_html => {  :rows => 5 } %>
-<%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
-<%= f.input :setup_file, input_html: {class: 'btn btn-default btn-file'} %> 
-<%= f.hidden_field :setup_file_cache %>
-<% @run.data_files.each do |data_file| %>
-  <%= link_to data_file, data_file.url, :class=>'uploaded_file' %><br/>
-<% end %>
-<%= f.file_field :data_files, multiple: true, input_html: {class: 'btn btn-default btn-file'} %>
-<%= f.hidden_field :data_files_cache %>
+<div>
+  <label>Setup File</label>
+  <%= link_to @run.setup_file, @run.setup_file_url, :class=>'uploaded_file' if @run.setup_file? %>
+  <%= f.file_field :setup_file, input_html: {class: 'btn btn-default btn-file'} %>
+  <%= f.hidden_field :setup_file_cache %>
+</div>
+<div>
+  <label>Data Files</label>
+  <% @run.data_files.each do |data_file| %>
+    <%= link_to data_file, data_file.url, :class=>'uploaded_file' %><br/>
+  <% end %>
+  <%= f.file_field :data_files, multiple: true, input_html: {class: 'btn btn-default btn-file'} %>
+  <%= f.hidden_field :data_files_cache %>
+</div>
 
 <div>
-<%= link_to 'back to index', runs_path, :class=>'btn' %>
-<%= f.button :submit , :class=>'btn btn-primary'%>
+  <%= link_to 'back to index', runs_path, :class=>'btn' %>
+  <%= f.button :submit , :class=>'btn btn-primary'%>
 </div>
