@@ -18,7 +18,7 @@ gem "devise"
 
 gem "uuid"
 
-gem "roo"
+gem "roo", "=2.8.3"
 gem "roo-xls"
 
 gem "i18n", "=1.8.2"
