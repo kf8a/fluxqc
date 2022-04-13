@@ -239,7 +239,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    roo (2.9.0)
+    roo (2.8.3)
       nokogiri (~> 1)
       rubyzip (>= 1.3.0, < 3.0.0)
     roo-xls (1.2.0)
@@ -357,7 +357,7 @@ DEPENDENCIES
   rbnacl (< 5.0)
   rbnacl-libsodium
   redis-rails
-  roo
+  roo (= 2.8.3)
   roo-xls
   rspec-rails
   sass-rails (>= 3.2)
