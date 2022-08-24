@@ -353,6 +353,7 @@ DEPENDENCIES
   puma
   qu-redis
   rails (~> 5.2)
+  rake
   rb-readline
   rbnacl (< 5.0)
   rbnacl-libsodium
