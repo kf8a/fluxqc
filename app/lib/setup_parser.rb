@@ -46,7 +46,7 @@ class SetupParser
     sample_date = Chronic.parse(xls.cell('C', date_row)) if sample_date.nil?
 
     first_row = 6
-    first_row += 1 if title.strip =~ /^GLBRC/
+    first_row += 1 if title.strip =~ /^GLBRC/ or title.strip =~ /^BCSE/
     first_row += 1 if date_row == 5
 
     parser = locate_parser(format_test)
