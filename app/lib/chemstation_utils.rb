@@ -3,13 +3,13 @@
 # chemstation file utility functions
 class ChemstationUtils
   def self.locate_compound_columns(row)
-    # if the column 3 is not a vial but looks like a date
-    if looks_like_time?(row[3])
-      [6, 10, 14]
-    elsif row[4].nil?
-      [5, 9, 13] # if column 4 is empty then they are shifted
-    else
-      [4, 8, 12] # the location of the compound names
+    compounds = {co2: ["CO2", "co2", "c02", "C02"],
+                ch4: ["CH4", "ch4"],
+                n2o: ["N2O" , "n2o", "N20", "n20"]
+    }
+
+    compounds.collect do | key, values|
+      values.collect {|val| row.index(val)}.compact[0]
     end
   end
 
