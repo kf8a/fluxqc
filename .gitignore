@@ -13,3 +13,4 @@ data/*
 config/local_env.yml
 sandi_meter/
 results/
+.DS_Store
