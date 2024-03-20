@@ -70,9 +70,9 @@ gem "uglifier"
 group :test, :development do
   # gem "jasmine-rails"
   gem "rspec-rails"
-  gem "puma"
 end
 
+gem "puma"
 group :test do
   gem "capybara"
   gem "database_cleaner"
