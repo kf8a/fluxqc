@@ -47,9 +47,11 @@ gem "listen"
 group :development do
   gem "bcrypt_pbkdf"
 
-  gem "capistrano3-unicorn"
+  # gem "capistrano3-unicorn"
   gem "capistrano-bundler"
   gem "capistrano-rails"
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+  gem 'capistrano-asdf'
 
   gem "ed25519"
   gem "net-ssh"
