@@ -36,7 +36,7 @@ gem "dalli", group: :production
 gem "prometheus-client"
 
 # Use unicorn as the web server
-gem "unicorn", group: :production
+# gem "unicorn", group: :production
 
 gem "rb-readline"
 
