@@ -35,9 +35,6 @@ gem "bcrypt"
 gem "dalli", group: :production
 gem "prometheus-client"
 
-# Use unicorn as the web server
-# gem "unicorn", group: :production
-
 gem "rb-readline"
 
 gem "listen"
@@ -74,7 +71,10 @@ group :test, :development do
   gem "rspec-rails"
 end
 
+gem "ffi", "~> 1.14.0"
+gem "sassc", "~> 2.0.0"
 gem "puma"
+
 group :test do
   gem "capybara"
   gem "database_cleaner"
