@@ -209,7 +209,7 @@ GEM
       redis-namespace
       simple_uuid
     racc (1.8.1)
-    rack (2.2.9)
+    rack (2.2.12)
     rack-session (1.0.2)
       rack (< 3)
     rack-test (2.1.0)
